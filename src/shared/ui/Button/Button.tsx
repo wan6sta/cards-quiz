@@ -5,6 +5,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   primary?: boolean
   secondary?: boolean
   danger?: boolean
+  width?: string
   nonRounded?: boolean
 }
 
