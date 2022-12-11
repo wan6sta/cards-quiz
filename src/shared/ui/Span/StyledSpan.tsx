@@ -28,6 +28,6 @@ export const StyledSpan = styled.span<StyledSpanProps>`
     props.bold &&
     css`
       font-weight: 500;
-      color: #000;
+      opacity: 1;
     `}
 `

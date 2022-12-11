@@ -16,10 +16,3 @@ body {
     color: #000000;
     background-color: #F9F9FA;
 }
-
-.test {
-    width: 347px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-}
