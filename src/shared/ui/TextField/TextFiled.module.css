@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    height: 48px;
+    position: relative;
+}
+
+.span {
+    color: transparent;
+    transform: scale(0);
+    position: absolute;
+    top: -1px;
+    transition: 0.2s ease-in;
+}
+
+.show {
+    color: #000;
+    transform: scale(100%);
+}
+
+.label {
+    width: 100%;
+}

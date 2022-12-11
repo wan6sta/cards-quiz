@@ -25,6 +25,10 @@ module.exports = {
     '@typescript-eslint/no-floating-promises': 'warn',
     '@typescript-eslint/strict-boolean-expressions': 'off',
     'n/handle-callback-err': 'warn',
-    '@typescript-eslint/triple-slash-reference': 'warn'
+    '@typescript-eslint/triple-slash-reference': 'warn',
+    'react/display-name': 'warn',
+    '@typescript-eslint/restrict-plus-operands': 'warn',
+    'multiline-ternary': 'off',
+    'react/prop-types': 'warn'
   }
 }
