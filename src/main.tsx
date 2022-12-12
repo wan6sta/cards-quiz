@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { App } from './app/App'
 import './app/styles/index.css'
 import { ErrorBoundary } from './app/providers/ErrorBoundary/ErrorBoundary'
 import { StoreProvider } from './app/providers/StoreProvider/StoreProvider'
+import { AppRouter } from './app/providers/AppRouter/AppRouter'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <StoreProvider>
     <ErrorBoundary>
-      <App />
+      <AppRouter />
     </ErrorBoundary>
   </StoreProvider>
 )

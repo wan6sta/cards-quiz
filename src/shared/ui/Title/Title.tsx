@@ -1,8 +1,12 @@
 import { StyledTitle } from './StyledTitle'
 import { FC, PropsWithChildren } from 'react'
 
-export const Title: FC<PropsWithChildren> = props => {
-  const { children } = props
+interface TitleProps {
+  fontSize?: string
+}
 
-  return <StyledTitle>{children}</StyledTitle>
+export const Title: FC<PropsWithChildren<TitleProps>> = props => {
+  const { children, ...restProps } = props
+
+  return <StyledTitle {...restProps}>{children}</StyledTitle>
 }

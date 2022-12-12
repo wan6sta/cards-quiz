@@ -9,6 +9,7 @@ import {
 import { BoxCard } from '../BoxCard/BoxCard'
 import { Checkbox } from '../Checkbox/Checkbox'
 import { Title } from '../Title/Title'
+import { AppLink } from '../AppLink/AppLink'
 
 export const Storybook = () => {
   return (
@@ -36,10 +37,15 @@ export const Storybook = () => {
       </BoxCard>
 
       <StyledWrapper>
-        <Title>Span</Title>
+        <Title>Span & AppLink</Title>
         <Span light>wow team</Span>
         <Span medium>wow team</Span>
         <Span bold>wow team</Span>
+        <AppLink primary to={'/'}>Sign Up</AppLink>
+        <AppLink justifyContent={'center'} primary to={'/'}>Sign Up</AppLink>
+        <AppLink justifyContent={'flex-end'} primary to={'/'}>Sign Up</AppLink>
+        <AppLink primary to={'/'}>Sign Up</AppLink>
+        <AppLink secondary to={'/'}>Forgot Password?</AppLink>
       </StyledWrapper>
     </StyledStorybook>
   )

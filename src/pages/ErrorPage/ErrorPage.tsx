@@ -26,9 +26,9 @@ export const ErrorPage = () => {
   return (
     <StyledErrorPage>
       <StyledWrapper>
-        <h1>Произошла непредвиденная ошибка!</h1>
+        <h1>Something went wrong!</h1>
         <Button width='300px' onClick={reloadPage}>
-          Обновить приложение
+          Reload the app
         </Button>
       </StyledWrapper>
     </StyledErrorPage>
