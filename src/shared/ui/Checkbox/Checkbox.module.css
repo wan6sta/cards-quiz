@@ -1,0 +1,10 @@
+.checkbox {
+  cursor: pointer;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+}
+
+.active {
+  opacity: 1;
+}

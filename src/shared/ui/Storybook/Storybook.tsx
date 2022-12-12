@@ -1,8 +1,13 @@
 import { TextFiled } from '../TextField/TextFiled'
 import { Button } from '../Button/Button'
 import { Span } from '../Span/Span'
-import { StyledStorybook, StyledWrapper } from './StyledStorybook'
+import {
+  StyledCheckboxWrapper,
+  StyledStorybook,
+  StyledWrapper
+} from './StyledStorybook'
 import { BoxCard } from '../BoxCard/BoxCard'
+import { Checkbox } from '../Checkbox/Checkbox'
 
 export const Storybook = () => {
   return (
@@ -19,6 +24,12 @@ export const Storybook = () => {
         <Button danger>wow team</Button>
         <Button primary>wow team</Button>
         <Button nonRounded>wow team</Button>
+
+        <StyledCheckboxWrapper>
+          <Checkbox />
+          <Checkbox />
+          <Checkbox />
+        </StyledCheckboxWrapper>
       </BoxCard>
 
       <StyledWrapper>
