@@ -26,6 +26,7 @@ export const StyledTextFiled = styled.input<StyledTextFiledProps>`
 
   &::placeholder {
     font-weight: 400;
+    user-select: none;
   }
 
   ${props =>
@@ -51,21 +52,37 @@ export const StyledTextFiled = styled.input<StyledTextFiledProps>`
 `
 
 export const StyledSearchIcon = styled(SearchIcon)`
-  cursor: pointer;
-  position: absolute;
-  top: 23px;
-  left: 17px;
-  opacity: 0.5;
+  
 `
 
-export const StyledShowPasswordIcon = styled(EyeIcon)`
+export const StyledShowPasswordIcon = styled(EyeIcon)``
+
+export const StyledShowPasswordWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   cursor: pointer;
+  width: 39px;
+  height: 36px;
   transition: 0.3s;
-  top: 18px;
-  right: 18px;
-
+  top: 12px;
+  right: 0;
+  
   &:hover {
     opacity: 0.7;
   }
+`
+
+export const StyledSearchIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  left: 0;
+  opacity: 0.5;
+  width: 44px;
+  height: 36px;
 `

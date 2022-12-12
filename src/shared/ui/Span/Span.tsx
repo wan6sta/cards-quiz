@@ -5,6 +5,7 @@ interface SpanProps {
   light?: boolean
   medium?: boolean
   bold?: boolean
+  nonSelect?: boolean
   className?: string
 }
 

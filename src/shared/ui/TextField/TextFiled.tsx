@@ -4,7 +4,9 @@ import cls from './TextFiled.module.css'
 import { cn } from '../../lib/cn/cn'
 import {
   StyledSearchIcon,
+  StyledSearchIconWrapper,
   StyledShowPasswordIcon,
+  StyledShowPasswordWrapper,
   StyledTextFiled
 } from './StyledTextField'
 
@@ -38,14 +40,17 @@ export const TextFiled: FC<TextFiledProps> = memo(props => {
         className={cn(cls.span, {
           [cls.show]: !!inputValue.length && fieldMode
         })}
+        nonSelect
         light
       >
         {title}
       </Span>
+      {showPassword ? (
+        <StyledShowPasswordWrapper onClick={toggleTypeHandler} tabIndex={1}>
+          <StyledShowPasswordIcon />
+        </StyledShowPasswordWrapper>
+      ) : null}
       <label className={cls.label}>
-        {showPassword ? (
-          <StyledShowPasswordIcon onClick={toggleTypeHandler} />
-        ) : null}
         <StyledTextFiled
           type={typeInput}
           showPassword={!!showPassword}
@@ -55,7 +60,11 @@ export const TextFiled: FC<TextFiledProps> = memo(props => {
           changeInputView={fieldMode}
           {...restProps}
         />
-        {!fieldMode ? <StyledSearchIcon /> : null}
+        {!fieldMode ? (
+          <StyledSearchIconWrapper>
+            <StyledSearchIcon />
+          </StyledSearchIconWrapper>
+        ) : null}
       </label>
     </div>
   )
