@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
 
 interface StyledButtonProps {
-  primary: boolean
-  secondary: boolean
-  danger: boolean
-  nonRounded: boolean
-  width: string
+  primary?: boolean
+  secondary?: boolean
+  danger?: boolean
+  nonRounded?: boolean
+  width?: string
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`

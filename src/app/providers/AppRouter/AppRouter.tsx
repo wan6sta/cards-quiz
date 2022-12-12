@@ -8,20 +8,20 @@ const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: <App />,
-      errorElement: <ErrorPage />
+      element: <App/>,
+      errorElement: <ErrorPage/>
     },
     {
       path: 'storybook',
-      element: <Storybook />
+      element: <Storybook/>
     },
     {
       path: '*',
-      element: <NotFoundPage />
+      element: <NotFoundPage/>
     }
   ],
   {}
 )
 export const AppRouter = () => {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router}/>
 }
