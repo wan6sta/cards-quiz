@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Button } from '../../shared/ui/Button/Button'
+import { Title } from '../../shared/ui/Title/Title'
 
 const StyledErrorPage = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 50px;
+  row-gap: 200px;
   width: 400px;
 `
 
@@ -26,7 +27,7 @@ export const ErrorPage = () => {
   return (
     <StyledErrorPage>
       <StyledWrapper>
-        <h1>Something went wrong!</h1>
+        <Title>Something went wrong!</Title>
         <Button width='300px' onClick={reloadPage}>
           Reload the app
         </Button>
