@@ -1,5 +1,6 @@
 import {
   StyledCheckbox,
+  StyledCheckBoxContainer,
   StyledLabel,
   StyledWrapperCheckbox
 } from './StyledCheckbox'
@@ -21,7 +22,7 @@ export const Checkbox: FC<CheckboxProps> = props => {
   }
 
   return (
-    <>
+    <StyledCheckBoxContainer>
       <StyledWrapperCheckbox>
         <ActiveCheckboxIcon
           className={cn(cls.checkbox, { [cls.active]: isActive })}
@@ -33,6 +34,6 @@ export const Checkbox: FC<CheckboxProps> = props => {
         />
       </StyledWrapperCheckbox>
       {Label && <StyledLabel>{Label}</StyledLabel>}
-    </>
+    </StyledCheckBoxContainer>
   )
 }

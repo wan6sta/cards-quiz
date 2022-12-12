@@ -27,3 +27,7 @@ export const StyledLabel = styled.span`
   font-weight: 500;
   font-size: 14px;
 `
+export const StyledCheckBoxContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
