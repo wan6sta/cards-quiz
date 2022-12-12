@@ -2,6 +2,7 @@ import { TextFiled } from '../TextField/TextFiled'
 import { Button } from '../Button/Button'
 import { Span } from '../Span/Span'
 import { StyledStorybook, StyledWrapper } from './StyledStorybook'
+import { BoxCard } from '../BoxCard/BoxCard'
 
 export const Storybook = () => {
   return (
@@ -13,12 +14,12 @@ export const Storybook = () => {
         <TextFiled title={'Email'} textFieldMode={'nonOutlined'} showPassword />
       </StyledWrapper>
 
-      <StyledWrapper>
+      <BoxCard width='350px'>
         <Button secondary>wow team</Button>
         <Button danger>wow team</Button>
         <Button primary>wow team</Button>
         <Button nonRounded>wow team</Button>
-      </StyledWrapper>
+      </BoxCard>
 
       <StyledWrapper>
         <Span light>wow team</Span>

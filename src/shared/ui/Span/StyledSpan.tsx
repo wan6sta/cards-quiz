@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
 interface StyledSpanProps {
-  light: boolean
-  medium: boolean
-  bold: boolean
+  light?: boolean
+  medium?: boolean
+  bold?: boolean
   nonSelect?: boolean
 }
 
