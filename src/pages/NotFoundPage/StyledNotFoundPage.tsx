@@ -34,3 +34,8 @@ export const StyledTextWrapper = styled.div`
   width: 218px;
   ${props => props && css``}
 `
+
+export const StyledImgWrapper = styled.div`
+  width: 451px;
+  ${props => props && css``}
+`

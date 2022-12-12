@@ -1,4 +1,5 @@
 import {
+  StyledImgWrapper,
   StyledNotFoundPage,
   StyledTextWrapper,
   StyledTitleWrapper,
@@ -22,7 +23,9 @@ export const NotFoundPage = () => {
             <Button primary>Back to home page</Button>
           </Link>
         </StyledTextWrapper>
-        <img src={notFoundImg} alt='404' />
+        <StyledImgWrapper>
+          <img src={notFoundImg} alt='404' />
+        </StyledImgWrapper>
       </StyledWrapper>
     </StyledNotFoundPage>
   )
