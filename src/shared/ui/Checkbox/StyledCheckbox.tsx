@@ -22,3 +22,8 @@ export const StyledWrapperCheckbox = styled.div<StyledCheckboxProps>`
     opacity: 0.85;
   }
 `
+export const StyledLabel = styled.span`
+  margin-left: 12px;
+  font-weight: 500;
+  font-size: 14px;
+`

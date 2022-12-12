@@ -1,10 +1,19 @@
-import { StyledCheckbox, StyledWrapperCheckbox } from './StyledCheckbox'
+import {
+  StyledCheckbox,
+  StyledLabel,
+  StyledWrapperCheckbox
+} from './StyledCheckbox'
 import { ReactComponent as ActiveCheckboxIcon } from '../../assets/icons/ActiveCheckbox.svg'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FC, useState } from 'react'
 import cls from './Checkbox.module.css'
 import { cn } from '../../lib/cn/cn'
 
-export const Checkbox = () => {
+interface CheckboxProps {
+  Label?: string
+}
+
+export const Checkbox: FC<CheckboxProps> = props => {
+  const { Label } = props
   const [isActive, setIsActive] = useState(false)
 
   const toggleIsActive = (e: ChangeEvent<HTMLInputElement>) => {
@@ -12,15 +21,18 @@ export const Checkbox = () => {
   }
 
   return (
-    <StyledWrapperCheckbox>
-      <ActiveCheckboxIcon
-        className={cn(cls.checkbox, { [cls.active]: isActive })}
-      />
-      <StyledCheckbox
-        checked={isActive}
-        onChange={toggleIsActive}
-        type={'checkbox'}
-      />
-    </StyledWrapperCheckbox>
+    <>
+      <StyledWrapperCheckbox>
+        <ActiveCheckboxIcon
+          className={cn(cls.checkbox, { [cls.active]: isActive })}
+        />
+        <StyledCheckbox
+          checked={isActive}
+          onChange={toggleIsActive}
+          type={'checkbox'}
+        />
+      </StyledWrapperCheckbox>
+      {Label && <StyledLabel>{Label}</StyledLabel>}
+    </>
   )
 }
