@@ -3,6 +3,7 @@ import { FC, PropsWithChildren } from 'react'
 
 interface TitleProps {
   fontSize?: string
+  marginBottom?: string
 }
 
 export const Title: FC<PropsWithChildren<TitleProps>> = props => {

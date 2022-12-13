@@ -5,8 +5,10 @@ interface SpanProps {
   light?: boolean
   medium?: boolean
   bold?: boolean
+  error?: boolean
   nonSelect?: boolean
   className?: string
+  marginBottom?: string
 }
 
 export const Span: FC<PropsWithChildren<SpanProps>> = memo(props => {

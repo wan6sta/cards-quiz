@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const StyledStorybook = styled.div`
+  padding: 30px;
+  width: 100%;
   display: flex;
   gap: 40px;
   flex-wrap: wrap;

@@ -3,25 +3,38 @@ import { Storybook } from '../../../shared/ui/Storybook/Storybook'
 import { App } from '../../App'
 import { NotFoundPage } from '../../../pages/NotFoundPage/NotFoundPage'
 import { ErrorPage } from '../../../pages/ErrorPage/ErrorPage'
+import { PageLayout } from '../../../widgets/PageLayout/PageLayout'
+import { ProfilePage } from '../../../pages/ProfilePage/ProfilePage'
 
 const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: <App/>,
-      errorElement: <ErrorPage/>
+      element: <App />,
+      errorElement: <ErrorPage />
     },
     {
       path: 'storybook',
-      element: <Storybook/>
+      element: <Storybook />,
+      errorElement: <ErrorPage />
+    },
+    {
+      path: '/profile',
+      element: (
+        <PageLayout>
+          <ProfilePage />
+        </PageLayout>
+      ),
+      errorElement: <ErrorPage />
     },
     {
       path: '*',
-      element: <NotFoundPage/>
+      element: <NotFoundPage />,
+      errorElement: <ErrorPage />
     }
   ],
   {}
 )
 export const AppRouter = () => {
-  return <RouterProvider router={router}/>
+  return <RouterProvider router={router} />
 }

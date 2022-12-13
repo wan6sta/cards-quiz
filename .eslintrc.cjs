@@ -29,6 +29,9 @@ module.exports = {
     'react/display-name': 'warn',
     '@typescript-eslint/restrict-plus-operands': 'warn',
     'multiline-ternary': 'off',
-    'react/prop-types': 'warn'
+    'react/prop-types': 'warn',
+    '@typescript-eslint/no-unused-expressions': 'warn',
+    'no-constant-condition': 'warn',
+    '@typescript-eslint/prefer-optional-chain': 'warn'
   }
 }

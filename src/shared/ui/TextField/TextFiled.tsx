@@ -1,4 +1,11 @@
-import { ChangeEvent, FC, InputHTMLAttributes, memo, useState } from 'react'
+import {
+  ChangeEvent,
+  FC,
+  InputHTMLAttributes,
+  memo,
+  useState,
+  KeyboardEvent
+} from 'react'
 import { Span } from '../Span/Span'
 import cls from './TextFiled.module.css'
 import { cn } from '../../lib/cn/cn'
@@ -9,17 +16,29 @@ import {
   StyledShowPasswordWrapper,
   StyledTextFiled
 } from './StyledTextField'
+import { Button } from '../Button/Button'
 
 interface TextFiledProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string
   showPassword?: boolean
   textFieldMode: 'outlined' | 'nonOutlined'
+  withSaveButton?: boolean
+  error?: string
+  onEnter?: (str: string) => void
 }
 
 type TypeInput = 'text' | 'password'
 
 export const TextFiled: FC<TextFiledProps> = memo(props => {
-  const { showPassword, title, textFieldMode, ...restProps } = props
+  const {
+    error,
+    onEnter,
+    withSaveButton,
+    showPassword,
+    title,
+    textFieldMode,
+    ...restProps
+  } = props
 
   const [inputValue, setInputValue] = useState('')
   const [typeInput, setTypeInput] = useState<TypeInput>('text')
@@ -34,6 +53,12 @@ export const TextFiled: FC<TextFiledProps> = memo(props => {
     setTypeInput(prev => (prev === 'text' ? 'password' : 'text'))
   }
 
+  const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if ((e.code = 'Enter')) {
+      onEnter && onEnter(inputValue)
+    }
+  }
+
   return (
     <div className={cls.wrapper}>
       <Span
@@ -45,6 +70,11 @@ export const TextFiled: FC<TextFiledProps> = memo(props => {
       >
         {title}
       </Span>
+      {withSaveButton && !error ? (
+        <Button className={cn(cls.saveButton)} nonRounded>
+          Save
+        </Button>
+      ) : null}
       {showPassword ? (
         <StyledShowPasswordWrapper onClick={toggleTypeHandler} tabIndex={1}>
           <StyledShowPasswordIcon />
@@ -52,6 +82,9 @@ export const TextFiled: FC<TextFiledProps> = memo(props => {
       ) : null}
       <label className={cls.label}>
         <StyledTextFiled
+          onKeyDown={onEnterHandler}
+          error={!!error}
+          withSaveButton={!!withSaveButton}
           type={typeInput}
           showPassword={!!showPassword}
           value={inputValue}
@@ -65,6 +98,9 @@ export const TextFiled: FC<TextFiledProps> = memo(props => {
             <StyledSearchIcon />
           </StyledSearchIconWrapper>
         ) : null}
+        <Span error className={cls.error}>
+          {error}
+        </Span>
       </label>
     </div>
   )

@@ -3,6 +3,7 @@ import { StyledBoxCard } from './StyledBoxCard'
 
 interface BoxCardProps {
   width?: string
+  rowGap?: string
 }
 
 export const BoxCard: FC<PropsWithChildren<BoxCardProps>> = props => {

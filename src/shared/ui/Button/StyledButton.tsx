@@ -9,6 +9,8 @@ interface StyledButtonProps {
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
+  display: flex;
+  text-align: center;
   background-color: #366eff;
   width: ${props => (props.width ? props.width : '100%')};
   border-radius: 30px;
@@ -18,6 +20,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   height: 36px;
   transition: 0.1s ease-in;
   user-select: none;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
   box-shadow: 0px 4px 18px rgba(54, 110, 255, 0.35),
   inset 0px 1px 0px rgba(255, 255, 255, 0.3);
   cursor: pointer;
@@ -56,4 +61,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
             border-radius: 2px;
             box-shadow: none;
           `}
+`
+
+export const StyledButtonWrapper = styled.button`
+  display: flex;
+  align-items: center;
 `

@@ -5,6 +5,8 @@ import { ReactComponent as EyeIcon } from '../../assets/icons/Eye.svg'
 interface StyledTextFiledProps {
   changeInputView?: boolean
   showPassword?: boolean
+  error?: boolean
+  withSaveButton?: boolean
 }
 
 export const StyledTextFiled = styled.input<StyledTextFiledProps>`
@@ -18,7 +20,7 @@ export const StyledTextFiled = styled.input<StyledTextFiledProps>`
   border: 1px solid #d9d9d9;
   border-radius: 2px;
   padding: 6px 6px 6px 40px;
-
+  
   &:focus {
     outline: none;
     border: 1px solid rgba(54, 110, 255, 1);
@@ -49,6 +51,28 @@ export const StyledTextFiled = styled.input<StyledTextFiledProps>`
     css`
       padding-right: 48px;
     `}
+
+  ${props =>
+      props.withSaveButton &&
+      css`
+      padding-right: 80px;
+    `}
+
+  ${props =>
+      props.error &&
+      css`
+        border: 1px solid #ff3636;
+    `}
+
+  ${props =>
+      props.error && props.changeInputView &&
+      css`
+        border: none;
+        border-bottom: 2px solid #ff3636;
+         &:focus {
+           border-bottom: 2px solid #ff3636;
+         }
+      `}
 `
 
 export const StyledSearchIcon = styled(SearchIcon)`
