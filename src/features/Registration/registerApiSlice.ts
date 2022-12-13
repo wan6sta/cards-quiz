@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { RegistrationResponseType } from './registrationModels'
 
 export const registerApiSlice = createApi({
   reducerPath: 'register/api',
@@ -20,7 +21,7 @@ export const registerApiSlice = createApi({
         body: payload
       })
     }),
-    registerUser: builder.mutation<any, any>({
+    registerUser: builder.mutation<RegistrationResponseType, RegisterUserPayload>({
       query: (payload: RegisterUserPayload) => ({
         url: 'auth/register',
         method: 'POST',
