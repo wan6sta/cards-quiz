@@ -11,6 +11,5 @@ export const StyledRegistrationWrapper = styled.div<StyledRegistrationProps>`
   flex-direction: ${props =>
     props.flexDirection ? props.flexDirection : 'row'};
   width: 100vw;
-  min-height: 100vh;
   ${props => props && css``}
 `
