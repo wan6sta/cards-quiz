@@ -1,40 +1,29 @@
 import {
   StyledCheckbox,
   StyledCheckBoxContainer,
-  StyledLabel,
-  StyledWrapperCheckbox
+  StyledLabel
 } from './StyledCheckbox'
-import { ReactComponent as ActiveCheckboxIcon } from '../../assets/icons/ActiveCheckbox.svg'
-import { ChangeEvent, forwardRef, useState } from 'react'
-import cls from './Checkbox.module.css'
-import { cn } from '../../lib/cn/cn'
+import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react'
 
-interface CheckboxProps {
+interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   Label?: string
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { Label } = props
-    const [isActive, setIsActive] = useState(false)
-
+    const { Label, onChange } = props
     const toggleIsActive = (e: ChangeEvent<HTMLInputElement>) => {
-      setIsActive(e.currentTarget.checked)
+      onChange?.(e)
     }
 
     return (
       <StyledCheckBoxContainer>
-        <StyledWrapperCheckbox>
-          <ActiveCheckboxIcon
-            className={cn(cls.checkbox, { [cls.active]: isActive })}
-          />
-          <StyledCheckbox
-            ref={ref}
-            checked={isActive}
-            onChange={toggleIsActive}
-            type={'checkbox'}
-          />
-        </StyledWrapperCheckbox>
+        <StyledCheckbox
+          ref={ref}
+          onChange={toggleIsActive}
+          type={'checkbox'}
+          {...props}
+        />
         {Label && <StyledLabel>{Label}</StyledLabel>}
       </StyledCheckBoxContainer>
     )
