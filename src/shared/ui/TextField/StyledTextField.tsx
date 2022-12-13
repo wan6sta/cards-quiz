@@ -90,7 +90,7 @@ export const StyledShowPasswordWrapper = styled.div`
   width: 39px;
   height: 36px;
   transition: 0.3s;
-  top: 27px;
+  top: -5px;
   right: 0;
   
   &:hover {
@@ -104,7 +104,7 @@ export const StyledSearchIconWrapper = styled.div`
   justify-content: center;
   cursor: pointer;
   position: absolute;
-  top: 26px;
+  top: -6px;
   left: 0;
   opacity: 0.5;
   width: 44px;
