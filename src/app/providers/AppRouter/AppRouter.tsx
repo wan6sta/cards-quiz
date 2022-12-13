@@ -32,11 +32,14 @@ const router = createBrowserRouter(
       path: '*',
       element: <NotFoundPage />,
       errorElement: <ErrorPage />
-      element: <NotFoundPage />
     },
     {
       path: '/registration',
-      element: <RegistrationPage />,
+      element: (
+        <PageLayout>
+          <RegistrationPage />
+        </PageLayout>
+      ),
       errorElement: <ErrorPage />
     }
   ],

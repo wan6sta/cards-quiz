@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC } from 'react'
+import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { StyledButton } from './StyledButton'
 import { ReactComponent as Logout } from '../../assets/icons/Logout.svg'
 
@@ -11,13 +11,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   nonRounded?: boolean
 }
 
-export const Button: FC<ButtonProps> = props => {
-  const { logout, children, ...restProps } = props
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
+    const { logout, children, ...restProps } = props
 
-  return (
-    <StyledButton {...restProps}>
-      {logout ? <Logout /> : null}
-      {children}
-    </StyledButton>
-  )
-}
+    return (
+      <StyledButton {...restProps}>
+        {logout ? <Logout /> : null}
+        {children}
+      </StyledButton>
+    )
+  }
+)

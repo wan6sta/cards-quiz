@@ -2,7 +2,7 @@ import { ChangeEvent, FC, KeyboardEvent, useState } from 'react'
 import { StyledEditableSpan, StyledTextWrapper } from './StyledEditableSpan'
 import { Title } from '../../shared/ui/Title/Title'
 import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
-import { TextFiled } from '../../shared/ui/TextField/TextFiled'
+import { TextField } from '../../shared/ui/TextField/TextField'
 import { Flex } from '../../shared/ui/Flex/Flex'
 
 interface EditableSpanProps {
@@ -50,7 +50,7 @@ export const EditableSpan: FC<EditableSpanProps> = props => {
     <StyledEditableSpan {...restProps}>
       {inputShow ? (
         <Flex>
-          <TextFiled
+          <TextField
             onKeyDown={onEnterHandler}
             error={error}
             onChange={inputValueHandler}

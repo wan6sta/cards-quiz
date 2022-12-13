@@ -1,4 +1,4 @@
-import { TextFiled } from '../TextField/TextFiled'
+import { TextField } from '../TextField/TextField'
 import { Button } from '../Button/Button'
 import { Span } from '../Span/Span'
 import {
@@ -21,11 +21,11 @@ export const Storybook = () => {
     <StyledStorybook>
       <StyledWrapper>
         <Title>TextFiled</Title>
-        <TextFiled title={'Email'} textFieldMode={'outlined'} />
-        <TextFiled title={'Email'} textFieldMode={'outlined'} showPassword />
-        <TextFiled title={'Email'} textFieldMode={'nonOutlined'} />
-        <TextFiled title={'Email'} textFieldMode={'nonOutlined'} showPassword />
-        <TextFiled title={'Email'} textFieldMode={'nonOutlined'} withSaveButton />
+        <TextField title={'Email'} textFieldMode={'outlined'} />
+        <TextField title={'Email'} textFieldMode={'outlined'} showPassword />
+        <TextField title={'Email'} textFieldMode={'nonOutlined'} />
+        <TextField title={'Email'} textFieldMode={'nonOutlined'} showPassword />
+        <TextField title={'Email'} textFieldMode={'nonOutlined'} withSaveButton />
       </StyledWrapper>
 
       <BoxCard width='350px'>

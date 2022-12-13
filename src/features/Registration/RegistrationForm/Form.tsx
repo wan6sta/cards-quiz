@@ -7,7 +7,7 @@ import { AppLink } from '../../../shared/ui/AppLink/AppLink'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { TextFiled } from '../../../shared/ui/TextField/TextFiled'
+import { TextField } from '../../../shared/ui/TextField/TextField'
 
 interface FormValues {
   email: string
@@ -54,7 +54,7 @@ export const Form: FC<FormProps> = ({ registerUser }) => {
           control={control}
           name={'email'}
           render={({ field }) => (
-            <TextFiled
+            <TextField
               title={'email'}
               textFieldMode={'nonOutlined'}
               {...field}
@@ -66,7 +66,7 @@ export const Form: FC<FormProps> = ({ registerUser }) => {
           control={control}
           name={'password'}
           render={({ field }) => (
-            <TextFiled
+            <TextField
               showPassword
               title={'password'}
               textFieldMode={'nonOutlined'}
@@ -79,7 +79,7 @@ export const Form: FC<FormProps> = ({ registerUser }) => {
           control={control}
           name={'confirmPassword'}
           render={({ field }) => (
-            <TextFiled
+            <TextField
               showPassword
               title={'confirm password'}
               textFieldMode={'nonOutlined'}
