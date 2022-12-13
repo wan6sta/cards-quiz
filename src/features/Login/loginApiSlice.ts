@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 export const loginApiSlice = createApi({
   reducerPath: 'login/api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://neko-back.herokuapp.com/2.0/',
+    baseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:7542/2.0/',
     credentials: 'include'
   }),
   endpoints: builder => ({
