@@ -5,6 +5,7 @@ import { NotFoundPage } from '../../../pages/NotFoundPage/NotFoundPage'
 import { ErrorPage } from '../../../pages/ErrorPage/ErrorPage'
 import { PageLayout } from '../../../widgets/PageLayout/PageLayout'
 import { ProfilePage } from '../../../pages/ProfilePage/ProfilePage'
+import { RegistrationPage } from '../../../pages/RegistrationPage/RegistrationPage'
 
 const router = createBrowserRouter(
   [
@@ -30,6 +31,12 @@ const router = createBrowserRouter(
     {
       path: '*',
       element: <NotFoundPage />,
+      errorElement: <ErrorPage />
+      element: <NotFoundPage />
+    },
+    {
+      path: '/registration',
+      element: <RegistrationPage />,
       errorElement: <ErrorPage />
     }
   ],

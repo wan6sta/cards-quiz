@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const authApiSlice = createApi({
-  reducerPath: 'auth/api',
+export const registerApiSlice = createApi({
+  reducerPath: 'register/api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:7542/2.0/',
     credentials: 'include'
@@ -26,30 +26,14 @@ export const authApiSlice = createApi({
         method: 'POST',
         body: payload
       })
-    }),
-    login: builder.mutation<any, any>({
-      query: (payload: LoginPayload) => ({
-        url: 'auth/login',
-        method: 'POST',
-        body: payload
-      })
     })
   })
 })
 
-export const {
-  useSendPingMutation,
-  useGetPingQuery,
-  useLoginMutation,
-  useRegisterUserMutation
-} = authApiSlice
+export const { useSendPingMutation, useGetPingQuery, useRegisterUserMutation } =
+  registerApiSlice
 
 interface RegisterUserPayload {
-  email: string
-  password: string
-}
-
-interface LoginPayload {
   email: string
   password: string
 }
