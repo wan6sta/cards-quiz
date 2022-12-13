@@ -11,6 +11,7 @@ interface FlexProps {
   columnGap?: string
   cursorPointer?: boolean
   onClick?: MouseEventHandler<HTMLDivElement>
+  margin?: string
   width?: string
   height?: string
 }

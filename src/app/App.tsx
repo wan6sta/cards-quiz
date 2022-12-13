@@ -1,9 +1,9 @@
-import { BugButton } from '../pages/ErrorPage/BugButton'
+import { Login } from '../features/Login/Login'
 
 export const App = () => {
   return (
     <div className='app'>
-      <BugButton />
+      <Login />
     </div>
   )
 }

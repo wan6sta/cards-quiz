@@ -3,13 +3,20 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 export const loginApiSlice = createApi({
   reducerPath: 'login/api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:7542/2.0/',
+    baseUrl: 'https://neko-back.herokuapp.com/2.0/',
     credentials: 'include'
   }),
-  endpoints: build => ({
-    login: build.mutation<any, any>({
+  endpoints: builder => ({
+    login: builder.mutation<any, any>({
       query: (payload: LoginPayload) => ({
         url: 'auth/login',
+        method: 'POST',
+        body: payload
+      })
+    }),
+    me: builder.mutation<any, any>({
+      query: (payload: any) => ({
+        url: 'auth/me',
         method: 'POST',
         body: payload
       })
@@ -22,4 +29,4 @@ interface LoginPayload {
   password: string
 }
 
-export const { useLoginMutation } = loginApiSlice
+export const { useLoginMutation, useMeMutation } = loginApiSlice

@@ -12,19 +12,23 @@ interface StyledFlexProps {
   onClick?: Function
   width?: string
   height?: string
+  margin?: string
 }
 
 export const StyledFlex = styled.div<StyledFlexProps>`
   display: flex;
   flex: 1;
-  width: ${props => props.width ? props.width : '100%'};
-  height: ${props => props.height ? props.height : 'auto'};
-  flex-direction: ${props => props.flexDirection ? props.flexDirection : 'row'};
-  align-items: ${props => props.alignItems ? props.alignItems : 'flex-start'};
-  justify-content: ${props => props.justifyContent ? props.justifyContent : 'start'};
-  justify-self: ${props => props.justifySelf ? props.justifySelf : 'start'};
-  row-gap: ${props => props.rowGap ? props.rowGap : '0'};
-  column-gap: ${props => props.rowGap ? props.rowGap : '0'};
-  cursor: ${props => props.cursorPointer ? 'pointer' : 'default'};
+  width: ${props => (props.width ? props.width : '100%')};
+  height: ${props => (props.height ? props.height : 'auto')};
+  flex-direction: ${props =>
+    props.flexDirection ? props.flexDirection : 'row'};
+  align-items: ${props => (props.alignItems ? props.alignItems : 'flex-start')};
+  justify-content: ${props =>
+    props.justifyContent ? props.justifyContent : 'start'};
+  justify-self: ${props => (props.justifySelf ? props.justifySelf : 'start')};
+  row-gap: ${props => (props.rowGap ? props.rowGap : '0')};
+  column-gap: ${props => (props.rowGap ? props.rowGap : '0')};
+  cursor: ${props => (props.cursorPointer ? 'pointer' : 'default')};
+  margin: ${props => (props.margin ? props.margin : '0px')};
   ${props => props && css``}
 `

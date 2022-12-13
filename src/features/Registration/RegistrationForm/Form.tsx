@@ -90,7 +90,7 @@ export const Form: FC<FormProps> = ({ registerUser }) => {
         <p>{errors.confirmPassword?.message}</p>
         <Button>Sign Up</Button>
         <Span medium>Already have and account?</Span>
-        <AppLink primary to={'login'}>
+        <AppLink primary to={'/login'}>
           Sign in
         </AppLink>
       </StyledBoxCard>

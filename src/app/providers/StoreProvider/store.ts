@@ -9,7 +9,10 @@ export const store = configureStore({
     [loginApiSlice.reducerPath]: loginApiSlice.reducer
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(registerApiSlice.middleware)
+    getDefaultMiddleware().concat(
+      registerApiSlice.middleware,
+      loginApiSlice.middleware
+    )
 })
 
 export type RootState = ReturnType<typeof store.getState>
