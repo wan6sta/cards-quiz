@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC } from 'react'
+import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { StyledButton } from './StyledButton'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -9,8 +9,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   nonRounded?: boolean
 }
 
-export const Button: FC<ButtonProps> = props => {
-  const { children, ...restProps } = props
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
+    const { children, ...restProps } = props
 
-  return <StyledButton {...restProps}>{children}</StyledButton>
-}
+    return (
+      <StyledButton ref={ref} {...restProps}>
+        {children}
+      </StyledButton>
+    )
+  }
+)
