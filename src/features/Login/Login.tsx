@@ -1,7 +1,6 @@
 import { BoxCard } from '../../shared/ui/BoxCard/BoxCard'
 import { Title } from '../../shared/ui/Title/Title'
 import { Button } from '../../shared/ui/Button/Button'
-import { Checkbox } from '../../shared/ui/Checkbox/Checkbox'
 import { AppLink } from '../../shared/ui/AppLink/AppLink'
 import { Span } from '../../shared/ui/Span/Span'
 import * as yup from 'yup'
