@@ -22,12 +22,12 @@ interface LoginForm {
 export const Schema = yup.object({
   email: yup
     .string()
-    .email('Введите корректый Email адресс')
-    .required('Поле обязательно к заполнению.'),
+    .email()
+    .required('Email is required'),
   password: yup
     .string()
-    .min(7, 'Пароль должен быть больше 7 символов.')
-    .required('Поле обязательно к заполнению.')
+    .min(7)
+    .required('Password is required')
 })
 export const Login = () => {
   const [me, { data: meData, isLoading, isSuccess: meSuccess }] =
@@ -111,8 +111,8 @@ export const Login = () => {
         {loginError && (
           <StyledError>
             {loginError?.data.error === 'user not found /ᐠ-ꞈ-ᐟ\\'
-              ? 'Пользователь не найден.'
-              : 'Некорректный e-mail адрес или пароль.'}
+              ? 'User not found'
+              : 'Incorrect email or password'}
           </StyledError>
         )}
         <StyledFormGroup>

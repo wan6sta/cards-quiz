@@ -13,19 +13,6 @@ export const registerApiSlice = createApi({
     credentials: 'include'
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   endpoints: builder => ({
-    getPing: builder.query<any, any>({
-      query: () => ({
-        url: 'ping',
-        method: 'GET'
-      })
-    }),
-    sendPing: builder.mutation<any, any>({
-      query: (payload: { frontTime: number }) => ({
-        url: 'ping',
-        method: 'POST',
-        body: payload
-      })
-    }),
     registerUser: builder.mutation<RegistrationResponseType, RegisterUserPayload>({
       query: (payload: RegisterUserPayload) => ({
         url: 'auth/register',
@@ -36,8 +23,7 @@ export const registerApiSlice = createApi({
   })
 })
 
-export const { useSendPingMutation, useGetPingQuery, useRegisterUserMutation } =
-  registerApiSlice
+export const { useRegisterUserMutation } = registerApiSlice
 
 interface RegisterUserPayload {
   email: string
