@@ -21,7 +21,7 @@ export const Registration = () => {
     location.reload()
   }
 
-  if (isSuccess) navigate('/login')
+  if (isSuccess) navigate('/registrationSuccess')
   if (registrationLoading) return <div>Loading...</div>
   if (registrationError) {
     return (
