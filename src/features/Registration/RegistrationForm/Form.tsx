@@ -49,7 +49,7 @@ export const Form: FC<FormProps> = ({ registerUser }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <StyledBoxCard>
-        <Title>Sign Up</Title>
+        <Title marginBottom={'41px'}>Sign Up</Title>
         <Controller
           control={control}
           name={'email'}

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Form } from './RegistrationForm/Form'
 import { Title } from '../../shared/ui/Title/Title'
 import { FetchError } from './registrationModels'
+import { errorMessageHandler } from '../../pages/RegistrationPage/utils/errorMessageHandler'
 
 export const Registration = () => {
   const navigate = useNavigate()
@@ -21,10 +22,7 @@ export const Registration = () => {
   if (registrationError) {
     errorMessage = (error as FetchError).data.error
   }
-  const errorMessageArr = errorMessage?.split(' ')
-  const properErrorMessage = errorMessageArr
-    ?.slice(0, errorMessageArr.length - 1)
-    .join(' ')
+  const properErrorMessage = errorMessageHandler(errorMessage)
   if (isSuccess) navigate('/registrationSuccess')
   if (registrationLoading) return <div>Loading...</div>
   return (
