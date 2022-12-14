@@ -1,26 +1,19 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {
+  BaseQueryFn,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery
+} from '@reduxjs/toolkit/query/react'
+import { FetchError, RegistrationResponseType } from './registrationModels'
 
 export const registerApiSlice = createApi({
   reducerPath: 'register/api',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:7542/2.0/',
     credentials: 'include'
-  }),
+  }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   endpoints: builder => ({
-    getPing: builder.query<any, any>({
-      query: () => ({
-        url: 'ping',
-        method: 'GET'
-      })
-    }),
-    sendPing: builder.mutation<any, any>({
-      query: (payload: { frontTime: number }) => ({
-        url: 'ping',
-        method: 'POST',
-        body: payload
-      })
-    }),
-    registerUser: builder.mutation<any, any>({
+    registerUser: builder.mutation<RegistrationResponseType, RegisterUserPayload>({
       query: (payload: RegisterUserPayload) => ({
         url: 'auth/register',
         method: 'POST',
@@ -30,8 +23,7 @@ export const registerApiSlice = createApi({
   })
 })
 
-export const { useSendPingMutation, useGetPingQuery, useRegisterUserMutation } =
-  registerApiSlice
+export const { useRegisterUserMutation } = registerApiSlice
 
 interface RegisterUserPayload {
   email: string

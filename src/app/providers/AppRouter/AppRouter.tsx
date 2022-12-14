@@ -7,6 +7,7 @@ import { PageLayout } from '../../../widgets/PageLayout/PageLayout'
 import { ProfilePage } from '../../../pages/ProfilePage/ProfilePage'
 import { RegistrationPage } from '../../../pages/RegistrationPage/RegistrationPage'
 import { LoginPage } from '../../../pages/LoginPage/LoginPage'
+import { RegistrationSuccessPage } from '../../../pages/RegistrationPage/RegistrationSuccessPage/RegistrationSuccessPage'
 
 const router = createBrowserRouter(
   [
@@ -48,6 +49,15 @@ const router = createBrowserRouter(
       element: (
         <PageLayout>
           <LoginPage />
+        </PageLayout>
+      ),
+      errorElement: <ErrorPage />
+    },
+    {
+      path: '/registrationSuccess',
+      element: (
+        <PageLayout>
+          <RegistrationSuccessPage />
         </PageLayout>
       ),
       errorElement: <ErrorPage />

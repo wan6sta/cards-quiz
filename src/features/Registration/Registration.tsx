@@ -2,6 +2,9 @@ import React from 'react'
 import { useRegisterUserMutation } from './registerApiSlice'
 import { useNavigate } from 'react-router-dom'
 import { Form } from './RegistrationForm/Form'
+import { Title } from '../../shared/ui/Title/Title'
+import { FetchError } from './registrationModels'
+import { errorMessageHandler } from '../../pages/RegistrationPage/utils/errorMessageHandler'
 
 export const Registration = () => {
   const navigate = useNavigate()
@@ -11,18 +14,23 @@ export const Registration = () => {
       isSuccess,
       isError: registrationError,
       isLoading: registrationLoading,
-      data: registerUserResponse,
-      error: errorMessage
+      error
     }
   ] = useRegisterUserMutation()
-  console.log(errorMessage)
 
-  if (isSuccess) navigate('*')
+  let errorMessage
+  if (registrationError) {
+    errorMessage = (error as FetchError).data.error
+  }
+  const properErrorMessage = errorMessageHandler(errorMessage)
+  if (isSuccess) navigate('/registrationSuccess')
   if (registrationLoading) return <div>Loading...</div>
   return (
     <>
       <Form registerUser={registerUser} />
-      {registrationError && <p>{registerUserResponse.error}</p>}
+      <Title color={'red'} fontSize={'26px'} marginBottom={'10px'}>
+        {registrationError && properErrorMessage}
+      </Title>
     </>
   )
 }

@@ -49,24 +49,25 @@ export const Form: FC<FormProps> = ({ registerUser }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <StyledBoxCard>
-        <Title>Sign Up</Title>
+        <Title marginBottom={'41px'}>Sign Up</Title>
         <Controller
           control={control}
           name={'email'}
           render={({ field }) => (
             <TextField
               title={'email'}
+              error={errors.email?.message}
               textFieldMode={'nonOutlined'}
               {...field}
             />
           )}
         />
-        <p>{errors.email?.message}</p>
         <Controller
           control={control}
           name={'password'}
           render={({ field }) => (
             <TextField
+              error={errors.password?.message}
               showPassword
               title={'password'}
               textFieldMode={'nonOutlined'}
@@ -74,20 +75,19 @@ export const Form: FC<FormProps> = ({ registerUser }) => {
             />
           )}
         />
-        <p>{errors.password?.message}</p>
         <Controller
           control={control}
           name={'confirmPassword'}
           render={({ field }) => (
             <TextField
               showPassword
+              error={errors.confirmPassword?.message}
               title={'confirm password'}
               textFieldMode={'nonOutlined'}
               {...field}
             />
           )}
         />
-        <p>{errors.confirmPassword?.message}</p>
         <Button>Sign Up</Button>
         <Span medium>Already have and account?</Span>
         <AppLink primary to={'/login'}>

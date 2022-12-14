@@ -5,7 +5,7 @@ import { RegistrationWrapper } from '../../features/Registration/registrationWra
 export const RegistrationPage = () => {
   return (
     <>
-      <RegistrationWrapper>
+      <RegistrationWrapper flexDirection={'column'}>
         <Registration />
       </RegistrationWrapper>
     </>
