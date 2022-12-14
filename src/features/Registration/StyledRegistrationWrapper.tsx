@@ -4,6 +4,8 @@ interface StyledRegistrationProps {
   flexDirection?: string
 }
 
+// Уьрать
+
 export const StyledRegistrationWrapper = styled.div<StyledRegistrationProps>`
   display: flex;
   align-items: center;

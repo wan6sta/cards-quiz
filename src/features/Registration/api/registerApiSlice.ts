@@ -4,7 +4,8 @@ import {
   FetchArgs,
   fetchBaseQuery
 } from '@reduxjs/toolkit/query/react'
-import { FetchError, RegistrationResponseType } from './registrationModels'
+import { RegistrationResponseType } from '../models/registrationModels'
+import { FetchError } from '../../../shared/models/ErrorModel'
 
 export const registerApiSlice = createApi({
   reducerPath: 'register/api',
@@ -13,7 +14,10 @@ export const registerApiSlice = createApi({
     credentials: 'include'
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   endpoints: builder => ({
-    registerUser: builder.mutation<RegistrationResponseType, RegisterUserPayload>({
+    registerUser: builder.mutation<
+    RegistrationResponseType,
+    RegisterUserPayload
+    >({
       query: (payload: RegisterUserPayload) => ({
         url: 'auth/register',
         method: 'POST',

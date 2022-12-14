@@ -1,9 +1,12 @@
-import { Login } from '../features/Login/Login'
+import { PageLayout } from '../widgets/PageLayout/PageLayout'
+import { LoginPage } from '../pages/LoginPage/LoginPage'
 
 export const App = () => {
   return (
     <div className='app'>
-      <Login />
+      <PageLayout>
+        <LoginPage />
+      </PageLayout>
     </div>
   )
 }

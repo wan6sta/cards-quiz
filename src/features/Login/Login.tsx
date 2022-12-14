@@ -15,26 +15,25 @@ import {
   StyledFormGroup
 } from './StyledLogin'
 import { TextField } from '../../shared/ui/TextField/TextField'
-import { useLoginMutation, useMeMutation } from './loginApiSlice'
-import { ErrorResponse } from './loginModels'
-
-interface LoginForm {
-  email: string
-  password: string
-  rememberMe: boolean
-}
+import { useLoginMutation, useMeMutation } from './api/loginApiSlice'
+import { LoginForm } from './models/loginModels'
+import { FetchError } from '../../shared/models/ErrorModel'
 
 export const Schema = yup.object({
   email: yup.string().email().required('Email is required'),
   password: yup.string().min(7).required('Password is required')
 })
+
 export const Login = () => {
   const [me, { isLoading, isSuccess: meSuccess }] = useMeMutation()
 
-  const [login, { error: loginError, isSuccess: loginSuccess }] =
-    useLoginMutation()
+  // Загрузки
+  const [
+    login,
+    { error: loginError, isSuccess: loginSuccess, isLoading: isLoginLoading }
+  ] = useLoginMutation()
 
-  useEffect(() => {
+  useEffect(function fetchIsLogin () {
     me({})
   }, [])
 
@@ -56,25 +55,25 @@ export const Login = () => {
     resolver: yupResolver(Schema)
   })
 
+  // Пустая страница с загрузкой
   if (isLoading) {
     return <div>loading...</div>
-  }
-
-  if (loginSuccess) {
-    navigate('/profile')
   }
 
   if (meSuccess) {
     navigate('/profile')
   }
+
+  // Всплывашку добавить на саксес / на еррор
   const onSubmit: SubmitHandler<LoginForm> = async data => {
     await login(data)
+    loginSuccess && navigate('/profile')
     reset()
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <BoxCard width={'413px'}>
+      <BoxCard>
         <Title marginBottom={'17px'}>Sign in</Title>
         <Controller
           name={'email'}
@@ -103,7 +102,7 @@ export const Login = () => {
         />
         {loginError && (
           <StyledError>
-            {(loginError as ErrorResponse)?.data.error ===
+            {(loginError as FetchError)?.data?.error ===
             'user not found /ᐠ-ꞈ-ᐟ\\'
               ? 'User not found'
               : 'Incorrect email or password'}

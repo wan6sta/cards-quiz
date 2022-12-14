@@ -1,12 +1,12 @@
 import { ReactNode } from 'react'
-import { App } from '../../App'
 import { ProfilePage } from '../../../pages/ProfilePage/ProfilePage'
 import { RegistrationPage } from '../../../pages/RegistrationPage/RegistrationPage'
 import { LoginPage } from '../../../pages/LoginPage/LoginPage'
-import { RegistrationSuccessPage } from '../../../pages/RegistrationPage/RegistrationSuccessPage/RegistrationSuccessPage'
+
 import { NotFoundPage } from '../../../pages/NotFoundPage/NotFoundPage'
 import { Navigate } from 'react-router-dom'
 import { Storybook } from '../../../shared/ui/Storybook/Storybook'
+import { RegistrationSuccessPage } from '../../../pages/RegistrationPage/RegistrationSuccessPage/RegistrationSuccessPage'
 
 export const enum AppPaths {
   'app' = '/',
@@ -26,7 +26,7 @@ interface AppRouteProps {
 }
 
 export const appRouterConfig: AppRouteProps[] = [
-  { path: AppPaths.app, element: <App />, pageLayout: false },
+  { path: AppPaths.app, element: <LoginPage />, pageLayout: true },
 
   { path: AppPaths.profilePage, element: <ProfilePage />, pageLayout: true },
   {

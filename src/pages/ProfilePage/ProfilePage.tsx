@@ -9,6 +9,7 @@ import { Span } from '../../shared/ui/Span/Span'
 import { Button } from '../../shared/ui/Button/Button'
 import { Flex } from '../../shared/ui/Flex/Flex'
 
+// вынести в фичу
 export const ProfilePage = () => {
   return (
     <StyledProfilePage>

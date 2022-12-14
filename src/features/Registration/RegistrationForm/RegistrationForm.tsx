@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { StyledBoxCard } from '../../../shared/ui/BoxCard/StyledBoxCard'
 import { Title } from '../../../shared/ui/Title/Title'
 import { Button } from '../../../shared/ui/Button/Button'
@@ -6,16 +6,11 @@ import { Span } from '../../../shared/ui/Span/Span'
 import { AppLink } from '../../../shared/ui/AppLink/AppLink'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 import { TextField } from '../../../shared/ui/TextField/TextField'
+import * as yup from 'yup'
+import { FormProps, FormValues } from '../models/registrationModels'
 
-interface FormValues {
-  email: string
-  password: string
-  confirmPassword: string
-}
-
-const schema = yup.object({
+const Schema = yup.object({
   email: yup.string().required('Email is required').email(),
   password: yup.string().required('Password is required').min(7).max(20),
   confirmPassword: yup
@@ -24,11 +19,9 @@ const schema = yup.object({
     .required('Passwords should match')
 })
 
-interface FormProps {
-  registerUser: (data: FormValues) => void
-}
+export const RegistrationForm: FC<FormProps> = props => {
+  const { registerUser } = props
 
-export const Form: FC<FormProps> = ({ registerUser }) => {
   const {
     handleSubmit,
     control,
@@ -40,12 +33,13 @@ export const Form: FC<FormProps> = ({ registerUser }) => {
       confirmPassword: ''
     },
     mode: 'onBlur',
-    resolver: yupResolver(schema)
+    resolver: yupResolver(Schema)
   })
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     registerUser(data)
   }
+  // Box Card
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <StyledBoxCard>

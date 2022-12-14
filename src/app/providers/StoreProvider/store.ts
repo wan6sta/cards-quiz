@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { registerApiSlice } from '../../../features/Registration/registerApiSlice'
+import { registerApiSlice } from '../../../features/Registration/api/registerApiSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { loginApiSlice } from '../../../features/Login/loginApiSlice'
+import { loginApiSlice } from '../../../features/Login/api/loginApiSlice'
 
 export const store = configureStore({
   reducer: {
