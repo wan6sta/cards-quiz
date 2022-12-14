@@ -6,12 +6,12 @@ import {
 import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react'
 
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-  Label?: string
+  label?: string
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { Label, onChange } = props
+    const { label, onChange } = props
     const toggleIsActive = (e: ChangeEvent<HTMLInputElement>) => {
       onChange?.(e)
     }
@@ -24,7 +24,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           type={'checkbox'}
           {...props}
         />
-        {Label && <StyledLabel>{Label}</StyledLabel>}
+        {label && <StyledLabel>{label}</StyledLabel>}
       </StyledCheckBoxContainer>
     )
   }

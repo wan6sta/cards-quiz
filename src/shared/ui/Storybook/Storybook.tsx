@@ -25,7 +25,11 @@ export const Storybook = () => {
         <TextField title={'Email'} textFieldMode={'outlined'} showPassword />
         <TextField title={'Email'} textFieldMode={'nonOutlined'} />
         <TextField title={'Email'} textFieldMode={'nonOutlined'} showPassword />
-        <TextField title={'Email'} textFieldMode={'nonOutlined'} withSaveButton />
+        <TextField
+          title={'Email'}
+          textFieldMode={'nonOutlined'}
+          withSaveButton
+        />
       </StyledWrapper>
 
       <BoxCard width='350px'>
@@ -65,13 +69,23 @@ export const Storybook = () => {
       </StyledWrapper>
 
       <StyledWrapper>
-        <Title>New</Title>
+        <Title>...</Title>
         <BackToLink>Back to Packs List</BackToLink>
         <BackToLink>Back to Packs List</BackToLink>
-        <ImgWrapper><img src={Cat}/></ImgWrapper>
-        <ImgWrapper borderRadius='50%'><img src={Git}/></ImgWrapper>
-        <EditableSpan initialValue={'SomeName'} title={'someTitle'}/>
-        <Button logout secondary>Log out</Button>
+        <ImgWrapper>
+          <img src={Cat} />
+        </ImgWrapper>
+        <ImgWrapper borderRadius='50%'>
+          <img src={Git} />
+        </ImgWrapper>
+        <EditableSpan initialValue={'SomeName'} title={'someTitle'} />
+        <Button logout secondary>
+          Log out
+        </Button>
+      </StyledWrapper>
+
+      <StyledWrapper>
+        <Checkbox label='some label' />
       </StyledWrapper>
     </StyledStorybook>
   )

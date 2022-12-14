@@ -7,11 +7,13 @@ export const StyledCheckbox = styled.input`
 `
 
 export const StyledLabel = styled.span`
+  cursor: pointer;
   margin-left: 12px;
   font-weight: 500;
+  user-select: none;
   font-size: 14px;
 `
-export const StyledCheckBoxContainer = styled.div`
+export const StyledCheckBoxContainer = styled.label`
   display: flex;
   align-items: center;
 `
