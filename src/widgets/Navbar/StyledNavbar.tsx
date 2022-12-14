@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 interface StyledNavbarProps {
   someProps?: string
@@ -14,7 +14,6 @@ export const StyledNavbar = styled.div<StyledNavbarProps>`
   margin-bottom: 24px;
   box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25),
     inset 0px 1px 0px rgba(255, 255, 255, 0.3);
-  ${props => props && css``}
 `
 
 export const StyledButtonWrapper = styled.div<StyledNavbarProps>`
