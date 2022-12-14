@@ -15,9 +15,16 @@ import {
   StyledFormGroup
 } from './StyledLogin'
 import { TextField } from '../../shared/ui/TextField/TextField'
-import { useLoginMutation, useMeMutation } from './api/loginApiSlice'
 import { LoginForm } from './models/loginModels'
 import { FetchError } from '../../shared/models/ErrorModel'
+import { useMeMutation } from '../../shared/api/authMeApiSlice'
+import { useLoginMutation } from './api/loginApiSlice'
+import { useDispatch } from 'react-redux'
+import { setIsLogin } from '../../app/providers/StoreProvider/authSlice/authSlice'
+import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
+import { ToastContainer, toast } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export const Schema = yup.object({
   email: yup.string().email().required('Email is required'),
@@ -33,11 +40,17 @@ export const Login = () => {
     { error: loginError, isSuccess: loginSuccess, isLoading: isLoginLoading }
   ] = useLoginMutation()
 
+  const dispatch = useDispatch()
+
   useEffect(function fetchIsLogin () {
     me({})
   }, [])
 
   const navigate = useNavigate()
+
+  if (loginSuccess) {
+    navigate(AppPaths.profilePage)
+  }
 
   const {
     handleSubmit,
@@ -61,7 +74,12 @@ export const Login = () => {
   }
 
   if (meSuccess) {
-    navigate('/profile')
+    navigate(AppPaths.profilePage)
+  }
+
+  const notify = () => {
+    console.log(123)
+    toast('Wow so easy !')
   }
 
   // Всплывашку добавить на саксес / на еррор
@@ -73,6 +91,11 @@ export const Login = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <button onClick={notify}>Notify !</button>
+        <ToastContainer />
+      </div>
+
       <BoxCard>
         <Title marginBottom={'17px'}>Sign in</Title>
         <Controller
@@ -115,13 +138,17 @@ export const Login = () => {
           </StyledCheckboxLabel>
         </StyledFormGroup>
         <StyledFormGroup margin={'0 0 45px 0'}>
-          <AppLink to={'#'} secondary justifyContent={'flex-end'}>
+          <AppLink
+            to={AppPaths.forgotPasswordPage}
+            secondary
+            justifyContent={'flex-end'}
+          >
             Forgot Password?
           </AppLink>
         </StyledFormGroup>
         <Button>Sign in</Button>
         <Span medium>Already have an account?</Span>
-        <AppLink primary to={'/registration'}>
+        <AppLink primary to={AppPaths.registrationPage}>
           Sign Up
         </AppLink>
       </BoxCard>

@@ -25,6 +25,7 @@ interface TextFiledProps extends InputHTMLAttributes<HTMLInputElement> {
   withSaveButton?: boolean
   error?: string
   onEnter?: (str: string) => void
+  margin?: string
 }
 
 type TypeInput = 'text' | 'password'
@@ -63,52 +64,52 @@ export const TextField = memo(
     }
 
     return (
-      <div className={cls.wrapperWrapper}>
-        <div className={cls.wrapper}>
-          <Span
-            className={cn(cls.span, {
-              [cls.show]: !!inputValue.length && fieldMode
-            })}
-            nonSelect
-            light
-          >
-            {title}
-          </Span>
-          {withSaveButton && !error ? (
-            <Button className={cn(cls.saveButton)} nonRounded>
-              Save
-            </Button>
-          ) : null}
-          {showPassword ? (
-            <StyledShowPasswordWrapper onClick={toggleTypeHandler} tabIndex={1}>
-              <StyledShowPasswordIcon />
-            </StyledShowPasswordWrapper>
-          ) : null}
-          <label className={cls.label}>
-            <StyledTextFiled
-              ref={ref}
-              onKeyDown={onEnterHandler}
-              error={!!error}
-              withSaveButton={!!withSaveButton}
-              type={typeInput}
-              showPassword={!!showPassword}
-              value={inputValue}
-              onChange={inputValueHandler}
-              placeholder={title}
-              changeInputView={fieldMode}
-              {...restProps}
-            />
-            {!fieldMode ? (
-              <StyledSearchIconWrapper>
-                <StyledSearchIcon />
-              </StyledSearchIconWrapper>
-            ) : null}
-            <Span error className={cls.error}>
-              {error}
-            </Span>
-          </label>
-        </div>
-      </div>
+            <div className={cls.wrapperWrapper}>
+                <div className={cls.wrapper}>
+                    <Span
+                        className={cn(cls.span, {
+                          [cls.show]: !!inputValue.length && fieldMode
+                        })}
+                        nonSelect
+                        light
+                    >
+                        {title}
+                    </Span>
+                    {withSaveButton && !error ? (
+                        <Button className={cn(cls.saveButton)} nonRounded>
+                            Save
+                        </Button>
+                    ) : null}
+                    {showPassword ? (
+                        <StyledShowPasswordWrapper onClick={toggleTypeHandler} tabIndex={1}>
+                            <StyledShowPasswordIcon/>
+                        </StyledShowPasswordWrapper>
+                    ) : null}
+                    <label className={cls.label}>
+                        <StyledTextFiled
+                            ref={ref}
+                            onKeyDown={onEnterHandler}
+                            error={!!error}
+                            withSaveButton={!!withSaveButton}
+                            type={typeInput}
+                            showPassword={!!showPassword}
+                            value={inputValue}
+                            onChange={inputValueHandler}
+                            placeholder={title}
+                            changeInputView={fieldMode}
+                            {...restProps}
+                        />
+                        {!fieldMode ? (
+                            <StyledSearchIconWrapper>
+                                <StyledSearchIcon/>
+                            </StyledSearchIconWrapper>
+                        ) : null}
+                        <Span error className={cls.error}>
+                            {error}
+                        </Span>
+                    </label>
+                </div>
+            </div>
     )
   })
 )

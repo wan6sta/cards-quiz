@@ -7,6 +7,7 @@ interface StyledSpanProps {
   nonSelect?: boolean
   error?: boolean
   marginBottom?: string
+  textCenter?: boolean
 }
 
 export const StyledSpan = styled.span<StyledSpanProps>`
@@ -14,8 +15,9 @@ export const StyledSpan = styled.span<StyledSpanProps>`
   line-height: 24px;
   opacity: 0.6;
   color: #000;
-  margin-bottom: ${props => props.marginBottom ? props.marginBottom : '0px'};
+  margin-bottom: ${props => (props.marginBottom ? props.marginBottom : '0px')};
   user-select: ${props => (props.nonSelect ? 'none' : 'text')};
+  text-align: ${props => (props.textCenter ? 'center' : 'inherit')};
 
   ${props =>
     props.light &&

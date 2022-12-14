@@ -9,14 +9,16 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   width?: string
   logout?: boolean
   nonRounded?: boolean
+  margin?: string
+  disabled?: boolean
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
-    const { logout, children, ...restProps } = props
+    const { disabled, logout, children, ...restProps } = props
 
     return (
-      <StyledButton {...restProps}>
+      <StyledButton disabled={!!disabled} {...restProps}>
         {logout ? <Logout /> : null}
         {children}
       </StyledButton>

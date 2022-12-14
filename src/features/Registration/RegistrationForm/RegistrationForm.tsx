@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { TextField } from '../../../shared/ui/TextField/TextField'
 import * as yup from 'yup'
 import { FormProps, FormValues } from '../models/registrationModels'
+import { AppPaths } from '../../../app/providers/AppRouter/routerConfig'
 
 const Schema = yup.object({
   email: yup.string().required('Email is required').email(),
@@ -84,7 +85,7 @@ export const RegistrationForm: FC<FormProps> = props => {
         />
         <Button>Sign Up</Button>
         <Span medium>Already have and account?</Span>
-        <AppLink primary to={'/login'}>
+        <AppLink primary to={AppPaths.loginPage}>
           Sign in
         </AppLink>
       </StyledBoxCard>

@@ -6,6 +6,7 @@ interface StyledButtonProps {
   danger?: boolean
   nonRounded?: boolean
   width?: string
+  margin?: string
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
@@ -23,8 +24,12 @@ export const StyledButton = styled.button<StyledButtonProps>`
   justify-content: center;
   align-items: center;
   column-gap: 10px;
+
+  opacity: ${props => (props.disabled ? '0.85' : '1')};
+
+  margin: ${props => (props.margin ? props.margin : '0')};
   box-shadow: 0px 4px 18px rgba(54, 110, 255, 0.35),
-    inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+  inset 0px 1px 0px rgba(255, 255, 255, 0.3);
   cursor: pointer;
 
   &:hover {

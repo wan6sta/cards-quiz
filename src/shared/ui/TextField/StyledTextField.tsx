@@ -7,6 +7,7 @@ interface StyledTextFiledProps {
   showPassword?: boolean
   error?: boolean
   withSaveButton?: boolean
+  margin?: string
 }
 
 export const StyledTextFiled = styled.input<StyledTextFiledProps>`
@@ -20,6 +21,7 @@ export const StyledTextFiled = styled.input<StyledTextFiledProps>`
   border: 1px solid #d9d9d9;
   border-radius: 2px;
   padding: 6px 6px 6px 40px;
+  margin: ${props => props.margin ? props.margin : '0'};
   
   &:focus {
     outline: none;

@@ -9,6 +9,7 @@ interface SpanProps {
   nonSelect?: boolean
   className?: string
   marginBottom?: string
+  textCenter?: boolean
 }
 
 export const Span: FC<PropsWithChildren<SpanProps>> = memo(props => {

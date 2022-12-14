@@ -2,11 +2,13 @@ import { ReactNode } from 'react'
 import { ProfilePage } from '../../../pages/ProfilePage/ProfilePage'
 import { RegistrationPage } from '../../../pages/RegistrationPage/RegistrationPage'
 import { LoginPage } from '../../../pages/LoginPage/LoginPage'
-
 import { NotFoundPage } from '../../../pages/NotFoundPage/NotFoundPage'
 import { Navigate } from 'react-router-dom'
 import { Storybook } from '../../../shared/ui/Storybook/Storybook'
 import { RegistrationSuccessPage } from '../../../pages/RegistrationPage/RegistrationSuccessPage/RegistrationSuccessPage'
+import { ForgotPasswordPage } from '../../../pages/ResetPasword/ForgotPasswordPage/ForgotPasswordPage'
+import { SetNewPasswordPage } from '../../../pages/ResetPasword/SetNewPasswordPage/SetNewPasswordPage'
+import { CheckEmailPage } from '../../../pages/ResetPasword/CheckEmailPage/CheckEmailPage'
 
 export const enum AppPaths {
   'app' = '/',
@@ -15,6 +17,9 @@ export const enum AppPaths {
   'loginPage' = '/login',
   'registrationSuccessPage' = '/registrationSuccess',
   'storybook' = '/storybook',
+  'forgotPasswordPage' = '/forgotPasswordPage',
+  'setNewPassword' = '/setNewPassword/*',
+  'checkEmailPage' = '/checkEmailPage',
   'notFoundPage' = '/404',
   'notFoundPageRedirect' = '*'
 }
@@ -38,6 +43,21 @@ export const appRouterConfig: AppRouteProps[] = [
   {
     path: AppPaths.registrationSuccessPage,
     element: <RegistrationSuccessPage />,
+    pageLayout: true
+  },
+  {
+    path: AppPaths.forgotPasswordPage,
+    element: <ForgotPasswordPage />,
+    pageLayout: true
+  },
+  {
+    path: AppPaths.checkEmailPage,
+    element: <CheckEmailPage />,
+    pageLayout: true
+  },
+  {
+    path: AppPaths.setNewPassword,
+    element: <SetNewPasswordPage />,
     pageLayout: true
   },
 

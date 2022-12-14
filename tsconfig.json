@@ -23,7 +23,8 @@
   "include": [
     "./vite.config.ts",
     "./src/**/*.tsx",
-    "./src/**/*.ts"
+    "./src/**/*.ts",
+    "./src/pages/ResetPasword/CheckEmailPage/CheckEmailPage.tsx"
   ],
   "references": [
     {
