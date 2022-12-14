@@ -4,7 +4,10 @@ import {
   FetchArgs,
   fetchBaseQuery
 } from '@reduxjs/toolkit/query/react'
-import { RegistrationResponseType } from '../models/registrationModels'
+import {
+  RegisterUserPayload,
+  RegistrationResponseType
+} from '../models/registrationModels'
 import { FetchError } from '../../../shared/models/ErrorModel'
 
 export const registerApiSlice = createApi({
@@ -28,8 +31,3 @@ export const registerApiSlice = createApi({
 })
 
 export const { useRegisterUserMutation } = registerApiSlice
-
-interface RegisterUserPayload {
-  email: string
-  password: string
-}

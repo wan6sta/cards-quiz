@@ -14,3 +14,8 @@ export interface FormValues {
 export interface FormProps {
   registerUser: (data: FormValues) => void
 }
+
+export interface RegisterUserPayload {
+  email: string
+  password: string
+}
