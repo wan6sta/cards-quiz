@@ -31,11 +31,6 @@ const router = createBrowserRouter(
       errorElement: <ErrorPage />
     },
     {
-      path: '*',
-      element: <NotFoundPage />,
-      errorElement: <ErrorPage />
-    },
-    {
       path: '/registration',
       element: (
         <PageLayout>
@@ -60,6 +55,11 @@ const router = createBrowserRouter(
           <RegistrationSuccessPage />
         </PageLayout>
       ),
+      errorElement: <ErrorPage />
+    },
+    {
+      path: '*',
+      element: <NotFoundPage />,
       errorElement: <ErrorPage />
     }
   ],

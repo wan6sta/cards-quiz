@@ -15,6 +15,6 @@ export interface userloggedInResponse {
 }
 
 export interface ErrorResponse {
-  data: { error: string; email: string; in: string }
+  data: { error: string, email: string, in: string }
   status: number
 }
