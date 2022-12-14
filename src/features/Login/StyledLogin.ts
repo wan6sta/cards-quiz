@@ -20,3 +20,9 @@ export const StyledFormCheckbox = styled.input`
   height: 18px;
   margin-right: 12px;
 `
+export const StyledCheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 4px;
+`

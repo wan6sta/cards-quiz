@@ -8,10 +8,15 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import { StyledError, StyledFormCheckbox, StyledFormGroup } from './StyledLogin'
+import {
+  StyledCheckboxLabel,
+  StyledError,
+  StyledFormCheckbox,
+  StyledFormGroup
+} from './StyledLogin'
 import { TextField } from '../../shared/ui/TextField/TextField'
 import { useLoginMutation, useMeMutation } from './loginApiSlice'
-import { Flex } from '../../shared/ui/Flex/Flex'
+import { ErrorResponse } from './loginModels'
 
 interface LoginForm {
   email: string
@@ -27,16 +32,14 @@ export const Schema = yup.object({
   password: yup
     .string()
     .min(7, 'Пароль должен быть больше 7 символов.')
+    .max(20, 'Длина пароля не должена превышать 2 символов.')
     .required('Поле обязательно к заполнению.')
 })
 export const Login = () => {
-  const [me, { data: meData, isLoading, isSuccess: meSuccess }] =
-    useMeMutation()
+  const [me, { isLoading, isSuccess: meSuccess }] = useMeMutation()
 
-  const [
-    login,
-    { data: loginData, error: loginError, isSuccess: loginSuccess }
-  ] = useLoginMutation()
+  const [login, { error: loginError, isSuccess: loginSuccess }] =
+    useLoginMutation()
 
   useEffect(() => {
     me({})
@@ -65,20 +68,21 @@ export const Login = () => {
   }
 
   if (loginSuccess) {
-    navigate('storybook')
+    navigate('/profile')
   }
 
   if (meSuccess) {
-    navigate('*')
+    navigate('/profile')
   }
-  const onSubmit: SubmitHandler<LoginForm> = data => {
-    login(data)
+  const onSubmit: SubmitHandler<LoginForm> = async data => {
+    await login(data)
     reset()
   }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <BoxCard width={'413px'}>
-        <Title>Sign in</Title>
+        <Title marginBottom={'17px'}>Sign in</Title>
         <Controller
           name={'email'}
           control={control}
@@ -91,7 +95,6 @@ export const Login = () => {
             />
           )}
         />
-        {errors?.email && <StyledError>{errors?.email.message}</StyledError>}
         <Controller
           name={'password'}
           control={control}
@@ -105,26 +108,19 @@ export const Login = () => {
             />
           )}
         />
-        {errors?.password && (
-          <StyledError>{errors?.password?.message}</StyledError>
-        )}
         {loginError && (
           <StyledError>
-            {loginError?.data.error === 'user not found /ᐠ-ꞈ-ᐟ\\'
+            {(loginError as ErrorResponse).data.error ===
+            'user not found /ᐠ-ꞈ-ᐟ\\'
               ? 'Пользователь не найден.'
               : 'Некорректный e-mail адрес или пароль.'}
           </StyledError>
         )}
         <StyledFormGroup>
-          <Flex justifyContent={'start'} alignItems={'center'}>
+          <StyledCheckboxLabel>
             <StyledFormCheckbox {...register('rememberMe')} type={'checkbox'} />
             <Span bold>Remember me</Span>
-          </Flex>
-          {/* <Controller
-            name={'rememberMe'}
-            control={control}
-            render={({ field }) => <Checkbox Label={'rrrrr'} {...field} />}
-          /> */}
+          </StyledCheckboxLabel>
         </StyledFormGroup>
         <StyledFormGroup margin={'0 0 45px 0'}>
           <AppLink to={'#'} secondary justifyContent={'flex-end'}>
@@ -133,7 +129,7 @@ export const Login = () => {
         </StyledFormGroup>
         <Button>Sign in</Button>
         <Span medium>Already have an account?</Span>
-        <AppLink primary to={'#'}>
+        <AppLink primary to={'/registration'}>
           Sign Up
         </AppLink>
       </BoxCard>

@@ -1,21 +1,27 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+import {
+  BaseQueryFn,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery
+} from '@reduxjs/toolkit/dist/query/react'
+import { ErrorResponse, userloggedInResponse } from './loginModels'
 
 export const loginApiSlice = createApi({
   reducerPath: 'login/api',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:7542/2.0/',
     credentials: 'include'
-  }),
+  }) as BaseQueryFn<string | FetchArgs, unknown, ErrorResponse, {}>,
   endpoints: builder => ({
-    login: builder.mutation<any, any>({
+    login: builder.mutation<userloggedInResponse, LoginPayload>({
       query: (payload: LoginPayload) => ({
         url: 'auth/login',
         method: 'POST',
         body: payload
       })
     }),
-    me: builder.mutation<any, any>({
-      query: (payload: any) => ({
+    me: builder.mutation<userloggedInResponse, {}>({
+      query: (payload: {}) => ({
         url: 'auth/me',
         method: 'POST',
         body: payload
@@ -27,6 +33,7 @@ export const loginApiSlice = createApi({
 interface LoginPayload {
   email: string
   password: string
+  rememberMe: boolean
 }
 
 export const { useLoginMutation, useMeMutation } = loginApiSlice

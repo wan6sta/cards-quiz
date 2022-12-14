@@ -6,6 +6,7 @@ import { ErrorPage } from '../../../pages/ErrorPage/ErrorPage'
 import { PageLayout } from '../../../widgets/PageLayout/PageLayout'
 import { ProfilePage } from '../../../pages/ProfilePage/ProfilePage'
 import { RegistrationPage } from '../../../pages/RegistrationPage/RegistrationPage'
+import { LoginPage } from '../../../pages/LoginPage/LoginPage'
 
 const router = createBrowserRouter(
   [
@@ -38,6 +39,15 @@ const router = createBrowserRouter(
       element: (
         <PageLayout>
           <RegistrationPage />
+        </PageLayout>
+      ),
+      errorElement: <ErrorPage />
+    },
+    {
+      path: '/login',
+      element: (
+        <PageLayout>
+          <LoginPage />
         </PageLayout>
       ),
       errorElement: <ErrorPage />
