@@ -3,7 +3,7 @@ import { useRegisterUserMutation } from './registerApiSlice'
 import { useNavigate } from 'react-router-dom'
 import { Form } from './RegistrationForm/Form'
 import { Title } from '../../shared/ui/Title/Title'
-import { Button } from '../../shared/ui/Button/Button'
+import { FetchError } from './registrationModels'
 
 export const Registration = () => {
   const navigate = useNavigate()
@@ -13,32 +13,26 @@ export const Registration = () => {
       isSuccess,
       isError: registrationError,
       isLoading: registrationLoading,
-      error: errorMessage
+      error
     }
   ] = useRegisterUserMutation()
 
-  const reloadPage = () => {
-    location.reload()
+  let errorMessage
+  if (registrationError) {
+    errorMessage = (error as FetchError).data.error
   }
-
+  const errorMessageArr = errorMessage?.split(' ')
+  const properErrorMessage = errorMessageArr
+    ?.slice(0, errorMessageArr.length - 1)
+    .join(' ')
   if (isSuccess) navigate('/registrationSuccess')
   if (registrationLoading) return <div>Loading...</div>
-  if (registrationError) {
-    return (
-      <>
-        <Title color={'red'} fontSize={'26px'} marginBottom={'10px'}>
-          {errorMessage?.data?.error}
-          <Button danger onClick={reloadPage}>
-            Click to reload the Page
-          </Button>
-        </Title>
-      </>
-    )
-  }
-
   return (
     <>
       <Form registerUser={registerUser} />
+      <Title color={'red'} fontSize={'26px'} marginBottom={'10px'}>
+        {registrationError && properErrorMessage}
+      </Title>
     </>
   )
 }

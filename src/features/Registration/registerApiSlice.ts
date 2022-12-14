@@ -1,12 +1,17 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { RegistrationResponseType } from './registrationModels'
+import {
+  BaseQueryFn,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery
+} from '@reduxjs/toolkit/query/react'
+import { FetchError, RegistrationResponseType } from './registrationModels'
 
 export const registerApiSlice = createApi({
   reducerPath: 'register/api',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:7542/2.0/',
     credentials: 'include'
-  }),
+  }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   endpoints: builder => ({
     getPing: builder.query<any, any>({
       query: () => ({
