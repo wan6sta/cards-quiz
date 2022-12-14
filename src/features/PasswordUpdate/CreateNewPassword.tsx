@@ -12,7 +12,7 @@ export const CreateNewPassword: FC = props => {
   const { ...restProps } = props
 
   const [createNewPass, { isLoading, isSuccess }] = useNewPassMutation()
-  const { '*': token } = useParams()
+  const { token } = useParams()
 
   const navigate = useNavigate()
   const [passwordValue, setPasswordValue] = useState('')

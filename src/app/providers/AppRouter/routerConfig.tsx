@@ -18,8 +18,8 @@ export const enum AppPaths {
   'registrationSuccessPage' = '/registrationSuccess',
   'storybook' = '/storybook',
   'forgotPasswordPage' = '/forgotPasswordPage',
-  'setNewPassword' = '/setNewPassword/*',
-  'checkEmailPage' = '/checkEmailPage',
+  'setNewPassword' = '/setNewPassword/:token',
+  'checkEmailPage' = '/checkEmailPage/:email',
   'notFoundPage' = '/404',
   'notFoundPageRedirect' = '*'
 }
@@ -64,7 +64,8 @@ export const appRouterConfig: AppRouteProps[] = [
   { path: AppPaths.notFoundPage, element: <NotFoundPage />, pageLayout: false },
   {
     path: AppPaths.notFoundPageRedirect,
-    element: <Navigate to={AppPaths.notFoundPage} />,
+    element: <NotFoundPage />,
+    // element: <Navigate to={AppPaths.notFoundPage} />,
     pageLayout: false
   }
 ]

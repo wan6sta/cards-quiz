@@ -47,7 +47,7 @@ link</a>
   }
 
   if (isSuccess) {
-    navigate(AppPaths.checkEmailPage)
+    navigate(`/checkEmailPage/${inputValue}`)
   }
 
   return (
