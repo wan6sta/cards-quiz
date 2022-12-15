@@ -7,10 +7,9 @@ import * as yup from 'yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
   StyledCheckboxLabel,
-  StyledError,
   StyledFormCheckbox,
   StyledFormGroup
 } from './StyledLogin'
@@ -19,10 +18,11 @@ import { LoginForm } from './models/loginModels'
 import { FetchError } from '../../shared/models/ErrorModel'
 import { useMeMutation } from '../../shared/api/authMeApiSlice'
 import { useLoginMutation } from './api/loginApiSlice'
-import { useDispatch } from 'react-redux'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { LinearPageLoader } from '../../widgets/LinearPageLoader/LinearPageLoader'
 import 'react-toastify/dist/ReactToastify.css'
+import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
+import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 
 export const Schema = yup.object({
   email: yup.string().email().required('Email is required'),
@@ -36,20 +36,12 @@ export const Login = () => {
   const [me, { isLoading, isSuccess: meSuccess }] = useMeMutation()
 
   // Загрузки
-  const [
-    login,
-    {
-      error: loginError,
-      isSuccess: loginSuccess,
-      isLoading: isLoginLoading,
-      data: loginData
-    }
-  ] = useLoginMutation()
+  const [login, { error: loginError, isSuccess: loginSuccess }] =
+    useLoginMutation()
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
-  useEffect(function fetchIsLogin () {
+  useEffect(function fetchIsLogin() {
     me({})
   }, [])
 
@@ -77,7 +69,7 @@ export const Login = () => {
     mode: 'onBlur',
     resolver: yupResolver(Schema)
   })
-
+  console.log(loginError)
   // Пустая страница с загрузкой
   // if (isLoading) return null
 
@@ -117,14 +109,6 @@ export const Login = () => {
             />
           )}
         />
-        {loginError && (
-          <StyledError>
-            {(loginError as FetchError)?.data?.error ===
-            'user not found /ᐠ-ꞈ-ᐟ\\'
-              ? 'User not found'
-              : 'Incorrect email or password'}
-          </StyledError>
-        )}
         <StyledFormGroup>
           <StyledCheckboxLabel>
             <StyledFormCheckbox {...register('rememberMe')} type={'checkbox'} />
@@ -148,6 +132,11 @@ export const Login = () => {
           Sign Up
         </AppLink>
       </BoxCard>
+      <ErrorAlert
+        errorMessage={errorMessageHandler(
+          (loginError as FetchError)?.data?.error
+        )}
+      />
     </form>
   )
 }

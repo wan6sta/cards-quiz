@@ -1,5 +1,5 @@
 import { toast, ToastContainer } from 'react-toastify'
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 
 interface ErrorProps {
   errorMessage?: string
@@ -8,17 +8,19 @@ interface ErrorProps {
 export const ErrorAlert: FC<ErrorProps> = props => {
   const { errorMessage } = props
 
-  errorMessage &&
-    toast.error(`${errorMessage}`, {
-      position: 'bottom-left',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light'
-    })
+  useMemo(() => {
+    errorMessage &&
+      toast.error(`${errorMessage}`, {
+        position: 'bottom-left',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light'
+      })
+  }, [errorMessage])
 
   return (
     <ToastContainer
@@ -29,9 +31,9 @@ export const ErrorAlert: FC<ErrorProps> = props => {
       closeOnClick
       rtl={false}
       limit={1}
-      pauseOnFocusLoss
+      pauseOnFocusLoss={false}
       draggable
-      pauseOnHover
+      pauseOnHover={false}
       theme='light'
     />
   )
