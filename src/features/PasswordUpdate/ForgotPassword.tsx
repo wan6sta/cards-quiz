@@ -53,6 +53,7 @@ link</a>
 </div>` // хтмп-письмо, вместо $token$ бэк вставит токен
     }
     resetPassword(data)
+    reset()
   }
 
   useEffect(() => {
