@@ -13,7 +13,6 @@ import {
 } from '../../shared/api/authMeApiSlice'
 import { useNavigate } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
-import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useLoginMutation } from '../Login/api/loginApiSlice'
 
 // Добавить лоадеры
