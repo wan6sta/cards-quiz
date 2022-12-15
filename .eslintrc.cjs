@@ -33,7 +33,8 @@ module.exports = {
         'no-constant-condition': 'warn',
         '@typescript-eslint/prefer-optional-chain': 'warn',
         '@typescript-eslint/no-misused-promises': 'warn',
-        '@typescript-eslint/prefer-nullish-coalescing': 'warn',
-        '@typescript-eslint/no-unused-vars': 'warn'
+        '@typescript-eslint/no-unused-vars': 'warn',
+        'no-unneeded-ternary': 'off',
+        '@typescript-eslint/prefer-nullish-coalescing': 'off'
     }
 }

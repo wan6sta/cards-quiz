@@ -6,14 +6,15 @@ import { TextField } from '../../shared/ui/TextField/TextField'
 import { Flex } from '../../shared/ui/Flex/Flex'
 
 interface EditableSpanProps {
-  initialValue: string
+  initialValue?: string
   title: string
   marginBottom?: string
+  editNameCallback?: (str: string) => void
 }
 
 export const EditableSpan: FC<EditableSpanProps> = props => {
-  const { title, initialValue, ...restProps } = props
-  const [value, setValue] = useState(initialValue)
+  const { editNameCallback, title, initialValue, ...restProps } = props
+  const [value, setValue] = useState(initialValue ? initialValue : '')
   const [inputShow, setInputShow] = useState(false)
   const [error, setError] = useState('')
 
@@ -32,11 +33,12 @@ export const EditableSpan: FC<EditableSpanProps> = props => {
       return
     }
 
+    editNameCallback && editNameCallback(value)
     setInputShow(false)
   }
 
   const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    if ((e.code === 'Enter')) {
+    if (e.code === 'Enter') {
       hideHandler()
     }
   }

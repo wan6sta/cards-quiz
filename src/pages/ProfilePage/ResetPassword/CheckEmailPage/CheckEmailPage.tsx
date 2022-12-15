@@ -8,12 +8,11 @@ import { Span } from '../../../../shared/ui/Span/Span'
 import { Link, useParams } from 'react-router-dom'
 import { Button } from '../../../../shared/ui/Button/Button'
 import { AppPaths } from '../../../../app/providers/AppRouter/routerConfig'
+import { RestoreUserEmailKey } from '../../../../shared/assets/constants/RestoreUserEmail'
 
 export const CheckEmailPage: FC = props => {
   const { ...restProps } = props
-
-  const { email } = useParams()
-
+  const email = sessionStorage.getItem(RestoreUserEmailKey)
   return (
     <StyledCheckEmailPage {...restProps}>
       <BoxCard>

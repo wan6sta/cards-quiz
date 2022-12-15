@@ -11,11 +11,11 @@
     box-sizing: border-box;
 }
 
-a, a:link, a:visited  {
+a, a:link, a:visited {
     text-decoration: none;
 }
 
-a:hover  {
+a:hover {
     text-decoration: none;
 }
 
@@ -31,4 +31,9 @@ ul, ul li {
 img, svg {
     max-width: 100%;
     height: auto;
+}
+
+:focus,
+:active {
+    outline: none;
 }

@@ -12,6 +12,7 @@ import * as yup from 'yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { RestoreUserEmailKey } from '../../shared/assets/constants/RestoreUserEmail'
 
 export const Schema = yup.object({
   email: yup
@@ -48,11 +49,12 @@ export const ForgotPassword: FC = props => {
       // можно указать разработчика фронта)
       message: `<div style="background-color: lime; padding: 15px">
 password recovery link: 
-<a href='http://localhost:5173/setNewPassword/$token$'>
+<a href='http://localhost:5173/set-new-password/$token$'>
 link</a>
 </div>` // хтмп-письмо, вместо $token$ бэк вставит токен
     }
     resetPassword(data)
+    sessionStorage.setItem(RestoreUserEmailKey, data.email)
     reset()
   }
 

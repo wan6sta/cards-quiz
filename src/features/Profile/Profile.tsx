@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { StyledDivForSpan } from './StyledProfile'
+import { useEditNameMutation } from './api/profileSlice'
 
 export const Profile: FC = props => {
   const { ...restProps } = props
@@ -26,8 +27,17 @@ export const Profile: FC = props => {
     { isLoading: deleteIsLoading, isSuccess: isDeleteSuccess }
   ] = useDeleteMeMutation()
 
-  const [me, { isLoading: isMeLoading, isSuccess, data, isError }] =
+  const [me, { isLoading: isMeLoading, isSuccess, data: meData, isError }] =
     useMeMutation()
+
+  const [
+    editName,
+    {
+      isLoading: isEditNameLoading,
+      data: editNameData,
+      isError: editNameIsError
+    }
+  ] = useEditNameMutation()
 
   useEffect(() => {
     me({})
@@ -46,9 +56,24 @@ export const Profile: FC = props => {
     }
   }, [isError, isDeleteSuccess])
 
+  const logOutButtonDisable = deleteIsLoading
+
+  const editNameHandler = (str: string) => {
+    const data = {
+      name: str,
+      img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ficatcare.org%2Fadvice%2Fthinking-of-getting-a-cat%2F&psig=AOvVaw0aBcdSvQNNBHGJoD_RPSu1&ust=1671209812335000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOC8qeyL_PsCFQAAAAAdAAAAABAIhttps://www.google.com/url?sa=i&url=https%3A%2F%2Ficatcare.org%2Fadvice%2Fthinking-of-getting-a-cat%2F&psig=AOvVaw0aBcdSvQNNBHGJoD_RPSu1&ust=1671209812335000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOC8qeyL_PsCFQAAAAAdAAAAABAI'
+    }
+
+    editName(data)
+  }
+
+  console.log(meData)
+
   return (
     <BoxCard rowGap='0px'>
       {isMeLoading ? <LinearPageLoader /> : null}
+      {deleteIsLoading ? <LinearPageLoader /> : null}
+      {isEditNameLoading ? <LinearPageLoader /> : null}
       <Title marginBottom='30px' fontSize='22px'>
         Personal Information
       </Title>
@@ -56,16 +81,22 @@ export const Profile: FC = props => {
         <img src={GithubIcon} alt='Icon' />
       </ImgWrapper>
       <EditableSpan
+        editNameCallback={editNameHandler}
         marginBottom='20px'
         title='Nickname'
-        initialValue={'Ivan'}
+        initialValue={meData?.name}
       />
       <StyledDivForSpan>
-        <Span light>{data?.email}</Span>
+        <Span light>{meData?.email}</Span>
       </StyledDivForSpan>
 
       <Flex width='127px'>
-        <Button onClick={logOutHandler} logout secondary>
+        <Button
+          disabled={logOutButtonDisable}
+          onClick={logOutHandler}
+          logout
+          secondary
+        >
           Log out
         </Button>
       </Flex>
