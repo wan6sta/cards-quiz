@@ -41,6 +41,10 @@ export const Login = () => {
 
   const navigate = useNavigate()
 
+  const errorHandler = errorMessageHandler(
+    (loginError as FetchError)?.data?.error
+  )
+
   useEffect(function fetchIsLogin() {
     me({})
   }, [])
@@ -132,11 +136,7 @@ export const Login = () => {
           Sign Up
         </AppLink>
       </BoxCard>
-      <ErrorAlert
-        errorMessage={errorMessageHandler(
-          (loginError as FetchError)?.data?.error
-        )}
-      />
+      <ErrorAlert errorMessage={errorHandler} />
     </form>
   )
 }
