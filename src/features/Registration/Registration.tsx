@@ -22,9 +22,8 @@ export const Registration = () => {
   ] = useRegisterUserMutation()
 
   let errorMessage
-
   if (registrationError) {
-    errorMessage = (error as FetchError).data.error
+    errorMessage = (error as FetchError).data?.error
   }
 
   const properErrorMessage = errorMessageHandler(errorMessage)
