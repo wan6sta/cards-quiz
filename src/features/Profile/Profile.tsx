@@ -42,7 +42,8 @@ export const Profile: FC = props => {
     {
       isLoading: isEditNameLoading,
       data: editNameData,
-      isError: editNameIsError
+      isError: editNameIsError,
+      isSuccess: isEditNameSuccess
     }
   ] = useEditNameMutation()
 
@@ -52,7 +53,8 @@ export const Profile: FC = props => {
 
   useEffect(() => {
     if (meData) dispatch(setUserData(meData))
-  }, [isSuccess])
+    if (editNameData) dispatch(setUserData(editNameData.updatedUser))
+  }, [isSuccess, isEditNameSuccess])
 
   const logOutHandler = () => {
     deleteAcc({})
