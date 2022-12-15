@@ -15,6 +15,10 @@ import { useNavigate } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { StyledDivForSpan } from './StyledProfile'
+import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
+import { setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
 
 export const Profile: FC = props => {
   const { ...restProps } = props
@@ -29,9 +33,16 @@ export const Profile: FC = props => {
   const [me, { isLoading: isMeLoading, isSuccess, data, isError }] =
     useMeMutation()
 
+  const { userData } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+
   useEffect(() => {
-    me({})
-  }, [])
+    if (!userData) me({})
+  }, [userData])
+
+  useEffect(() => {
+    if (data) dispatch(setUserData(data))
+  }, [isSuccess])
 
   const logOutHandler = () => {
     deleteAcc({})
@@ -61,7 +72,7 @@ export const Profile: FC = props => {
         initialValue={'Ivan'}
       />
       <StyledDivForSpan>
-        <Span light>{data?.email}</Span>
+        <Span light>{userData?.email}</Span>
       </StyledDivForSpan>
 
       <Flex width='127px'>

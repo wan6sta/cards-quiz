@@ -23,6 +23,8 @@ import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoa
 import 'react-toastify/dist/ReactToastify.css'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
+import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
+import { setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
 
 export const Schema = yup.object({
   email: yup
@@ -41,14 +43,25 @@ export const Login = () => {
   // Загрузки
   const [
     login,
-    { error: loginError, isSuccess: loginSuccess, isLoading: isLoginLoading }
+    {
+      error: loginError,
+      isSuccess: loginSuccess,
+      isLoading: isLoginLoading,
+      data: loginData
+    }
   ] = useLoginMutation()
+
+  const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
 
-  useEffect(function fetchIsLogin () {
+  useEffect(function fetchIsLogin() {
     me({})
   }, [])
+
+  useEffect(() => {
+    if (loginData) dispatch(setUserData(loginData))
+  }, [loginSuccess])
 
   useEffect(() => {
     if (meSuccess) {
