@@ -51,7 +51,7 @@ export const Profile: FC = props => {
   }, [userData])
 
   useEffect(() => {
-    if (data) dispatch(setUserData(data))
+    if (meData) dispatch(setUserData(meData))
   }, [isSuccess])
 
   const logOutHandler = () => {
@@ -91,12 +91,17 @@ export const Profile: FC = props => {
       <ImgWrapper marginBottom='17px' borderRadius={'50%'}>
         <img src={GithubIcon} alt='Icon' />
       </ImgWrapper>
-      <EditableSpan
-        editNameCallback={editNameHandler}
-        marginBottom='20px'
-        title='Nickname'
-        initialValue={userData?.name}
-      />
+      <StyledDivForSpan>
+        {userData ? (
+          <EditableSpan
+            editNameCallback={editNameHandler}
+            marginBottom='20px'
+            title='Nickname'
+            initialValue={userData?.name}
+          />
+        ) : null}
+      </StyledDivForSpan>
+
       <StyledDivForSpan>
         <Span light>{userData?.email}</Span>
       </StyledDivForSpan>

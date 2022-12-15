@@ -14,7 +14,7 @@ interface EditableSpanProps {
 
 export const EditableSpan: FC<EditableSpanProps> = props => {
   const { editNameCallback, title, initialValue, ...restProps } = props
-  const [value, setValue] = useState(initialValue ? initialValue : '')
+  const [value, setValue] = useState(initialValue)
   const [inputShow, setInputShow] = useState(false)
   const [error, setError] = useState('')
 

@@ -10,3 +10,11 @@ export const StyledDivForSpan = styled.div`
   height: 30px;
   margin-bottom: 15px;
 `
+
+export const StyledDivForEditableSpan = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  margin-bottom: 15px;
+`
