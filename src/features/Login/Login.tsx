@@ -37,15 +37,9 @@ export const Schema = yup.object({
 export const Login = () => {
   const [me, { isLoading: isMeLoading, isSuccess: meSuccess }] = useMeMutation()
 
-  const [
-    login,
-    {
-      error: loginError,
-      isSuccess: loginSuccess,
-      isLoading: isLoginLoading,
-      data: loginData
-    }
-  ] = useLoginMutation()
+  // Загрузки
+  const [login, { error: loginError, isSuccess: loginSuccess, isLoading: isLoginLoading }] =
+    useLoginMutation()
 
   const navigate = useNavigate()
 
@@ -121,14 +115,6 @@ export const Login = () => {
             />
           )}
         />
-        {loginError && (
-          <StyledError>
-            {(loginError as FetchError)?.data?.error ===
-            'user not found /ᐠ-ꞈ-ᐟ\\'
-              ? 'User not found'
-              : 'Incorrect email or password'}
-          </StyledError>
-        )}
         <StyledFormGroup>
           <StyledCheckboxLabel>
             <StyledFormCheckbox {...register('rememberMe')} type={'checkbox'} />
