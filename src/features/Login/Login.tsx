@@ -20,9 +20,8 @@ import { FetchError } from '../../shared/models/ErrorModel'
 import { useMeMutation } from '../../shared/api/authMeApiSlice'
 import { useLoginMutation } from './api/loginApiSlice'
 import { useDispatch } from 'react-redux'
-import { setIsLogin } from '../../app/providers/StoreProvider/authSlice/authSlice'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -40,24 +39,28 @@ export const Login = () => {
     { error: loginError, isSuccess: loginSuccess, isLoading: isLoginLoading }
   ] = useLoginMutation()
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  useEffect(function fetchIsLogin () {
+  useEffect(function fetchIsLogin() {
     me({})
   }, [])
 
-  const navigate = useNavigate()
-
-  if (loginSuccess) {
-    navigate(AppPaths.profilePage)
-  }
+  useEffect(() => {
+    if (meSuccess) {
+      navigate(AppPaths.profilePage)
+    }
+    if (loginSuccess) {
+      navigate(AppPaths.profilePage)
+    }
+  }, [meSuccess, loginSuccess])
 
   const {
     handleSubmit,
     reset,
     control,
     register,
-    formState: { errors }
+    formState: { errors,isValid }
   } = useForm<LoginForm>({
     defaultValues: {
       email: '',
@@ -73,29 +76,15 @@ export const Login = () => {
     return <div>loading...</div>
   }
 
-  if (meSuccess) {
-    navigate(AppPaths.profilePage)
-  }
-
-  const notify = () => {
-    console.log(123)
-    toast('Wow so easy !')
-  }
 
   // Всплывашку добавить на саксес / на еррор
   const onSubmit: SubmitHandler<LoginForm> = async data => {
     await login(data)
-    loginSuccess && navigate('/profile')
     reset()
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <button onClick={notify}>Notify !</button>
-        <ToastContainer />
-      </div>
-
       <BoxCard>
         <Title marginBottom={'17px'}>Sign in</Title>
         <Controller
@@ -146,7 +135,7 @@ export const Login = () => {
             Forgot Password?
           </AppLink>
         </StyledFormGroup>
-        <Button>Sign in</Button>
+        <Button disabled={!isValid}>Sign in</Button>
         <Span medium>Already have an account?</Span>
         <AppLink primary to={AppPaths.registrationPage}>
           Sign Up

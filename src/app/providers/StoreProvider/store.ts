@@ -5,9 +5,10 @@ import { loginApiSlice } from '../../../features/Login/api/loginApiSlice'
 import authReducer from './authSlice/authSlice'
 import { forgotApiSlice } from '../../../features/PasswordUpdate/api/forgotPassApiSlice'
 import { authMeApiSlice } from '../../../shared/api/authMeApiSlice'
-
+import authSlice from '../../../features/Login/api/authSlice'
 export const store = configureStore({
   reducer: {
+    authSlice,
     [registerApiSlice.reducerPath]: registerApiSlice.reducer,
     [loginApiSlice.reducerPath]: loginApiSlice.reducer,
     [forgotApiSlice.reducerPath]: forgotApiSlice.reducer,
@@ -25,5 +26,6 @@ export const store = configureStore({
 })
 
 export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
 setupListeners(store.dispatch)
