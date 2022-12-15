@@ -26,7 +26,7 @@ export const RegistrationForm: FC<FormProps> = props => {
   const {
     handleSubmit,
     control,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm<FormValues>({
     defaultValues: {
       email: '',
@@ -40,17 +40,17 @@ export const RegistrationForm: FC<FormProps> = props => {
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     registerUser(data)
   }
-  // Box Card
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <StyledBoxCard>
-        <Title marginBottom={'41px'}>Sign Up</Title>
+        <Title marginBottom={'17px'}>Sign Up</Title>
         <Controller
           control={control}
           name={'email'}
           render={({ field }) => (
             <TextField
-              title={'email'}
+              title={'Email'}
               error={errors.email?.message}
               textFieldMode={'nonOutlined'}
               {...field}
@@ -64,7 +64,7 @@ export const RegistrationForm: FC<FormProps> = props => {
             <TextField
               error={errors.password?.message}
               showPassword
-              title={'password'}
+              title={'Password'}
               textFieldMode={'nonOutlined'}
               {...field}
             />
@@ -77,13 +77,15 @@ export const RegistrationForm: FC<FormProps> = props => {
             <TextField
               showPassword
               error={errors.confirmPassword?.message}
-              title={'confirm password'}
+              title={'Confirm password'}
               textFieldMode={'nonOutlined'}
               {...field}
             />
           )}
         />
-        <Button>Sign Up</Button>
+        <Button disabled={!isValid} margin={'17px 0 0 0'}>
+          Sign Up
+        </Button>
         <Span medium>Already have and account?</Span>
         <AppLink primary to={AppPaths.loginPage}>
           Sign in

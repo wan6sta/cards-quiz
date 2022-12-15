@@ -6,6 +6,7 @@ import { Title } from '../../shared/ui/Title/Title'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { FetchError } from '../../shared/models/ErrorModel'
+import { RegistrationLoader } from '../../pages/RegistrationPage/RegistrationLoader'
 
 export const Registration = () => {
   const navigate = useNavigate()
@@ -21,18 +22,17 @@ export const Registration = () => {
   ] = useRegisterUserMutation()
 
   let errorMessage
-
   if (registrationError) {
-    errorMessage = (error as FetchError).data.error
+    errorMessage = (error as FetchError).data?.error
   }
 
   const properErrorMessage = errorMessageHandler(errorMessage)
 
   if (isSuccess) navigate(AppPaths.registrationSuccessPage)
 
-  if (registrationLoading) return <div>Loading...</div>
+  if (registrationLoading) return <RegistrationLoader />
 
-  // Добавить всплывашку и лоадинг
+  // Добавить всплывашку
   return (
     <>
       <RegistrationForm registerUser={registerUser} />

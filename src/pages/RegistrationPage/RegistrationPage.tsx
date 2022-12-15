@@ -1,13 +1,12 @@
 import { Registration } from '../../features/Registration/Registration'
-import { RegistrationWrapper } from '../../features/Registration/registrationWrapper'
+import { Flex } from '../../shared/ui/Flex/Flex'
 
 export const RegistrationPage = () => {
-  // Flex refactor
   return (
     <>
-      <RegistrationWrapper flexDirection={'column'}>
+      <Flex flexDirection={'column'} alignItems={'center'}>
         <Registration />
-      </RegistrationWrapper>
+      </Flex>
     </>
   )
 }
