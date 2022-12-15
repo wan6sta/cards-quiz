@@ -21,6 +21,8 @@ import { useLoginMutation } from './api/loginApiSlice'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import 'react-toastify/dist/ReactToastify.css'
+import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
+import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 
 export const Schema = yup.object({
   email: yup
@@ -85,6 +87,10 @@ export const Login = () => {
     isMeLoading ||
     isLoginLoading
 
+  const errorHandler = errorMessageHandler(
+    (loginError as FetchError)?.data?.error
+  )
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {isMeLoading ? <LinearPageLoader /> : null}
@@ -139,6 +145,7 @@ export const Login = () => {
           Sign Up
         </AppLink>
       </BoxCard>
+      <ErrorAlert errorMessage={errorHandler} />
     </form>
   )
 }
