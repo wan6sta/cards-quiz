@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import {
   StyledCheckboxLabel,
-  StyledError,
   StyledFormCheckbox,
   StyledFormGroup
 } from './StyledLogin'
@@ -38,8 +37,10 @@ export const Login = () => {
   const [me, { isLoading: isMeLoading, isSuccess: meSuccess }] = useMeMutation()
 
   // Загрузки
-  const [login, { error: loginError, isSuccess: loginSuccess, isLoading: isLoginLoading }] =
-    useLoginMutation()
+  const [
+    login,
+    { error: loginError, isSuccess: loginSuccess, isLoading: isLoginLoading }
+  ] = useLoginMutation()
 
   const navigate = useNavigate()
 
