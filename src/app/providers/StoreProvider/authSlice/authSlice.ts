@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { userloggedInResponse } from '../../../../features/Login/models/loginModels'
 
-type Initial = Record<string, undefined | any>
+interface Initial {
+  userData: undefined | userloggedInResponse
+  isAuth: boolean
+}
 
 const initialState: Initial = {
-  userData: undefined
+  userData: undefined,
+  isAuth: false
 }
 
 export const authSlice = createSlice({
@@ -15,7 +19,7 @@ export const authSlice = createSlice({
       state.userData = action.payload
     },
     removeUserData: state => {
-      state.userData = {}
+      state.userData = undefined
     }
   }
 })

@@ -1,6 +1,10 @@
 import { FC } from 'react'
 import { StyledButtonWrapper, StyledNavbar } from './StyledNavbar'
 import { Button } from '../../shared/ui/Button/Button'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { Link } from 'react-router-dom'
+import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
+import { Flex } from '../../shared/ui/Flex/Flex'
 
 interface NavbarProps {
   someProps?: string
@@ -9,10 +13,24 @@ interface NavbarProps {
 export const Navbar: FC<NavbarProps> = props => {
   const { ...restProps } = props
 
+  const { userData } = useAppSelector(state => state.auth)
+
   return (
     <StyledNavbar {...restProps}>
       <StyledButtonWrapper>
-        <Button primary>Sign in</Button>
+        {!userData ? (
+          <Link to={AppPaths.loginPage}>
+            <Flex width='113px'>
+              <Button>Log in</Button>
+            </Flex>
+          </Link>
+        ) : (
+          <Link to={AppPaths.profilePage}>
+            <Flex width='113px'>
+              <Button>FIX</Button>
+            </Flex>
+          </Link>
+        )}
       </StyledButtonWrapper>
     </StyledNavbar>
   )

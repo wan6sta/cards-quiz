@@ -18,7 +18,7 @@ import { StyledDivForSpan } from './StyledProfile'
 import { useSelector } from 'react-redux'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
-import { setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
+import { removeUserData, setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
 import { useEditNameMutation } from './api/profileSlice'
 
 export const Profile: FC = props => {
@@ -28,7 +28,11 @@ export const Profile: FC = props => {
 
   const [
     deleteAcc,
-    { isLoading: deleteIsLoading, isSuccess: isDeleteSuccess }
+    {
+      isLoading: deleteIsLoading,
+      isSuccess: isDeleteSuccess,
+      data: deleteMeData
+    }
   ] = useDeleteMeMutation()
 
   const [me, { isLoading: isMeLoading, isSuccess, data: meData, isError }] =
@@ -54,7 +58,8 @@ export const Profile: FC = props => {
   useEffect(() => {
     if (meData) dispatch(setUserData(meData))
     if (editNameData) dispatch(setUserData(editNameData.updatedUser))
-  }, [isSuccess, isEditNameSuccess])
+    if (deleteMeData) dispatch(removeUserData())
+  }, [isSuccess, isEditNameSuccess, isDeleteSuccess])
 
   const logOutHandler = () => {
     deleteAcc({})
