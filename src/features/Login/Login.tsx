@@ -21,14 +21,15 @@ import { useMeMutation } from '../../shared/api/authMeApiSlice'
 import { useLoginMutation } from './api/loginApiSlice'
 import { useDispatch } from 'react-redux'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
-
-import 'react-toastify/dist/ReactToastify.css'
-import { setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
 import { LinearPageLoader } from '../../widgets/LinearPageLoader/LinearPageLoader'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const Schema = yup.object({
   email: yup.string().email().required('Email is required'),
-  password: yup.string().min(7).required('Password is required')
+  password: yup
+    .string()
+    .min(7, 'Password must be at least 7 characters')
+    .required('Password is required')
 })
 
 export const Login = () => {
@@ -60,13 +61,6 @@ export const Login = () => {
       navigate(AppPaths.profilePage)
     }
   }, [meSuccess, loginSuccess])
-
-  // useEffect(() => {
-  //   if (loginData) {
-  //     console.log(loginData)
-  //     dispatch(setUserData(loginData))
-  //   }
-  // }, [loginSuccess])
 
   const {
     handleSubmit,
