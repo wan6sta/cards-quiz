@@ -13,6 +13,9 @@ import { Span } from '../../shared/ui/Span/Span'
 import { AppLink } from '../../shared/ui/AppLink/AppLink'
 import * as yup from 'yup'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '../../shared/models/ErrorModel'
+import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 
 const Schema = yup.object({
   email: yup.string().required('Email is required').email(),
@@ -26,15 +29,8 @@ const Schema = yup.object({
 export const Registration = () => {
   const navigate = useNavigate()
 
-  const [
-    registerUser,
-    {
-      isSuccess,
-      isError: registrationError,
-      isLoading: registrationLoading,
-      error
-    }
-  ] = useRegisterUserMutation()
+  const [registerUser, { isSuccess, isLoading: registrationLoading, error }] =
+    useRegisterUserMutation()
 
   useEffect(() => {
     if (isSuccess) navigate(AppPaths.registrationSuccessPage)
@@ -42,27 +38,33 @@ export const Registration = () => {
 
   const {
     handleSubmit,
+    reset,
     control,
-    formState: { errors, isValid }
+    formState: { errors }
   } = useForm<FormValues>({
     defaultValues: {
       email: '',
       password: '',
       confirmPassword: ''
     },
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(Schema)
   })
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
-    registerUser(data)
+    await registerUser(data)
+    reset()
   }
 
-  const disableInput =
+  const disableButton =
     !!errors.email?.message ||
     !!errors.password?.message ||
     !!errors.confirmPassword?.message ||
     registrationLoading
+
+  const properErrorMessage = errorMessageHandler(
+    (error as FetchError)?.data?.error
+  )
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -107,7 +109,7 @@ export const Registration = () => {
             />
           )}
         />
-        <Button disabled={disableInput} margin={'70px 0 10px 0'}>
+        <Button disabled={disableButton} margin={'70px 0 10px 0'}>
           Sign Up
         </Button>
         <Span medium>Already have and account?</Span>
@@ -115,6 +117,7 @@ export const Registration = () => {
           Sign in
         </AppLink>
       </BoxCard>
+      <ErrorAlert errorMessage={properErrorMessage} />
     </form>
   )
 }

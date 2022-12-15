@@ -15,6 +15,9 @@ import { useNavigate } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { StyledDivForSpan } from './StyledProfile'
+import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
+import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '../../shared/models/ErrorModel'
 
 export const Profile: FC = props => {
   const { ...restProps } = props
@@ -23,11 +26,17 @@ export const Profile: FC = props => {
 
   const [
     deleteAcc,
-    { isLoading: deleteIsLoading, isSuccess: isDeleteSuccess }
+    {
+      isLoading: deleteIsLoading,
+      isSuccess: isDeleteSuccess,
+      error: deleteError
+    }
   ] = useDeleteMeMutation()
 
-  const [me, { isLoading: isMeLoading, isSuccess, data, isError }] =
-    useMeMutation()
+  const [
+    me,
+    { isLoading: isMeLoading, isSuccess, data, isError, error: meError }
+  ] = useMeMutation()
 
   useEffect(() => {
     me({})
@@ -46,29 +55,41 @@ export const Profile: FC = props => {
     }
   }, [isError, isDeleteSuccess])
 
-  return (
-    <BoxCard rowGap='0px'>
-      {isMeLoading ? <LinearPageLoader /> : null}
-      <Title marginBottom='30px' fontSize='22px'>
-        Personal Information
-      </Title>
-      <ImgWrapper marginBottom='17px' borderRadius={'50%'}>
-        <img src={GithubIcon} alt='Icon' />
-      </ImgWrapper>
-      <EditableSpan
-        marginBottom='20px'
-        title='Nickname'
-        initialValue={'Ivan'}
-      />
-      <StyledDivForSpan>
-        <Span light>{data?.email}</Span>
-      </StyledDivForSpan>
+  const properMeErrorMessage = errorMessageHandler(
+    (meError as FetchError)?.data?.error
+  )
+  const properDeleteErrorMessage = errorMessageHandler(
+    (deleteError as FetchError)?.data?.error
+  )
 
-      <Flex width='127px'>
-        <Button onClick={logOutHandler} logout secondary>
-          Log out
-        </Button>
-      </Flex>
-    </BoxCard>
+  return (
+    <>
+      <BoxCard rowGap='0px'>
+        {isMeLoading ? <LinearPageLoader /> : null}
+        {deleteIsLoading ? <LinearPageLoader /> : null}
+        <Title marginBottom='30px' fontSize='22px'>
+          Personal Information
+        </Title>
+        <ImgWrapper marginBottom='17px' borderRadius={'50%'}>
+          <img src={GithubIcon} alt='Icon' />
+        </ImgWrapper>
+        <EditableSpan
+          marginBottom='20px'
+          title='Nickname'
+          initialValue={'Enter your Name'}
+        />
+        <StyledDivForSpan>
+          <Span light>{data?.email}</Span>
+        </StyledDivForSpan>
+
+        <Flex width='127px'>
+          <Button onClick={logOutHandler} logout secondary>
+            Log out
+          </Button>
+        </Flex>
+      </BoxCard>
+      <ErrorAlert errorMessage={properMeErrorMessage} />
+      <ErrorAlert errorMessage={properDeleteErrorMessage} />
+    </>
   )
 }
