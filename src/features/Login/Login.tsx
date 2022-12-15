@@ -83,6 +83,13 @@ export const Login = () => {
     reset()
   }
 
+  const disableButton =
+    !!errors.email?.message ||
+    !!errors.password?.message ||
+    !!errors.rememberMe?.message ||
+    isMeLoading ||
+    isLoginLoading
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {isMeLoading ? <LinearPageLoader /> : null}
@@ -139,15 +146,7 @@ export const Login = () => {
             Forgot Password?
           </AppLink>
         </StyledFormGroup>
-        <Button
-          disabled={
-            !!errors.email?.message ||
-            !!errors.password?.message ||
-            !!errors.rememberMe?.message
-          }
-        >
-          Sign in
-        </Button>
+        <Button disabled={disableButton}>Sign in</Button>
         <Span medium>Already have an account?</Span>
         <AppLink primary to={AppPaths.registrationPage}>
           Sign Up

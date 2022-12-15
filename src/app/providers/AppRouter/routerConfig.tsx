@@ -19,7 +19,7 @@ export const enum AppPaths {
   'storybook' = '/storybook',
   'forgotPasswordPage' = '/forgot-password-page',
   'setNewPassword' = '/set-new-password/:token',
-  'checkEmailPage' = '/check-email-page/:email',
+  'checkEmailPage' = '/check-email-page',
   'notFoundPage' = '/404',
   'notFoundPageRedirect' = '*'
 }
