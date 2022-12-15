@@ -2,11 +2,10 @@ import { useRegisterUserMutation } from './api/registerApiSlice'
 import { useNavigate } from 'react-router-dom'
 import { RegistrationForm } from './RegistrationForm/RegistrationForm'
 import { Title } from '../../shared/ui/Title/Title'
-
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { FetchError } from '../../shared/models/ErrorModel'
-import { RegistrationLoader } from '../../pages/RegistrationPage/RegistrationLoader'
+import { LinearPageLoader } from '../../widgets/LinearPageLoader/LinearPageLoader'
 
 export const Registration = () => {
   const navigate = useNavigate()
@@ -30,15 +29,14 @@ export const Registration = () => {
 
   if (isSuccess) navigate(AppPaths.registrationSuccessPage)
 
-  if (registrationLoading) return <RegistrationLoader />
-
   // Добавить всплывашку
   return (
-    <>
+    <div>
+      {registrationLoading ? <LinearPageLoader /> : null}
       <RegistrationForm registerUser={registerUser} />
       <Title color={'red'} fontSize={'26px'} marginBottom={'10px'}>
         {registrationError && properErrorMessage}
       </Title>
-    </>
+    </div>
   )
 }

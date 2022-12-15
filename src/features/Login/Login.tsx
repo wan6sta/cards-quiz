@@ -21,9 +21,10 @@ import { useMeMutation } from '../../shared/api/authMeApiSlice'
 import { useLoginMutation } from './api/loginApiSlice'
 import { useDispatch } from 'react-redux'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
-import { toast, ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
+import { setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
+import { LinearPageLoader } from '../../widgets/LinearPageLoader/LinearPageLoader'
 
 export const Schema = yup.object({
   email: yup.string().email().required('Email is required'),
@@ -36,13 +37,18 @@ export const Login = () => {
   // Загрузки
   const [
     login,
-    { error: loginError, isSuccess: loginSuccess, isLoading: isLoginLoading }
+    {
+      error: loginError,
+      isSuccess: loginSuccess,
+      isLoading: isLoginLoading,
+      data: loginData
+    }
   ] = useLoginMutation()
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  useEffect(function fetchIsLogin() {
+  useEffect(function fetchIsLogin () {
     me({})
   }, [])
 
@@ -55,12 +61,19 @@ export const Login = () => {
     }
   }, [meSuccess, loginSuccess])
 
+  // useEffect(() => {
+  //   if (loginData) {
+  //     console.log(loginData)
+  //     dispatch(setUserData(loginData))
+  //   }
+  // }, [loginSuccess])
+
   const {
     handleSubmit,
     reset,
     control,
     register,
-    formState: { errors,isValid }
+    formState: { errors, isValid }
   } = useForm<LoginForm>({
     defaultValues: {
       email: '',
@@ -72,10 +85,7 @@ export const Login = () => {
   })
 
   // Пустая страница с загрузкой
-  if (isLoading) {
-    return <div>loading...</div>
-  }
-
+  // if (isLoading) return null
 
   // Всплывашку добавить на саксес / на еррор
   const onSubmit: SubmitHandler<LoginForm> = async data => {
@@ -85,6 +95,7 @@ export const Login = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {isLoading ? <LinearPageLoader /> : null}
       <BoxCard>
         <Title marginBottom={'17px'}>Sign in</Title>
         <Controller
@@ -123,7 +134,9 @@ export const Login = () => {
         <StyledFormGroup>
           <StyledCheckboxLabel>
             <StyledFormCheckbox {...register('rememberMe')} type={'checkbox'} />
-            <Span bold>Remember me</Span>
+            <Span nonSelect bold>
+              Remember me
+            </Span>
           </StyledCheckboxLabel>
         </StyledFormGroup>
         <StyledFormGroup margin={'0 0 45px 0'}>

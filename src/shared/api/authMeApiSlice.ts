@@ -21,8 +21,8 @@ export const authMeApiSlice = createApi({
         body: payload
       })
     }),
-    deleteMe: builder.query({
-      query: () => ({
+    deleteMe: builder.mutation({
+      query: (payload: {}) => ({
         url: 'auth/me',
         method: 'DELETE'
       })
@@ -30,4 +30,4 @@ export const authMeApiSlice = createApi({
   })
 })
 
-export const { useMeMutation, useLazyDeleteMeQuery } = authMeApiSlice
+export const { useMeMutation, useDeleteMeMutation } = authMeApiSlice

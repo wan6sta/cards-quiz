@@ -8,33 +8,25 @@ import { Flex } from '../../shared/ui/Flex/Flex'
 import { Button } from '../../shared/ui/Button/Button'
 import { BoxCard } from '../../shared/ui/BoxCard/BoxCard'
 import {
-  useLazyDeleteMeQuery,
+  useDeleteMeMutation,
   useMeMutation
 } from '../../shared/api/authMeApiSlice'
 import { useNavigate } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
-import { useLoginMutation } from '../Login/api/loginApiSlice'
-
-// Добавить лоадеры
+import { LinearPageLoader } from '../../widgets/LinearPageLoader/LinearPageLoader'
+import { StyledDivForSpan } from './StyledProfile'
 
 export const Profile: FC = props => {
   const { ...restProps } = props
 
   const navigate = useNavigate()
 
-  const [deleteAcc, { isLoading: deleteIsLoading }] = useLazyDeleteMeQuery()
-
   const [
-    login,
-    {
-      error: loginError,
-      isSuccess: loginSuccess,
-      isLoading: isLoginLoading,
-      data: loginData
-    }
-  ] = useLoginMutation()
+    deleteAcc,
+    { isLoading: deleteIsLoading, isSuccess: isDeleteSuccess }
+  ] = useDeleteMeMutation()
 
-  const [me, { isLoading, isSuccess: success, status, data, isError }] =
+  const [me, { isLoading: isMeLoading, isSuccess, data, isError }] =
     useMeMutation()
 
   useEffect(() => {
@@ -42,18 +34,21 @@ export const Profile: FC = props => {
   }, [])
 
   const logOutHandler = () => {
-    deleteAcc()
-    navigate(AppPaths.loginPage)
+    deleteAcc({})
   }
 
-  console.log(loginData)
-
-  if (isError) {
-    navigate(AppPaths.loginPage)
-  }
+  useEffect(() => {
+    if (isError) {
+      navigate(AppPaths.loginPage)
+    }
+    if (isDeleteSuccess) {
+      navigate(AppPaths.loginPage)
+    }
+  }, [isError, isDeleteSuccess])
 
   return (
     <BoxCard rowGap='0px'>
+      {isMeLoading ? <LinearPageLoader /> : null}
       <Title marginBottom='30px' fontSize='22px'>
         Personal Information
       </Title>
@@ -65,9 +60,10 @@ export const Profile: FC = props => {
         title='Nickname'
         initialValue={'Ivan'}
       />
-      <Span marginBottom='29px' light>
-        wan6sta@gmail.com
-      </Span>
+      <StyledDivForSpan>
+        <Span light>{data?.email}</Span>
+      </StyledDivForSpan>
+
       <Flex width='127px'>
         <Button onClick={logOutHandler} logout secondary>
           Log out

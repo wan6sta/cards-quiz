@@ -1,23 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { userloggedInResponse } from '../../../../features/Login/models/loginModels'
 
-interface InitialState {
-  isLogin: boolean
+type Initial = Record<string, undefined | any>
+
+const initialState: Initial = {
+  userData: undefined
 }
 
-const initialState: InitialState = {
-  isLogin: false
-}
-
-const todosSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setIsLogin (state, action) {
-      state.isLogin = action.payload
+    setUserData: (state, action: PayloadAction<userloggedInResponse>) => {
+      state.userData = action.payload
+    },
+    removeUserData: state => {
+      state.userData = {}
     }
   }
 })
-
-export const { setIsLogin } = todosSlice.actions
-
-export default todosSlice.reducer
+export const { setUserData, removeUserData } = authSlice.actions
