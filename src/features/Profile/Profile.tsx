@@ -13,7 +13,7 @@ import {
 } from '../../shared/api/authMeApiSlice'
 import { useNavigate } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
-import { LinearPageLoader } from '../../widgets/LinearPageLoader/LinearPageLoader'
+import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { StyledDivForSpan } from './StyledProfile'
 
 export const Profile: FC = props => {

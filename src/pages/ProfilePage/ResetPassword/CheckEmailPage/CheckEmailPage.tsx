@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
-import { BoxCard } from '../../../shared/ui/BoxCard/BoxCard'
-import { Title } from '../../../shared/ui/Title/Title'
-import { ImgWrapper } from '../../../shared/ui/ImgWrapper/ImgWrapper'
-import EmailIcon from '../../../shared/assets/icons/EmailIcon.png'
+import { BoxCard } from '../../../../shared/ui/BoxCard/BoxCard'
+import { Title } from '../../../../shared/ui/Title/Title'
+import { ImgWrapper } from '../../../../shared/ui/ImgWrapper/ImgWrapper'
+import EmailIcon from '../../../../shared/assets/icons/EmailIcon.png'
 import { StyledCheckEmailPage } from './StyledCheckEmailPage'
-import { Span } from '../../../shared/ui/Span/Span'
+import { Span } from '../../../../shared/ui/Span/Span'
 import { Link, useParams } from 'react-router-dom'
-import { Button } from '../../../shared/ui/Button/Button'
-import { AppPaths } from '../../../app/providers/AppRouter/routerConfig'
+import { Button } from '../../../../shared/ui/Button/Button'
+import { AppPaths } from '../../../../app/providers/AppRouter/routerConfig'
 
 export const CheckEmailPage: FC = props => {
   const { ...restProps } = props

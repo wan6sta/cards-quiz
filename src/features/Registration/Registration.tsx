@@ -5,7 +5,7 @@ import { Title } from '../../shared/ui/Title/Title'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { FetchError } from '../../shared/models/ErrorModel'
-import { LinearPageLoader } from '../../widgets/LinearPageLoader/LinearPageLoader'
+import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 
 export const Registration = () => {
   const navigate = useNavigate()

@@ -10,10 +10,15 @@ interface SpanProps {
   className?: string
   marginBottom?: string
   textCenter?: boolean
+  hover?: boolean
 }
 
 export const Span: FC<PropsWithChildren<SpanProps>> = memo(props => {
-  const { children, ...restProps } = props
+  const { hover, children, ...restProps } = props
 
-  return <StyledSpan {...restProps}>{children}</StyledSpan>
+  return (
+    <StyledSpan hover={!!hover} {...restProps}>
+      {children}
+    </StyledSpan>
+  )
 })

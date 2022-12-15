@@ -13,7 +13,8 @@ export const StyledAppLink = styled.div<StyledAppLinkProps>`
   
   & > a {
     color: inherit;
-
+    transition: 0.2s ease-in;
+    
     ${props => props.primary && css`
       text-decoration-line: underline;
       color: #366EFF;
@@ -30,5 +31,9 @@ export const StyledAppLink = styled.div<StyledAppLinkProps>`
       font-size: 14px;
       line-height: 22px;
     `}
+    
+    &:hover {
+      opacity: 0.85;
+    }
   }
 `
