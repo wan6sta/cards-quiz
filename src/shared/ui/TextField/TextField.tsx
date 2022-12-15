@@ -39,6 +39,7 @@ export const TextField = memo(
       showPassword,
       title,
       textFieldMode,
+      onChange,
       ...restProps
     } = props
 
@@ -50,6 +51,7 @@ export const TextField = memo(
     const fieldMode = textFieldMode === 'nonOutlined'
 
     const inputValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e)
       setInputValue(e.currentTarget.value)
     }
 
@@ -93,7 +95,6 @@ export const TextField = memo(
                             withSaveButton={!!withSaveButton}
                             type={typeInput}
                             showPassword={!!showPassword}
-                            value={inputValue}
                             onChange={inputValueHandler}
                             placeholder={title}
                             changeInputView={fieldMode}
