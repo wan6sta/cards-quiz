@@ -15,6 +15,10 @@ import { useNavigate } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { StyledDivForSpan } from './StyledProfile'
+import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
+import { setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
 import { useEditNameMutation } from './api/profileSlice'
 
 export const Profile: FC = props => {
@@ -30,6 +34,9 @@ export const Profile: FC = props => {
   const [me, { isLoading: isMeLoading, isSuccess, data: meData, isError }] =
     useMeMutation()
 
+  const { userData } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+
   const [
     editName,
     {
@@ -40,8 +47,12 @@ export const Profile: FC = props => {
   ] = useEditNameMutation()
 
   useEffect(() => {
-    me({})
-  }, [])
+    if (!userData) me({})
+  }, [userData])
+
+  useEffect(() => {
+    if (data) dispatch(setUserData(data))
+  }, [isSuccess])
 
   const logOutHandler = () => {
     deleteAcc({})
@@ -84,10 +95,10 @@ export const Profile: FC = props => {
         editNameCallback={editNameHandler}
         marginBottom='20px'
         title='Nickname'
-        initialValue={meData?.name}
+        initialValue={userData?.name}
       />
       <StyledDivForSpan>
-        <Span light>{meData?.email}</Span>
+        <Span light>{userData?.email}</Span>
       </StyledDivForSpan>
 
       <Flex width='127px'>
