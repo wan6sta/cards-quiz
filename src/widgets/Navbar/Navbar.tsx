@@ -22,7 +22,7 @@ export const Navbar: FC<NavbarProps> = props => {
         {!userData ? (
           <Link to={AppPaths.loginPage}>
             <Flex width='113px'>
-              <Button>Log in</Button>
+              <Button>Sign in</Button>
             </Flex>
           </Link>
         ) : (
