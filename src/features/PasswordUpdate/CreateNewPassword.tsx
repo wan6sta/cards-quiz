@@ -11,9 +11,9 @@ import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoa
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import * as yup from 'yup'
-import {ErrorAlert} from "../../shared/ui/ErrorAlert/ErrorAlert";
-import {errorMessageHandler} from "../../shared/lib/errorMessageHandler/errorMessageHandler";
-import {FetchError} from "../../shared/models/ErrorModel";
+import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
+import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '../../shared/models/ErrorModel'
 
 export const Schema = yup.object({
   password: yup
@@ -33,8 +33,7 @@ export const CreateNewPassword: FC = props => {
     handleSubmit,
     reset,
     control,
-    register,
-    formState: { errors, isValid }
+    formState: { errors }
   } = useForm<{ password: string }>({
     defaultValues: {
       password: ''
@@ -64,9 +63,7 @@ export const CreateNewPassword: FC = props => {
 
   const disableButton = !!errors.password?.message || isLoading
 
-  const errorHandler = errorMessageHandler(
-      (error as FetchError)?.data?.error
-  )
+  const errorHandler = errorMessageHandler((error as FetchError)?.data?.error)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

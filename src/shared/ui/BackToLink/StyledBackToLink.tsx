@@ -9,10 +9,10 @@ export const StyledBackToLink = styled.div<StyledBackToLinkProps>`
   display: flex;
   align-items: center;
   height: 24px;
-  align-self: ${props => props.alignSelf ? props.alignSelf : 'flex-start'};
-  margin-bottom: ${props => props.marginBottom ? props.marginBottom : 0};
+  align-self: ${props => (props.alignSelf ? props.alignSelf : 'flex-start')};
+  margin-bottom: ${props => (props.marginBottom ? props.marginBottom : 0)};
   transition: 0.1s ease-in;
-  
+
   &:hover {
     opacity: 0.85;
   }

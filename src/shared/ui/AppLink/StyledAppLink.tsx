@@ -9,28 +9,33 @@ interface StyledAppLinkProps {
 export const StyledAppLink = styled.div<StyledAppLinkProps>`
   display: flex;
   align-items: center;
-  justify-content: ${props => props.justifyContent ? props.justifyContent : 'flex-start'};
-  
+  justify-content: ${props =>
+    props.justifyContent ? props.justifyContent : 'flex-start'};
+
   & > a {
     color: inherit;
     transition: 0.2s ease-in;
-    
-    ${props => props.primary && css`
-      text-decoration-line: underline;
-      color: #366EFF;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 24px;
-      letter-spacing: 0.01em;
-    `}
 
-    ${props => props.secondary && css`
-      text-decoration: none;
-      color: #000;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 22px;
-    `}
+    ${props =>
+      props.primary &&
+      css`
+        text-decoration-line: underline;
+        color: #366eff;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.01em;
+      `}
+
+    ${props =>
+      props.secondary &&
+      css`
+        text-decoration: none;
+        color: #000;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+      `}
     
     &:hover {
       opacity: 0.85;

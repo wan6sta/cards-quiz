@@ -27,8 +27,6 @@ import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorM
 import { FetchError } from '../../shared/models/ErrorModel'
 
 export const Profile: FC = props => {
-  const { ...restProps } = props
-
   const navigate = useNavigate()
 
   const [
@@ -36,20 +34,13 @@ export const Profile: FC = props => {
     {
       isLoading: deleteIsLoading,
       isSuccess: isDeleteSuccess,
-      data: deleteMeData,
       error: deleteMeError
     }
   ] = useDeleteMeMutation()
 
   const [
     me,
-    {
-      isLoading: isMeLoading,
-      isSuccess,
-      data: meData,
-      isError: isMeError,
-      error: meError
-    }
+    { isLoading: isMeLoading, isSuccess, data: meData, isError: isMeError }
   ] = useMeMutation()
 
   const { userData } = useAppSelector(state => state.auth)
@@ -81,7 +72,6 @@ export const Profile: FC = props => {
       dispatch(removeUserData())
       navigate(AppPaths.loginPage)
     }
-    // if (editNameIsError) navigate(AppPaths.loginPage)
   }, [isMeError, isDeleteSuccess, editNameIsError])
 
   const logOutHandler = async () => {

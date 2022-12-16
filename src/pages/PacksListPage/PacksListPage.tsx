@@ -1,18 +1,17 @@
 import { FC } from 'react'
 import styled, { css } from 'styled-components'
-import {Title} from "../../shared/ui/Title/Title";
+import { Title } from '../../shared/ui/Title/Title'
 
-interface StyledPacksListPageProps {}
-
-export const StyledPacksListPage = styled.div<StyledPacksListPageProps>`
+export const StyledPacksListPage = styled.div`
   ${props => props && css``}
 `
-interface PacksListPageProps {}
 
-export const PacksListPage: FC<PacksListPageProps> = props => {
+export const PacksListPage: FC = props => {
   const { ...restProps } = props
 
-  return <StyledPacksListPage {...restProps} >
+  return (
+    <StyledPacksListPage {...restProps}>
       <Title>Packs List</Title>
-  </StyledPacksListPage>
+    </StyledPacksListPage>
+  )
 }

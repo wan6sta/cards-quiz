@@ -10,7 +10,8 @@ import { userloggedInResponse } from '../../features/Login/models/loginModels'
 export const authMeApiSlice = createApi({
   reducerPath: 'authMe/api',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.MODE === 'development'
+    baseUrl:
+      import.meta.env.MODE === 'development'
         ? import.meta.env.VITE_API_BASE_URL
         : import.meta.env.VITE_API_PROD_URL,
     credentials: 'include'

@@ -84,11 +84,11 @@ export const StyledSearchIcon = styled(SearchIcon)``
 
 export const StyledShowPasswordIcon = styled(EyeIcon)`
   width: 24px;
-  height: 24px
+  height: 24px;
 `
 export const StyledShowPasswordSlashIcon = styled(EyeSlashIcon)`
   width: 24px;
-  height: 24px
+  height: 24px;
 `
 
 export const StyledShowPasswordWrapper = styled.div`

@@ -2,10 +2,7 @@ import { FC } from 'react'
 import cls from './LinearPageLoader.module.css'
 import { BarLoader } from 'react-spinners'
 
-interface LineaerPageLoaderProps {}
-
-export const LinearPageLoader: FC<LineaerPageLoaderProps> = props => {
-  const { ...restProps } = props
+export const LinearPageLoader: FC = props => {
 
   return (
     <div className={cls.position}>

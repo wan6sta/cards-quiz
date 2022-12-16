@@ -23,7 +23,9 @@ export const BugButton = () => {
 
   return (
     <StyledWrapper>
-      <Button danger onClick={newError}>ERROR</Button>
+      <Button danger onClick={newError}>
+        ERROR
+      </Button>
     </StyledWrapper>
   )
 }

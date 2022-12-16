@@ -1,18 +1,18 @@
-@import "./reset.css";
+@import './reset.css';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 body {
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .app {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-    background-color: #F9F9FA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  background-color: #f9f9fa;
 }

@@ -1,10 +1,10 @@
 import {
   ChangeEvent,
+  forwardRef,
   InputHTMLAttributes,
-  memo,
-  useState,
   KeyboardEvent,
-  forwardRef
+  memo,
+  useState
 } from 'react'
 import { Span } from '../Span/Span'
 import cls from './TextField.module.css'

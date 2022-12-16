@@ -1,7 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-export const StyledProfile = styled.div`
-`
+export const StyledProfile = styled.div``
 
 export const StyledDivForSpan = styled.div`
   display: flex;

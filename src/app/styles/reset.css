@@ -1,39 +1,49 @@
 /* Reset and base styles  */
 * {
-    padding: 0px;
-    margin: 0px;
-    border: none;
+  padding: 0px;
+  margin: 0px;
+  border: none;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-a, a:link, a:visited {
-    text-decoration: none;
+a,
+a:link,
+a:visited {
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-    font-size: inherit;
-    font-weight: inherit;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: inherit;
+  font-weight: inherit;
 }
 
-ul, ul li {
-    list-style: none;
+ul,
+ul li {
+  list-style: none;
 }
 
-img, svg {
-    max-width: 100%;
-    height: auto;
+img,
+svg {
+  max-width: 100%;
+  height: auto;
 }
 
 :focus,
 :active {
-    outline: none;
+  outline: none;
 }

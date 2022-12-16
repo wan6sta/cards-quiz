@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components'
 
-interface StyledLineaerPageLoaderProps {}
-
-export const StyledLineaerPageLoader = styled.div<StyledLineaerPageLoaderProps>`
+export const StyledLineaerPageLoader = styled.div`
   ${props => props && css``}
 `

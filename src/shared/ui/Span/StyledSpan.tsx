@@ -19,7 +19,7 @@ export const StyledSpan = styled.span<StyledSpanProps>`
   margin-bottom: ${props => (props.marginBottom ? props.marginBottom : '0px')};
   user-select: ${props => (props.nonSelect ? 'none' : 'text')};
   text-align: ${props => (props.textCenter ? 'center' : 'inherit')};
-  
+
   ${props =>
     props.light &&
     css`

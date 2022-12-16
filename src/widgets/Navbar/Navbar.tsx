@@ -5,7 +5,7 @@ import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSe
 import { Link } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { Flex } from '../../shared/ui/Flex/Flex'
-import {ProfileInfo} from "../ProfileInfo/ProfileInfo";
+import { ProfileInfo } from '../ProfileInfo/ProfileInfo'
 
 interface NavbarProps {
   someProps?: string
@@ -26,7 +26,7 @@ export const Navbar: FC<NavbarProps> = props => {
             </Flex>
           </Link>
         ) : (
-          <ProfileInfo/>
+          <ProfileInfo />
         )}
       </StyledButtonWrapper>
     </StyledNavbar>

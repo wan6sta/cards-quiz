@@ -22,7 +22,7 @@ export const StyledTitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 11px;
-  
+
   ${props => props && css``}
 `
 

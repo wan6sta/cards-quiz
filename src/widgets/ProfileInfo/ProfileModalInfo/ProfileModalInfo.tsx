@@ -1,25 +1,19 @@
 import { FC } from 'react'
 import {
-    StyledListItem,
-    StyledProfileItem,
-    StyledProfileModalInfo,
-    StyledSearchItem, StyledTextWrapper
+  StyledProfileItem,
+  StyledProfileModalInfo,
+  StyledTextWrapper
 } from './StyledProfileModalInfo'
 import { ReactComponent as MiniUser } from '../../../shared/assets/icons/MiniUser.svg'
 import { ReactComponent as Logout } from '../../../shared/assets/icons/Logout.svg'
 
-interface ProfileModalInfoProps {}
-
-export const ProfileModalInfo: FC<ProfileModalInfoProps> = props => {
-  const { ...restProps } = props
+export const ProfileModalInfo: FC = props => {
 
   return (
     <StyledProfileModalInfo>
       <StyledProfileItem>
         <MiniUser />
-        <StyledTextWrapper>
-            Profile
-        </StyledTextWrapper>
+        <StyledTextWrapper>Profile</StyledTextWrapper>
       </StyledProfileItem>
       <StyledProfileItem>
         <Logout />

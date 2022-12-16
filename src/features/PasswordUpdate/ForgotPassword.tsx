@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react'
+import { FC, useEffect, useState } from 'react'
 import { StyledForgotPassword } from './StyledForgotPassword'
 import { TextField } from '../../shared/ui/TextField/TextField'
 import { Span } from '../../shared/ui/Span/Span'
@@ -28,11 +28,10 @@ export const ForgotPassword: FC = props => {
   const { ...restProps } = props
   const navigate = useNavigate()
 
-  const [resetPassword, { isLoading, isSuccess, error, isError, data }] =
+  const [resetPassword, { isLoading, isSuccess, error }] =
     useResetPassMutation()
 
   const [email, setEmail] = useState('')
-
 
   useEffect(() => {
     if (isSuccess) {
@@ -45,8 +44,7 @@ export const ForgotPassword: FC = props => {
     handleSubmit,
     reset,
     control,
-    register,
-    formState: { errors, isValid }
+    formState: { errors }
   } = useForm<{ email: string }>({
     defaultValues: {
       email: ''
@@ -58,21 +56,18 @@ export const ForgotPassword: FC = props => {
   const onSubmit: SubmitHandler<{ email: string }> = async formData => {
     if (errors.email?.message) return
     const data = {
-      email: formData.email, // кому восстанавливать пароль
+      email: formData.email,
       from: 'wow team',
-      // можно указать разработчика фронта)
       message: `<div style="background-color: lime; padding: 15px">
 password recovery link: 
 <a href='http://localhost:5173/set-new-password/$token$'>
 link</a>
-</div>` // хтмп-письмо, вместо $token$ бэк вставит токен
+</div>`
     }
     setEmail(prev => data.email)
     await resetPassword(data)
     reset()
   }
-
-
 
   const disableButton = !!errors.email?.message || isLoading
 
