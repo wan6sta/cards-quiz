@@ -19,7 +19,7 @@ import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 
 const Schema = yup.object({
   email: yup.string().required('Email is required').email(),
-  password: yup.string().required('Password is required').min(7).max(20),
+  password: yup.string().required('Password is required').min(8).max(20),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords should match')

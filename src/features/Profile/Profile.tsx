@@ -41,8 +41,16 @@ export const Profile: FC = props => {
     }
   ] = useDeleteMeMutation()
 
-  const [me, { isLoading: isMeLoading, isSuccess, data: meData, isError: meError }] =
-    useMeMutation()
+  const [
+    me,
+    {
+      isLoading: isMeLoading,
+      isSuccess,
+      data: meData,
+      isError: isMeError,
+      error: meError
+    }
+  ] = useMeMutation()
 
   const { userData } = useAppSelector(state => state.auth)
   const dispatch = useAppDispatch()
@@ -53,7 +61,8 @@ export const Profile: FC = props => {
       isLoading: isEditNameLoading,
       data: editNameData,
       isError: editNameIsError,
-      isSuccess: isEditNameSuccess
+      isSuccess: isEditNameSuccess,
+      error: editNameError
     }
   ] = useEditNameMutation()
 
@@ -64,16 +73,20 @@ export const Profile: FC = props => {
   useEffect(() => {
     if (meData) dispatch(setUserData(meData))
     if (editNameData) dispatch(setUserData(editNameData.updatedUser))
-    if (deleteMeData) dispatch(removeUserData())
-  }, [isSuccess, isEditNameSuccess, isDeleteSuccess])
+  }, [isSuccess, isEditNameSuccess])
 
   useEffect(() => {
-    if (isError) navigate(AppPaths.loginPage)
-    if (isDeleteSuccess) navigate(AppPaths.loginPage)
-    if (editNameIsError) navigate(AppPaths.loginPage)
-  }, [isError, isDeleteSuccess, editNameIsError])
+    if (isMeError) navigate(AppPaths.loginPage)
+    if (isDeleteSuccess) {
+      dispatch(removeUserData())
+      navigate(AppPaths.loginPage)
+    }
+    // if (editNameIsError) navigate(AppPaths.loginPage)
+  }, [isMeError, isDeleteSuccess, editNameIsError])
 
-  const logOutHandler = async () => await deleteAcc({})
+  const logOutHandler = async () => {
+    await deleteAcc({})
+  }
 
   const logOutButtonDisable = deleteIsLoading
 
@@ -86,21 +99,21 @@ export const Profile: FC = props => {
   }
 
   const properMeErrorMessage = errorMessageHandler(
-      (meError as FetchError)?.data?.error
+    (deleteMeError as FetchError)?.data?.error
   )
   const properDeleteErrorMessage = errorMessageHandler(
-      (deleteMeError as FetchError)?.data?.error
+    (editNameError as FetchError)?.data?.error
   )
+
+  const isBundleLoading = isMeLoading || deleteIsLoading || isEditNameLoading
 
   return (
     <BoxCard rowGap='0px'>
-      {isMeLoading ? <LinearPageLoader /> : null}
-      {deleteIsLoading ? <LinearPageLoader /> : null}
-      {isEditNameLoading ? <LinearPageLoader /> : null}
+      {isBundleLoading ? <LinearPageLoader /> : null}
       <Title marginBottom='30px' fontSize='22px'>
         Personal Information
       </Title>
-      <ImgWrapper marginBottom='17px' borderRadius={'50%'}>
+      <ImgWrapper marginBottom='25px' borderRadius={'50%'}>
         <img src={GithubIcon} alt='Icon' />
       </ImgWrapper>
       <StyledDivForSpan>

@@ -9,6 +9,7 @@ import { ForgotPasswordPage } from '../../../pages/ProfilePage/ResetPassword/For
 import { SetNewPasswordPage } from '../../../pages/ProfilePage/ResetPassword/SetNewPasswordPage/SetNewPasswordPage'
 import { CheckEmailPage } from '../../../pages/ProfilePage/ResetPassword/CheckEmailPage/CheckEmailPage'
 import { Navigate } from 'react-router-dom'
+import { PacksListPage } from '../../../pages/PacksListPage/PacksListPage'
 
 export const enum AppPaths {
   'app' = '/',
@@ -17,6 +18,7 @@ export const enum AppPaths {
   'loginPage' = '/login',
   'registrationSuccessPage' = '/registration-success',
   'storybook' = '/storybook',
+  'packsListPage' = '/packs-list',
   'forgotPasswordPage' = '/forgot-password-page',
   'setNewPassword' = '/set-new-password/:token',
   'checkEmailPage' = '/check-email-page',
@@ -42,6 +44,11 @@ export const appRouterConfig: AppRouteProps[] = [
   {
     path: AppPaths.registrationSuccessPage,
     element: <RegistrationSuccessPage />,
+    pageLayout: true
+  },
+  {
+    path: AppPaths.packsListPage,
+    element: <PacksListPage />,
     pageLayout: true
   },
   {

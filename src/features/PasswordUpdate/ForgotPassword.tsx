@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import {FC, useEffect, useState} from 'react'
 import { StyledForgotPassword } from './StyledForgotPassword'
 import { TextField } from '../../shared/ui/TextField/TextField'
 import { Span } from '../../shared/ui/Span/Span'
@@ -13,6 +13,9 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { RestoreUserEmailKey } from '../../shared/assets/constants/RestoreUserEmail'
+import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
+import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '../../shared/models/ErrorModel'
 
 export const Schema = yup.object({
   email: yup
@@ -25,7 +28,18 @@ export const ForgotPassword: FC = props => {
   const { ...restProps } = props
   const navigate = useNavigate()
 
-  const [resetPassword, { isLoading, isSuccess }] = useResetPassMutation()
+  const [resetPassword, { isLoading, isSuccess, error, isError, data }] =
+    useResetPassMutation()
+
+  const [email, setEmail] = useState('')
+
+
+  useEffect(() => {
+    if (isSuccess) {
+      sessionStorage.setItem(RestoreUserEmailKey, email)
+      navigate(AppPaths.checkEmailPage)
+    }
+  }, [isSuccess, email])
 
   const {
     handleSubmit,
@@ -37,7 +51,7 @@ export const ForgotPassword: FC = props => {
     defaultValues: {
       email: ''
     },
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(Schema)
   })
 
@@ -53,18 +67,16 @@ password recovery link:
 link</a>
 </div>` // хтмп-письмо, вместо $token$ бэк вставит токен
     }
+    setEmail(prev => data.email)
     await resetPassword(data)
-    sessionStorage.setItem(RestoreUserEmailKey, data.email)
     reset()
   }
 
-  useEffect(() => {
-    if (isSuccess) {
-      navigate(AppPaths.checkEmailPage)
-    }
-  }, [isSuccess])
+
 
   const disableButton = !!errors.email?.message || isLoading
+
+  const errorHandler = errorMessageHandler((error as FetchError)?.data?.error)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -101,6 +113,7 @@ link</a>
           Try logging in
         </AppLink>
       </StyledForgotPassword>
+      <ErrorAlert errorMessage={errorHandler} />
     </form>
   )
 }

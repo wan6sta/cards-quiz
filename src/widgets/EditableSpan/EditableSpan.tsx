@@ -33,7 +33,7 @@ export const EditableSpan: FC<EditableSpanProps> = props => {
       return
     }
 
-    editNameCallback && editNameCallback(value)
+    editNameCallback && editNameCallback(value.trim())
     setInputShow(false)
   }
 

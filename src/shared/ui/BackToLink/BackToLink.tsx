@@ -14,7 +14,7 @@ export const BackToLink: FC<PropsWithChildren<BackToLinkProps>> = props => {
 
   return (
     <StyledBackToLink {...restProps}>
-      <AppLink to={AppPaths.profilePage}>
+      <AppLink to={AppPaths.packsListPage}>
         <StyledWrapper>
           <BackIcon />
           {children}

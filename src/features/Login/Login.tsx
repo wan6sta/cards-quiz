@@ -33,14 +33,13 @@ export const Schema = yup.object({
     .required('Email is required'),
   password: yup
     .string()
-    .min(7, 'Password must be at least 7 characters')
+    .min(8, 'Password must be at least 7 characters')
     .required('Password is required')
 })
 
 export const Login = () => {
   const [me, { isLoading: isMeLoading, isSuccess: meSuccess }] = useMeMutation()
 
-  // Загрузки
   const [
     login,
     {
@@ -84,7 +83,7 @@ export const Login = () => {
       password: '',
       rememberMe: false
     },
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(Schema)
   })
 
@@ -93,6 +92,10 @@ export const Login = () => {
     reset()
   }
 
+  const errorHandler = errorMessageHandler(
+    (loginError as FetchError)?.data?.error
+  )
+
   const disableButton =
     !!errors.email?.message ||
     !!errors.password?.message ||
@@ -100,14 +103,11 @@ export const Login = () => {
     isMeLoading ||
     isLoginLoading
 
-  const properErrorMessage = errorMessageHandler(
-    (loginError as FetchError)?.data?.error
-  )
+  const isBundleLoading = isMeLoading || isLoginLoading
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {isMeLoading ? <LinearPageLoader /> : null}
-      {isLoginLoading ? <LinearPageLoader /> : null}
+      {isBundleLoading ? <LinearPageLoader /> : null}
       <BoxCard>
         <Title marginBottom={'17px'}>Sign in</Title>
         <Controller
@@ -158,7 +158,7 @@ export const Login = () => {
           Sign Up
         </AppLink>
       </BoxCard>
-      <ErrorAlert errorMessage={properErrorMessage} />
+      <ErrorAlert errorMessage={errorHandler} />
     </form>
   )
 }

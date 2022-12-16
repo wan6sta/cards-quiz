@@ -92,6 +92,7 @@ export const TextField = memo(
           ) : null}
           <label className={cls.label}>
             <StyledTextFiled
+              value={value}
               ref={ref}
               onKeyDown={onEnterHandler}
               error={!!error}

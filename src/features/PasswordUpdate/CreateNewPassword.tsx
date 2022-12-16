@@ -11,18 +11,21 @@ import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoa
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import * as yup from 'yup'
+import {ErrorAlert} from "../../shared/ui/ErrorAlert/ErrorAlert";
+import {errorMessageHandler} from "../../shared/lib/errorMessageHandler/errorMessageHandler";
+import {FetchError} from "../../shared/models/ErrorModel";
 
 export const Schema = yup.object({
   password: yup
     .string()
-    .min(7, 'Password must be at least 7 characters')
+    .min(8, 'Password must be at least 7 characters')
     .required('Password is required')
 })
 
 export const CreateNewPassword: FC = props => {
   const { ...restProps } = props
 
-  const [createNewPass, { isLoading, isSuccess }] = useNewPassMutation()
+  const [createNewPass, { isLoading, isSuccess, error }] = useNewPassMutation()
   const { token } = useParams()
   const navigate = useNavigate()
 
@@ -36,7 +39,7 @@ export const CreateNewPassword: FC = props => {
     defaultValues: {
       password: ''
     },
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(Schema)
   })
 
@@ -60,6 +63,10 @@ export const CreateNewPassword: FC = props => {
   }, [isSuccess])
 
   const disableButton = !!errors.password?.message || isLoading
+
+  const errorHandler = errorMessageHandler(
+      (error as FetchError)?.data?.error
+  )
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -88,6 +95,7 @@ export const CreateNewPassword: FC = props => {
         </Flex>
         <Button disabled={disableButton}>Create new password</Button>
       </StyledCreateNewPassword>
+      <ErrorAlert errorMessage={errorHandler} />
     </form>
   )
 }
