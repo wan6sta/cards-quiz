@@ -1,9 +1,9 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import {createHashRouter, RouterProvider} from 'react-router-dom'
 import { ErrorPage } from '../../../pages/ErrorPage/ErrorPage'
 import { PageLayout } from '../../../widgets/PageLayout/PageLayout'
 import { appRouterConfig } from './routerConfig'
 
-const newRouter = createBrowserRouter(
+const newRouter = createHashRouter(
   appRouterConfig.map(route => ({
     path: route.path,
     element: route.pageLayout ? (

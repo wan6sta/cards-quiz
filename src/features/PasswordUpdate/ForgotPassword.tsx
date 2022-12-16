@@ -53,6 +53,10 @@ export const ForgotPassword: FC = props => {
     resolver: yupResolver(Schema)
   })
 
+  const url =  import.meta.env.MODE === 'development'
+          ? import.meta.env.VITE_API_BASE_URL
+          : import.meta.env.VITE_API_PROD_URL
+
   const onSubmit: SubmitHandler<{ email: string }> = async formData => {
     if (errors.email?.message) return
     const data = {
@@ -60,7 +64,7 @@ export const ForgotPassword: FC = props => {
       from: 'wow team',
       message: `<div style="background-color: lime; padding: 15px">
 password recovery link: 
-<a href='http://localhost:5173/set-new-password/$token$'>
+<a href='https://cards-quiz.vercel.app/#/set-new-password/$token$'>
 link</a>
 </div>`
     }
