@@ -17,9 +17,11 @@ export const authSlice = createSlice({
   reducers: {
     setUserData: (state, action: PayloadAction<userloggedInResponse>) => {
       state.userData = action.payload
+      state.isAuth = true
     },
     removeUserData: state => {
       state.userData = undefined
+      state.isAuth = false
     }
   }
 })
