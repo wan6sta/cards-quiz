@@ -33,7 +33,6 @@ export const Registration = () => {
     registerUser,
     {
       isSuccess,
-      isError: registrationError,
       isLoading: registrationLoading,
       error
     }

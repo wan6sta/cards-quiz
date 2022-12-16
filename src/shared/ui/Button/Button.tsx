@@ -18,7 +18,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const { disabled, logout, children, ...restProps } = props
 
     return (
-      <StyledButton disabled={!!disabled} {...restProps}>
+      <StyledButton ref={ref} disabled={!!disabled} {...restProps}>
         {logout ? <Logout /> : null}
         {children}
       </StyledButton>
