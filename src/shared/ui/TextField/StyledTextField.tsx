@@ -100,7 +100,7 @@ export const StyledShowPasswordWrapper = styled.div`
   width: 39px;
   height: 36px;
   transition: 0.3s;
-  top: 11px;
+  top: 13px;
   right: 0;
 
   &:hover {
