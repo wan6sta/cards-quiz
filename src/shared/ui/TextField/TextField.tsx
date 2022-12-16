@@ -25,7 +25,7 @@ interface TextFiledProps extends InputHTMLAttributes<HTMLInputElement> {
   textFieldMode: 'outlined' | 'nonOutlined'
   withSaveButton?: boolean
   error?: string
-  onEnter?: (str: string) => void
+  onEnter?: () => void
   margin?: string
 }
 
@@ -41,10 +41,10 @@ export const TextField = memo(
       title,
       textFieldMode,
       onChange,
+      value,
       ...restProps
     } = props
 
-    const [inputValue, setInputValue] = useState('')
     const [typeInput, setTypeInput] = useState<TypeInput>(
       showPassword ? 'password' : 'text'
     )
@@ -53,7 +53,6 @@ export const TextField = memo(
 
     const inputValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
       onChange?.(e)
-      setInputValue(e.currentTarget.value)
     }
 
     const toggleTypeHandler = () => {
@@ -61,17 +60,16 @@ export const TextField = memo(
     }
 
     const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-      if ((e.code = 'Enter')) {
-        onEnter && onEnter(inputValue)
+      if ((e.key = 'Enter')) {
+        onEnter && onEnter()
       }
     }
-
     return (
       <div className={cls.wrapperWrapper}>
         <div className={cls.wrapper}>
           <Span
             className={cn(cls.span, {
-              [cls.show]: !!inputValue.length && fieldMode
+              [cls.show]: (value as string) && fieldMode
             })}
             nonSelect
             light
