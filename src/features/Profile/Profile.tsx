@@ -25,6 +25,7 @@ import { useEditNameMutation } from './api/profileSlice'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../shared/models/ErrorModel'
+import { authSelector } from '../../app/providers/StoreProvider/authSlice/selectors/authSelector'
 
 export const Profile: FC = props => {
   const navigate = useNavigate()
@@ -43,7 +44,7 @@ export const Profile: FC = props => {
     { isLoading: isMeLoading, isSuccess, data: meData, isError: isMeError }
   ] = useMeMutation()
 
-  const { userData } = useAppSelector(state => state.auth)
+  const { userData } = useAppSelector(authSelector)
   const dispatch = useAppDispatch()
 
   const [
