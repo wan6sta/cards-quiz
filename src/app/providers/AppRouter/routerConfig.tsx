@@ -32,7 +32,6 @@ interface AppRouteProps {
 
 export const appRouterConfig: AppRouteProps[] = [
   { path: AppPaths.app, element: <LoginPage />, pageLayout: true },
-
   { path: AppPaths.profilePage, element: <ProfilePage />, pageLayout: true },
   {
     path: AppPaths.registrationPage,
@@ -60,7 +59,6 @@ export const appRouterConfig: AppRouteProps[] = [
     element: <SetNewPasswordPage />,
     pageLayout: true
   },
-
   { path: AppPaths.notFoundPage, element: <NotFoundPage />, pageLayout: false },
   {
     path: AppPaths.notFoundPageRedirect,

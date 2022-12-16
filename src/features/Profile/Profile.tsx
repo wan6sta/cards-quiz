@@ -15,10 +15,12 @@ import { useNavigate } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { StyledDivForSpan } from './StyledProfile'
-import { useSelector } from 'react-redux'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
-import { removeUserData, setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
+import {
+  removeUserData,
+  setUserData
+} from '../../app/providers/StoreProvider/authSlice/authSlice'
 import { useEditNameMutation } from './api/profileSlice'
 
 export const Profile: FC = props => {
@@ -61,31 +63,23 @@ export const Profile: FC = props => {
     if (deleteMeData) dispatch(removeUserData())
   }, [isSuccess, isEditNameSuccess, isDeleteSuccess])
 
-  const logOutHandler = () => {
-    deleteAcc({})
-  }
-
   useEffect(() => {
-    if (isError) {
-      navigate(AppPaths.loginPage)
-    }
-    if (isDeleteSuccess) {
-      navigate(AppPaths.loginPage)
-    }
-  }, [isError, isDeleteSuccess])
+    if (isError) navigate(AppPaths.loginPage)
+    if (isDeleteSuccess) navigate(AppPaths.loginPage)
+    if (editNameIsError) navigate(AppPaths.loginPage)
+  }, [isError, isDeleteSuccess, editNameIsError])
+
+  const logOutHandler = async () => await deleteAcc({})
 
   const logOutButtonDisable = deleteIsLoading
 
-  const editNameHandler = (str: string) => {
+  const editNameHandler = async (str: string) => {
     const data = {
       name: str,
       img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ficatcare.org%2Fadvice%2Fthinking-of-getting-a-cat%2F&psig=AOvVaw0aBcdSvQNNBHGJoD_RPSu1&ust=1671209812335000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOC8qeyL_PsCFQAAAAAdAAAAABAIhttps://www.google.com/url?sa=i&url=https%3A%2F%2Ficatcare.org%2Fadvice%2Fthinking-of-getting-a-cat%2F&psig=AOvVaw0aBcdSvQNNBHGJoD_RPSu1&ust=1671209812335000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOC8qeyL_PsCFQAAAAAdAAAAABAI'
     }
-
-    editName(data)
+    await editName(data)
   }
-
-  console.log(meData)
 
   return (
     <BoxCard rowGap='0px'>
@@ -112,7 +106,6 @@ export const Profile: FC = props => {
       <StyledDivForSpan>
         <Span light>{userData?.email}</Span>
       </StyledDivForSpan>
-
       <Flex width='127px'>
         <Button
           disabled={logOutButtonDisable}

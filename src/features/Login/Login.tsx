@@ -55,7 +55,7 @@ export const Login = () => {
 
   const navigate = useNavigate()
 
-  useEffect(function fetchIsLogin() {
+  useEffect(() => {
     me({})
   }, [])
 

@@ -55,7 +55,7 @@ export const Registration = () => {
   })
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
-    registerUser(data)
+    await registerUser(data)
   }
 
   const disableInput =

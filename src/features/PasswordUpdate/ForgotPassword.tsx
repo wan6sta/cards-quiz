@@ -53,7 +53,7 @@ password recovery link:
 link</a>
 </div>` // хтмп-письмо, вместо $token$ бэк вставит токен
     }
-    resetPassword(data)
+    await resetPassword(data)
     sessionStorage.setItem(RestoreUserEmailKey, data.email)
     reset()
   }
