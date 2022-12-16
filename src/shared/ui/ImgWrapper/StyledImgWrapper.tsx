@@ -5,6 +5,7 @@ interface StyledImgWrapperProps {
   height?: string
   borderRadius?: string
   marginBottom?: string
+  cursorPointer?: boolean
 }
 
 export const StyledImgWrapper = styled.div<StyledImgWrapperProps>`
@@ -12,6 +13,7 @@ export const StyledImgWrapper = styled.div<StyledImgWrapperProps>`
   height: ${props => props.height ? props.height : '96px'};
   border-radius: ${props => props.borderRadius ? props.borderRadius : '0%'};
   margin-bottom: ${props => props.marginBottom ? props.marginBottom : '0px'};
+  cursor: ${props => props.cursorPointer ? 'pointer' : 'default'};
   
   & > img {
     user-select: none;

@@ -6,6 +6,7 @@ interface ImgWrapperProps {
   height?: string
   borderRadius?: string
   marginBottom?: string
+  cursorPointer?: boolean
 }
 
 export const ImgWrapper: FC<PropsWithChildren<ImgWrapperProps>> = props => {

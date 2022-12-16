@@ -19,5 +19,9 @@ export const StyledNavbar = styled.div<StyledNavbarProps>`
 export const StyledButtonWrapper = styled.div<StyledNavbarProps>`
   display: flex;
   align-items: center;
-  width: 113px;
+  justify-content: flex-end;
+  font-weight: 500;
+  color: black;
+  font-size: 16px;
+  line-height: 24px;
 `

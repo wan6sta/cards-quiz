@@ -5,6 +5,8 @@ interface TitleProps {
   fontSize?: string
   marginBottom?: string
   color?: string
+  underLine?: boolean
+  lineHeight?: string
 }
 
 export const Title: FC<PropsWithChildren<TitleProps>> = props => {
