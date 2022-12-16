@@ -11,20 +11,20 @@ export const ErrorAlert: FC<ErrorProps> = props => {
   useMemo(() => {
     errorMessage &&
       toast.error(`${errorMessage}`, {
-        position: 'bottom-left',
+        position: 'top-right',
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
-        theme: 'light'
+        theme: 'colored'
       })
   }, [errorMessage])
 
   return (
     <ToastContainer
-      position='bottom-left'
+      position='top-right'
       autoClose={2000}
       hideProgressBar={false}
       newestOnTop={false}
@@ -34,7 +34,7 @@ export const ErrorAlert: FC<ErrorProps> = props => {
       pauseOnFocusLoss={false}
       draggable
       pauseOnHover={false}
-      theme='light'
+      theme='colored'
     />
   )
 }

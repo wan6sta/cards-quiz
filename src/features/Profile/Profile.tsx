@@ -22,6 +22,9 @@ import {
   setUserData
 } from '../../app/providers/StoreProvider/authSlice/authSlice'
 import { useEditNameMutation } from './api/profileSlice'
+import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
+import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '../../shared/models/ErrorModel'
 
 export const Profile: FC = props => {
   const { ...restProps } = props
@@ -33,11 +36,12 @@ export const Profile: FC = props => {
     {
       isLoading: deleteIsLoading,
       isSuccess: isDeleteSuccess,
-      data: deleteMeData
+      data: deleteMeData,
+      error: deleteMeError
     }
   ] = useDeleteMeMutation()
 
-  const [me, { isLoading: isMeLoading, isSuccess, data: meData, isError }] =
+  const [me, { isLoading: isMeLoading, isSuccess, data: meData, isError: meError }] =
     useMeMutation()
 
   const { userData } = useAppSelector(state => state.auth)
@@ -81,6 +85,13 @@ export const Profile: FC = props => {
     await editName(data)
   }
 
+  const properMeErrorMessage = errorMessageHandler(
+      (meError as FetchError)?.data?.error
+  )
+  const properDeleteErrorMessage = errorMessageHandler(
+      (deleteMeError as FetchError)?.data?.error
+  )
+
   return (
     <BoxCard rowGap='0px'>
       {isMeLoading ? <LinearPageLoader /> : null}
@@ -116,6 +127,8 @@ export const Profile: FC = props => {
           Log out
         </Button>
       </Flex>
+      <ErrorAlert errorMessage={properMeErrorMessage} />
+      <ErrorAlert errorMessage={properDeleteErrorMessage} />
     </BoxCard>
   )
 }

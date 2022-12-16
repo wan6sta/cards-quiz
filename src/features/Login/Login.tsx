@@ -77,7 +77,7 @@ export const Login = () => {
     reset,
     control,
     register,
-    formState: { errors, isValid }
+    formState: { errors }
   } = useForm<LoginForm>({
     defaultValues: {
       email: '',
@@ -100,7 +100,7 @@ export const Login = () => {
     isMeLoading ||
     isLoginLoading
 
-  const errorHandler = errorMessageHandler(
+  const properErrorMessage = errorMessageHandler(
     (loginError as FetchError)?.data?.error
   )
 
@@ -158,7 +158,7 @@ export const Login = () => {
           Sign Up
         </AppLink>
       </BoxCard>
-      <ErrorAlert errorMessage={errorHandler} />
+      <ErrorAlert errorMessage={properErrorMessage} />
     </form>
   )
 }
