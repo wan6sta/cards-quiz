@@ -1,6 +1,6 @@
 import { RegistredUserModel } from '../../../shared/models/RegistredUserModel'
 
-export interface userloggedInResponse extends RegistredUserModel {
+export interface UserLoggedInResponse extends RegistredUserModel {
   token: string
   tokenDeathTime: number
   avatar: string

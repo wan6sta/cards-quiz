@@ -5,7 +5,7 @@ import {
   fetchBaseQuery
 } from '@reduxjs/toolkit/dist/query/react'
 import { FetchError } from '../models/ErrorModel'
-import { userloggedInResponse } from '../../features/Login/models/loginModels'
+import { UserLoggedInResponse } from '../../features/Login/models/loginModels'
 
 export const authMeApiSlice = createApi({
   reducerPath: 'authMe/api',
@@ -17,7 +17,7 @@ export const authMeApiSlice = createApi({
     credentials: 'include'
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   endpoints: builder => ({
-    me: builder.mutation<userloggedInResponse, {}>({
+    me: builder.mutation<UserLoggedInResponse, {}>({
       query: (payload: {}) => ({
         url: 'auth/me',
         method: 'POST',

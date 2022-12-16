@@ -4,7 +4,7 @@ import {
   FetchArgs,
   fetchBaseQuery
 } from '@reduxjs/toolkit/dist/query/react'
-import { LoginPayload, userloggedInResponse } from '../models/loginModels'
+import { LoginPayload, UserLoggedInResponse } from '../models/loginModels'
 import { FetchError } from '../../../shared/models/ErrorModel'
 
 export const loginApiSlice = createApi({
@@ -17,7 +17,7 @@ export const loginApiSlice = createApi({
     credentials: 'include'
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   endpoints: builder => ({
-    login: builder.mutation<userloggedInResponse, LoginPayload>({
+    login: builder.mutation<UserLoggedInResponse, LoginPayload>({
       query: (payload: LoginPayload) => ({
         url: 'auth/login',
         method: 'POST',

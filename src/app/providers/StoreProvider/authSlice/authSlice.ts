@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { userloggedInResponse } from '../../../../features/Login/models/loginModels'
+import { UserLoggedInResponse } from '../../../../features/Login/models/loginModels'
 
 interface Initial {
-  userData: undefined | userloggedInResponse
+  userData: undefined | UserLoggedInResponse
   isAuth: boolean
 }
 
@@ -15,7 +15,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUserData: (state, action: PayloadAction<userloggedInResponse>) => {
+    setUserData: (state, action: PayloadAction<UserLoggedInResponse>) => {
       state.userData = action.payload
       state.isAuth = true
     },
