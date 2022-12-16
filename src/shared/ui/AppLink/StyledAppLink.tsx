@@ -38,7 +38,7 @@ export const StyledAppLink = styled.div<StyledAppLinkProps>`
       `}
     
     &:hover {
-      opacity: 0.85;
+      color: #366eff;
     }
   }
 `
