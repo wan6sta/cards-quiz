@@ -16,6 +16,7 @@ import Git from '../../assets/icons/Cat.jpg'
 import Cat from '../../assets/icons/GithubIcon.png'
 import { EditableSpan } from '../../../widgets/EditableSpan/EditableSpan'
 import { LinearPageLoader } from '../LinearPageLoader/LinearPageLoader'
+import { Pagination } from '../Pagination/Pagination'
 
 export const Storybook = () => {
   return (
@@ -89,6 +90,8 @@ export const Storybook = () => {
       <StyledWrapper>
         <Checkbox label='some label' />
       </StyledWrapper>
+
+      <Pagination />
     </StyledStorybook>
   )
 }
