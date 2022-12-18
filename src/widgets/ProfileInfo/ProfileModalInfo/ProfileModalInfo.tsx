@@ -8,7 +8,6 @@ import { ReactComponent as MiniUser } from '../../../shared/assets/icons/MiniUse
 import { ReactComponent as Logout } from '../../../shared/assets/icons/Logout.svg'
 
 export const ProfileModalInfo: FC = props => {
-
   return (
     <StyledProfileModalInfo>
       <StyledProfileItem>

@@ -16,7 +16,7 @@ import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoa
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../shared/models/ErrorModel'
-import {RESTORE_USER_EMAIL_KEY} from "../../shared/assets/constants/RESTORE_USER_EMAIL_KEY";
+import { RESTORE_USER_EMAIL_KEY } from '../../shared/assets/constants/RESTORE_USER_EMAIL_KEY'
 
 export const Schema = yup.object({
   email: yup
