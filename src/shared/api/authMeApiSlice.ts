@@ -7,6 +7,10 @@ import {
 import { FetchError } from '../models/ErrorModel'
 import { UserLoggedInResponse } from '../../features/Login/models/loginModels'
 import { BASE_URL } from '../assets/constants/BASE_URL'
+import {
+  removeUserData,
+  setUserData
+} from '../../app/providers/StoreProvider/authSlice/authSlice'
 
 export const authMeApiSlice = createApi({
   reducerPath: 'authMe/api',
@@ -20,13 +24,25 @@ export const authMeApiSlice = createApi({
         url: 'auth/me',
         method: 'POST',
         body: payload
-      })
+      }),
+      async onQueryStarted(payload, { dispatch, queryFulfilled }) {
+        try {
+          const res = await queryFulfilled
+          dispatch(setUserData(res.data))
+        } catch (e) {}
+      }
     }),
     deleteMe: builder.mutation({
       query: (payload: {}) => ({
         url: 'auth/me',
         method: 'DELETE'
-      })
+      }),
+      async onQueryStarted(payload, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled
+          dispatch(removeUserData())
+        } catch (e) {}
+      }
     })
   })
 })

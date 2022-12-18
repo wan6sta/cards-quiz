@@ -7,6 +7,7 @@ import {
 import { LoginPayload, UserLoggedInResponse } from '../models/loginModels'
 import { FetchError } from '../../../shared/models/ErrorModel'
 import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
+import { setUserData } from '../../../app/providers/StoreProvider/authSlice/authSlice'
 
 export const loginApiSlice = createApi({
   reducerPath: 'login/api',
@@ -20,7 +21,11 @@ export const loginApiSlice = createApi({
         url: 'auth/login',
         method: 'POST',
         body: payload
-      })
+      }),
+      async onQueryStarted(payload, { dispatch, queryFulfilled }) {
+        const res = await queryFulfilled
+        dispatch(setUserData(res.data))
+      }
     })
   })
 })

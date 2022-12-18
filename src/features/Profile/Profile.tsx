@@ -30,9 +30,11 @@ import {authErrorSelector} from "../../app/providers/StoreProvider/authSlice/sel
 import {authIsLoadingSelector} from "../../app/providers/StoreProvider/authSlice/selectors/authIsLoadingSelector";
 
 export const Profile: FC = props => {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const userData = useAppSelector(authUserDataSelector)
+  const authError = useAppSelector(authErrorSelector)
   const authIsLoading = useAppSelector(authIsLoadingSelector)
 
   const [

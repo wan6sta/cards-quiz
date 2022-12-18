@@ -22,8 +22,6 @@ import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoa
 import 'react-toastify/dist/ReactToastify.css'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
-import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
-import { setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
 
 export const Schema = yup.object({
   email: yup
@@ -37,43 +35,8 @@ export const Schema = yup.object({
 })
 
 export const Login = () => {
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-
-  // const isAuth = useAppSelector(isAuthSelector)
-  // const isMeLoading = useAppSelector(authIsLoadingSelector)
-
-  const [
-    login,
-    {
-      error: loginError,
-      isSuccess: loginSuccess,
-      isLoading: isLoginLoading,
-      data: loginData
-    }
-  ] = useLoginMutation()
-
-  // useEffect(() => {
-  //   if (!isAuth) {
-  //     dispatch(getAuthMe())
-  //   }
-  // }, [isAuth])
-
-  useEffect(() => {
-    if (loginData) dispatch(setUserData(loginData))
-  }, [loginSuccess])
-
-  // useEffect(() => {
-  //   if (isAuth) {
-  //     navigate(AppPaths.profilePage)
-  //   }
-  // }, [isAuth])
-
-  useEffect(() => {
-    if (loginSuccess) {
-      navigate(AppPaths.profilePage)
-    }
-  }, [loginSuccess])
+  const [login, { error: loginError, isLoading: isLoginLoading }] =
+    useLoginMutation()
 
   const {
     handleSubmit,
