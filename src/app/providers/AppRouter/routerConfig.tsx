@@ -30,11 +30,12 @@ interface AppRouteProps {
   path: AppPaths
   element: ReactNode
   pageLayout: boolean
+  requiredAuth?: boolean
 }
 
 export const appRouterConfig: AppRouteProps[] = [
-  { path: AppPaths.app, element: <LoginPage />, pageLayout: true },
-  { path: AppPaths.profilePage, element: <ProfilePage />, pageLayout: true },
+  { path: AppPaths.app, element: <LoginPage />, pageLayout: true},
+  { path: AppPaths.profilePage, element: <ProfilePage />, pageLayout: true, requiredAuth: true },
   {
     path: AppPaths.registrationPage,
     element: <RegistrationPage />,
@@ -49,7 +50,8 @@ export const appRouterConfig: AppRouteProps[] = [
   {
     path: AppPaths.packsListPage,
     element: <PacksListPage />,
-    pageLayout: true
+    pageLayout: true,
+    requiredAuth: true
   },
   {
     path: AppPaths.forgotPasswordPage,
@@ -79,6 +81,7 @@ if (import.meta.env.DEV) {
   appRouterConfig.push({
     path: AppPaths.storybook,
     element: <Storybook />,
-    pageLayout: false
+    pageLayout: false,
+    requiredAuth: true
   })
 }

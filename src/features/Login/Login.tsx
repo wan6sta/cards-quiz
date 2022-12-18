@@ -16,7 +16,6 @@ import {
 import { TextField } from '../../shared/ui/TextField/TextField'
 import { LoginForm } from './models/loginModels'
 import { FetchError } from '../../shared/models/ErrorModel'
-import { useMeMutation } from '../../shared/api/authMeApiSlice'
 import { useLoginMutation } from './api/loginApiSlice'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
@@ -25,6 +24,11 @@ import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorM
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
 import { setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
+import { getAuthMe } from '../../app/providers/StoreProvider/authSlice/getAuthMe'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { authUserDataSelector } from '../../app/providers/StoreProvider/authSlice/selectors/authUserDataSelector'
+import { isAuthSelector } from '../../app/providers/StoreProvider/authSlice/selectors/isAuthSelector'
+import { authIsLoadingSelector } from '../../app/providers/StoreProvider/authSlice/selectors/authIsLoadingSelector'
 
 export const Schema = yup.object({
   email: yup
@@ -38,7 +42,11 @@ export const Schema = yup.object({
 })
 
 export const Login = () => {
-  const [me, { isLoading: isMeLoading, isSuccess: meSuccess }] = useMeMutation()
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  // const isAuth = useAppSelector(isAuthSelector)
+  // const isMeLoading = useAppSelector(authIsLoadingSelector)
 
   const [
     login,
@@ -50,26 +58,27 @@ export const Login = () => {
     }
   ] = useLoginMutation()
 
-  const dispatch = useAppDispatch()
-
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    me({})
-  }, [])
+  // useEffect(() => {
+  //   if (!isAuth) {
+  //     dispatch(getAuthMe())
+  //   }
+  // }, [isAuth])
 
   useEffect(() => {
     if (loginData) dispatch(setUserData(loginData))
   }, [loginSuccess])
 
+  // useEffect(() => {
+  //   if (isAuth) {
+  //     navigate(AppPaths.profilePage)
+  //   }
+  // }, [isAuth])
+
   useEffect(() => {
-    if (meSuccess) {
-      navigate(AppPaths.profilePage)
-    }
     if (loginSuccess) {
       navigate(AppPaths.profilePage)
     }
-  }, [meSuccess, loginSuccess])
+  }, [loginSuccess])
 
   const {
     handleSubmit,
@@ -100,10 +109,9 @@ export const Login = () => {
     !!errors.email?.message ||
     !!errors.password?.message ||
     !!errors.rememberMe?.message ||
-    isMeLoading ||
     isLoginLoading
 
-  const isBundleLoading = isMeLoading || isLoginLoading
+  const isBundleLoading = isLoginLoading
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

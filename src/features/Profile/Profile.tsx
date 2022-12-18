@@ -8,8 +8,7 @@ import { Flex } from '../../shared/ui/Flex/Flex'
 import { Button } from '../../shared/ui/Button/Button'
 import { BoxCard } from '../../shared/ui/BoxCard/BoxCard'
 import {
-  useDeleteMeMutation,
-  useMeMutation
+  useDeleteMeMutation
 } from '../../shared/api/authMeApiSlice'
 import { useNavigate } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
@@ -25,10 +24,28 @@ import { useEditNameMutation } from './api/profileSlice'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../shared/models/ErrorModel'
-import { authSelector } from '../../app/providers/StoreProvider/authSlice/selectors/authSelector'
+import { authUserDataSelector } from '../../app/providers/StoreProvider/authSlice/selectors/authUserDataSelector'
+import { getAuthMe } from '../../app/providers/StoreProvider/authSlice/getAuthMe'
+import {authErrorSelector} from "../../app/providers/StoreProvider/authSlice/selectors/authErrorSelector";
+import {authIsLoadingSelector} from "../../app/providers/StoreProvider/authSlice/selectors/authIsLoadingSelector";
 
 export const Profile: FC = props => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const userData = useAppSelector(authUserDataSelector)
+  const authError = useAppSelector(authErrorSelector)
+  const authIsLoading = useAppSelector(authIsLoadingSelector)
+
+  const [
+    editName,
+    {
+      isLoading: isEditNameLoading,
+      data: editNameData,
+      isSuccess: isEditNameSuccess,
+      error: editNameError
+    }
+  ] = useEditNameMutation()
 
   const [
     deleteAcc,
@@ -39,41 +56,19 @@ export const Profile: FC = props => {
     }
   ] = useDeleteMeMutation()
 
-  const [
-    me,
-    { isLoading: isMeLoading, isSuccess, data: meData, isError: isMeError }
-  ] = useMeMutation()
-
-  const { userData } = useAppSelector(authSelector)
-  const dispatch = useAppDispatch()
-
-  const [
-    editName,
-    {
-      isLoading: isEditNameLoading,
-      data: editNameData,
-      isError: editNameIsError,
-      isSuccess: isEditNameSuccess,
-      error: editNameError
-    }
-  ] = useEditNameMutation()
-
   useEffect(() => {
-    if (!userData) me({})
+    if (!userData) dispatch(getAuthMe())
   }, [userData])
 
   useEffect(() => {
-    if (meData) dispatch(setUserData(meData))
     if (editNameData) dispatch(setUserData(editNameData.updatedUser))
-  }, [isSuccess, isEditNameSuccess])
+  }, [isEditNameSuccess])
 
   useEffect(() => {
-    if (isMeError) navigate(AppPaths.loginPage)
     if (isDeleteSuccess) {
       dispatch(removeUserData())
-      navigate(AppPaths.loginPage)
     }
-  }, [isMeError, isDeleteSuccess, editNameIsError])
+  }, [isDeleteSuccess])
 
   const logOutHandler = async () => {
     await deleteAcc({})
@@ -94,11 +89,12 @@ export const Profile: FC = props => {
   const properMeErrorMessage = errorMessageHandler(
     (deleteMeError as FetchError)?.data?.error
   )
+
   const properDeleteErrorMessage = errorMessageHandler(
     (editNameError as FetchError)?.data?.error
   )
 
-  const isBundleLoading = isMeLoading || deleteIsLoading || isEditNameLoading
+  const isBundleLoading = authIsLoading || deleteIsLoading || isEditNameLoading
 
   return (
     <BoxCard rowGap='0px'>

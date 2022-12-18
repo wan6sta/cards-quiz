@@ -6,14 +6,12 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { FetchError } from '../models/ErrorModel'
 import { UserLoggedInResponse } from '../../features/Login/models/loginModels'
+import { BASE_URL } from '../assets/constants/BASE_URL'
 
 export const authMeApiSlice = createApi({
   reducerPath: 'authMe/api',
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      import.meta.env.MODE === 'development'
-        ? import.meta.env.VITE_API_BASE_URL
-        : import.meta.env.VITE_API_PROD_URL,
+    baseUrl: BASE_URL,
     credentials: 'include'
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   endpoints: builder => ({

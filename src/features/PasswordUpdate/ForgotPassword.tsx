@@ -12,10 +12,11 @@ import * as yup from 'yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
-import { RestoreUserEmailKey } from '../../shared/assets/constants/RestoreUserEmail'
+
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../shared/models/ErrorModel'
+import {RESTORE_USER_EMAIL_KEY} from "../../shared/assets/constants/RESTORE_USER_EMAIL_KEY";
 
 export const Schema = yup.object({
   email: yup
@@ -35,7 +36,7 @@ export const ForgotPassword: FC = props => {
 
   useEffect(() => {
     if (isSuccess) {
-      sessionStorage.setItem(RestoreUserEmailKey, email)
+      sessionStorage.setItem(RESTORE_USER_EMAIL_KEY, email)
       navigate(AppPaths.checkEmailPage)
     }
   }, [isSuccess, email])

@@ -1,18 +1,30 @@
-import {createHashRouter, RouterProvider} from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import { ErrorPage } from '../../../pages/ErrorPage/ErrorPage'
 import { PageLayout } from '../../../widgets/PageLayout/PageLayout'
 import { appRouterConfig } from './routerConfig'
+import { RequiredAuth } from './RequiredAuth'
+import { RequiredNonAuth } from './RequiredNonAuth'
 
 const newRouter = createHashRouter(
-  appRouterConfig.map(route => ({
-    path: route.path,
-    element: route.pageLayout ? (
+  appRouterConfig.map(route => {
+    const element = route.pageLayout ? (
       <PageLayout>{route.element}</PageLayout>
     ) : (
       route.element
-    ),
-    errorElement: <ErrorPage />
-  }))
+    )
+
+    const protectedElement = route.requiredAuth ? (
+      <RequiredAuth>{element}</RequiredAuth>
+    ) : (
+      <RequiredNonAuth>{element}</RequiredNonAuth>
+    )
+
+    return {
+      path: route.path,
+      element: protectedElement,
+      errorElement: <ErrorPage />
+    }
+  })
 )
 
 export const AppRouter = () => {

@@ -5,14 +5,12 @@ import {
   fetchBaseQuery
 } from '@reduxjs/toolkit/dist/query/react'
 import { FetchError } from '../../../shared/models/ErrorModel'
+import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 
 export const profileSlice = createApi({
   reducerPath: 'profile/api',
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      import.meta.env.MODE === 'development'
-        ? import.meta.env.VITE_API_BASE_URL
-        : import.meta.env.VITE_API_PROD_URL,
+    baseUrl: BASE_URL,
     credentials: 'include'
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   endpoints: builder => ({
