@@ -1,21 +1,15 @@
-import { useAppDispatch } from '../StoreProvider/hooks/useAppDispatch'
-import { useAppSelector } from '../StoreProvider/hooks/useAppSelector'
-import { isAuthSelector } from '../StoreProvider/authSlice/selectors/isAuthSelector'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
-import { getAuthMe } from '../StoreProvider/authSlice/getAuthMe'
-import { authErrorSelector } from '../StoreProvider/authSlice/selectors/authErrorSelector'
 import { LinearPageLoader } from '../../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { useMeMutation } from '../../../shared/api/authMeApiSlice'
 
 export const AppLoader: FC<PropsWithChildren> = ({ children }) => {
-  const dispatch = useAppDispatch()
-  const isAuth = useAppSelector(isAuthSelector)
-  const error = useAppSelector(authErrorSelector)
   const [isAppLoading, setIsAppLoading] = useState(true)
 
-  useEffect(() => {
-    dispatch(getAuthMe())
-  }, [])
+  const [me, { error, isSuccess: isAuth }] = useMeMutation()
 
+  useEffect(() => {
+    me({})
+  }, [])
   useEffect(() => {
     if (isAuth) {
       setIsAppLoading(false)
@@ -30,7 +24,5 @@ export const AppLoader: FC<PropsWithChildren> = ({ children }) => {
 
   if (isAppLoading) return <LinearPageLoader />
 
-  return <>
-    {children}
-  </>
+  return <>{children}</>
 }
