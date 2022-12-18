@@ -10,7 +10,7 @@ export const getAuthMe = createAsyncThunk(
       const response = await authMeApi.getAuthMe()
       thunkAPI.dispatch(setUserData(response.data))
       thunkAPI.dispatch(setIsLoading(false))
-    } catch (e: Error) {
+    } catch (e: any) {
       thunkAPI.dispatch(setError(e.message))
     }
   }

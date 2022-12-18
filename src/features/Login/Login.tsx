@@ -24,11 +24,6 @@ import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorM
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
 import { setUserData } from '../../app/providers/StoreProvider/authSlice/authSlice'
-import { getAuthMe } from '../../app/providers/StoreProvider/authSlice/getAuthMe'
-import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
-import { authUserDataSelector } from '../../app/providers/StoreProvider/authSlice/selectors/authUserDataSelector'
-import { isAuthSelector } from '../../app/providers/StoreProvider/authSlice/selectors/isAuthSelector'
-import { authIsLoadingSelector } from '../../app/providers/StoreProvider/authSlice/selectors/authIsLoadingSelector'
 
 export const Schema = yup.object({
   email: yup
@@ -37,7 +32,7 @@ export const Schema = yup.object({
     .required('Email is required'),
   password: yup
     .string()
-    .min(8, 'Password must be at least 7 characters')
+    .min(8, 'Password must be at least 8 characters')
     .required('Password is required')
 })
 

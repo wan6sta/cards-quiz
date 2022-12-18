@@ -19,7 +19,11 @@ import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 
 const Schema = yup.object({
   email: yup.string().required('Email is required').email(),
-  password: yup.string().required('Password is required').min(8).max(20),
+  password: yup
+    .string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters')
+    .max(20, 'Password must be at most 20 characters'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords should match')
@@ -29,14 +33,8 @@ const Schema = yup.object({
 export const Registration = () => {
   const navigate = useNavigate()
 
-  const [
-    registerUser,
-    {
-      isSuccess,
-      isLoading: registrationLoading,
-      error
-    }
-  ] = useRegisterUserMutation()
+  const [registerUser, { isSuccess, isLoading: registrationLoading, error }] =
+    useRegisterUserMutation()
 
   useEffect(() => {
     if (isSuccess) navigate(AppPaths.registrationSuccessPage)

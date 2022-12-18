@@ -18,7 +18,7 @@ import { FetchError } from '../../shared/models/ErrorModel'
 export const Schema = yup.object({
   password: yup
     .string()
-    .min(8, 'Password must be at least 7 characters')
+    .min(8, 'Password must be at least 8 characters')
     .required('Password is required')
 })
 
