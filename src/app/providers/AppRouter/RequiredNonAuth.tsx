@@ -5,10 +5,10 @@ import { FC, PropsWithChildren } from 'react'
 import { AppPaths } from './routerConfig'
 
 export const RequiredNonAuth: FC<PropsWithChildren> = props => {
-    const { children } = props
-    const isAuth = useAppSelector(isAuthSelector)
+  const { children } = props
+  const isAuth = useAppSelector(isAuthSelector)
 
-    if (isAuth) return <Navigate to={AppPaths.profilePage} />
+  if (isAuth) return <Navigate to={AppPaths.profilePage} />
 
-    return children
+  return <>{children}</>
 }

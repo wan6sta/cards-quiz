@@ -8,7 +8,7 @@ export const RequiredAuth: FC<PropsWithChildren> = props => {
   const { children } = props
   const isAuth = useAppSelector(isAuthSelector)
 
-  if (isAuth) return children
+  if (isAuth) return <>{children}</>
 
   return <Navigate to={AppPaths.loginPage} />
 }

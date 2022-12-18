@@ -30,5 +30,7 @@ export const AppLoader: FC<PropsWithChildren> = ({ children }) => {
 
   if (isAppLoading) return <LinearPageLoader />
 
-  return children
+  return <>
+    {children}
+  </>
 }
