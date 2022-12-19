@@ -13,7 +13,7 @@ export const StyledBoxCard = styled.div<StyledBoxCardProps>`
   row-gap: ${props => (props.rowGap ? props.rowGap : '24px')};
   width: ${props => (props.width ? props.width : '413px')};
   background: #ffffff;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 1px 8px 0px rgba(34, 60, 80, 0.2);
   border-radius: 2px;
   padding: 35px 33px 42px 33px;
 

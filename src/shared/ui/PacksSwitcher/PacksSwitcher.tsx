@@ -1,7 +1,6 @@
 import { FC, useState } from 'react'
 import { StyledPack, StyledPacksSwitcher } from './StyledPacksSwitcher'
 import {Flex} from "../Flex/Flex";
-import {Title} from "../Title/Title";
 import {Span} from "../Span/Span";
 
 interface PacksSwitcherProps {}
@@ -11,7 +10,7 @@ export type PackSwitch = 'all' | 'my'
 export const PacksSwitcher: FC<PacksSwitcherProps> = props => {
   const { ...restProps } = props
 
-  const [type, setType] = useState<PackSwitch>('my')
+  const [type, setType] = useState<PackSwitch>('all')
 
   const isAll = type === 'all'
   const isMy = type === 'my'

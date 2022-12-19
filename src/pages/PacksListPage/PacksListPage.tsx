@@ -1,38 +1,61 @@
 import { FC } from 'react'
-import styled, { css } from 'styled-components'
-import { TextField } from '../../shared/ui/TextField/TextField'
+import { PacksList } from '../../features/PacksList/PacksList'
+import {
+  ButtonWrapper,
+  FilterSliderWrapper,
+  FilterTextFieldWrapper,
+  FilterWrapper,
+  InputWrapper,
+  PackSwitcherWrapper,
+  PaginationWrapper,
+  RemoveFilterWrapper,
+  StyledPacksListPage,
+  TitleWrapper
+} from './StyledPacksList'
 import { Title } from '../../shared/ui/Title/Title'
-import { useCreateCardPackMutation, useGetPacksQuery } from './packsApiSlice'
-import { ArgsForGetCards } from './packModel'
 import { Button } from '../../shared/ui/Button/Button'
+import { Span } from '../../shared/ui/Span/Span'
+import { TextField } from '../../shared/ui/TextField/TextField'
+import { PacksSwitcher } from '../../shared/ui/PacksSwitcher/PacksSwitcher'
+import { DoubleRange } from '../../shared/ui/DoubleRange/DoubleRange'
+import { ReactComponent as RemoveFilter } from '../../shared/assets/icons/FilterRemove.svg'
+import { Pagination } from '../../shared/ui/Pagination/Pagination'
 
-export const StyledPacksListPage = styled.div`
-  ${props => props && css``}
-`
+interface PacksListPageProps {}
 
-export const PacksListPage: FC = props => {
-  const { data: packsList } = useGetPacksQuery({
-    pageCount: 10,
-    min: 1,
-    max: 2
-  } as ArgsForGetCards)
-
-  const [createPack, { data: createPackData }] = useCreateCardPackMutation()
-  const onCreatePackHandler = async () => {
-    await createPack({
-      cardsPack: { name: 'CardPack', deckCover: 'blabla', private: true }
-    })
-  }
-  console.log(packsList)
+export const PacksListPage: FC<PacksListPageProps> = props => {
   const { ...restProps } = props
+
   return (
     <StyledPacksListPage {...restProps}>
-      <Title>Packs List</Title>
-      <TextField title={'Search a pack'} textFieldMode={'outlined'} />
-      {packsList?.map(pack => {
-        return <div key={pack._id}>{pack.name}</div>
-      })}
-      <Button onClick={onCreatePackHandler}>Create Pack</Button>
+      <TitleWrapper>
+        <Title>Packs list</Title>
+        <ButtonWrapper>
+          <Button>Add new pack</Button>
+        </ButtonWrapper>
+      </TitleWrapper>
+      <FilterWrapper>
+        <FilterTextFieldWrapper>
+          <InputWrapper>
+            <Span title>Search</Span>
+            <TextField title={'Search'} textFieldMode='outlined' />
+          </InputWrapper>
+          <PackSwitcherWrapper>
+            <PacksSwitcher />
+          </PackSwitcherWrapper>
+        </FilterTextFieldWrapper>
+
+        <FilterSliderWrapper>
+          <DoubleRange />
+          <RemoveFilterWrapper>
+            <RemoveFilter />
+          </RemoveFilterWrapper>
+        </FilterSliderWrapper>
+      </FilterWrapper>
+      <PacksList />
+      <PaginationWrapper>
+        <Pagination />
+      </PaginationWrapper>
     </StyledPacksListPage>
   )
 }

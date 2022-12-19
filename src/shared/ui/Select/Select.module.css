@@ -18,6 +18,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: 0.1s ease-in;
+    background: none;
 }
 
 .button:hover {
@@ -27,8 +28,9 @@
 .list {
     margin-top: 5px;
     position: absolute;
-    display: flex;
+    top: -130px;
     flex-direction: column;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 39px;
@@ -46,6 +48,10 @@
     font-weight: 400;
     cursor: pointer;
     font-size: 14px;
+}
+
+.family {
+    margin-bottom: 0;
 }
 
 .family:first-child > li {
