@@ -26,8 +26,8 @@ export const packsApiSlice = createApi({
       transformResponse: (response: ServerResponse) => response.cardPacks,
       providesTags: result => ['Cards']
     }),
-    createCardPack: builder.mutation<any, CreatePack>({
-      query: (payload: CreatePack) => ({
+    createCardPack: builder.mutation<any, any>({
+      query: (payload: any) => ({
         url: 'cards/pack',
         method: 'POST',
         body: payload
@@ -41,7 +41,7 @@ export const packsApiSlice = createApi({
       }),
       invalidatesTags: ['Cards']
     }),
-    updateCardsPack: builder.mutation<any, CardPack>({
+    updateCardsPack: builder.mutation<CardPack, CardPack>({
       query: (payload) => ({
         url: `cards/pack/${payload._id}`,
         method: 'PUT',

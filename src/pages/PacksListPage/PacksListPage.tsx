@@ -12,14 +12,16 @@ export const StyledPacksListPage = styled.div`
 
 export const PacksListPage: FC = props => {
   const { data: packsList } = useGetPacksQuery({
-    page: 2,
-    min: 10,
-    max: 20
+    pageCount: 10,
+    min: 1,
+    max: 2
   } as ArgsForGetCards)
 
   const [createPack, { data: createPackData }] = useCreateCardPackMutation()
   const onCreatePackHandler = async () => {
-    await createPack({name:'CardPack'})
+    await createPack({
+      cardsPack: { name: 'CardPack', deckCover: 'blabla', private: true }
+    })
   }
   console.log(packsList)
   const { ...restProps } = props
