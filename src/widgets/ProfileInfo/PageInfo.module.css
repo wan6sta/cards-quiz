@@ -3,7 +3,7 @@
   align-items: center;
   column-gap: 12px;
   height: 60px;
-  transition: 0.25s ease-in;
+  transition: 0.1s ease-in;
   cursor: pointer;
 }
 
@@ -11,7 +11,7 @@
   user-select: none;
   cursor: pointer;
   line-height: 60px;
-  transition: 0.2s ease-in;
+  transition: 0.1s ease-in;
 }
 
 .span:hover {

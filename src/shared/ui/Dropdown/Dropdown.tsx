@@ -20,66 +20,70 @@ interface Props {
 export const Dropdown: FC<PropsWithChildren<Props>> = props => {
   const { children, nav } = props
   return (
-    <div>
-      <Menu as={'div'} className={cls.dropdownWrapper}>
-        {nav && (
-          <>
-            <Menu.Button className={cls.dropdownBtn}>{children}</Menu.Button>
-            <Menu.Items className={cls.dropdownItems}>
-              <Menu.Item>
-                {({ active }) => (
-                  <Link to={AppPaths.profilePage}>
-                    <li className={cn(cls.li, { [cls.active]: active })}>
-                      <UserIcon className={cls.icon} />
-                      Profile
-                    </li>
-                  </Link>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
+    <Menu as={'div'} className={cls.dropdownWrapper}>
+      {nav && (
+        <>
+          <Menu.Button className={cls.dropdownBtn}>{children}</Menu.Button>
+          <Menu.Items className={cls.dropdownItems}>
+            <div className={cls.tr}>
+
+            </div>
+            <Menu.Item>
+              {({ active }) => (
+                <Link to={AppPaths.profilePage}>
                   <li className={cn(cls.li, { [cls.active]: active })}>
-                    <LogoutIcon className={cls.icon} /> Log out
+                    <UserIcon className={cls.icon} />
+                    Profile
                   </li>
-                )}
-              </Menu.Item>
-            </Menu.Items>
-          </>
-        )}
-        {!nav && (
-          <>
-            <Menu.Button className={cls.dropdownBtn}>
-              <DotsIcon />
-            </Menu.Button>
-            <Menu.Items
-              className={cn(cls.dropdownItems, { [cls.dropdownPacks]: !nav })}
-            >
-              <Menu.Item>
-                {({ active }) => (
-                  <li className={cn(cls.li, { [cls.active]: active })}>
-                    <EditIcon className={cls.icon} />
-                    Edit
-                  </li>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <li className={cn(cls.li, { [cls.active]: active })}>
-                    <TrashIcon className={cls.icon} /> Delete
-                  </li>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <li className={cn(cls.li, { [cls.active]: active })}>
-                    <LearnIcon className={cls.icon} /> Learn
-                  </li>
-                )}
-              </Menu.Item>
-            </Menu.Items>
-          </>
-        )}
-      </Menu>
-    </div>
+                </Link>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <li className={cn(cls.li, { [cls.active]: active })}>
+                  <LogoutIcon className={cls.icon} /> Log out
+                </li>
+              )}
+            </Menu.Item>
+          </Menu.Items>
+        </>
+      )}
+      {!nav && (
+        <>
+          <Menu.Button className={cls.dropdownBtn}>
+            <DotsIcon />
+          </Menu.Button>
+          <Menu.Items
+            className={cn(cls.dropdownItems, { [cls.dropdownPacks]: !nav })}
+          >
+            <div className={cls.tr}>
+
+            </div>
+            <Menu.Item>
+              {({ active }) => (
+                <li className={cn(cls.li, { [cls.active]: active })}>
+                  <EditIcon className={cls.icon} />
+                  Edit
+                </li>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <li className={cn(cls.li, { [cls.active]: active })}>
+                  <TrashIcon className={cls.icon} /> Delete
+                </li>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <li className={cn(cls.li, { [cls.active]: active })}>
+                  <LearnIcon className={cls.icon} /> Learn
+                </li>
+              )}
+            </Menu.Item>
+          </Menu.Items>
+        </>
+      )}
+    </Menu>
   )
 }

@@ -15,6 +15,20 @@
     border: 1px solid #CFCFCF;
     border-radius: 5px;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.tr {
+    position: absolute;
+    top: -4.5px;
+    right: 10px;
+    transform: rotate(45deg);
+    width: 7px;
+    height: 7px;
+    border: 1px solid #CFCFCF;
+    border-bottom: none;
+    border-right: none;
+    background-color: white;
 }
 
 .dropdownBtn {
@@ -31,13 +45,13 @@ li {
     display: flex;
     align-items: center;
     list-style-type: none;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 14px;
     line-height: 24px;
     margin-bottom: 16px;
-    transition: 0.2s ease-in;
     user-select: none;
     cursor: pointer;
+    transition: 0.1s ease-in;
 }
 
 .icon {
@@ -47,8 +61,7 @@ li {
 }
 
 .active {
-
-    color: rgb(54, 110, 255);
+    color: #366eff;
 }
 
 a {
