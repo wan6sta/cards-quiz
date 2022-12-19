@@ -6,7 +6,8 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../shared/models/ErrorModel'
-import {ArgsForGetCards, CardPack, CreatePack, ServerResponse} from './packModel'
+import { ArgsForGetCards, CardPack, ServerResponse } from './packModel'
+import { identity, pickBy } from 'lodash-es'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -17,11 +18,14 @@ export const packsApiSlice = createApi({
   tagTypes: ['Cards'],
   endpoints: builder => ({
     getPacks: builder.query<CardPack[], ArgsForGetCards>({
-      query: (args) => ({
+      query: args => ({
         url: `cards/pack`,
-        params: {
-          ...args
-        }
+        params: pickBy(
+          {
+            ...args
+          },
+          identity
+        )
       }),
       transformResponse: (response: ServerResponse) => response.cardPacks,
       providesTags: result => ['Cards']
@@ -34,15 +38,15 @@ export const packsApiSlice = createApi({
       }),
       invalidatesTags: ['Cards']
     }),
-    deleteCardPack: builder.mutation<any,CardPack>({
-      query: (payload) => ({
+    deleteCardPack: builder.mutation<any, CardPack>({
+      query: payload => ({
         url: `cards/pack/${payload._id}`,
-        method: 'DELETE',
+        method: 'DELETE'
       }),
       invalidatesTags: ['Cards']
     }),
     updateCardsPack: builder.mutation<CardPack, CardPack>({
-      query: (payload) => ({
+      query: payload => ({
         url: `cards/pack/${payload._id}`,
         method: 'PUT',
         body: payload
