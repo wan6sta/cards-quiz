@@ -17,6 +17,7 @@ import Cat from '../../assets/icons/GithubIcon.png'
 import { EditableSpan } from '../../../widgets/EditableSpan/EditableSpan'
 import { LinearPageLoader } from '../LinearPageLoader/LinearPageLoader'
 import { Pagination } from '../Pagination/Pagination'
+import {Dropdown} from '../Dropdown/Dropdown';
 
 export const Storybook = () => {
   return (
@@ -90,7 +91,8 @@ export const Storybook = () => {
       <StyledWrapper>
         <Checkbox label='some label' />
       </StyledWrapper>
-
+<Dropdown nav>Кнопка</Dropdown>
+      <Dropdown/>
       <Pagination />
     </StyledStorybook>
   )
