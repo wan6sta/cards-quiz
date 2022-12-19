@@ -6,6 +6,7 @@ import { forgotApiSlice } from '../../../features/PasswordUpdate/api/forgotPassA
 import { authMeApiSlice } from '../../../shared/api/authMeApiSlice'
 import { authSlice } from './authSlice/authSlice'
 import { profileSlice } from '../../../features/Profile/api/profileSlice'
+import { packsApiSlice } from '../../../pages/PacksListPage/packsApiSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     [forgotApiSlice.reducerPath]: forgotApiSlice.reducer,
     [authMeApiSlice.reducerPath]: authMeApiSlice.reducer,
     [profileSlice.reducerPath]: profileSlice.reducer,
+    [packsApiSlice.reducerPath]: packsApiSlice.reducer,
     auth: authSlice.reducer
   },
   middleware: getDefaultMiddleware =>
@@ -22,7 +24,8 @@ export const store = configureStore({
       loginApiSlice.middleware,
       authMeApiSlice.middleware,
       forgotApiSlice.middleware,
-      profileSlice.middleware
+      profileSlice.middleware,
+      packsApiSlice.middleware
     ),
   devTools: true
 })
