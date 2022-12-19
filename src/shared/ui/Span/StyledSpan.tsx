@@ -4,8 +4,9 @@ interface StyledSpanProps {
   light?: boolean
   medium?: boolean
   bold?: boolean
-  nonSelect?: boolean
   error?: boolean
+  nonSelect?: boolean
+  className?: string
   marginBottom?: string
   textCenter?: boolean
   hover?: boolean

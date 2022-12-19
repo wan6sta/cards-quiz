@@ -3,6 +3,7 @@ import './index.css'
 import { useState } from 'react'
 import cls from './DoubleRange.module.css'
 import { Span } from '../Span/Span'
+import {isArray} from "lodash-es";
 
 type Value = number | number[]
 
@@ -31,7 +32,7 @@ export const DoubleRange = () => {
     <div className={cls.wrapperWrapper}>
       <Span title>Number of cards</Span>
       <div className={cls.wrapper}>
-        <div className={cls.numWrapper}>{value.at(0)}</div>
+        <div className={cls.numWrapper}>{isArray(value) ? value.at(0) : null}</div>
         <div className={cls.rangeWrapper}>
           <Range
             className={cls.Range}
@@ -44,7 +45,7 @@ export const DoubleRange = () => {
             onChange={onSliderChange}
           />
         </div>
-        <div className={cls.numWrapper}>{value.at(1)}</div>
+        <div className={cls.numWrapper}>{isArray(value) ? value.at(1) : null}</div>
       </div>
     </div>
   )

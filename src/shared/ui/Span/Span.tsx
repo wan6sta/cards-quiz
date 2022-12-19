@@ -18,6 +18,7 @@ export const Span: FC<PropsWithChildren<SpanProps>> = memo(props => {
   const { hover, children, ...restProps } = props
 
   return (
+    // @ts-expect-error
     <StyledSpan hover={!!hover} {...restProps}>
       {children}
     </StyledSpan>
