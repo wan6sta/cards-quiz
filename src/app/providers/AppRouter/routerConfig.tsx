@@ -31,6 +31,7 @@ interface AppRouteProps {
   element: ReactNode
   pageLayout: boolean
   requiredAuth?: boolean
+  page404?: boolean
 }
 
 export const appRouterConfig: AppRouteProps[] = [
@@ -68,12 +69,13 @@ export const appRouterConfig: AppRouteProps[] = [
     element: <SetNewPasswordPage />,
     pageLayout: true
   },
-  { path: AppPaths.notFoundPage, element: <NotFoundPage />, pageLayout: false },
+  { path: AppPaths.notFoundPage, element: <NotFoundPage />, pageLayout: false, page404: true },
   {
     path: AppPaths.notFoundPageRedirect,
     // element: <NotFoundPage />,
     element: <Navigate to={AppPaths.notFoundPage} />,
-    pageLayout: false
+    pageLayout: false,
+    page404: true
   }
 ]
 

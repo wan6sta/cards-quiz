@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Listbox } from '@headlessui/react'
 import cls from './Select.module.css'
 import { ReactComponent as ArrowDown } from '../../assets/icons/ArrowDown.svg'
+import { cn } from '../../lib/cn/cn'
 
 const people = [
   { id: 1, name: '0', unavailable: false },
@@ -24,12 +25,16 @@ export const Select = () => {
         <Listbox.Options className={cls.list}>
           {people.map(person => (
             <Listbox.Option
-              className={cls.ul}
               key={person.id}
               value={person}
               disabled={person.unavailable}
+              className={cls.family}
             >
-              {person.name}
+              {({ active, selected }) => (
+                <li className={cn(cls.li, { [cls.active]: active })}>
+                  {person.name}
+                </li>
+              )}
             </Listbox.Option>
           ))}
         </Listbox.Options>

@@ -13,11 +13,15 @@ const newRouter = createHashRouter(
       route.element
     )
 
-    const protectedElement = route.requiredAuth ? (
-      <RequiredAuth>{element}</RequiredAuth>
-    ) : (
-      <RequiredNonAuth>{element}</RequiredNonAuth>
-    )
+    let protectedElement = element
+
+    if (!route.page404) {
+      protectedElement = route.requiredAuth ? (
+        <RequiredAuth>{element}</RequiredAuth>
+      ) : (
+        <RequiredNonAuth>{element}</RequiredNonAuth>
+      )
+    }
 
     return {
       path: route.path,

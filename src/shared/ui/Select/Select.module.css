@@ -18,6 +18,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: 0.2s ease-in;
+    margin-bottom: 5px;
 }
 
 .button:hover {
@@ -31,20 +32,33 @@
     align-items: center;
     justify-content: center;
     width: 39px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9fa;
 }
 
-.ul {
-    user-select: none;
-    font-weight: 400;
+
+.li {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     height: 24px;
     width: 39px;
+    user-select: none;
+    font-weight: 400;
+    cursor: pointer;
     font-size: 14px;
 }
 
-.ul:hover {
-    background-color: rgba(187, 187, 187, 0.2);
+.family:first-child > li {
+    border-radius: 2px 2px 0 0;
+}
+
+.family:last-child > li {
+    border-radius: 0 0 2px 2px;
+}
+
+
+.active {
+    background-color: rgb(54, 110, 255);
+    color: white;
 }
