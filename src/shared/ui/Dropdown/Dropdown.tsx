@@ -20,7 +20,7 @@ interface Props {
 export const Dropdown: FC<PropsWithChildren<Props>> = props => {
   const { children, nav } = props
   return (
-    <>
+    <div>
       <Menu as={'div'} className={cls.dropdownWrapper}>
         {nav && (
           <>
@@ -80,6 +80,6 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
           </>
         )}
       </Menu>
-    </>
+    </div>
   )
 }
