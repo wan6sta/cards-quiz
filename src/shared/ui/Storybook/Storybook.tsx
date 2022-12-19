@@ -17,6 +17,8 @@ import Cat from '../../assets/icons/GithubIcon.png'
 import { EditableSpan } from '../../../widgets/EditableSpan/EditableSpan'
 import { LinearPageLoader } from '../LinearPageLoader/LinearPageLoader'
 import { Pagination } from '../Pagination/Pagination'
+import { DoubleRange } from '../DoubleRange/DoubleRange'
+import { PacksSwitcher } from '../PacksSwitcher/PacksSwitcher'
 
 export const Storybook = () => {
   return (
@@ -92,6 +94,14 @@ export const Storybook = () => {
       </StyledWrapper>
 
       <Pagination />
+
+      <StyledWrapper>
+        <DoubleRange />
+      </StyledWrapper>
+
+      <StyledWrapper>
+        <PacksSwitcher />
+      </StyledWrapper>
     </StyledStorybook>
   )
 }

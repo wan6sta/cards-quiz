@@ -17,15 +17,15 @@
     height: 24px;
     font-weight: 500;
     cursor: pointer;
-    transition: 0.2s ease-in;
-    margin-bottom: 5px;
+    transition: 0.1s ease-in;
 }
 
 .button:hover {
-    opacity: 0.85;
+    border: 1px solid rgb(54, 110, 255);
 }
 
 .list {
+    margin-top: 5px;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -35,7 +35,6 @@
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
     background-color: #f9f9fa;
 }
-
 
 .li {
     display: flex;

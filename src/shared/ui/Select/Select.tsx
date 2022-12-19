@@ -31,9 +31,9 @@ export const Select = () => {
               className={cls.family}
             >
               {({ active, selected }) => (
-                <li className={cn(cls.li, { [cls.active]: active })}>
+                <span className={cn(cls.li, { [cls.active]: active })}>
                   {person.name}
-                </li>
+                </span>
               )}
             </Listbox.Option>
           ))}

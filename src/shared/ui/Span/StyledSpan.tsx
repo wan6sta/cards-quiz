@@ -9,6 +9,7 @@ interface StyledSpanProps {
   marginBottom?: string
   textCenter?: boolean
   hover?: boolean
+  title?: boolean
 }
 
 export const StyledSpan = styled.span<StyledSpanProps>`
@@ -48,4 +49,13 @@ export const StyledSpan = styled.span<StyledSpanProps>`
       font-size: 12px;
       opacity: 1;
     `}
+
+  ${props =>
+      props.title &&
+      css`
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 17px;
+        opacity: 1;
+      `}
 `
