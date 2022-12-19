@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../shared/models/ErrorModel'
-import { CardPack, CreatePack, ServerResponse } from './packModel'
+import {ArgsForGetCards, CardPack, CreatePack, ServerResponse} from './packModel'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -16,14 +16,17 @@ export const packsApiSlice = createApi({
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   tagTypes: ['Cards'],
   endpoints: builder => ({
-    getPacks: builder.query<CardPack[], any>({
-      query: () => ({
-        url: 'cards/pack'
+    getPacks: builder.query<CardPack[], ArgsForGetCards>({
+      query: (args) => ({
+        url: `cards/pack`,
+        params: {
+          ...args
+        }
       }),
       transformResponse: (response: ServerResponse) => response.cardPacks,
       providesTags: result => ['Cards']
     }),
-    createCardPack: builder.mutation<CreatePack, CreatePack>({
+    createCardPack: builder.mutation<any, CreatePack>({
       query: (payload: CreatePack) => ({
         url: 'cards/pack',
         method: 'POST',
@@ -31,23 +34,18 @@ export const packsApiSlice = createApi({
       }),
       invalidatesTags: ['Cards']
     }),
-    deleteCardPack: builder.mutation({
-      query: (id: string) => ({
-        url: `cards/pack/${id}`,
+    deleteCardPack: builder.mutation<any,CardPack>({
+      query: (payload) => ({
+        url: `cards/pack/${payload._id}`,
         method: 'DELETE',
-        params: {
-          cardId: id
-        }
       }),
       invalidatesTags: ['Cards']
     }),
-    updateCardsPack: builder.mutation<CreatePack, any>({
-      query: (id: string) => ({
-        url: `cards/pack/${id}`,
+    updateCardsPack: builder.mutation<any, CardPack>({
+      query: (payload) => ({
+        url: `cards/pack/${payload._id}`,
         method: 'PUT',
-        params: {
-          id
-        }
+        body: payload
       }),
       invalidatesTags: ['Cards']
     })
