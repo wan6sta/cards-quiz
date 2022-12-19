@@ -6,6 +6,7 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../shared/models/ErrorModel'
+import { CardPack, CreatePack, ServerResponse } from './packModel'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -13,43 +14,48 @@ export const packsApiSlice = createApi({
     baseUrl: BASE_URL,
     credentials: 'include'
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
+  tagTypes: ['Cards'],
   endpoints: builder => ({
-    getPacks: builder.query<any, any>({
+    getPacks: builder.query<CardPack[], any>({
       query: () => ({
-        url: 'cards/pack',
-        method: 'GET'
-      })
+        url: 'cards/pack'
+      }),
+      transformResponse: (response: ServerResponse) => response.cardPacks,
+      providesTags: result => ['Cards']
     }),
-    createCardPack: builder.mutation({
-      query: (payload: {}) => ({
+    createCardPack: builder.mutation<CreatePack, CreatePack>({
+      query: (payload: CreatePack) => ({
         url: 'cards/pack',
         method: 'POST',
         body: payload
-      })
+      }),
+      invalidatesTags: ['Cards']
     }),
     deleteCardPack: builder.mutation({
       query: (id: string) => ({
-        url: 'cards/pack',
+        url: `cards/pack/${id}`,
         method: 'DELETE',
         params: {
           cardId: id
         }
-      })
+      }),
+      invalidatesTags: ['Cards']
     }),
-    updateCardsPack: builder.mutation({
+    updateCardsPack: builder.mutation<CreatePack, any>({
       query: (id: string) => ({
-        url: 'cards/pack',
+        url: `cards/pack/${id}`,
         method: 'PUT',
         params: {
           id
         }
-      })
+      }),
+      invalidatesTags: ['Cards']
     })
   })
 })
 
 export const {
-  useLazyGetPacksQuery,
+  useGetPacksQuery,
   useCreateCardPackMutation,
   useDeleteCardPackMutation,
   useUpdateCardsPackMutation
