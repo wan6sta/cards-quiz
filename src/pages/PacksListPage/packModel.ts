@@ -17,7 +17,7 @@ export interface CardPack {
   __v: number
 }
 
-export interface ServerResponse {
+export interface PacksResponse {
   cardPacks: CardPack[]
   page: number
   pageCount: number

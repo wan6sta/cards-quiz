@@ -1,8 +1,9 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  SortingState,
   useReactTable
 } from '@tanstack/react-table'
 import {
@@ -14,109 +15,76 @@ import {
   StyledTextWrapper,
   StyledTh,
   StyledThead,
-  StyledTr,
-  StyledTrDownWrapper
+  StyledTr
 } from './StyledPacksList'
 import { ReactComponent as TrDown } from '../../shared/assets/icons/TrDown.svg'
+import { ReactComponent as TrUp } from '../../shared/assets/icons/TrUp.svg'
 import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIcon.svg'
 import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../shared/assets/icons/Trash.svg'
+import { ArgsForGetCards, CardPack } from '../../pages/PacksListPage/packModel'
+import { useGetPacksQuery } from '../../pages/PacksListPage/packsApiSlice'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 
-interface Person {
-  Name: string
-  Cards: number
-  ['Last Updated']: string
-  ['Created by']: string
-  Actions: string
+interface Table extends CardPack {
+  actions?: string
 }
 
-const defaultData: Person[] = [
-  {
-    Name: 'Lanaya',
-    Cards: 12392193921321312,
-    'Last Updated': '18.03.2021',
-    'Created by': 'wan6stawan6stawan6stawan6sta',
-    Actions: 'some actions'
-  },
-  {
-    Name: 'LanayaLanayaLanayaLanayaLanayaLanayaLanayaLanayaLanayaLanaya',
-    Cards: 4,
-    'Last Updated': '18.03.2021',
-    'Created by': 'wan6sta',
-    Actions: 'some actions'
-  },
-  {
-    Name: 'Lanaya',
-    Cards: 4,
-    'Last Updated': '18.03.2021',
-    'Created by': 'wan6sta',
-    Actions: 'some actions'
-  },
-  {
-    Name: 'Lanaya',
-    Cards: 4,
-    'Last Updated': '18.03.2021',
-    'Created by': 'wan6sta',
-    Actions: 'some actions'
-  },
-  {
-    Name: 'Lanaya',
-    Cards: 12392193921321312,
-    'Last Updated': '18.03.2021',
-    'Created by': 'wan6stawan6stawan6stawan6sta',
-    Actions: 'some actions'
-  },
-  {
-    Name: 'LanayaLanayaLanayaLanayaLanayaLanayaLanayaLanayaLanayaLanaya',
-    Cards: 4,
-    'Last Updated': '18.03.2021',
-    'Created by': 'wan6sta',
-    Actions: 'some actions'
-  },
-  {
-    Name: 'Lanaya',
-    Cards: 4,
-    'Last Updated': '18.03.2021',
-    'Created by': 'wan6sta',
-    Actions: 'some actions'
-  },
-  {
-    Name: 'Lanaya',
-    Cards: 4,
-    'Last Updated': '18.03.2021',
-    'Created by': 'wan6sta',
-    Actions: 'some actions'
-  }
-]
-
-const columnHelper = createColumnHelper<Person>()
+const columnHelper = createColumnHelper<Table>()
 
 const columns = [
-  columnHelper.accessor('Name', {}),
-  columnHelper.accessor(row => row.Cards, {
-    id: 'Cards',
-    header: () => 'Cards'
+  columnHelper.accessor('name', {
+    header: 'Name'
   }),
-  columnHelper.accessor('Last Updated', {
-    header: () => 'Last Updated'
+  columnHelper.accessor('cardsCount', {
+    header: 'Cards'
   }),
-  columnHelper.accessor('Created by', {
-    header: () => 'Created by'
+  columnHelper.accessor('updated', {
+    header: 'Last Updated'
   }),
-  columnHelper.accessor('Actions', {
+  columnHelper.accessor('user_name', {
+    header: 'Created by'
+  }),
+  columnHelper.accessor('actions', {
     header: 'Actions'
   })
 ]
 
 export const PacksList: FC = props => {
-  const [data, setData] = useState(() => [...defaultData])
+  const { userPack } = useAppSelector(state => state.packs)
+
+  const [sorting, setSorting] = useState<SortingState>([])
+
+  const sortedValueHandler =
+    sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
+
+
+  const queryParams = {
+    packName: 'test',
+    pageCount: 10,
+    min: 0,
+    max: 10,
+    page: 1,
+    sortPacks: sortedValueHandler
+  } as ArgsForGetCards
+
+  const { refetch } = useGetPacksQuery(queryParams)
+
+  useEffect(() => {
+    refetch()
+  }, [sorting])
+
+  const data = useMemo(() => [...userPack], [userPack])
 
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting
+    },
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel()
   })
-
   return (
     <StyledPacksList className='p-2'>
       <StyledTable>
@@ -124,27 +92,27 @@ export const PacksList: FC = props => {
           {table.getHeaderGroups().map(headerGroup => (
             <StyledTr key={headerGroup.id}>
               {headerGroup.headers.map(header => {
-                if (header.id === 'Last Updated') {
-                  return (
-                    <StyledTh key={header.id}>
-                      {header.isPlaceholder ? null : (
-                        <StyledTrDownWrapper>
-                          <span>Last updated</span>
-                          <TrDown />
-                        </StyledTrDownWrapper>
-                      )}
-                    </StyledTh>
-                  )
-                }
-
                 return (
                   <StyledTh key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
+                    {header.isPlaceholder ? null : (
+                      <div
+                        {...{
+                          onClick:
+                            header.id !== 'actions'
+                              ? header.column.getToggleSortingHandler()
+                              : undefined
+                        }}
+                      >
+                        {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
                         )}
+                        {{
+                          asc: <TrUp />,
+                          desc: <TrDown />
+                        }[header.column.getIsSorted() as string] ?? null}
+                      </div>
+                    )}
                   </StyledTh>
                 )
               })}
@@ -155,7 +123,7 @@ export const PacksList: FC = props => {
           {table.getRowModel().rows.map(row => (
             <StyledTr body key={row.id}>
               {row.getVisibleCells().map(cell => {
-                if (cell.column.id === 'Actions') {
+                if (cell.column.id === 'actions') {
                   return (
                     <StyledTd key={cell.id}>
                       <StyledIconsWrapper>
@@ -166,7 +134,6 @@ export const PacksList: FC = props => {
                     </StyledTd>
                   )
                 }
-
                 return (
                   <StyledTd key={cell.id}>
                     <StyledTextWrapper>
