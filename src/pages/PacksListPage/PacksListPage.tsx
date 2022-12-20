@@ -20,6 +20,7 @@ import { PacksSwitcher } from '../../shared/ui/PacksSwitcher/PacksSwitcher'
 import { DoubleRange } from '../../shared/ui/DoubleRange/DoubleRange'
 import { ReactComponent as RemoveFilter } from '../../shared/assets/icons/FilterRemove.svg'
 import { Pagination } from '../../shared/ui/Pagination/Pagination'
+import { DeboucedTableInput } from "../../widgets/DeboucedTableInput/DeboucedTableInput";
 
 interface PacksListPageProps {}
 
@@ -38,7 +39,7 @@ export const PacksListPage: FC<PacksListPageProps> = props => {
         <FilterTextFieldWrapper>
           <InputWrapper>
             <Span title>Search</Span>
-            <TextField title={'Search'} textFieldMode='outlined' />
+            <DeboucedTableInput/>
           </InputWrapper>
           <PackSwitcherWrapper>
             <PacksSwitcher />
