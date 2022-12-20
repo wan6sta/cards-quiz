@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useLayoutEffect, useState } from 'react'
 import { StyledPack, StyledPacksSwitcher } from './StyledPacksSwitcher'
 import { Flex } from '../Flex/Flex'
 import { Span } from '../Span/Span'
@@ -17,6 +17,15 @@ export const PacksSwitcher: FC<PacksSwitcherProps> = props => {
   const { ...restProps } = props
   const [type, setType] = useState<PackSwitch>('all')
 
+  const filter = searchParams.get(AppFilters.filter)
+
+  useLayoutEffect(() => {
+    if (filter === null) {
+      setType('all')
+      return
+    }
+    setType(prev => filter as PackSwitch)
+  }, [filter])
   const isAll = type === 'all'
   const isMy = type === 'my'
 

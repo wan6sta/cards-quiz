@@ -65,16 +65,15 @@ export const PacksList: FC = props => {
     sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
 
   const queryParams = {
-    packName: searchParams.get(AppFilters.search),
+    packName: searchParams.get(AppFilters.search) as string,
     pageCount: Number(searchParams.get(AppFilters.perPage)) || 10,
     min: Number(searchParams.get(AppFilters.min)),
     max: Number(searchParams.get(AppFilters.max)),
-    page: Number(searchParams.get(AppFilters.page)),
-    sortPacks: sortedValue as string | undefined,
+    page: Number(searchParams.get(AppFilters.page)) || 1,
+    sortPacks: sortedValue as string,
     user_id: searchParams.get(AppFilters.filter) === 'my' ? userId : null
   }
 
-  // @ts-expect-error
   const { refetch, isLoading } = useGetPacksQuery(queryParams)
 
   useEffect(() => {

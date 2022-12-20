@@ -5,8 +5,7 @@ import { ReactComponent as ArrowDown } from '../../shared/assets/icons/ArrowDown
 import { cn } from '../../shared/lib/cn/cn'
 import { useSearchParams } from 'react-router-dom'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'
-import {useUlrParams} from "../../features/PacksList/hooks/useUrlParams";
-
+import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
 
 const cardsCount = [
   { id: 1, name: '10', unavailable: false },
@@ -23,12 +22,12 @@ export const Select = () => {
   const changeCountPageHandler = (str: string) => {
     setSearchParams({ ...urlParams, [AppFilters.perPage]: str })
   }
-
+  const urlSelectedValue = searchParams.get(AppFilters.perPage)
   return (
     <div className={cls.select}>
       <Listbox value={selectedPerson} onChange={setSelectedPerson}>
         <Listbox.Button className={cls.button}>
-          {selectedPerson.name}
+          {urlSelectedValue === null ? selectedPerson.name : urlSelectedValue}
           <ArrowDown />
         </Listbox.Button>
         <Listbox.Options className={cls.list}>
