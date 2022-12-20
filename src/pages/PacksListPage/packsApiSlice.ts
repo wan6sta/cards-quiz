@@ -64,5 +64,6 @@ export const {
   useGetPacksQuery,
   useCreateCardPackMutation,
   useDeleteCardPackMutation,
-  useUpdateCardsPackMutation
+  useUpdateCardsPackMutation,
+  useLazyGetPacksQuery
 } = packsApiSlice

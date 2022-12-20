@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useState } from 'react'
+import { FC, useMemo, useState } from 'react'
 import {
   createColumnHelper,
   flexRender,
@@ -24,9 +24,10 @@ import { ReactComponent as TrUp } from '../../shared/assets/icons/TrUp.svg'
 import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIcon.svg'
 import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../shared/assets/icons/Trash.svg'
-import { ArgsForGetCards, CardPack } from '../../pages/PacksListPage/packModel'
+import { CardPack } from '../../pages/PacksListPage/packModel'
 import { useGetPacksQuery } from '../../pages/PacksListPage/packsApiSlice'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useQueryParams } from './hooks/useQueryParams'
 
 interface Table extends CardPack {
   actions?: string
@@ -53,29 +54,10 @@ const columns = [
 ]
 
 export const PacksList: FC = props => {
-  const { userPack } = useAppSelector(state => state.packs)
-
   const [sorting, setSorting] = useState<SortingState>([])
-
-  const sortedValueHandler =
-    sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
-
-  const queryParams = {
-    packName: 'test',
-    pageCount: 10,
-    min: 0,
-    max: 10,
-    page: 1,
-    sortPacks: sortedValueHandler
-  } as ArgsForGetCards
-
+  const queryParams = useQueryParams(sorting)
   const { refetch } = useGetPacksQuery(queryParams)
-
-  useEffect(() => {
-    refetch()
-  }, [sorting])
-
-  const data = useMemo(() => [...userPack], [userPack])
+  const data = useAppSelector(state => state.packs.userPack)
 
   const table = useReactTable({
     data,
@@ -88,7 +70,7 @@ export const PacksList: FC = props => {
   })
 
   return (
-    <StyledPacksList className='p-2'>
+    <StyledPacksList>
       <StyledTable>
         <StyledThead>
           {table.getHeaderGroups().map(headerGroup => (
