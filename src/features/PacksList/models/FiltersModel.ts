@@ -4,5 +4,6 @@ export const enum AppFilters {
   'showPacks' = 'showPacks',
   'page' = 'page',
   'min' = 'min',
-  'max' = 'max'
+  'max' = 'max',
+  filter = 'filter'
 }

@@ -59,7 +59,7 @@ const columns = [
 export const PacksList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
   const data = useAppSelector(getPacksSelector)
-
+  const userId = useAppSelector(state => state.auth.userData?._id)
   const [searchParams, setSearchParams] = useSearchParams()
   const sortedValue =
     sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
@@ -70,7 +70,8 @@ export const PacksList: FC = props => {
     min: Number(searchParams.get(AppFilters.min)),
     max: Number(searchParams.get(AppFilters.max)),
     page: Number(searchParams.get(AppFilters.page)),
-    sortPacks: sortedValue as string | undefined
+    sortPacks: sortedValue as string | undefined,
+    user_id: searchParams.get(AppFilters.filter) === 'my' ? userId : null
   }
 
   // @ts-expect-error
@@ -81,7 +82,9 @@ export const PacksList: FC = props => {
   }, [
     sorting,
     searchParams.get(AppFilters.perPage),
-    searchParams.get(AppFilters.page)
+    searchParams.get(AppFilters.page),
+    searchParams.get(AppFilters.search),
+    searchParams.get(AppFilters.filter)
   ])
 
   const table = useReactTable({
