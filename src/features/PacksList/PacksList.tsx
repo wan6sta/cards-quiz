@@ -24,7 +24,6 @@ import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.s
 import { ReactComponent as DeleteIcon } from '../../shared/assets/icons/Trash.svg'
 import { ArgsForGetCards, CardPack } from '../../pages/PacksListPage/packModel'
 import { useGetPacksQuery } from '../../pages/PacksListPage/packsApiSlice'
-import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 
 interface Table extends CardPack {
   actions?: string
@@ -52,6 +51,7 @@ const columns = [
 
 export const PacksList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
+
 
   const sortedValueHandler =
     sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`

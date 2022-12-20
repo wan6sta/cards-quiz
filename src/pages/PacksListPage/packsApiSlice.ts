@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../shared/models/ErrorModel'
-import { ArgsForGetCards, CardPack, ServerResponse } from './packModel'
+import {ArgsForGetCards, CardPack, CreatePack, ServerResponse} from './packModel'
 import { identity, pickBy } from 'lodash-es'
 
 export const packsApiSlice = createApi({
@@ -30,8 +30,8 @@ export const packsApiSlice = createApi({
       transformResponse: (response: ServerResponse) => response.cardPacks,
       providesTags: result => ['Cards']
     }),
-    createCardPack: builder.mutation<any, any>({
-      query: (payload: any) => ({
+    createCardPack: builder.mutation<any, CreatePack>({
+      query: (payload: CreatePack) => ({
         url: 'cards/pack',
         method: 'POST',
         body: payload
@@ -45,7 +45,7 @@ export const packsApiSlice = createApi({
       }),
       invalidatesTags: ['Cards']
     }),
-    updateCardsPack: builder.mutation<CardPack, CardPack>({
+    updateCardsPack: builder.mutation<any, CardPack>({
       query: payload => ({
         url: `cards/pack/${payload._id}`,
         method: 'PUT',

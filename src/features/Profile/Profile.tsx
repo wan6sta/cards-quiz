@@ -20,21 +20,11 @@ import { authUserDataSelector } from '../../app/providers/StoreProvider/authSlic
 export const Profile: FC = props => {
   const userData = useAppSelector(authUserDataSelector)
 
-  const [
-    editName,
-    {
-      isLoading: isEditNameLoading,
-      error: editNameError
-    }
-  ] = useEditNameMutation()
+  const [editName, { isLoading: isEditNameLoading, error: editNameError }] =
+    useEditNameMutation()
 
-  const [
-    deleteAcc,
-    {
-      isLoading: deleteIsLoading,
-      error: deleteMeError
-    }
-  ] = useDeleteMeMutation()
+  const [deleteAcc, { isLoading: deleteIsLoading, error: deleteMeError }] =
+    useDeleteMeMutation()
 
   const logOutHandler = async () => {
     await deleteAcc({})
