@@ -9,7 +9,9 @@ import {
 import {
   StyledIconsWrapper,
   StyledPacksList,
+  StyledSpan,
   StyledTable,
+  StyledTableWrapper,
   StyledTbody,
   StyledTd,
   StyledTextWrapper,
@@ -58,7 +60,6 @@ export const PacksList: FC = props => {
   const sortedValueHandler =
     sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
 
-
   const queryParams = {
     packName: 'test',
     pageCount: 10,
@@ -85,6 +86,7 @@ export const PacksList: FC = props => {
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel()
   })
+
   return (
     <StyledPacksList className='p-2'>
       <StyledTable>
@@ -119,35 +121,39 @@ export const PacksList: FC = props => {
             </StyledTr>
           ))}
         </StyledThead>
-        <StyledTbody>
-          {table.getRowModel().rows.map(row => (
-            <StyledTr body key={row.id}>
-              {row.getVisibleCells().map(cell => {
-                if (cell.column.id === 'actions') {
+        <StyledTableWrapper>
+          <StyledTbody>
+            {table.getRowModel().rows.map(row => (
+              <StyledTr body key={row.id}>
+                {row.getVisibleCells().map(cell => {
+                  if (cell.column.id === 'actions') {
+                    return (
+                      <StyledTd key={cell.id}>
+                        <StyledIconsWrapper>
+                          <LearnIcon />
+                          <EditIcon />
+                          <DeleteIcon />
+                        </StyledIconsWrapper>
+                      </StyledTd>
+                    )
+                  }
                   return (
                     <StyledTd key={cell.id}>
-                      <StyledIconsWrapper>
-                        <LearnIcon />
-                        <EditIcon />
-                        <DeleteIcon />
-                      </StyledIconsWrapper>
+                      <StyledTextWrapper>
+                        <StyledSpan>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </StyledSpan>
+                      </StyledTextWrapper>
                     </StyledTd>
                   )
-                }
-                return (
-                  <StyledTd key={cell.id}>
-                    <StyledTextWrapper>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </StyledTextWrapper>
-                  </StyledTd>
-                )
-              })}
-            </StyledTr>
-          ))}
-        </StyledTbody>
+                })}
+              </StyledTr>
+            ))}
+          </StyledTbody>
+        </StyledTableWrapper>
       </StyledTable>
     </StyledPacksList>
   )

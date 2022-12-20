@@ -9,6 +9,13 @@ export const StyledPacksList = styled.div`
   ${props => props && css``}
 `
 
+export const StyledTableWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 485px;
+  overflow-y: scroll;
+`
+
 export const StyledTable = styled.table`
   display: flex;
   flex-direction: column;
@@ -26,6 +33,9 @@ export const StyledThead = styled.thead`
 `
 
 export const StyledTbody = styled.tbody`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   
 `
 
@@ -40,6 +50,7 @@ export const StyledTr = styled.tr<StyledTrProps>`
     padding: 0 36px;
     border-bottom: 1px solid #D9D9D9;
     font-size: 16px;
+    height: 48px;
   `}
 `
 
@@ -83,10 +94,15 @@ export const StyledIconsWrapper = styled.div`
   }
 `
 
-export const StyledTextWrapper = styled.span`
+export const StyledTextWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 134px;
+  width: 147px;
   height: 48px;
+`
+
+export const StyledSpan = styled.span`
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 `

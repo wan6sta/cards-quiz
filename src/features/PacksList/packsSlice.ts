@@ -14,6 +14,7 @@ export const packsSlice = createSlice({
   initialState,
   reducers: {
     setUserPack: (state, action: PayloadAction<CardPack[]>) => {
+      console.log(action.payload)
       state.userPack = action.payload
     }
   }
