@@ -6,8 +6,8 @@ import { forgotApiSlice } from '../../../features/PasswordUpdate/api/forgotPassA
 import { authMeApiSlice } from '../../../shared/api/authMeApiSlice'
 import { authSlice } from './authSlice/authSlice'
 import { profileSlice } from '../../../features/Profile/api/profileSlice'
-import { packsApiSlice } from '../../../pages/PacksListPage/packsApiSlice'
-import { packsSlice } from '../../../features/PacksList/packsSlice'
+import { packsApiSlice } from '../../../features/PacksList/api/packsApiSlice'
+import { packsSlice } from '../../../features/PacksList/slice/packsSlice'
 import { cardApiSlice } from '../../../pages/PacksListPage/PackPage/cardApiSlice'
 
 export const store = configureStore({

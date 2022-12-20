@@ -19,7 +19,7 @@ import { TextField } from '../../shared/ui/TextField/TextField'
 import { PacksSwitcher } from '../../shared/ui/PacksSwitcher/PacksSwitcher'
 import { DoubleRange } from '../../shared/ui/DoubleRange/DoubleRange'
 import { ReactComponent as RemoveFilter } from '../../shared/assets/icons/FilterRemove.svg'
-import { Pagination } from '../../shared/ui/Pagination/Pagination'
+import { Pagination } from '../../widgets/Pagination/Pagination'
 
 interface PacksListPageProps {}
 

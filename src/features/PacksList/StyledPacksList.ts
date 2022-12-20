@@ -4,12 +4,12 @@ interface StyledTrProps {
   body?: boolean
 }
 
-export const StyledPacksList = styled.div`
+export const StyledPacksList = styled.span`
   width: 100%;
   ${props => props && css``}
 `
 
-export const StyledTableWrapper = styled.div`
+export const StyledTableWrapper = styled.span`
   display: flex;
   width: 100%;
   height: 485px;
@@ -29,14 +29,37 @@ export const StyledThead = styled.thead`
   align-items: center;
   height: 48px;
   padding: 16px 36px;
-  background: #EFEFEF;
+  background: #efefef;
+`
+
+export const StyledTh = styled.th`
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17px;
+  width: 180px;
+  user-select: none;
+  height: 48px;
+`
+
+export const StyledTitleWrapper = styled.div`
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  cursor: pointer;
+  height: 48px;
+  transition: 0.1s ease-in;
+
+  &:hover {
+    color: #366eff;
+  }
 `
 
 export const StyledTbody = styled.tbody`
   display: flex;
   flex-direction: column;
   width: 100%;
-  
 `
 
 export const StyledTr = styled.tr<StyledTrProps>`
@@ -45,40 +68,35 @@ export const StyledTr = styled.tr<StyledTrProps>`
   align-items: center;
   flex: 1;
   height: 48px;
-  
-  ${props => props.body && css`
-    padding: 0 36px;
-    border-bottom: 1px solid #D9D9D9;
-    font-size: 16px;
-    height: 48px;
-  `}
+
+  ${props =>
+    props.body &&
+    css`
+      padding: 0 36px;
+      border-bottom: 1px solid #d9d9d9;
+      font-size: 16px;
+      height: 48px;
+    `}
 `
 
 export const StyledTd = styled.td`
   width: 163px;
 `
 
-export const StyledTh = styled.th`
-  display: flex;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 17px;
-  width: 180px;
-  user-select: none;
-`
 
-export const StyledTrDownWrapper = styled.div`
+
+export const StyledTrDownWrapper = styled.span`
   display: flex;
   align-items: center;
   column-gap: 6px;
   cursor: pointer;
-  
+
   &:hover {
     opacity: 0.85;
   }
 `
 
-export const StyledIconsWrapper = styled.div`
+export const StyledIconsWrapper = styled.span`
   display: flex;
   column-gap: 12px;
 
@@ -94,7 +112,7 @@ export const StyledIconsWrapper = styled.div`
   }
 `
 
-export const StyledTextWrapper = styled.div`
+export const StyledTextWrapper = styled.span`
   display: flex;
   align-items: center;
   width: 147px;

@@ -1,16 +1,26 @@
 import { AppFilters } from '../models/FiltersModel'
 import { useSearchParams } from 'react-router-dom'
-import {ArgsForGetCards} from "../../../pages/PacksListPage/packModel";
+import { ArgsForGetCards } from '../models/packModel'
 
 interface Sorting {
   id: string
   desc: boolean
 }
 
-export const useQueryParams = (sorting: Sorting[]): ArgsForGetCards => {
+interface UseQueryParamsProps {
+  sorting?: Sorting[]
+}
+
+export const useQueryParams = ({
+  sorting
+}: UseQueryParamsProps): ArgsForGetCards => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const sortedValue =
-    sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
+
+  let sortedValue: string | boolean = ''
+
+  if (sorting) {
+    sortedValue = sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
+  }
 
   console.log(sorting)
 

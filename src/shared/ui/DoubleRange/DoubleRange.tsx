@@ -26,8 +26,6 @@ export const DoubleRange = () => {
     setValue(value)
   }
 
-  console.log(value)
-
   return (
     <div className={cls.wrapperWrapper}>
       <Span title>Number of cards</Span>

@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../../shared/models/ErrorModel'
-import { CreatePack } from '../packModel'
+import { CreatePack } from '../../../features/PacksList/models/packModel'
 
 export const cardApiSlice = createApi({
   reducerPath: 'card/api',

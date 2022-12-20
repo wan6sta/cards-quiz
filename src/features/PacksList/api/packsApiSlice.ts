@@ -4,11 +4,11 @@ import {
   FetchArgs,
   fetchBaseQuery
 } from '@reduxjs/toolkit/dist/query/react'
-import { BASE_URL } from '../../shared/assets/constants/BASE_URL'
-import { FetchError } from '../../shared/models/ErrorModel'
-import { ArgsForGetCards, CardPack, PacksResponse } from './packModel'
+import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
+import { FetchError } from '../../../shared/models/ErrorModel'
+import { ArgsForGetCards, CardPack, PacksResponse } from '../models/packModel'
 import { identity, pickBy } from 'lodash-es'
-import { setUserPack } from '../../features/PacksList/packsSlice'
+import { setTotalPacksCount, setUserPack } from '../slice/packsSlice'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -31,6 +31,7 @@ export const packsApiSlice = createApi({
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled
         dispatch(setUserPack(data.cardPacks))
+        dispatch(setTotalPacksCount(data.cardPacksTotalCount))
       },
       providesTags: result => ['Cards']
     }),
