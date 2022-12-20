@@ -8,6 +8,7 @@ import { authSlice } from './authSlice/authSlice'
 import { profileSlice } from '../../../features/Profile/api/profileSlice'
 import { packsApiSlice } from '../../../pages/PacksListPage/packsApiSlice'
 import { packsSlice } from '../../../features/PacksList/packsSlice'
+import { cardApiSlice } from '../../../pages/PacksListPage/PackPage/cardApiSlice'
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     [profileSlice.reducerPath]: profileSlice.reducer,
     [packsApiSlice.reducerPath]: packsApiSlice.reducer,
     auth: authSlice.reducer,
+    [cardApiSlice.reducerPath]: cardApiSlice.reducer,
     packs: packsSlice.reducer
   },
   middleware: getDefaultMiddleware =>
@@ -27,7 +29,8 @@ export const store = configureStore({
       authMeApiSlice.middleware,
       forgotApiSlice.middleware,
       profileSlice.middleware,
-      packsApiSlice.middleware
+      packsApiSlice.middleware,
+      cardApiSlice.middleware
     ),
   devTools: true
 })
