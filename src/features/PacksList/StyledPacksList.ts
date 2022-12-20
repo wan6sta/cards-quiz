@@ -55,7 +55,7 @@ export const StyledTr = styled.tr<StyledTrProps>`
 `
 
 export const StyledTd = styled.td`
-  width: 180px;
+  width: 163px;
 `
 
 export const StyledTh = styled.th`
