@@ -7,6 +7,7 @@ import { authMeApiSlice } from '../../../shared/api/authMeApiSlice'
 import { authSlice } from './authSlice/authSlice'
 import { profileSlice } from '../../../features/Profile/api/profileSlice'
 import { packsApiSlice } from '../../../pages/PacksListPage/packsApiSlice'
+import { packsSlice } from '../../../features/PacksList/packsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,7 +17,8 @@ export const store = configureStore({
     [authMeApiSlice.reducerPath]: authMeApiSlice.reducer,
     [profileSlice.reducerPath]: profileSlice.reducer,
     [packsApiSlice.reducerPath]: packsApiSlice.reducer,
-    auth: authSlice.reducer
+    auth: authSlice.reducer,
+    packs: packsSlice.reducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(

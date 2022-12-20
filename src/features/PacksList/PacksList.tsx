@@ -24,7 +24,7 @@ import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.s
 import { ReactComponent as DeleteIcon } from '../../shared/assets/icons/Trash.svg'
 import { ArgsForGetCards, CardPack } from '../../pages/PacksListPage/packModel'
 import { useGetPacksQuery } from '../../pages/PacksListPage/packsApiSlice'
-import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 
 interface Table extends CardPack {
   actions?: string
@@ -34,16 +34,16 @@ const columnHelper = createColumnHelper<Table>()
 
 const columns = [
   columnHelper.accessor('name', {
-    header: () => 'Name'
+    header: 'Name'
   }),
   columnHelper.accessor('cardsCount', {
-    header: () => 'Cards'
+    header: 'Cards'
   }),
   columnHelper.accessor('updated', {
-    header: () => 'Last Updated'
+    header: 'Last Updated'
   }),
   columnHelper.accessor('user_name', {
-    header: () => 'Created by'
+    header: 'Created by'
   }),
   columnHelper.accessor('actions', {
     header: 'Actions'
@@ -51,34 +51,30 @@ const columns = [
 ]
 
 export const PacksList: FC = props => {
+  const { userPack } = useAppSelector(state => state.packs)
+
   const [sorting, setSorting] = useState<SortingState>([])
 
   const sortedValueHandler =
     sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
 
+
   const queryParams = {
+    packName: 'test',
     pageCount: 10,
-    min: 1,
-    max: 2,
+    min: 0,
+    max: 10,
+    page: 1,
     sortPacks: sortedValueHandler
   } as ArgsForGetCards
 
-  const { data: resData, refetch, isSuccess } = useGetPacksQuery(queryParams)
+  const { refetch } = useGetPacksQuery(queryParams)
 
   useEffect(() => {
-    if (sorting.length > 0) {
-      refetch()
-    }
+    refetch()
   }, [sorting])
-  useEffect(() => {
-    if (resData) {
-      setData(resData)
-    }
-  }, [resData])
 
-  const [tableData, setData] = useState<Table[]>([])
-
-  const data = useMemo(() => [...tableData], [tableData])
+  const data = useMemo(() => [...userPack], [userPack])
 
   const table = useReactTable({
     data,
@@ -138,7 +134,6 @@ export const PacksList: FC = props => {
                     </StyledTd>
                   )
                 }
-
                 return (
                   <StyledTd key={cell.id}>
                     <StyledTextWrapper>

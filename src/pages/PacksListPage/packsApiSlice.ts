@@ -6,8 +6,9 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../shared/models/ErrorModel'
-import { ArgsForGetCards, CardPack, ServerResponse } from './packModel'
+import { ArgsForGetCards, CardPack, PacksResponse } from './packModel'
 import { identity, pickBy } from 'lodash-es'
+import { setUserPack } from '../../features/PacksList/packsSlice'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -17,7 +18,7 @@ export const packsApiSlice = createApi({
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   tagTypes: ['Cards'],
   endpoints: builder => ({
-    getPacks: builder.query<CardPack[], ArgsForGetCards>({
+    getPacks: builder.query<PacksResponse, ArgsForGetCards>({
       query: args => ({
         url: `cards/pack`,
         params: pickBy(
@@ -27,7 +28,10 @@ export const packsApiSlice = createApi({
           identity
         )
       }),
-      transformResponse: (response: ServerResponse) => response.cardPacks,
+      async onQueryStarted(payload, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled
+        dispatch(setUserPack(data.cardPacks))
+      },
       providesTags: result => ['Cards']
     }),
     createCardPack: builder.mutation<any, any>({
