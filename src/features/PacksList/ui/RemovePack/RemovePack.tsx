@@ -6,12 +6,13 @@ import { FC } from 'react'
 interface RemovePackProps {
   packId: string
 }
-
+// Add error
 export const RemovePack: FC<RemovePackProps> = props => {
   const { packId } = props
   const [removePack, { isLoading }] = useDeleteCardPackMutation()
 
   const deleteCardHandler = () => {
+    if (isLoading) return
     removePack(packId)
   }
 

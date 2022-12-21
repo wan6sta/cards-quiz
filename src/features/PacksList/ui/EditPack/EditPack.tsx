@@ -6,7 +6,7 @@ import { FC } from 'react'
 interface EditPackProps {
   packsId: string
 }
-
+// Add error
 export const EditPack: FC<EditPackProps> = props => {
   const [updateCard, { isLoading }] = useUpdateCardsPackMutation()
   const { packsId } = props
