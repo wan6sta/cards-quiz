@@ -8,19 +8,17 @@ import {
   InputWrapper,
   PackSwitcherWrapper,
   PaginationWrapper,
-  RemoveFilterWrapper,
   StyledPacksListPage,
   TitleWrapper
 } from './StyledPacksList'
 import { Title } from '../../shared/ui/Title/Title'
 import { Button } from '../../shared/ui/Button/Button'
 import { Span } from '../../shared/ui/Span/Span'
-import { TextField } from '../../shared/ui/TextField/TextField'
 import { PacksSwitcher } from '../../shared/ui/PacksSwitcher/PacksSwitcher'
 import { DoubleRange } from '../../shared/ui/DoubleRange/DoubleRange'
-import { ReactComponent as RemoveFilter } from '../../shared/assets/icons/FilterRemove.svg'
 import { Pagination } from '../../widgets/Pagination/Pagination'
 import { DeboucedTableInput } from '../../widgets/DeboucedTableInput/DeboucedTableInput'
+import { RemoveFilterBtn } from '../../widgets/RemoveFilterBtn/RemoveFilterBtn'
 
 export const PacksListPage: FC = props => {
   return (
@@ -44,9 +42,7 @@ export const PacksListPage: FC = props => {
 
         <FilterSliderWrapper>
           <DoubleRange />
-          <RemoveFilterWrapper>
-            <RemoveFilter />
-          </RemoveFilterWrapper>
+          <RemoveFilterBtn />
         </FilterSliderWrapper>
       </FilterWrapper>
       <PacksList />

@@ -1,5 +1,4 @@
-import styled, {css} from "styled-components";
-
+import styled, { css } from 'styled-components'
 
 interface StyledPacksListPageProps {}
 
@@ -36,30 +35,12 @@ export const FilterWrapper = styled.div`
 `
 
 export const InputWrapper = styled.div`
-    width: 413px;
+  width: 413px;
 `
 
 export const PackSwitcherWrapper = styled.div`
   display: flex;
 `
-
-export const RemoveFilterWrapper = styled.div`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #FFFFFF;
-  border: 1px solid #E8E8E8;
-  width: 40px;
-  height: 36px;
-  border-radius: 2px;
-  transition: 0.1s ease-in;
-  
-  &:hover {
-    opacity: 0.8;
-  }
-`
-
 
 export const FilterTextFieldWrapper = styled.div`
   display: flex;

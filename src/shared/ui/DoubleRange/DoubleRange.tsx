@@ -1,6 +1,6 @@
 import Range from 'rc-slider'
 import './index.css'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import cls from './DoubleRange.module.css'
 import { Span } from '../Span/Span'
 import { debounce, isArray } from 'lodash-es'
@@ -13,25 +13,26 @@ type Value = number | number[]
 export const DoubleRange = () => {
   const urlParams = useUlrParams()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [min, setMin] = useState(0)
-  const [max, setMax] = useState(100)
-  const [value, setValue] = useState<Value>([0, 100])
-
   const minCount = useAppSelector(state => state.packs.cardsMinCount)
   const maxCount = useAppSelector(state => state.packs.cardsMaxCount)
+  const [min, setMin] = useState(0)
+  const [max, setMax] = useState(100)
+
+  const [value, setValue] = useState<Value>([minCount, maxCount])
+
   const urlMinValue = searchParams.get(AppFilters.min)
   const urlMaxValue = searchParams.get(AppFilters.max)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (searchParams.get(AppFilters.min) && searchParams.get(AppFilters.max)) {
-      setMax(Number(urlMaxValue))
       setValue([Number(urlMinValue), Number(urlMaxValue)])
-    } else {
-      setMin(minCount)
-      setMax(maxCount)
-      setValue([minCount, maxCount])
     }
-  }, [])
+  }, [searchParams.get(AppFilters.min), searchParams.get(AppFilters.max)])
+
+  useLayoutEffect(() => {
+    setMin(minCount)
+    setMax(maxCount)
+  }, [minCount, maxCount])
 
   const sliderDebounced = useCallback(
     debounce((value: Value) => {

@@ -16,18 +16,25 @@ const cardsCount = [
 
 export const Select = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [selectedPerson, setSelectedPerson] = useState(cardsCount[0])
+  const urlSelectedValue = searchParams.get(AppFilters.perPage)
+  const [selectedPerson, setSelectedPerson] = useState(
+    urlSelectedValue === null
+      ? cardsCount[0]
+      : cardsCount.find(el =>
+          el.name === urlSelectedValue ? urlSelectedValue : cardsCount[0]
+        )
+  )
   const urlParams = useUlrParams()
 
   const changeCountPageHandler = (str: string) => {
     setSearchParams({ ...urlParams, [AppFilters.perPage]: str })
   }
-  const urlSelectedValue = searchParams.get(AppFilters.perPage)
+
   return (
     <div className={cls.select}>
       <Listbox value={selectedPerson} onChange={setSelectedPerson}>
         <Listbox.Button className={cls.button}>
-          {urlSelectedValue === null ? selectedPerson.name : urlSelectedValue}
+          {selectedPerson?.name}
           <ArrowDown />
         </Listbox.Button>
         <Listbox.Options className={cls.list}>
