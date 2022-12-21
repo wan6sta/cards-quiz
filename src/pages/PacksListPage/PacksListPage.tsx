@@ -47,7 +47,7 @@ export const PacksListPage: FC = props => {
       </FilterWrapper>
       <PacksList />
       <PaginationWrapper>
-        <Pagination />
+        <Pagination titleForSelectSpan={'Packs per Page'}/>
       </PaginationWrapper>
     </StyledPacksListPage>
   )

@@ -50,7 +50,17 @@ const columns = [
 
 export const CardsList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
-  const data = [{ id: 1, name: 'blabla' }]
+  const data = [
+    { id: 0, name: 'blabla' },
+    { id: 1, name: '123' },
+    { id: 2, name: '14125125' },
+    {
+      id: 3,
+      name: '676575653'
+    },
+    { id: 4, name: 'blabla' },
+    { id: 5, name: 'blabla' }
+  ]
 
   const table = useReactTable({
     data,
