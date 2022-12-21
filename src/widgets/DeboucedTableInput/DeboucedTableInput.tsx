@@ -62,7 +62,7 @@ export const DeboucedTableInput = () => {
     <TextField
       value={inputValue}
       onChange={handler}
-      title={'Search'}
+      title={'Provide your text'}
       textFieldMode='outlined'
     />
   )

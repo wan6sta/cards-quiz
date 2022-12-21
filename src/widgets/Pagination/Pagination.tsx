@@ -3,14 +3,19 @@ import cls from './Pagination.module.css'
 import { Select } from '../Select/Select'
 import { PaginatedItems } from './PaginatedItems'
 
-export const Pagination: FC = props => {
+interface PaginationProps {
+  titleForSelectSpan: string
+}
+
+export const Pagination: FC<PaginationProps> = props => {
+  const { titleForSelectSpan } = props
   return (
     <div className={cls.paginateWrapper}>
       <PaginatedItems />
       <div className={cls.selectWrapper}>
         <span>Show</span>
         <Select />
-        <span>Cards per Page</span>
+        <span>{titleForSelectSpan}</span>
       </div>
     </div>
   )

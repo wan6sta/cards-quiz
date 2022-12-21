@@ -10,6 +10,7 @@ import { SetNewPasswordPage } from '../../../pages/ProfilePage/ResetPassword/Set
 import { CheckEmailPage } from '../../../pages/ProfilePage/ResetPassword/CheckEmailPage/CheckEmailPage'
 import { Navigate } from 'react-router-dom'
 import { PacksListPage } from '../../../pages/PacksListPage/PacksListPage'
+import { CardsListPage } from '../../../pages/CardsListPage/CardsListPage'
 
 export const enum AppPaths {
   'app' = '/',
@@ -19,6 +20,7 @@ export const enum AppPaths {
   'registrationSuccessPage' = '/registration-success',
   'storybook' = '/storybook',
   'packsListPage' = '/packs-list',
+  'cardsListPage' = '/cards-list',
   'forgotPasswordPage' = '/forgot-password-page',
   'setNewPassword' = '/set-new-password/:token',
   'checkEmailPage' = '/check-email-page',
@@ -35,8 +37,13 @@ interface AppRouteProps {
 }
 
 export const appRouterConfig: AppRouteProps[] = [
-  { path: AppPaths.app, element: <LoginPage />, pageLayout: true},
-  { path: AppPaths.profilePage, element: <ProfilePage />, pageLayout: true, requiredAuth: true },
+  { path: AppPaths.app, element: <LoginPage />, pageLayout: true },
+  {
+    path: AppPaths.profilePage,
+    element: <ProfilePage />,
+    pageLayout: true,
+    requiredAuth: true
+  },
   {
     path: AppPaths.registrationPage,
     element: <RegistrationPage />,
@@ -55,6 +62,12 @@ export const appRouterConfig: AppRouteProps[] = [
     requiredAuth: true
   },
   {
+    path: AppPaths.cardsListPage,
+    element: <CardsListPage />,
+    pageLayout: true,
+    requiredAuth: true
+  },
+  {
     path: AppPaths.forgotPasswordPage,
     element: <ForgotPasswordPage />,
     pageLayout: true
@@ -69,7 +82,12 @@ export const appRouterConfig: AppRouteProps[] = [
     element: <SetNewPasswordPage />,
     pageLayout: true
   },
-  { path: AppPaths.notFoundPage, element: <NotFoundPage />, pageLayout: false, page404: true },
+  {
+    path: AppPaths.notFoundPage,
+    element: <NotFoundPage />,
+    pageLayout: false,
+    page404: true
+  },
   {
     path: AppPaths.notFoundPageRedirect,
     // element: <NotFoundPage />,
