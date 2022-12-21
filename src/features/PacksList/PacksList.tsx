@@ -7,6 +7,8 @@ import {
   useReactTable
 } from '@tanstack/react-table'
 import {
+  StyledErrorTd,
+  StyledErrorTr,
   StyledHeadTr,
   StyledIconsWrapper,
   StyledPacksList,
@@ -133,41 +135,49 @@ export const PacksList: FC = props => {
           </StyledThead>
 
           <StyledTbody>
-            {table.getRowModel().rows.map(row => (
-              <StyledTr body key={row.id}>
-                {row.getVisibleCells().map(cell => {
-                  if (cell.column.id === 'actions') {
+            {loading ? (
+              <StyledErrorTr></StyledErrorTr>
+            ) : !data.length ? (
+              <StyledErrorTr>
+                <StyledErrorTd>Packs not found</StyledErrorTd>
+              </StyledErrorTr>
+            ) : (
+              table.getRowModel().rows.map(row => (
+                <StyledTr body key={row.id}>
+                  {row.getVisibleCells().map(cell => {
+                    if (cell.column.id === 'actions') {
+                      return (
+                        <StyledTd key={cell.id}>
+                          {row.original.user_id === userId ? (
+                            <StyledIconsWrapper>
+                              <LearnIcon />
+                              <EditIcon />
+                              <DeleteIcon />
+                            </StyledIconsWrapper>
+                          ) : (
+                            <StyledIconsWrapper>
+                              <LearnIcon />
+                            </StyledIconsWrapper>
+                          )}
+                        </StyledTd>
+                      )
+                    }
                     return (
                       <StyledTd key={cell.id}>
-                        {row.original.user_id === userId ? (
-                          <StyledIconsWrapper>
-                            <LearnIcon />
-                            <EditIcon />
-                            <DeleteIcon />
-                          </StyledIconsWrapper>
-                        ) : (
-                          <StyledIconsWrapper>
-                            <LearnIcon />
-                          </StyledIconsWrapper>
-                        )}
+                        <StyledTextWrapper>
+                          <StyledSpan>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </StyledSpan>
+                        </StyledTextWrapper>
                       </StyledTd>
                     )
-                  }
-                  return (
-                    <StyledTd key={cell.id}>
-                      <StyledTextWrapper>
-                        <StyledSpan>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </StyledSpan>
-                      </StyledTextWrapper>
-                    </StyledTd>
-                  )
-                })}
-              </StyledTr>
-            ))}
+                  })}
+                </StyledTr>
+              ))
+            )}
           </StyledTbody>
         </StyledTable>
       </StyledPacksList>

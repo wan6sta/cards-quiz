@@ -54,7 +54,7 @@ export const StyledTbody = styled.tbody`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 480px;
+  height: 51.7vh;
   overflow-y: scroll;
 `
 
@@ -119,4 +119,18 @@ export const StyledSpan = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`
+
+export const StyledErrorTr = styled.tr`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+`
+
+export const StyledErrorTd = styled.td`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
 `
