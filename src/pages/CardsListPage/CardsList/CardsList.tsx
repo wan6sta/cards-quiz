@@ -12,6 +12,7 @@ import { ReactComponent as TrUp } from '../../../shared/assets/icons/TrUp.svg'
 import { ReactComponent as EditIcon } from '../../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../../shared/assets/icons/Trash.svg'
 import {
+  StyledHeadTr,
   StyledIconsWrapper,
   StyledPacksList,
   StyledSpan,
@@ -51,7 +52,7 @@ const columns = [
 export const CardsList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
   const { data: rrr, isSuccess } = useGetCardQuery({
-    cardsPack_id: '639f46707792515ac401bb00'
+    cardsPack_id: '63319bd2ef99210257c3d013'
   })
   const [data, setData] = useState([])
   // const userId = useAppSelector(state => state.auth.userData?._id)
@@ -80,7 +81,7 @@ export const CardsList: FC = props => {
         <StyledTable>
           <StyledThead>
             {table.getHeaderGroups().map(headerGroup => (
-              <StyledTr key={headerGroup.id}>
+              <StyledHeadTr key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (
                     <StyledTh key={header.id}>
@@ -103,7 +104,7 @@ export const CardsList: FC = props => {
                     </StyledTh>
                   )
                 })}
-              </StyledTr>
+              </StyledHeadTr>
             ))}
           </StyledThead>
 
