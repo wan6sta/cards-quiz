@@ -82,7 +82,9 @@ export const PacksList: FC = props => {
     searchParams.get(AppFilters.perPage),
     searchParams.get(AppFilters.page),
     searchParams.get(AppFilters.search),
-    searchParams.get(AppFilters.filter)
+    searchParams.get(AppFilters.filter),
+    searchParams.get(AppFilters.min),
+    searchParams.get(AppFilters.max)
   ])
 
   const table = useReactTable({

@@ -2,7 +2,7 @@ import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
 import { useSearchParams } from 'react-router-dom'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 import { ReactComponent as RemoveFilter } from '../../shared/assets/icons/FilterRemove.svg'
-import { RemoveFilterWrapper } from "./StyledRemoveFilterBtn";
+import { RemoveFilterWrapper } from './StyledRemoveFilterBtn'
 
 export const RemoveFilterBtn = () => {
   const urlParams = useUlrParams()
@@ -19,8 +19,8 @@ export const RemoveFilterBtn = () => {
     }
   }
   return (
-    <RemoveFilterWrapper>
-      <RemoveFilter onClick={removeQueryParams} />
+    <RemoveFilterWrapper onClick={removeQueryParams} tabIndex={0}>
+      <RemoveFilter />
     </RemoveFilterWrapper>
   )
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Listbox } from '@headlessui/react'
 import cls from './Select.module.css'
 import { ReactComponent as ArrowDown } from '../../shared/assets/icons/ArrowDown.svg'
@@ -6,6 +6,7 @@ import { cn } from '../../shared/lib/cn/cn'
 import { useSearchParams } from 'react-router-dom'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
+import { identity, pickBy } from 'lodash-es'
 
 const cardsCount = [
   { id: 1, name: '10', unavailable: false },
@@ -17,17 +18,29 @@ const cardsCount = [
 export const Select = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const urlSelectedValue = searchParams.get(AppFilters.perPage)
-  const [selectedPerson, setSelectedPerson] = useState(
-    urlSelectedValue === null
-      ? cardsCount[0]
-      : cardsCount.find(el =>
-          el.name === urlSelectedValue ? urlSelectedValue : cardsCount[0]
-        )
-  )
+  const [selectedPerson, setSelectedPerson] = useState(cardsCount[0])
   const urlParams = useUlrParams()
 
+  useEffect(() => {
+    if (urlSelectedValue) {
+      const el = cardsCount.find(
+        (el, index, arr) => el.name === urlSelectedValue
+      )
+      setSelectedPerson(el ? el : cardsCount[0])
+    }
+  }, [urlSelectedValue])
+
   const changeCountPageHandler = (str: string) => {
-    setSearchParams({ ...urlParams, [AppFilters.perPage]: str })
+    setSearchParams(
+      pickBy(
+        {
+          ...urlParams,
+          [AppFilters.perPage]: str,
+          [AppFilters.page]: ''
+        },
+        identity
+      )
+    )
   }
 
   return (

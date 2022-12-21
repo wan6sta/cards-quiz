@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import ReactPaginate from 'react-paginate'
@@ -17,7 +17,7 @@ export function PaginatedItems() {
   const initialValue = 0
   const urlParams = useUlrParams()
   const urlPageParams = Number(searchParams.get(AppFilters.page))
-  const packsCount = useAppSelector(state => state.packs.totalPacksCount)
+  const packsCount = useAppSelector(state => state.packs.totalPacksCount || 1)
 
   useEffect(() => {
     setItemsPerPage(Number(searchParams.get(AppFilters.perPage)) || 10)

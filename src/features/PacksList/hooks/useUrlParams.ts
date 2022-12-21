@@ -1,6 +1,6 @@
 import { AppFilters } from '../models/FiltersModel'
 import { useSearchParams } from 'react-router-dom'
-import { identity, isBoolean, pickBy } from 'lodash-es'
+import { identity, pickBy } from 'lodash-es'
 
 export const useUlrParams = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -16,16 +16,6 @@ export const useUlrParams = () => {
     },
     identity
   )
-
-  // const newArray = Object.entries(returnValue).filter(([key, value]) =>
-  //   Boolean(value)
-  // )
-  //
-  // const newValue: Record<string, any> = {}
-  //
-  // for (let i = 0; i < newArray.length; i++) {
-  //   newValue[newArray[i][0]] = newArray[i][1]
-  // }
 
   return returnValue
 }

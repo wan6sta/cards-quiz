@@ -1,9 +1,9 @@
 import Range from 'rc-slider'
 import './index.css'
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import cls from './DoubleRange.module.css'
 import { Span } from '../Span/Span'
-import { debounce, isArray } from 'lodash-es'
+import { debounce, identity, isArray, pickBy } from 'lodash-es'
 import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useSearchParams } from 'react-router-dom'
 import { useUlrParams } from '../../../features/PacksList/hooks/useUrlParams'
@@ -15,33 +15,40 @@ export const DoubleRange = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const minCount = useAppSelector(state => state.packs.cardsMinCount)
   const maxCount = useAppSelector(state => state.packs.cardsMaxCount)
-  const [min, setMin] = useState(0)
-  const [max, setMax] = useState(100)
+  const [min, setMin] = useState(minCount)
+  const [max, setMax] = useState(maxCount)
 
   const [value, setValue] = useState<Value>([minCount, maxCount])
 
-  const urlMinValue = searchParams.get(AppFilters.min)
-  const urlMaxValue = searchParams.get(AppFilters.max)
+  const urlMaxCountValue = Number(searchParams.get(AppFilters.max))
+  const urlMinCountValue = Number(searchParams.get(AppFilters.min))
 
-  useLayoutEffect(() => {
-    if (searchParams.get(AppFilters.min) && searchParams.get(AppFilters.max)) {
-      setValue([Number(urlMinValue), Number(urlMaxValue)])
+  useEffect(() => {
+    if (urlMaxCountValue + urlMinCountValue !== 0) {
+      setMin(minCount)
+      setMax(maxCount)
+      setValue([urlMinCountValue, urlMaxCountValue])
+    } else {
+      setValue([minCount, maxCount])
+      setMin(minCount)
+      setMax(maxCount)
     }
-  }, [searchParams.get(AppFilters.min), searchParams.get(AppFilters.max)])
-
-  useLayoutEffect(() => {
-    setMin(minCount)
-    setMax(maxCount)
-  }, [minCount, maxCount])
+  }, [minCount, maxCount, urlMaxCountValue, urlMinCountValue])
 
   const sliderDebounced = useCallback(
     debounce((value: Value) => {
       if (Array.isArray(value)) {
-        setSearchParams({
-          ...urlParams,
-          [AppFilters.min]: String(value[0]),
-          [AppFilters.max]: String(value[1])
-        })
+        setSearchParams(
+          pickBy(
+            {
+              ...urlParams,
+              [AppFilters.min]: String(value[0]),
+              [AppFilters.max]: String(value[1]),
+              [AppFilters.page]: ''
+            },
+            identity
+          )
+        )
       }
     }, 250),
     [setSearchParams]

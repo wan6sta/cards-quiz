@@ -1,20 +1,17 @@
-import { FC, useEffect, useLayoutEffect, useState } from 'react'
+import { FC, useCallback, useLayoutEffect, useState } from 'react'
 import { StyledPack, StyledPacksSwitcher } from './StyledPacksSwitcher'
 import { Flex } from '../Flex/Flex'
 import { Span } from '../Span/Span'
-import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useSearchParams } from 'react-router-dom'
 import { useUlrParams } from '../../../features/PacksList/hooks/useUrlParams'
 import { AppFilters } from '../../../features/PacksList/models/FiltersModel'
-
-interface PacksSwitcherProps {}
+import { debounce, identity, pickBy } from 'lodash-es'
 
 export type PackSwitch = 'all' | 'my'
 
-export const PacksSwitcher: FC<PacksSwitcherProps> = props => {
+export const PacksSwitcher: FC = props => {
   const [searchParams, setSearchParams] = useSearchParams()
   const urlParams = useUlrParams()
-  const { ...restProps } = props
   const [type, setType] = useState<PackSwitch>('all')
 
   const filter = searchParams.get(AppFilters.filter)
@@ -29,19 +26,35 @@ export const PacksSwitcher: FC<PacksSwitcherProps> = props => {
   const isAll = type === 'all'
   const isMy = type === 'my'
 
+  const debouncedToggle = useCallback(
+    debounce((packType: PackSwitch) => {
+      setSearchParams(
+        pickBy(
+          {
+            ...urlParams,
+            [AppFilters.filter]: packType,
+            [AppFilters.page]: ''
+          },
+          identity
+        )
+      )
+    }, 250),
+    [setSearchParams]
+  )
+
   const toggleIsMy = () => {
     setType(prev => 'my')
-    setSearchParams({ ...urlParams, [AppFilters.filter]: 'my' })
+    debouncedToggle('my')
   }
   const toggleIsAll = () => {
     setType(prev => 'all')
-    setSearchParams({ ...urlParams, [AppFilters.filter]: 'all' })
+    debouncedToggle('all')
   }
 
   return (
     <Flex flexDirection='column' rowGap='8px'>
       <Span spanTitle>Show packs cards</Span>
-      <StyledPacksSwitcher {...restProps}>
+      <StyledPacksSwitcher>
         <StyledPack tabIndex={1} onClick={toggleIsMy} isMy={isMy}>
           My
         </StyledPack>

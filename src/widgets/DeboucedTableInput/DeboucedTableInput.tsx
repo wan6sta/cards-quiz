@@ -7,7 +7,7 @@ import {
   useLayoutEffect,
   useState
 } from 'react'
-import { debounce } from 'lodash-es'
+import { debounce, identity, pickBy } from 'lodash-es'
 import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 
@@ -22,7 +22,7 @@ export const DeboucedTableInput = () => {
       return
     }
     setInputValue(searchParams.get(AppFilters.search) as string)
-  }, [])
+  }, [searchParams.get(AppFilters.search)])
 
   const urlParams = useUlrParams()
 
@@ -38,7 +38,16 @@ export const DeboucedTableInput = () => {
   const debounced = useCallback(
     debounce((inputValue: string) => {
       inputValue.length > 0
-        ? setSearchParams({ ...urlParams, [AppFilters.search]: inputValue })
+        ? setSearchParams(
+            pickBy(
+              {
+                ...urlParams,
+                [AppFilters.search]: inputValue,
+                [AppFilters.page]: ''
+              },
+              identity
+            )
+          )
         : removeQueryParams()
     }, 250),
     [setSearchParams]
