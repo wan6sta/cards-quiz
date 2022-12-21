@@ -4,7 +4,7 @@ import { Select } from '../Select/Select'
 import { PaginatedItems } from './PaginatedItems'
 
 interface PaginationProps {
-  titleForSelectSpan: string
+  titleForSelectSpan?: string
 }
 
 export const Pagination: FC<PaginationProps> = props => {
