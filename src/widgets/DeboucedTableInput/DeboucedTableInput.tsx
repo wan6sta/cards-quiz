@@ -1,5 +1,5 @@
 import { TextField } from '../../shared/ui/TextField/TextField'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import {
   ChangeEvent,
   useCallback,
@@ -23,18 +23,27 @@ export const DeboucedTableInput = () => {
     }
     setInputValue(searchParams.get(AppFilters.search) as string)
   }, [])
+
   const urlParams = useUlrParams()
+
+  const removeQueryParams = () => {
+    const param = searchParams.get(AppFilters.search)
+
+    if (param) {
+      searchParams.delete(AppFilters.search)
+      setSearchParams(searchParams)
+    }
+  }
+
   const debounced = useCallback(
     debounce((inputValue: string) => {
-      inputValue.length > 1
+      inputValue.length > 0
         ? setSearchParams({ ...urlParams, [AppFilters.search]: inputValue })
-        : searchParams.delete(AppFilters.search) //fix
+        : removeQueryParams()
     }, 250),
-    [setSearchParams, inputValue]
+    [setSearchParams]
   )
 
-  const ree = useLocation()
-  console.log(ree)
   const handler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.currentTarget.value)
     debounced(e.currentTarget.value)
