@@ -25,7 +25,6 @@ import {
 import { ReactComponent as TrDown } from '../../shared/assets/icons/TrDown.svg'
 import { ReactComponent as TrUp } from '../../shared/assets/icons/TrUp.svg'
 import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIcon.svg'
-import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../shared/assets/icons/Trash.svg'
 import { CardPack } from './models/packModel'
 import { useGetPacksQuery } from './api/packsApiSlice'
@@ -34,6 +33,7 @@ import { getPacksSelector } from './selectors/getPacksSelector'
 import { AppFilters } from './models/FiltersModel'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { EditPack } from './ui/EditPack/EditPack'
 
 interface Table extends CardPack {
   actions?: string
@@ -151,7 +151,7 @@ export const PacksList: FC = props => {
                           {row.original.user_id === userId ? (
                             <StyledIconsWrapper>
                               <LearnIcon />
-                              <EditIcon />
+                              <EditPack packsId={row.original._id} />
                               <DeleteIcon />
                             </StyledIconsWrapper>
                           ) : (

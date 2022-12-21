@@ -53,17 +53,19 @@ export const packsApiSlice = createApi({
     }),
     deleteCardPack: builder.mutation<any, CardPack>({
       query: payload => ({
-        url: `cards/pack/${payload._id}`,
+        url: `cards/pack/?id=${payload._id}`,
         method: 'DELETE'
       }),
       invalidatesTags: ['Cards']
     }),
-    updateCardsPack: builder.mutation<CardPack, CardPack>({
-      query: payload => ({
-        url: `cards/pack/${payload._id}`,
-        method: 'PUT',
-        body: payload
-      }),
+    updateCardsPack: builder.mutation<CardPack, any>({
+      query: payload => {
+        return {
+          url: `cards/pack`,
+          method: 'PUT',
+          body: payload
+        }
+      },
       invalidatesTags: ['Cards']
     })
   })
