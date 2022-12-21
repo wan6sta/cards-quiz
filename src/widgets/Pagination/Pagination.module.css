@@ -16,12 +16,13 @@
 }
 
 .prev {
-    width: 24px;
+    width: 37px;
     height: 24px;
 }
 
 .ul {
     display: flex;
+    column-gap: 10px;
     height: 24px;
 }
 
@@ -30,12 +31,12 @@
     display: inline-block;
     flex: 1;
     text-align: center;
-    margin-right: 12px;
+    margin-bottom: 0;
     border-radius: 2px;
     user-select: none;
     cursor: pointer;
     height: 24px;
-    width: 31px !important;
+    width: 37px !important;
     font-size: 16px;
 }
 
@@ -50,7 +51,7 @@
     flex: 1;
     justify-content: center;
     height: 24px;
-    width: 24px !important;
+    width: 37px !important;
 }
 
 .ul > li.active {
