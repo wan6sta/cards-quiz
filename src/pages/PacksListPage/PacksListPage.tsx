@@ -36,7 +36,6 @@ export const PacksListPage: FC = props => {
             <PacksSwitcher />
           </PackSwitcherWrapper>
         </FilterTextFieldWrapper>
-
         <FilterSliderWrapper>
           <DoubleRange />
           <RemoveFilterBtn />
