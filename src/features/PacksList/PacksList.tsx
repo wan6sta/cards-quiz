@@ -30,8 +30,9 @@ import { useGetPacksQuery, useLazyGetPacksQuery } from './api/packsApiSlice'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { getPacksSelector } from './selectors/getPacksSelector'
 import { AppFilters } from './models/FiltersModel'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { useUlrParams } from './hooks/useUrlParams'
 
 interface Table extends CardPack {
   actions?: string
@@ -59,10 +60,11 @@ const columns = [
 
 export const PacksList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
+  const { search } = useLocation()
   const data = useAppSelector(getPacksSelector)
   const userId = useAppSelector(state => state.auth.userData?._id)
-
   const [searchParams, setSearchParams] = useSearchParams()
+
   const sortedValue =
     sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
 
@@ -80,15 +82,7 @@ export const PacksList: FC = props => {
 
   useEffect(() => {
     refetch()
-  }, [
-    sorting,
-    searchParams.get(AppFilters.perPage),
-    searchParams.get(AppFilters.page),
-    searchParams.get(AppFilters.search),
-    searchParams.get(AppFilters.filter),
-    searchParams.get(AppFilters.min),
-    searchParams.get(AppFilters.max)
-  ])
+  }, [sorting, search])
 
   const table = useReactTable({
     data,

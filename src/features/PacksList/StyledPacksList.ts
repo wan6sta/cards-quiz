@@ -54,7 +54,7 @@ export const StyledTbody = styled.tbody`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 485px;
+  height: 480px;
   overflow-y: scroll;
 `
 
