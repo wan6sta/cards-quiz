@@ -123,7 +123,6 @@ export const Login = () => {
           Sign Up
         </AppLink>
       </BoxCard>
-      <CardsListPage/>
       <ErrorAlert errorMessage={errorHandler} />
     </form>
   )

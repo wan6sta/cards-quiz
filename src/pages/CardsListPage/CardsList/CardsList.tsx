@@ -12,7 +12,6 @@ import { ReactComponent as TrUp } from '../../../shared/assets/icons/TrUp.svg'
 import { ReactComponent as LearnIcon } from '../../../shared/assets/icons/TeacherIcon.svg'
 import { ReactComponent as EditIcon } from '../../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../../shared/assets/icons/Trash.svg'
-import { CardPack } from '../../../features/PacksList/models/packModel'
 import {
   StyledIconsWrapper,
   StyledPacksList,
@@ -26,12 +25,15 @@ import {
   StyledTitleWrapper,
   StyledTr
 } from '../../../features/PacksList/StyledPacksList'
+import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useGetCardQuery } from '../../PacksListPage/PackPage/cardApiSlice'
+import { Card } from './Models/CardsModel'
 
-interface Table extends CardPack {
+interface Table extends Card {
   actions?: string
 }
 
-const columnHelper = createColumnHelper<any>()
+const columnHelper = createColumnHelper<Table>()
 
 const columns = [
   columnHelper.accessor('question', {
@@ -50,18 +52,8 @@ const columns = [
 
 export const CardsList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
-  const data = [
-    { id: 0, name: 'blabla' },
-    { id: 1, name: '123' },
-    { id: 2, name: '14125125' },
-    {
-      id: 3,
-      name: '676575653'
-    },
-    { id: 4, name: 'blabla' },
-    { id: 5, name: 'blabla' }
-  ]
-
+  const userId = useAppSelector(state => state.auth.userData?._id)
+  const { data } = useGetCardQuery('')
   const table = useReactTable({
     data,
     columns,
