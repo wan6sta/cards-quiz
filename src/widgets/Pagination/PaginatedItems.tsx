@@ -10,7 +10,6 @@ import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
 
 export function PaginatedItems() {
   const [searchParams, setSearchParams] = useSearchParams()
-  // const [itemOffset, setItemOffset] = useState(0)
 
   const [itemsPerPage, setItemsPerPage] = useState(
     Number(searchParams.get(AppFilters.perPage)) || 10
@@ -18,25 +17,15 @@ export function PaginatedItems() {
   const initialValue = 0
   const urlParams = useUlrParams()
   const urlPageParams = Number(searchParams.get(AppFilters.page))
-  // const endOffset = itemOffset + itemsPerPage
   const packsCount = useAppSelector(state => state.packs.totalPacksCount)
-  // const items = []
-  //
-  // for (let i = 0; i < packsCount; i++) {
-  //   items.push(i)
-  // }
 
   useEffect(() => {
     setItemsPerPage(Number(searchParams.get(AppFilters.perPage)) || 10)
   }, [searchParams.get(AppFilters.perPage)])
-
-  // const currentItems = items.slice(itemOffset, endOffset)
   const pageCount = Math.ceil(packsCount / itemsPerPage)
 
   const handlePageClick = (event: any) => {
     setSearchParams({ ...urlParams, [AppFilters.page]: event.selected + 1 })
-    // const newOffset = (event.selected * itemsPerPage) % packsCount
-    // setItemOffset(newOffset)
   }
 
   return (
