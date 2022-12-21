@@ -52,8 +52,17 @@ const columns = [
 
 export const CardsList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
-  const userId = useAppSelector(state => state.auth.userData?._id)
-  const { data } = useGetCardQuery('')
+  const { data: rrr, isSuccess } = useGetCardQuery({
+    cardsPack_id: '639f46707792515ac401bb00'
+  })
+  const [data, setData] = useState([])
+  // const userId = useAppSelector(state => state.auth.userData?._id)
+  useEffect(() => {
+    if (rrr) {
+      setData(rrr.cards)
+    }
+  }, [isSuccess])
+  console.log(rrr?.cards)
   const table = useReactTable({
     data,
     columns,
@@ -80,10 +89,7 @@ export const CardsList: FC = props => {
                       {header.isPlaceholder ? null : (
                         <StyledTitleWrapper
                           {...{
-                            onClick:
-                              header.id !== 'actions'
-                                ? header.column.getToggleSortingHandler()
-                                : undefined
+                            onClick: header.column.getToggleSortingHandler()
                           }}
                         >
                           {flexRender(
@@ -107,11 +113,11 @@ export const CardsList: FC = props => {
             {table.getRowModel().rows.map(row => (
               <StyledTr body key={row.id}>
                 {row.getVisibleCells().map(cell => {
-                  if (cell.column.id === 'actions') {
+                  if (cell.column.id === 'grade') {
                     return (
                       <StyledTd key={cell.id}>
                         <StyledIconsWrapper>
-                          <LearnIcon />
+                          ⭐⭐⭐⭐⭐
                           <EditIcon />
                           <DeleteIcon />
                         </StyledIconsWrapper>
