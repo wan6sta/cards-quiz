@@ -8,7 +8,12 @@ import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../../shared/models/ErrorModel'
 import { ArgsForGetCards, CardPack, PacksResponse } from '../models/packModel'
 import { identity, pickBy } from 'lodash-es'
-import { setTotalPacksCount, setUserPack } from '../slice/packsSlice'
+import {
+  setCardsMaxCount,
+  setCardsMinCount,
+  setTotalPacksCount,
+  setUserPack
+} from '../slice/packsSlice'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -32,6 +37,8 @@ export const packsApiSlice = createApi({
         const { data } = await queryFulfilled
         dispatch(setUserPack(data.cardPacks))
         dispatch(setTotalPacksCount(data.cardPacksTotalCount))
+        dispatch(setCardsMinCount(data.minCardsCount))
+        dispatch(setCardsMaxCount(data.maxCardsCount))
       },
       providesTags: result => ['Cards']
     }),

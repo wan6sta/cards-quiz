@@ -39,7 +39,6 @@ export function PaginatedItems() {
     // setItemOffset(newOffset)
   }
 
-  console.log(urlPageParams)
   return (
     <>
       <ReactPaginate

@@ -4,11 +4,15 @@ import { CardPack } from '../models/packModel'
 interface Initial {
   userPack: [] | CardPack[]
   totalPacksCount: number
+  cardsMinCount: number
+  cardsMaxCount: number
 }
 
 const initialState: Initial = {
   userPack: [],
-  totalPacksCount: 0
+  totalPacksCount: 0,
+  cardsMinCount: 0,
+  cardsMaxCount: 0
 }
 
 export const packsSlice = createSlice({
@@ -20,7 +24,18 @@ export const packsSlice = createSlice({
     },
     setTotalPacksCount: (state, action: PayloadAction<number>) => {
       state.totalPacksCount = action.payload
+    },
+    setCardsMinCount: (state, action: PayloadAction<number>) => {
+      state.cardsMinCount = action.payload
+    },
+    setCardsMaxCount: (state, action: PayloadAction<number>) => {
+      state.cardsMaxCount = action.payload
     }
   }
 })
-export const { setUserPack, setTotalPacksCount } = packsSlice.actions
+export const {
+  setUserPack,
+  setTotalPacksCount,
+  setCardsMinCount,
+  setCardsMaxCount
+} = packsSlice.actions

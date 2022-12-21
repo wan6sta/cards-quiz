@@ -1,4 +1,4 @@
-import { identity, pickBy } from 'lodash-es'
+import { pickBy } from 'lodash-es'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import {
   BaseQueryFn,
@@ -7,7 +7,6 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../../shared/models/ErrorModel'
-import { CreatePack } from '../../../features/PacksList/models/packModel'
 
 export const cardApiSlice = createApi({
   reducerPath: 'card/api',

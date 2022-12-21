@@ -40,7 +40,7 @@ export const PacksSwitcher: FC<PacksSwitcherProps> = props => {
 
   return (
     <Flex flexDirection='column' rowGap='8px'>
-      <Span title>Show packs cards</Span>
+      <Span spanTitle>Show packs cards</Span>
       <StyledPacksSwitcher {...restProps}>
         <StyledPack tabIndex={1} onClick={toggleIsMy} isMy={isMy}>
           My

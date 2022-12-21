@@ -11,14 +11,13 @@ interface SpanProps {
   marginBottom?: string
   textCenter?: boolean
   hover?: boolean
-  title?: boolean
+  spanTitle?: boolean
 }
 
 export const Span: FC<PropsWithChildren<SpanProps>> = memo(props => {
   const { hover, children, ...restProps } = props
 
   return (
-    // @ts-expect-error
     <StyledSpan hover={!!hover} {...restProps}>
       {children}
     </StyledSpan>

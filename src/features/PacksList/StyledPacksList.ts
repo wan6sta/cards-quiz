@@ -9,13 +9,6 @@ export const StyledPacksList = styled.span`
   ${props => props && css``}
 `
 
-export const StyledTableWrapper = styled.span`
-  display: flex;
-  width: 100%;
-  height: 485px;
-  overflow-y: scroll;
-`
-
 export const StyledTable = styled.table`
   display: flex;
   flex-direction: column;
@@ -60,6 +53,8 @@ export const StyledTbody = styled.tbody`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 485px;
+  overflow-y: scroll;
 `
 
 export const StyledTr = styled.tr<StyledTrProps>`
@@ -82,8 +77,6 @@ export const StyledTr = styled.tr<StyledTrProps>`
 export const StyledTd = styled.td`
   width: 163px;
 `
-
-
 
 export const StyledTrDownWrapper = styled.span`
   display: flex;

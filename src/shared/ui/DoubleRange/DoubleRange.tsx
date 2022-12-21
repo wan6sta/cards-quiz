@@ -3,11 +3,17 @@ import './index.css'
 import { useState } from 'react'
 import cls from './DoubleRange.module.css'
 import { Span } from '../Span/Span'
-import {isArray} from "lodash-es";
+import { isArray } from 'lodash-es'
+import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useSearchParams } from 'react-router-dom'
+import { useUlrParams } from '../../../features/PacksList/hooks/useUrlParams'
 
-type Value = number | number[]
+type Value = number[]
 
 export const DoubleRange = () => {
+  const minCount = useAppSelector(state => state.packs.cardsMinCount)
+  const mamCount = useAppSelector(state => state.packs.cardsMaxCount)
+
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(100)
   const [value, setValue] = useState<Value>([0, 100])
@@ -21,6 +27,8 @@ export const DoubleRange = () => {
   //     setValue(value)
   //   }
   // }
+  const urlParams = useUlrParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const onSliderChange = (value: Value) => {
     setValue(value)
@@ -28,9 +36,11 @@ export const DoubleRange = () => {
 
   return (
     <div className={cls.wrapperWrapper}>
-      <Span title>Number of cards</Span>
+      <Span spanTitle>Number of cards</Span>
       <div className={cls.wrapper}>
-        <div className={cls.numWrapper}>{isArray(value) ? value.at(0) : null}</div>
+        <div className={cls.numWrapper}>
+          {isArray(value) ? value.at(0) : null}
+        </div>
         <div className={cls.rangeWrapper}>
           <Range
             className={cls.Range}
@@ -43,7 +53,9 @@ export const DoubleRange = () => {
             onChange={onSliderChange}
           />
         </div>
-        <div className={cls.numWrapper}>{isArray(value) ? value.at(1) : null}</div>
+        <div className={cls.numWrapper}>
+          {isArray(value) ? value.at(1) : null}
+        </div>
       </div>
     </div>
   )

@@ -11,7 +11,6 @@ import {
   StyledPacksList,
   StyledSpan,
   StyledTable,
-  StyledTableWrapper,
   StyledTbody,
   StyledTd,
   StyledTextWrapper,
@@ -133,39 +132,38 @@ export const PacksList: FC = props => {
               </StyledTr>
             ))}
           </StyledThead>
-          <StyledTableWrapper>
-            <StyledTbody>
-              {table.getRowModel().rows.map(row => (
-                <StyledTr body key={row.id}>
-                  {row.getVisibleCells().map(cell => {
-                    if (cell.column.id === 'actions') {
-                      return (
-                        <StyledTd key={cell.id}>
-                          <StyledIconsWrapper>
-                            <LearnIcon />
-                            <EditIcon />
-                            <DeleteIcon />
-                          </StyledIconsWrapper>
-                        </StyledTd>
-                      )
-                    }
+
+          <StyledTbody>
+            {table.getRowModel().rows.map(row => (
+              <StyledTr body key={row.id}>
+                {row.getVisibleCells().map(cell => {
+                  if (cell.column.id === 'actions') {
                     return (
                       <StyledTd key={cell.id}>
-                        <StyledTextWrapper>
-                          <StyledSpan>
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext()
-                            )}
-                          </StyledSpan>
-                        </StyledTextWrapper>
+                        <StyledIconsWrapper>
+                          <LearnIcon />
+                          <EditIcon />
+                          <DeleteIcon />
+                        </StyledIconsWrapper>
                       </StyledTd>
                     )
-                  })}
-                </StyledTr>
-              ))}
-            </StyledTbody>
-          </StyledTableWrapper>
+                  }
+                  return (
+                    <StyledTd key={cell.id}>
+                      <StyledTextWrapper>
+                        <StyledSpan>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </StyledSpan>
+                      </StyledTextWrapper>
+                    </StyledTd>
+                  )
+                })}
+              </StyledTr>
+            ))}
+          </StyledTbody>
         </StyledTable>
       </StyledPacksList>
     </>
