@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components'
 
-interface StyledPacksListPageProps {}
-
-export const StyledPacksListPage = styled.div<StyledPacksListPageProps>`
+export const StyledPacksListPage = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
