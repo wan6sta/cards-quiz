@@ -1,70 +1,69 @@
 .select {
-    position: relative;
+  position: relative;
 }
 
 .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 6px;
-    user-select: none;
-    background: #FFFFFF;
-    border: 1px solid #D9D9D9;
-    border-radius: 2px;
-    width: 39px;
-    font-family: inherit;
-    font-size: 14px;
-    height: 24px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.1s ease-in;
-    background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 6px;
+  user-select: none;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  width: 39px;
+  font-family: inherit;
+  font-size: 14px;
+  height: 24px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+  background: none;
 }
 
 .button:hover {
-    border: 1px solid rgb(54, 110, 255);
+  border: 1px solid rgb(54, 110, 255);
 }
 
 .list {
-    margin-top: 5px;
-    position: absolute;
-    top: -108px;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 39px;
-    box-shadow: 2px 1px 8px 0px rgba(34, 60, 80, 0.2);
-    background-color: #f9f9fa;
+  margin-top: 5px;
+  position: absolute;
+  top: -108px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 39px;
+  box-shadow: 2px 1px 8px 0px rgba(34, 60, 80, 0.2);
+  background-color: #f9f9fa;
 }
 
 .li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 24px;
-    width: 39px;
-    user-select: none;
-    font-weight: 400;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 39px;
+  user-select: none;
+  font-weight: 400;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px;
 }
 
 .family {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .family:first-child > li {
-    border-radius: 2px 2px 0 0;
+  border-radius: 2px 2px 0 0;
 }
 
 .family:last-child > li {
-    border-radius: 0 0 2px 2px;
+  border-radius: 0 0 2px 2px;
 }
 
-
 .active {
-    background-color: rgb(54, 110, 255);
-    color: white;
+  background-color: rgb(54, 110, 255);
+  color: white;
 }

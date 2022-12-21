@@ -1,12 +1,6 @@
 import { TextField } from '../../shared/ui/TextField/TextField'
 import { useSearchParams } from 'react-router-dom'
-import {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useState
-} from 'react'
+import { ChangeEvent, useCallback, useLayoutEffect, useState } from 'react'
 import { debounce, identity, pickBy } from 'lodash-es'
 import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'

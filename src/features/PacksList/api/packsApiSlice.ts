@@ -14,7 +14,7 @@ import {
   setTotalPacksCount,
   setUserPack
 } from '../slice/packsSlice'
-import {convertData} from "../lib/convertData";
+import { convertData } from '../lib/convertData'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',

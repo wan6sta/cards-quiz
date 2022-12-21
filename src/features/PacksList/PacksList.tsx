@@ -26,13 +26,12 @@ import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIc
 import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../shared/assets/icons/Trash.svg'
 import { CardPack } from './models/packModel'
-import { useGetPacksQuery, useLazyGetPacksQuery } from './api/packsApiSlice'
+import { useGetPacksQuery } from './api/packsApiSlice'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { getPacksSelector } from './selectors/getPacksSelector'
 import { AppFilters } from './models/FiltersModel'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
-import { useUlrParams } from './hooks/useUrlParams'
 
 interface Table extends CardPack {
   actions?: string

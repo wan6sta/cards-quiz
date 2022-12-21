@@ -77,7 +77,7 @@ export const StyledTr = styled.tr<StyledTrProps>`
 `
 
 export const StyledTd = styled.td`
-  flex-basis: 19%; 
+  flex-basis: 19%;
   flex-grow: 1;
 `
 

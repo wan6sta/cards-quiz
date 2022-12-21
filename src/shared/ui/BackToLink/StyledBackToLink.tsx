@@ -13,7 +13,7 @@ export const StyledBackToLink = styled.div<StyledBackToLinkProps>`
   margin-bottom: ${props => (props.marginBottom ? props.marginBottom : 0)};
   transition: 0.1s ease-in;
   user-select: none;
-  
+
   &:hover {
     opacity: 0.85;
   }

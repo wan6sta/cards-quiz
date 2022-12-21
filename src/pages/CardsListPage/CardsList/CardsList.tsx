@@ -9,7 +9,6 @@ import {
 
 import { ReactComponent as TrDown } from '../../../shared/assets/icons/TrDown.svg'
 import { ReactComponent as TrUp } from '../../../shared/assets/icons/TrUp.svg'
-import { ReactComponent as LearnIcon } from '../../../shared/assets/icons/TeacherIcon.svg'
 import { ReactComponent as EditIcon } from '../../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../../shared/assets/icons/Trash.svg'
 import {
@@ -25,7 +24,6 @@ import {
   StyledTitleWrapper,
   StyledTr
 } from '../../../features/PacksList/StyledPacksList'
-import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useGetCardQuery } from '../../PacksListPage/PackPage/cardApiSlice'
 import { Card } from './Models/CardsModel'
 

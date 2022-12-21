@@ -15,7 +15,7 @@
 .rc-slider-rail {
   position: absolute;
   width: 100%;
-  background-color: #366EFF;
+  background-color: #366eff;
   height: 5px;
   opacity: 0.5;
   border-radius: 10px;
@@ -23,7 +23,7 @@
 .rc-slider-track {
   position: absolute;
   height: 5px;
-  background: #366EFF;
+  background: #366eff;
   border-radius: 10px;
 }
 .rc-slider-handle {
@@ -37,11 +37,11 @@
   cursor: grab;
   touch-action: pan-x;
 
-  background: #FFFFFF;
-  border: 4px solid #366EFF;
+  background: #ffffff;
+  border: 4px solid #366eff;
 }
 .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
-  border-color: #366EFF;
+  border-color: #366eff;
   box-shadow: 0 0 0 10px rgba(54, 110, 255, 0.25);
 }
 .rc-slider-handle:focus {
@@ -49,19 +49,19 @@
   box-shadow: none;
 }
 .rc-slider-handle:focus-visible {
-  border-color: #366EFF;
-  box-shadow: 0 0 0 3px #366EFF;
+  border-color: #366eff;
+  box-shadow: 0 0 0 3px #366eff;
 }
 .rc-slider-handle-click-focused:focus {
-  border-color: #366EFF;
+  border-color: #366eff;
   box-shadow: unset;
 }
 .rc-slider-handle:hover {
-  border-color: rgba(54, 110, 255, 0.80);
+  border-color: rgba(54, 110, 255, 0.8);
 }
 .rc-slider-handle:active {
-  border-color: #366EFF;
-  box-shadow: 0 0 5px #366EFF;
+  border-color: #366eff;
+  box-shadow: 0 0 5px #366eff;
   cursor: -webkit-grabbing;
   cursor: grabbing;
 }
@@ -97,18 +97,18 @@
   height: 8px;
   vertical-align: middle;
   background-color: #fff;
-  border: 2px solid #366EFF;
+  border: 2px solid #366eff;
   border-radius: 50%;
   cursor: pointer;
 }
 .rc-slider-dot-active {
-  border-color: #366EFF;
+  border-color: #366eff;
 }
 .rc-slider-dot-reverse {
   margin-right: -4px;
 }
 .rc-slider-disabled {
-  background-color: #366EFF;
+  background-color: #366eff;
 }
 .rc-slider-disabled .rc-slider-track {
   background-color: #ccc;

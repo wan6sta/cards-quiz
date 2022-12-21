@@ -54,9 +54,10 @@ export const ForgotPassword: FC = props => {
     resolver: yupResolver(Schema)
   })
 
-  const url = import.meta.env.MODE === 'development'
-          ? 'http://localhost:5174'
-          : 'https://cards-quiz.vercel.app'
+  const url =
+    import.meta.env.MODE === 'development'
+      ? 'http://localhost:5174'
+      : 'https://cards-quiz.vercel.app'
 
   const finalUrl = `${url}/#/set-new-password/$token$`
 

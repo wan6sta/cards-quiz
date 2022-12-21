@@ -19,7 +19,8 @@ export const useQueryParams = ({
   let sortedValue: string | boolean = ''
 
   if (sorting) {
-    sortedValue = sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
+    sortedValue =
+      sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
   }
 
   console.log(sorting)
