@@ -5,8 +5,8 @@ import { Button } from '../../shared/ui/Button/Button'
 import { Span } from '../../shared/ui/Span/Span'
 import { Pagination } from '../../widgets/Pagination/Pagination'
 import { DeboucedTableInput } from '../../widgets/DeboucedTableInput/DeboucedTableInput'
+import { ButtonWrapper } from '../../features/PacksList/ui/AddNewPack/StyledAddNewPack'
 import {
-  ButtonWrapper,
   FilterTextFieldWrapper,
   FilterWrapper,
   InputWrapper,

@@ -18,12 +18,6 @@ export const TitleWrapper = styled.div`
   ${props => props && css``}
 `
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  width: 175px;
-  ${props => props && css``}
-`
-
 export const FilterWrapper = styled.div`
   display: flex;
   align-items: flex-end;
