@@ -34,6 +34,7 @@ import { getPacksSelector } from './selectors/getPacksSelector'
 import { AppFilters } from './models/FiltersModel'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { RemovePack } from './ui/RemovePack/RemovePack'
 
 interface Table extends CardPack {
   actions?: string
@@ -152,7 +153,7 @@ export const PacksList: FC = props => {
                             <StyledIconsWrapper>
                               <LearnIcon />
                               <EditIcon />
-                              <DeleteIcon />
+                              <RemovePack packId={row.original._id} />
                             </StyledIconsWrapper>
                           ) : (
                             <StyledIconsWrapper>
