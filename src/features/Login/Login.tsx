@@ -20,6 +20,7 @@ import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoa
 import 'react-toastify/dist/ReactToastify.css'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
+import {CardsListPage} from "../../pages/CardsListPage/CardsListPage";
 
 export const Schema = yup.object({
   email: yup
@@ -122,6 +123,7 @@ export const Login = () => {
           Sign Up
         </AppLink>
       </BoxCard>
+      <CardsListPage/>
       <ErrorAlert errorMessage={errorHandler} />
     </form>
   )
