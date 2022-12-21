@@ -41,11 +41,11 @@ export const Profile: FC = props => {
   }
 
   const properMeErrorMessage = errorMessageHandler(
-    (deleteMeError as FetchError)?.data?.error
+    (editNameError as FetchError)?.data?.error
   )
 
   const properDeleteErrorMessage = errorMessageHandler(
-    (editNameError as FetchError)?.data?.error
+    (deleteMeError as FetchError)?.data?.error
   )
 
   const isBundleLoading = deleteIsLoading || isEditNameLoading

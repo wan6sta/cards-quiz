@@ -3,7 +3,7 @@ import { ImgWrapper } from '../../shared/ui/ImgWrapper/ImgWrapper'
 import GithubIcon from '../../shared/assets/icons/GithubIcon.png'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import cls from './PageInfo.module.css'
-import { Dropdown } from '../../shared/ui/Dropdown/Dropdown'
+import { Dropdown } from '../Dropdown/Dropdown'
 
 export const ProfileInfo: FC = props => {
   const { userData } = useAppSelector(state => state.auth)

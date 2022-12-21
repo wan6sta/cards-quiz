@@ -14,6 +14,7 @@ import {
   setTotalPacksCount,
   setUserPack
 } from '../slice/packsSlice'
+import {convertData} from "../lib/convertData";
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -35,7 +36,7 @@ export const packsApiSlice = createApi({
       }),
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled
-        dispatch(setUserPack(data.cardPacks))
+        dispatch(setUserPack(convertData(data.cardPacks)))
         dispatch(setTotalPacksCount(data.cardPacksTotalCount))
         dispatch(setCardsMinCount(data.minCardsCount))
         dispatch(setCardsMaxCount(data.maxCardsCount))

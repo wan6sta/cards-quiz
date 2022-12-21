@@ -7,6 +7,7 @@ import {
   useReactTable
 } from '@tanstack/react-table'
 import {
+  StyledHeadTr,
   StyledIconsWrapper,
   StyledPacksList,
   StyledSpan,
@@ -25,11 +26,12 @@ import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIc
 import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../shared/assets/icons/Trash.svg'
 import { CardPack } from './models/packModel'
-import { useGetPacksQuery } from './api/packsApiSlice'
+import { useGetPacksQuery, useLazyGetPacksQuery } from './api/packsApiSlice'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { getPacksSelector } from './selectors/getPacksSelector'
 import { AppFilters } from './models/FiltersModel'
 import { useSearchParams } from 'react-router-dom'
+import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 
 interface Table extends CardPack {
   actions?: string
@@ -59,6 +61,7 @@ export const PacksList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
   const data = useAppSelector(getPacksSelector)
   const userId = useAppSelector(state => state.auth.userData?._id)
+
   const [searchParams, setSearchParams] = useSearchParams()
   const sortedValue =
     sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
@@ -73,7 +76,7 @@ export const PacksList: FC = props => {
     user_id: searchParams.get(AppFilters.filter) === 'my' ? userId : null
   }
 
-  const { refetch, isLoading } = useGetPacksQuery(queryParams)
+  const { refetch, isFetching } = useGetPacksQuery(queryParams)
 
   useEffect(() => {
     refetch()
@@ -97,15 +100,16 @@ export const PacksList: FC = props => {
     getCoreRowModel: getCoreRowModel()
   })
 
-  const loading = isLoading
+  const loading = isFetching
 
   return (
     <>
+      {loading ? <LinearPageLoader /> : null}
       <StyledPacksList>
         <StyledTable>
           <StyledThead>
             {table.getHeaderGroups().map(headerGroup => (
-              <StyledTr key={headerGroup.id}>
+              <StyledHeadTr key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (
                     <StyledTh key={header.id}>
@@ -131,7 +135,7 @@ export const PacksList: FC = props => {
                     </StyledTh>
                   )
                 })}
-              </StyledTr>
+              </StyledHeadTr>
             ))}
           </StyledThead>
 
@@ -142,11 +146,17 @@ export const PacksList: FC = props => {
                   if (cell.column.id === 'actions') {
                     return (
                       <StyledTd key={cell.id}>
-                        <StyledIconsWrapper>
-                          <LearnIcon />
-                          <EditIcon />
-                          <DeleteIcon />
-                        </StyledIconsWrapper>
+                        {row.original.user_id === userId ? (
+                          <StyledIconsWrapper>
+                            <LearnIcon />
+                            <EditIcon />
+                            <DeleteIcon />
+                          </StyledIconsWrapper>
+                        ) : (
+                          <StyledIconsWrapper>
+                            <LearnIcon />
+                          </StyledIconsWrapper>
+                        )}
                       </StyledTd>
                     )
                   }

@@ -12,7 +12,7 @@ export interface CardPack {
   type: string
   rating: number
   created: Date
-  updated: Date
+  updated: string
   more_id: string
   __v: number
 }

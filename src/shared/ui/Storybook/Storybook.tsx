@@ -17,9 +17,9 @@ import Cat from '../../assets/icons/GithubIcon.png'
 import { EditableSpan } from '../../../widgets/EditableSpan/EditableSpan'
 import { LinearPageLoader } from '../LinearPageLoader/LinearPageLoader'
 import { Pagination } from '../../../widgets/Pagination/Pagination'
-import { Dropdown } from '../Dropdown/Dropdown'
-import { DoubleRange } from '../DoubleRange/DoubleRange'
-import { PacksSwitcher } from '../PacksSwitcher/PacksSwitcher'
+import { Dropdown } from '../../../widgets/Dropdown/Dropdown'
+import { DoubleRange } from '../../../widgets/DoubleRange/DoubleRange'
+import { PacksSwitcher } from '../../../widgets/PacksSwitcher/PacksSwitcher'
 
 export const Storybook = () => {
   return (

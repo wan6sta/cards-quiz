@@ -17,8 +17,7 @@ export function PaginatedItems() {
   const initialValue = 0
   const urlParams = useUlrParams()
   const urlPageParams = Number(searchParams.get(AppFilters.page))
-  // const packsCount = useAppSelector(state => state.packs.totalPacksCount || 1)
-  const packsCount = 10000
+  const packsCount = useAppSelector(state => state.packs.totalPacksCount || 1)
 
   useEffect(() => {
     setItemsPerPage(Number(searchParams.get(AppFilters.perPage)) || 10)

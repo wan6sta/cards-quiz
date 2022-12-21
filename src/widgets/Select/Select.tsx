@@ -23,9 +23,7 @@ export const Select = () => {
 
   useEffect(() => {
     if (urlSelectedValue) {
-      const el = cardsCount.find(
-        (el, index, arr) => el.name === urlSelectedValue
-      )
+      const el = cardsCount.find(el => el.name === urlSelectedValue)
       setSelectedPerson(el ? el : cardsCount[0])
     }
   }, [urlSelectedValue])

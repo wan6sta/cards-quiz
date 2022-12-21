@@ -21,7 +21,7 @@ export const StyledThead = styled.thead`
   display: flex;
   align-items: center;
   height: 48px;
-  padding: 16px 36px;
+  padding: 16px 54px 16px 36px;
   background: #efefef;
 `
 
@@ -31,9 +31,10 @@ export const StyledTh = styled.th`
   font-weight: 500;
   font-size: 16px;
   line-height: 17px;
-  width: 180px;
   user-select: none;
   height: 48px;
+  flex-basis: 19%;
+  flex-grow: 1;
 `
 
 export const StyledTitleWrapper = styled.div`
@@ -57,25 +58,27 @@ export const StyledTbody = styled.tbody`
   overflow-y: scroll;
 `
 
+export const StyledHeadTr = styled.tr<StyledTrProps>`
+  display: flex;
+  align-items: center;
+  height: 48px;
+  justify-content: space-around;
+  flex: 1;
+`
+
 export const StyledTr = styled.tr<StyledTrProps>`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex: 1;
   height: 48px;
-
-  ${props =>
-    props.body &&
-    css`
-      padding: 0 36px;
-      border-bottom: 1px solid #d9d9d9;
-      font-size: 16px;
-      height: 48px;
-    `}
+  justify-content: space-around;
+  padding: 0 36px;
+  border-bottom: 1px solid #d9d9d9;
+  font-size: 16px;
 `
 
 export const StyledTd = styled.td`
-  width: 163px;
+  flex-basis: 19%; 
+  flex-grow: 1;
 `
 
 export const StyledTrDownWrapper = styled.span`

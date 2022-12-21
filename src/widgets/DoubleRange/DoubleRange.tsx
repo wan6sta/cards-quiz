@@ -2,12 +2,12 @@ import Range from 'rc-slider'
 import './index.css'
 import { useCallback, useEffect, useState } from 'react'
 import cls from './DoubleRange.module.css'
-import { Span } from '../Span/Span'
+import { Span } from '../../shared/ui/Span/Span'
 import { debounce, identity, isArray, pickBy } from 'lodash-es'
-import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useSearchParams } from 'react-router-dom'
-import { useUlrParams } from '../../../features/PacksList/hooks/useUrlParams'
-import { AppFilters } from '../../../features/PacksList/models/FiltersModel'
+import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
+import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 
 type Value = number | number[]
 export const DoubleRange = () => {
