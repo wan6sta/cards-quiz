@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import {
   createColumnHelper,
   flexRender,
@@ -32,10 +32,9 @@ import {
 } from './api/cardApiSlice'
 import { Card, GetCardsArgs } from './Models/CardsModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
-import { useParams, useSearchParams } from 'react-router-dom'
-import { AppFilters } from '../PacksList/models/FiltersModel'
-import { useUlrParams } from '../PacksList/hooks/useUrlParams'
+import { useParams } from 'react-router-dom'
 import { StarRating } from '../../widgets/StarRating/StarRating'
+import { CardListGrade } from '../../widgets/CardListGrade/CardListGrade'
 
 interface Table extends Card {
   actions?: string
@@ -54,7 +53,13 @@ const columns = [
     header: 'Last Updated'
   }),
   columnHelper.accessor('grade', {
-    header: 'Grade'
+    header: 'Grade',
+    cell: cell => (
+      <CardListGrade
+        packsId={cell.row.original._id}
+        packCreatorId={cell.row.original.user_id}
+      />
+    )
   })
 ]
 
@@ -135,31 +140,6 @@ export const CardsList: FC = props => {
             {table.getRowModel().rows.map(row => (
               <StyledTr body key={row.id}>
                 {row.getVisibleCells().map(cell => {
-                  if (cell.column.id === 'grade') {
-                    return (
-                      <StyledTd key={cell.id}>
-                        {row.original.user_id === userId ? (
-                          <StyledIconsWrapper>
-                            <StarRating />
-                            <EditIcon
-                              onClick={async () =>
-                                await onUpdateCardHandler(row.original._id)
-                              }
-                            />
-                            <DeleteIcon
-                              onClick={async () =>
-                                await onDeleteCardHandler(row.original._id)
-                              }
-                            />
-                          </StyledIconsWrapper>
-                        ) : (
-                          <StyledIconsWrapper>
-                            <StarRating />
-                          </StyledIconsWrapper>
-                        )}
-                      </StyledTd>
-                    )
-                  }
                   return (
                     <StyledTd key={cell.id}>
                       <StyledTextWrapper>
