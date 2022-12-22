@@ -7,10 +7,7 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../../shared/models/ErrorModel'
-import {
-  setCards,
-  setCardsPage
-} from '../slice/cardsSlice'
+import { setCards, setCardsPage } from '../slice/cardsSlice'
 import {
   CardApiPayload,
   CreateCard,
@@ -38,9 +35,11 @@ export const cardApiSlice = createApi({
         })
       }),
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
-        const { data } = await queryFulfilled
-        dispatch(setCards(data.cards))
-        dispatch(setCardsPage(data.page))
+        try {
+          const { data } = await queryFulfilled
+          dispatch(setCards(data.cards))
+          dispatch(setCardsPage(data.page))
+        } catch {}
       },
       providesTags: result => ['Card']
     }),

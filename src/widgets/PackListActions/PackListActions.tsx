@@ -8,12 +8,12 @@ import { RemovePackAction } from '../../features/PacksList/ui/RemovePackAction/R
 import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIcon.svg'
 import { EditActionIcon } from '../../features/PacksList/ui/EditAction/EditActionIcon'
 
-interface PropsType {
+interface Props {
   packCreatorId: string
   packsId: string
 }
 
-export const PackListActions: FC<PropsType> = props => {
+export const PackListActions: FC<Props> = props => {
   const userId = useAppSelector(state => state.auth.userData?._id)
 
   const { packsId, packCreatorId } = props

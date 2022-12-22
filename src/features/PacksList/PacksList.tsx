@@ -37,7 +37,6 @@ import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorM
 import { FetchError } from '../../shared/models/ErrorModel'
 import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
-import {AppPaths} from "../../app/providers/AppRouter/routerConfig";
 
 interface Table extends CardPack {
   actions?: string

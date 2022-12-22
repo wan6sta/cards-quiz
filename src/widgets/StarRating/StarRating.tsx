@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ReactComponent as StarIcon } from '../../shared/assets/icons/Star.svg'
 import { ReactComponent as StarCheckedIcon } from '../../shared/assets/icons/StarChecked.svg'
+import { StyledStarRating } from './StyledStarRating'
 
 export const StarRating = () => {
   const [rating, setRating] = useState(0)
@@ -16,7 +17,15 @@ export const StarRating = () => {
             onMouseEnter={() => setHover(index)}
             onMouseLeave={() => setHover(rating)}
           >
-            {index <= (hover || rating) ? <StarCheckedIcon /> : <StarIcon />}
+            {index <= (hover || rating) ? (
+              <StyledStarRating>
+                <StarCheckedIcon />
+              </StyledStarRating>
+            ) : (
+              <StyledStarRating>
+                <StarIcon />
+              </StyledStarRating>
+            )}
           </span>
         )
       })}

@@ -35,11 +35,13 @@ export const packsApiSlice = createApi({
         )
       }),
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
-        const { data } = await queryFulfilled
-        dispatch(setUserPack(convertData(data.cardPacks)))
-        dispatch(setTotalPacksCount(data.cardPacksTotalCount))
-        dispatch(setCardsMinCount(data.minCardsCount))
-        dispatch(setCardsMaxCount(data.maxCardsCount))
+        try {
+          const { data } = await queryFulfilled
+          dispatch(setUserPack(convertData(data.cardPacks)))
+          dispatch(setTotalPacksCount(data.cardPacksTotalCount))
+          dispatch(setCardsMinCount(data.minCardsCount))
+          dispatch(setCardsMaxCount(data.maxCardsCount))
+        } catch {}
       },
       providesTags: result => ['Cards']
     }),
@@ -53,13 +55,13 @@ export const packsApiSlice = createApi({
     }),
     deleteCardPack: builder.mutation<any, string>({
       query: payload => {
-        return ({
+        return {
           url: `cards/pack`,
           method: 'DELETE',
           params: {
             id: payload
           }
-        })
+        }
       },
       invalidatesTags: ['Cards']
     }),
