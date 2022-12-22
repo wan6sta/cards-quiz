@@ -10,11 +10,7 @@ import {
   StyledErrorTd,
   StyledErrorTr,
   StyledHeadTr,
-  StyledIconPackWrapper,
-  StyledIconsWrapper,
-  StyledIconWrapper,
   StyledPacksList,
-  StyledSkeletonTr,
   StyledSpan,
   StyledTable,
   StyledTbody,
@@ -27,7 +23,6 @@ import {
 } from './StyledPacksList'
 import { ReactComponent as TrDown } from '../../shared/assets/icons/TrDown.svg'
 import { ReactComponent as TrUp } from '../../shared/assets/icons/TrUp.svg'
-import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIcon.svg'
 import { CardPack } from './models/packModel'
 import { useGetPacksQuery } from './api/packsApiSlice'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
@@ -35,40 +30,13 @@ import { getPacksSelector } from './selectors/getPacksSelector'
 import { AppFilters } from './models/FiltersModel'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
-import { EditPack } from './ui/EditPack/EditPack'
-import { RemovePack } from './ui/RemovePack/RemovePack'
 import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
 import { setCardPackId } from '../../pages/CardsListPage/CardsList/cardsSlice'
-import { TableSkeleton } from '../../shared/ui/TableSkeleton/TableSkeleton'
-import { CircleLoader } from 'react-spinners'
-import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
-import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
-import { FetchError } from '../../shared/models/ErrorModel'
-import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
+import { PackListActions } from '../../widgets/PackListActions/PackListActions'
 
 interface Table extends CardPack {
   actions?: string
 }
-
-const columnHelper = createColumnHelper<Table>()
-
-const columns = [
-  columnHelper.accessor('name', {
-    header: 'Name'
-  }),
-  columnHelper.accessor('cardsCount', {
-    header: 'Cards'
-  }),
-  columnHelper.accessor('updated', {
-    header: 'Last Updated'
-  }),
-  columnHelper.accessor('user_name', {
-    header: 'Created by'
-  }),
-  columnHelper.accessor('actions', {
-    header: 'Actions'
-  })
-]
 
 export const PacksList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -96,6 +64,42 @@ export const PacksList: FC = props => {
   useEffect(() => {
     refetch()
   }, [sorting, search])
+  const onLearnButtonClickHandler = (cardPackId: string) => {
+    dispatch(setCardPackId(cardPackId))
+    navigate('/cards-list')
+  }
+  const columnHelper = createColumnHelper<Table>()
+
+  const columns = [
+    columnHelper.accessor('name', {
+      header: 'Name',
+      cell: cell => (
+        <StyledTitleWrapper
+          onClick={() => onLearnButtonClickHandler(cell.row.original._id)}
+        >
+          {cell.getValue()}
+        </StyledTitleWrapper>
+      )
+    }),
+    columnHelper.accessor('cardsCount', {
+      header: 'Cards'
+    }),
+    columnHelper.accessor('updated', {
+      header: 'Last Updated'
+    }),
+    columnHelper.accessor('user_name', {
+      header: 'Created by'
+    }),
+    columnHelper.accessor('actions', {
+      header: 'Actions',
+      cell: cell => (
+        <PackListActions
+          packCreatorId={cell.row.original.user_id}
+          packsId={cell.row.original._id}
+        />
+      )
+    })
+  ]
 
   const table = useReactTable({
     data,
@@ -109,13 +113,7 @@ export const PacksList: FC = props => {
 
   const loading = isFetching
 
-  const onLearnButtonClickHandler = (cardPackId: string) => {
-    dispatch(setCardPackId(cardPackId))
-    navigate('/cards-list')
-  }
-
   const errorHandler = errorMessageHandler((error as FetchError)?.data?.error)
-
   return (
     <>
       {loading ? <LinearPageLoader /> : null}
@@ -166,37 +164,6 @@ export const PacksList: FC = props => {
               table.getRowModel().rows.map(row => (
                 <StyledTr body key={row.id}>
                   {row.getVisibleCells().map(cell => {
-                    if (cell.column.id === 'actions') {
-                      return (
-                        <StyledTd key={cell.id}>
-                          {row.original.user_id === userId ? (
-                            <StyledIconWrapper>
-                              <StyledIconPackWrapper>
-                                <LearnIcon
-                                  onClick={() =>
-                                    onLearnButtonClickHandler(row.original._id)
-                                  }
-                                />
-                              </StyledIconPackWrapper>
-                              <StyledIconPackWrapper>
-                                <EditPack packsId={row.original._id} />
-                              </StyledIconPackWrapper>
-                              <StyledIconPackWrapper>
-                                <RemovePack packId={row.original._id} />
-                              </StyledIconPackWrapper>
-                            </StyledIconWrapper>
-                          ) : (
-                            <StyledIconsWrapper>
-                              <LearnIcon
-                                onClick={() =>
-                                  onLearnButtonClickHandler(row.original._id)
-                                }
-                              />
-                            </StyledIconsWrapper>
-                          )}
-                        </StyledTd>
-                      )
-                    }
                     return (
                       <StyledTd key={cell.id}>
                         <StyledTextWrapper>
