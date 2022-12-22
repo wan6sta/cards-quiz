@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import {useParams, useSearchParams} from 'react-router-dom'
 import {useCallback, useEffect, useState} from 'react'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
@@ -7,10 +7,13 @@ import cls from './Pagination.module.css'
 import { ReactComponent as RightIcon } from '../../shared/assets/icons/RightArrowI.svg'
 import { ReactComponent as LeftIcon } from '../../shared/assets/icons/LeftArrow.svg'
 import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
-import {debounce, identity, pickBy} from "lodash-es";
+import {debounce} from "lodash-es";
+import {getPacksSelector} from "../../features/PacksList/selectors/getTotalPacksCountSelector";
 
 export function PaginatedItems() {
   const [searchParams, setSearchParams] = useSearchParams()
+
+  const { packId } = useParams()
 
   const [itemsPerPage, setItemsPerPage] = useState(
     Number(searchParams.get(AppFilters.perPage)) || 10
@@ -18,7 +21,7 @@ export function PaginatedItems() {
   const initialValue = 0
   const urlParams = useUlrParams()
   const urlPageParams = Number(searchParams.get(AppFilters.page))
-  const packsCount = useAppSelector(state => state.packs.totalPacksCount || 1)
+  const packsCount = useAppSelector(getPacksSelector(packId || '')) || 1
 
   useEffect(() => {
     setItemsPerPage(Number(searchParams.get(AppFilters.perPage)) || 10)

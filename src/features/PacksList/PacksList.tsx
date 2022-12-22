@@ -38,6 +38,7 @@ import { FetchError } from '../../shared/models/ErrorModel'
 import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import {AppPaths} from "../../app/providers/AppRouter/routerConfig";
+import {identity, pickBy} from "lodash-es";
 
 interface Table extends CardPack {
   actions?: string
@@ -72,6 +73,10 @@ export const PacksList: FC = props => {
 
   const onClickNameHandler = (cardPackId: string) => {
     dispatch(setCardPackId(cardPackId))
+    setSearchParams(pickBy({
+      [AppFilters.page]: ''
+    }, identity))
+
     navigate(`/cards-list/${cardPackId}`)
   }
 

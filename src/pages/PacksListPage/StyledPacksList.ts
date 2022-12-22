@@ -5,7 +5,6 @@ export const StyledPacksListPage = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-top: 16px;
   width: 100%;
   ${props => props && css``}
 `
@@ -47,7 +46,6 @@ export const FilterSliderWrapper = styled.div`
 `
 
 export const PaginationWrapper = styled.div`
-  position: absolute;
-  bottom: 72px;
-  left: 0;
+  margin-top: 40px;
+  display: flex;
 `
