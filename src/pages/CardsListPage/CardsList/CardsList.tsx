@@ -25,13 +25,16 @@ import {
   StyledTitleWrapper,
   StyledTr
 } from '../../../features/PacksList/StyledPacksList'
-import { useGetCardQuery } from '../../PacksListPage/PackPage/cardApiSlice'
+import {
+  useDeleteCardMutation,
+  useGetCardQuery
+} from '../../PacksListPage/PackPage/cardApiSlice'
 import { Card, GetCardsArgs } from './Models/CardsModel'
 import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useSearchParams } from 'react-router-dom'
 import { AppFilters } from '../../../features/PacksList/models/FiltersModel'
 import { useUlrParams } from '../../../features/PacksList/hooks/useUrlParams'
-import {BackToLink} from "../../../shared/ui/BackToLink/BackToLink";
+import { BackToLink } from '../../../shared/ui/BackToLink/BackToLink'
 
 interface Table extends Card {
   actions?: string
@@ -58,6 +61,7 @@ export const CardsList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [searchParams, setSearchParams] = useSearchParams()
   const urlParams = useUlrParams()
+  const [deleteCard] = useDeleteCardMutation()
 
   const data = useAppSelector(state => state.cards.cards)
   const cardsPackId = useAppSelector(state => state.cards.cardPackId)
@@ -83,6 +87,10 @@ export const CardsList: FC = props => {
       [AppFilters.cardPack_id]: cardsPackId as string
     })
   }, [])
+
+  const onDeletePackHandler = async (cardId: string) => {
+    deleteCard(cardId)
+  }
   return (
     <>
       <StyledPacksList>
@@ -127,7 +135,11 @@ export const CardsList: FC = props => {
                           <StyledIconsWrapper>
                             ⭐⭐⭐⭐⭐
                             <EditIcon />
-                            <DeleteIcon />
+                            <DeleteIcon
+                              onClick={async () =>
+                                await onDeletePackHandler(row.original._id)
+                              }
+                            />
                           </StyledIconsWrapper>
                         ) : (
                           <StyledIconsWrapper>⭐⭐⭐⭐⭐</StyledIconsWrapper>

@@ -69,6 +69,7 @@ export interface CreateCardResponse {
   token: string
   tokenDeathTime: number
 }
+
 export interface CreateCardPayload {
   card: CreateCard
 }
@@ -82,4 +83,27 @@ interface CreateCard {
   answerImg?: string | number
   questionVideo?: string | number
   answerVideo?: string | number
+}
+
+export interface DeletedCard {
+  _id: string
+  cardsPack_id: string
+  user_id: string
+  answer: string
+  question: string
+  grade: number
+  shots: number
+  comments: string
+  type: string
+  rating: number
+  more_id: string
+  created: Date
+  updated: Date
+  __v: number
+}
+
+export interface DeleteCardResponse {
+  deletedCard: DeletedCard
+  token: string
+  tokenDeathTime: number
 }

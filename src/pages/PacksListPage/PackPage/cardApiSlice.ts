@@ -20,7 +20,7 @@ import {
 } from '../../CardsListPage/CardsList/cardsSlice'
 import {
   CreateCardPayload,
-  CreateCardResponse,
+  CreateCardResponse, DeleteCardResponse,
   GetCardsArgs,
   GetCardsResponse
 } from '../../CardsListPage/CardsList/Models/CardsModel'
@@ -55,10 +55,13 @@ export const cardApiSlice = createApi({
       }),
       invalidatesTags: ['Card']
     }),
-    deleteCard: builder.mutation<any, string>({
+    deleteCard: builder.mutation<DeleteCardResponse, string>({
       query: cardId => ({
-        url: `cards/card/${cardId}`,
-        method: 'DELETE'
+        url: `cards/card/`,
+        method: 'DELETE',
+        params: {
+          id: cardId
+        }
       }),
       invalidatesTags: ['Card']
     }),
@@ -73,4 +76,5 @@ export const cardApiSlice = createApi({
   })
 })
 
-export const { useGetCardQuery, useCreateCardMutation } = cardApiSlice
+export const { useGetCardQuery, useCreateCardMutation, useDeleteCardMutation } =
+  cardApiSlice

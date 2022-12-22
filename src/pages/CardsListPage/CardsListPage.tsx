@@ -20,8 +20,8 @@ import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSe
 import { AddNewCard } from './addNewCardPage/AddNewCard'
 
 export const CardsListPage: FC = props => {
-  const cardsData = useAppSelector(state => state.cards.cards)
-  if (!cardsData.length) return <AddNewCard />
+  /* const cardsData = useAppSelector(state => state.cards.cards)
+  if (!cardsData.length) return <AddNewCard /> */
   return (
     <StyledPacksListPage>
       <BackToLink alignSelf='flex-start' marginBottom='27px'>
