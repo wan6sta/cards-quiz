@@ -14,7 +14,7 @@ export const StyledTable = styled.table`
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
-  box-shadow: 2px 1px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 2px 1px 8px 0 rgba(34, 60, 80, 0.2);
 `
 
 export const StyledThead = styled.thead`
