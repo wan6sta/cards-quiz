@@ -40,7 +40,11 @@ import { getCardUserIdSelector } from './selectors/getCardUserIdSelector'
 import { getCardsSelector } from './selectors/getCardsSelector'
 import { CreateNewCard } from './ui/CreateNewCard/CreateNewCard'
 import { AppFilters } from '../PacksList/models/FiltersModel'
-import {StyledCardSpan, StyledCardTextWrapper, StyledGradeWrapper} from './StyledCardsList'
+import {
+  StyledCardSpan,
+  StyledCardTextWrapper,
+  StyledGradeWrapper
+} from './StyledCardsList'
 
 interface Table extends Card {
   actions?: string
@@ -171,7 +175,7 @@ export const CardsList: FC = props => {
             ) : !data.length ? (
               <StyledErrorTr>
                 {userAuthId === userPackId ? (
-                  <CreateNewCard />
+                  <CreateNewCard text />
                 ) : (
                   <StyledErrorTd>Packs not found</StyledErrorTd>
                 )}

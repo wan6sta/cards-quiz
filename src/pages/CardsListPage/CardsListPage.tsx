@@ -19,9 +19,16 @@ import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSe
 import { getPackName } from '../../features/CardList/selectors/getPackName'
 import { Dropdown } from '../../widgets/Dropdown/Dropdown'
 import { StyledTitleWrapper } from './StyledCardsListPage'
+import { getAuthIdSelector } from '../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
+import { getCardUserIdSelector } from '../../features/CardList/selectors/getCardUserIdSelector'
+import { CreateNewCard } from '../../features/CardList/ui/CreateNewCard/CreateNewCard'
 
 export const CardsListPage: FC = props => {
   const packName = useAppSelector(getPackName)
+  const authId = useAppSelector(getAuthIdSelector)
+  const userPackId = useAppSelector(getCardUserIdSelector)
+
+  const isMyPack = authId === userPackId
 
   return (
     <StyledPacksListPage>
@@ -30,11 +37,11 @@ export const CardsListPage: FC = props => {
       </BackToLink>
       <TitleWrapper>
         <StyledTitleWrapper>
-            <Title>{packName.slice(0, 25)}</Title>
-            <Dropdown />
+          <Title>{packName.slice(0, 25)}</Title>
+          {isMyPack ? <Dropdown /> : null}
         </StyledTitleWrapper>
         <ButtonWrapper>
-          <Button>Learn this pack</Button>
+          {isMyPack ? <CreateNewCard /> : <Button>Learn this pack</Button>}
         </ButtonWrapper>
       </TitleWrapper>
       <FilterWrapper>

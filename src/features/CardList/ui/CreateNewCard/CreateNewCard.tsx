@@ -8,7 +8,11 @@ import {
 import { Span } from '../../../../shared/ui/Span/Span'
 import { useParams } from 'react-router-dom'
 
-export const CreateNewCard: FC = props => {
+interface CreateNewCardProps {
+  text?: boolean
+}
+
+export const CreateNewCard: FC<CreateNewCardProps> = ({ text }) => {
   const [createCard] = useCreateCardMutation()
   const { packId } = useParams()
 
@@ -21,9 +25,11 @@ export const CreateNewCard: FC = props => {
 
   return (
     <StyledCreateNewCardWrapper>
-      <Span light fontSize={'16px'}>
-        This pack is empty. Click add new card to fill this pack
-      </Span>
+      {text ? (
+        <Span light fontSize={'16px'}>
+          This pack is empty. Click add new card to fill this pack
+        </Span>
+      ) : null}
       <StyledCreateNewCard>
         <Button onClick={onAddCardHandler}>Add new Card</Button>
       </StyledCreateNewCard>
