@@ -70,11 +70,11 @@ export interface CreateCardResponse {
   tokenDeathTime: number
 }
 
-export interface CreateCardPayload {
-  card: CreateCard
+export interface CardApiPayload<T> {
+  card: T
 }
 
-interface CreateCard {
+export interface CreateCard {
   cardsPack_id: string
   question?: string
   answer?: string
@@ -106,4 +106,37 @@ export interface DeleteCardResponse {
   deletedCard: DeletedCard
   token: string
   tokenDeathTime: number
+}
+
+export interface UpdatedCard {
+  _id: string
+  cardsPack_id: string
+  user_id: string
+  answer: string
+  question: string
+  grade: number
+  shots: number
+  comments: string
+  type: string
+  rating: number
+  more_id: string
+  created: Date
+  updated: Date
+  __v: number
+  answerImg: string
+  answerVideo: string
+  questionImg: string
+  questionVideo: string
+}
+
+export interface UpdateCardResponse {
+  updatedCard: UpdatedCard
+  token: string
+  tokenDeathTime: number
+}
+
+export interface UpdateCard {
+  _id: string
+  question?: string
+  answer?: string
 }

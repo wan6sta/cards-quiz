@@ -8,21 +8,18 @@ import {
 import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../../shared/models/ErrorModel'
 import {
-  setCardsMaxCount,
-  setCardsMinCount,
-  setTotalPacksCount,
-  setUserPack
-} from '../../../features/PacksList/slice/packsSlice'
-import { convertData } from '../../../features/PacksList/lib/convertData'
-import {
   setCards,
   setCardsPage
 } from '../../CardsListPage/CardsList/cardsSlice'
 import {
-  CreateCardPayload,
-  CreateCardResponse, DeleteCardResponse,
+  CardApiPayload,
+  CreateCard,
+  CreateCardResponse,
+  DeleteCardResponse,
   GetCardsArgs,
-  GetCardsResponse
+  GetCardsResponse,
+  UpdateCard,
+  UpdateCardResponse
 } from '../../CardsListPage/CardsList/Models/CardsModel'
 
 export const cardApiSlice = createApi({
@@ -47,8 +44,11 @@ export const cardApiSlice = createApi({
       },
       providesTags: result => ['Card']
     }),
-    createCard: builder.mutation<CreateCardResponse, CreateCardPayload>({
-      query: (payload: CreateCardPayload) => ({
+    createCard: builder.mutation<
+      CreateCardResponse,
+      CardApiPayload<CreateCard>
+    >({
+      query: payload => ({
         url: 'cards/card',
         method: 'POST',
         body: payload
@@ -65,9 +65,12 @@ export const cardApiSlice = createApi({
       }),
       invalidatesTags: ['Card']
     }),
-    updateCard: builder.mutation<any, any>({
+    updateCard: builder.mutation<
+      UpdateCardResponse,
+      CardApiPayload<UpdateCard>
+    >({
       query: payload => ({
-        url: `cards/card/${payload._id}`,
+        url: `cards/card/`,
         method: 'PUT',
         body: payload
       }),
@@ -76,5 +79,9 @@ export const cardApiSlice = createApi({
   })
 })
 
-export const { useGetCardQuery, useCreateCardMutation, useDeleteCardMutation } =
-  cardApiSlice
+export const {
+  useGetCardQuery,
+  useCreateCardMutation,
+  useUpdateCardMutation,
+  useDeleteCardMutation
+} = cardApiSlice

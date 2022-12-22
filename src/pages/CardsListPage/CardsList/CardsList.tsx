@@ -27,7 +27,8 @@ import {
 } from '../../../features/PacksList/StyledPacksList'
 import {
   useDeleteCardMutation,
-  useGetCardQuery
+  useGetCardQuery,
+  useUpdateCardMutation
 } from '../../PacksListPage/PackPage/cardApiSlice'
 import { Card, GetCardsArgs } from './Models/CardsModel'
 import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
@@ -62,7 +63,7 @@ export const CardsList: FC = props => {
   const [searchParams, setSearchParams] = useSearchParams()
   const urlParams = useUlrParams()
   const [deleteCard] = useDeleteCardMutation()
-
+  const [updateCard] = useUpdateCardMutation()
   const data = useAppSelector(state => state.cards.cards)
   const cardsPackId = useAppSelector(state => state.cards.cardPackId)
   const userId = useAppSelector(state => state.auth.userData?._id)
@@ -88,8 +89,17 @@ export const CardsList: FC = props => {
     })
   }, [])
 
-  const onDeletePackHandler = async (cardId: string) => {
-    deleteCard(cardId)
+  const onDeleteCardHandler = async (cardId: string) => {
+    await deleteCard(cardId)
+  }
+  const onUpdateCardHandler = async (cardId: string) => {
+    const updateCardPayload = {
+      card: {
+        _id: cardId,
+        question: 'How you doing?'
+      }
+    }
+    await updateCard(updateCardPayload)
   }
   return (
     <>
@@ -134,10 +144,14 @@ export const CardsList: FC = props => {
                         {row.original.user_id === userId ? (
                           <StyledIconsWrapper>
                             ⭐⭐⭐⭐⭐
-                            <EditIcon />
+                            <EditIcon
+                              onClick={async () =>
+                                await onUpdateCardHandler(row.original._id)
+                              }
+                            />
                             <DeleteIcon
                               onClick={async () =>
-                                await onDeletePackHandler(row.original._id)
+                                await onDeleteCardHandler(row.original._id)
                               }
                             />
                           </StyledIconsWrapper>
