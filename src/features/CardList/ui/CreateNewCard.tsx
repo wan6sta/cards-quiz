@@ -1,20 +1,20 @@
 import { FC } from 'react'
 import { Button } from '../../../shared/ui/Button/Button'
 import { useCreateCardMutation } from '../api/cardApiSlice'
-import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
 import {
   StyledCreateNewCard,
   StyledCreateNewCardWrapper
 } from './StyledCreateNewCard'
 import { Span } from '../../../shared/ui/Span/Span'
+import { useParams } from 'react-router-dom'
 
 export const CreateNewCard: FC = props => {
   const [createCard] = useCreateCardMutation()
-  const cardPackId = useAppSelector(state => state.cards.cardPackId)
+  const { packId } = useParams()
 
   const onAddCardHandler = async () => {
     const card = {
-      cardsPack_id: cardPackId
+      cardsPack_id: String(packId)
     }
     await createCard({ card })
   }

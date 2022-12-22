@@ -14,7 +14,7 @@ import {
   setTotalPacksCount,
   setUserPack
 } from '../slice/packsSlice'
-import { convertData } from '../lib/convertData'
+import { convertPacksData } from '../lib/convertPacksData'
 import { resetCardState } from '../../CardList/slice/cardsSlice'
 
 export const packsApiSlice = createApi({
@@ -37,7 +37,7 @@ export const packsApiSlice = createApi({
       }),
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled
-        dispatch(setUserPack(convertData(data.cardPacks)))
+        dispatch(setUserPack(convertPacksData<CardPack>(data.cardPacks)))
         dispatch(setTotalPacksCount(data.cardPacksTotalCount))
         dispatch(setCardsMinCount(data.minCardsCount))
         dispatch(setCardsMaxCount(data.maxCardsCount))

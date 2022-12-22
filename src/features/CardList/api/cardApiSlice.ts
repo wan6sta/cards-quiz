@@ -9,6 +9,7 @@ import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../../shared/models/ErrorModel'
 
 import {
+  Card,
   CardApiPayload,
   CreateCard,
   CreateCardResponse,
@@ -25,6 +26,7 @@ import {
   setPackName,
   setPackUserId
 } from '../slice/cardsSlice'
+import { convertPacksData } from '../../PacksList/lib/convertPacksData'
 
 export const cardApiSlice = createApi({
   reducerPath: 'card/api',
@@ -45,7 +47,7 @@ export const cardApiSlice = createApi({
         const { data } = await queryFulfilled
 
         dispatch(setCardsTotalCount(data.cardsTotalCount))
-        dispatch(setCards(data.cards))
+        dispatch(setCards(convertPacksData<Card>(data.cards)))
         dispatch(setCardPackId(String(data.cardPackId)))
         dispatch(setPackName(data.packName))
         dispatch(setPackUserId(data.packUserId))

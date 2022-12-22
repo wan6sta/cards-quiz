@@ -15,11 +15,11 @@ import {
 } from '../PacksListPage/StyledPacksList'
 import { CardsList } from '../../features/CardList/CardsList'
 import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { getPackName } from '../../features/CardList/selectors/getPackName'
 
 export const CardsListPage: FC = props => {
-  // const totalCardsCount = useAppSelector(getTotalPacksCountSelector('card'))
-  // const authId = useAppSelector(getAuthIdSelector)
-  // const userId = useAppSelector(getCardUserIdSelector)
+  const packName = useAppSelector(getPackName)
 
   return (
     <StyledPacksListPage>
@@ -27,7 +27,7 @@ export const CardsListPage: FC = props => {
         Back to Packs List
       </BackToLink>
       <TitleWrapper>
-        <Title>Friends Pack</Title>
+        <Title>{packName}</Title>
         <ButtonWrapper>
           <Button>Learn this pack</Button>
         </ButtonWrapper>

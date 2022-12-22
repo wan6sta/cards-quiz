@@ -14,8 +14,8 @@ export interface Card {
   type?: string
   rating?: number
   more_id?: string
-  created?: Date
-  updated?: Date
+  created?: string
+  updated?: string
   __v?: number
 }
 

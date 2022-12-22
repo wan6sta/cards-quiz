@@ -33,13 +33,14 @@ import {
 } from './api/cardApiSlice'
 import { Card, GetCardsArgs } from './Models/CardsModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
-import { useParams } from 'react-router-dom'
+import {useLocation, useParams, useSearchParams} from 'react-router-dom'
 import { CardListGrade } from '../../widgets/CardListGrade/CardListGrade'
 import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
 import { getAuthIdSelector } from '../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
 import { getCardUserIdSelector } from './selectors/getCardUserIdSelector'
 import { getCardsSelector } from './selectors/getCardsSelector'
 import { CreateNewCard } from './ui/CreateNewCard'
+import {AppFilters} from "../PacksList/models/FiltersModel";
 
 interface Table extends Card {
   actions?: string
@@ -72,20 +73,24 @@ export const CardsList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [deleteCard] = useDeleteCardMutation()
   const [updateCard] = useUpdateCardMutation()
+  const [searchParams, setSearchParams] = useSearchParams()
   const { packId } = useParams()
+  const { search } = useLocation()
   const data = useAppSelector(getCardsSelector)
   const userAuthId = useAppSelector(getAuthIdSelector)
   const userPackId = useAppSelector(getCardUserIdSelector)
 
   const cardsQueryParams: GetCardsArgs = {
-    cardsPack_id: String(packId)
+    cardsPack_id: String(packId),
+    pageCount: Number(searchParams.get(AppFilters.perPage)) || 10,
+    page: Number(searchParams.get(AppFilters.page)) || 1,
   }
 
   const { refetch, isFetching } = useGetCardQuery(cardsQueryParams)
 
   useEffect(() => {
     refetch()
-  }, [])
+  }, [search])
 
   const table = useReactTable({
     data,
