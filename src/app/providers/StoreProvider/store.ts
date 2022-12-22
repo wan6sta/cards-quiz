@@ -8,8 +8,8 @@ import { authSlice } from './authSlice/authSlice'
 import { profileSlice } from '../../../features/Profile/api/profileSlice'
 import { packsApiSlice } from '../../../features/PacksList/api/packsApiSlice'
 import { packsSlice } from '../../../features/PacksList/slice/packsSlice'
-import { cardApiSlice } from '../../../pages/PacksListPage/PackPage/cardApiSlice'
-import { cardsSlice } from '../../../pages/CardsListPage/CardsList/cardsSlice'
+import { cardApiSlice } from '../../../features/CardList/api/cardApiSlice'
+import { cardsSlice } from '../../../features/CardList/slice/cardsSlice'
 
 export const store = configureStore({
   reducer: {

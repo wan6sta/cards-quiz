@@ -10,7 +10,7 @@ import { FetchError } from '../../../shared/models/ErrorModel'
 import {
   setCards,
   setCardsPage
-} from '../../CardsListPage/CardsList/cardsSlice'
+} from '../slice/cardsSlice'
 import {
   CardApiPayload,
   CreateCard,
@@ -20,7 +20,7 @@ import {
   GetCardsResponse,
   UpdateCard,
   UpdateCardResponse
-} from '../../CardsListPage/CardsList/Models/CardsModel'
+} from '../Models/CardsModel'
 
 export const cardApiSlice = createApi({
   reducerPath: 'card/api',

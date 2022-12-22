@@ -2,7 +2,7 @@ import { useDeleteCardPackMutation } from '../../api/packsApiSlice'
 import { LinearPageLoader } from '../../../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { ReactComponent as DeleteIcon } from '../../../../shared/assets/icons/Trash.svg'
 import { FC } from 'react'
-import { useDeleteCardMutation } from '../../../../pages/PacksListPage/PackPage/cardApiSlice'
+import { useDeleteCardMutation } from '../../../CardList/api/cardApiSlice'
 import {ErrorAlert} from "../../../../shared/ui/ErrorAlert/ErrorAlert";
 import {errorMessageHandler} from "../../../../shared/lib/errorMessageHandler/errorMessageHandler";
 import {FetchError} from "../../../../shared/models/ErrorModel";

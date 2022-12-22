@@ -2,7 +2,7 @@ import { useUpdateCardsPackMutation } from '../../api/packsApiSlice'
 import { LinearPageLoader } from '../../../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { ReactComponent as EditIcon } from '../../../../shared/assets/icons/EditIcon.svg'
 import { FC } from 'react'
-import { useUpdateCardMutation } from '../../../../pages/PacksListPage/PackPage/cardApiSlice'
+import { useUpdateCardMutation } from '../../../CardList/api/cardApiSlice'
 import {errorMessageHandler} from "../../../../shared/lib/errorMessageHandler/errorMessageHandler";
 import {FetchError} from "../../../../shared/models/ErrorModel";
 import {ErrorAlert} from "../../../../shared/ui/ErrorAlert/ErrorAlert";

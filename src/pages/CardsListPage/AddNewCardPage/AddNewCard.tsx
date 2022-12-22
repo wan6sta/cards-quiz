@@ -3,7 +3,7 @@ import { Title } from '../../../shared/ui/Title/Title'
 import { BackToLink } from '../../../shared/ui/BackToLink/BackToLink'
 import { Span } from '../../../shared/ui/Span/Span'
 import { Button } from '../../../shared/ui/Button/Button'
-import { useCreateCardMutation } from '../../PacksListPage/PackPage/cardApiSlice'
+import { useCreateCardMutation } from '../../../features/CardList/api/cardApiSlice'
 import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
 
 export const AddNewCard = () => {

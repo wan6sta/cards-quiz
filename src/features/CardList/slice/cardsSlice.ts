@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Card, GetCardsResponse } from './Models/CardsModel'
+import { Card, GetCardsResponse } from '../Models/CardsModel'
 
 const initialState: GetCardsResponse = {
   cards: [],

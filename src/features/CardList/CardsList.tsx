@@ -7,10 +7,10 @@ import {
   useReactTable
 } from '@tanstack/react-table'
 
-import { ReactComponent as TrDown } from '../../../shared/assets/icons/TrDown.svg'
-import { ReactComponent as TrUp } from '../../../shared/assets/icons/TrUp.svg'
-import { ReactComponent as EditIcon } from '../../../shared/assets/icons/EditIcon.svg'
-import { ReactComponent as DeleteIcon } from '../../../shared/assets/icons/Trash.svg'
+import { ReactComponent as TrDown } from '../../shared/assets/icons/TrDown.svg'
+import { ReactComponent as TrUp } from '../../shared/assets/icons/TrUp.svg'
+import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
+import { ReactComponent as DeleteIcon } from '../../shared/assets/icons/Trash.svg'
 import {
   StyledHeadTr,
   StyledIconsWrapper,
@@ -24,19 +24,19 @@ import {
   StyledThead,
   StyledTitleWrapper,
   StyledTr
-} from '../../../features/PacksList/StyledPacksList'
+} from '../PacksList/StyledPacksList'
 import {
   useDeleteCardMutation,
   useGetCardQuery,
   useUpdateCardMutation
-} from '../../PacksListPage/PackPage/cardApiSlice'
+} from './api/cardApiSlice'
 import { Card, GetCardsArgs } from './Models/CardsModel'
-import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useSearchParams } from 'react-router-dom'
-import { AppFilters } from '../../../features/PacksList/models/FiltersModel'
-import { useUlrParams } from '../../../features/PacksList/hooks/useUrlParams'
-import { BackToLink } from '../../../shared/ui/BackToLink/BackToLink'
-import { StarRating } from '../../../widgets/StarRating/StarRating'
+import { AppFilters } from '../PacksList/models/FiltersModel'
+import { useUlrParams } from '../PacksList/hooks/useUrlParams'
+import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
+import { StarRating } from '../../widgets/StarRating/StarRating'
 
 interface Table extends Card {
   actions?: string

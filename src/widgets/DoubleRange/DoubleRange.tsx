@@ -50,7 +50,7 @@ export const DoubleRange = () => {
           )
         )
       }
-    }, 250),
+    }, 350),
     [setSearchParams]
   )
 
