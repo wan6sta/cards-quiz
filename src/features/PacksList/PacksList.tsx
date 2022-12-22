@@ -37,6 +37,9 @@ import { FetchError } from '../../shared/models/ErrorModel'
 import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { setPackUserId } from '../CardList/slice/cardsSlice'
+import { useUlrParams } from './hooks/useUrlParams'
+import { getPacksPageSelector } from './selectors/getPacksPageSelector'
+import { getAuthIdSelector } from '../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
 
 interface Table extends CardPack {
   actions?: string
@@ -46,7 +49,9 @@ export const PacksList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
   const { search } = useLocation()
   const data = useAppSelector(getPacksSelector)
-  const userId = useAppSelector(state => state.auth.userData?._id)
+  const urlParams = useUlrParams()
+  const packPage = useAppSelector(getPacksPageSelector)
+  const userId = useAppSelector(getAuthIdSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -63,11 +68,25 @@ export const PacksList: FC = props => {
     user_id: searchParams.get(AppFilters.filter) === 'my' ? userId : null
   }
 
-  const { refetch, isFetching, error } = useGetPacksQuery(queryParams)
+  const {
+    refetch,
+    isFetching,
+    error,
+    data: packData
+  } = useGetPacksQuery(queryParams)
 
   useEffect(() => {
     refetch()
   }, [sorting, search])
+
+  useEffect(() => {
+    if (packData?.cardPacks.length === 0) {
+      setSearchParams({
+        ...urlParams,
+        [AppFilters.page]: String(packPage - 1)
+      })
+    }
+  }, [packData])
 
   const onClickNameHandler = (cardPackId: string, userCardId: string) => {
     dispatch(setPackUserId(userCardId))
@@ -75,7 +94,6 @@ export const PacksList: FC = props => {
   }
 
   const columnHelper = createColumnHelper<Table>()
-
   const columns = [
     columnHelper.accessor('name', {
       header: 'Name',

@@ -22,6 +22,7 @@ import {
 import {
   setCardPackId,
   setCards,
+  setCardsPage,
   setCardsTotalCount,
   setPackName,
   setPackUserId
@@ -44,13 +45,15 @@ export const cardApiSlice = createApi({
         })
       }),
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
-        const { data } = await queryFulfilled
-
-        dispatch(setCardsTotalCount(data.cardsTotalCount))
-        dispatch(setCards(convertPacksData<Card>(data.cards)))
-        dispatch(setCardPackId(String(data.cardPackId)))
-        dispatch(setPackName(data.packName))
-        dispatch(setPackUserId(data.packUserId))
+        try {
+          const { data } = await queryFulfilled
+          dispatch(setCardsTotalCount(data.cardsTotalCount))
+          dispatch(setCards(convertPacksData<Card>(data.cards)))
+          dispatch(setCardPackId(String(data.cardPackId)))
+          dispatch(setPackName(data.packName))
+          dispatch(setPackUserId(data.packUserId))
+          dispatch(setCardsPage(data.page))
+        } catch {}
       },
       providesTags: result => ['Card']
     }),

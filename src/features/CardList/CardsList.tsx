@@ -35,6 +35,8 @@ import { getCardsSelector } from './selectors/getCardsSelector'
 import { CreateNewCard } from './ui/CreateNewCard/CreateNewCard'
 import { AppFilters } from '../PacksList/models/FiltersModel'
 import { StyledCardSpan, StyledCardTextWrapper } from './StyledCardsList'
+import { useUlrParams } from '../PacksList/hooks/useUrlParams'
+import { getCardsPageSelector } from './selectors/getCardsPageSelector'
 
 interface Table extends Card {
   actions?: string
@@ -82,6 +84,8 @@ const columns = [
 export const CardsList: FC = () => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [searchParams, setSearchParams] = useSearchParams()
+  const urlParams = useUlrParams()
+  const cardsPage = useAppSelector(getCardsPageSelector)
   const { packId } = useParams()
   const { search } = useLocation()
   const data = useAppSelector(getCardsSelector)
@@ -95,11 +99,24 @@ export const CardsList: FC = () => {
     cardAnswer: searchParams.get(AppFilters.search) as string
   }
 
-  const { refetch, isFetching } = useGetCardQuery(cardsQueryParams)
+  const {
+    refetch,
+    isFetching,
+    data: cardsData
+  } = useGetCardQuery(cardsQueryParams)
 
   useEffect(() => {
     refetch()
   }, [search])
+
+  useEffect(() => {
+    if (cardsData?.cards.length === 0) {
+      setSearchParams({
+        ...urlParams,
+        [AppFilters.page]: String(cardsPage - 1)
+      })
+    }
+  }, [cardsData])
 
   const table = useReactTable({
     data,
