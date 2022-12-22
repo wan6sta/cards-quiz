@@ -14,8 +14,14 @@ import {
   setUserPack
 } from '../../../features/PacksList/slice/packsSlice'
 import { convertData } from '../../../features/PacksList/lib/convertData'
-import {setCards, setCardsPage} from "../../CardsListPage/CardsList/cardsSlice";
-import {GetCardsArgs, GetCardsResponse} from "../../CardsListPage/CardsList/Models/CardsModel";
+import {
+  setCards,
+  setCardsPage
+} from '../../CardsListPage/CardsList/cardsSlice'
+import {
+  GetCardsArgs,
+  GetCardsResponse
+} from '../../CardsListPage/CardsList/Models/CardsModel'
 
 export const cardApiSlice = createApi({
   reducerPath: 'card/api',
@@ -65,6 +71,4 @@ export const cardApiSlice = createApi({
   })
 })
 
-export const {
-  useGetCardQuery,
-} = cardApiSlice
+export const { useGetCardQuery, useCreateCardMutation } = cardApiSlice
