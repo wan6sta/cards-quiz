@@ -15,21 +15,15 @@ import {
   StyledErrorTr,
   StyledHeadTr,
   StyledPacksList,
-  StyledSpan,
   StyledTable,
   StyledTbody,
   StyledTd,
-  StyledTextWrapper,
   StyledTh,
   StyledThead,
   StyledTitleWrapper,
   StyledTr
 } from '../PacksList/StyledPacksList'
-import {
-  useDeleteCardMutation,
-  useGetCardQuery,
-  useUpdateCardMutation
-} from './api/cardApiSlice'
+import { useGetCardQuery } from './api/cardApiSlice'
 import { Card, GetCardsArgs } from './Models/CardsModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useLocation, useParams, useSearchParams } from 'react-router-dom'
@@ -40,11 +34,7 @@ import { getCardUserIdSelector } from './selectors/getCardUserIdSelector'
 import { getCardsSelector } from './selectors/getCardsSelector'
 import { CreateNewCard } from './ui/CreateNewCard/CreateNewCard'
 import { AppFilters } from '../PacksList/models/FiltersModel'
-import {
-  StyledCardSpan,
-  StyledCardTextWrapper,
-  StyledGradeWrapper
-} from './StyledCardsList'
+import { StyledCardSpan, StyledCardTextWrapper } from './StyledCardsList'
 
 interface Table extends Card {
   actions?: string
@@ -88,10 +78,8 @@ const columns = [
   })
 ]
 
-export const CardsList: FC = props => {
+export const CardsList: FC = () => {
   const [sorting, setSorting] = useState<SortingState>([])
-  const [deleteCard] = useDeleteCardMutation()
-  const [updateCard] = useUpdateCardMutation()
   const [searchParams, setSearchParams] = useSearchParams()
   const { packId } = useParams()
   const { search } = useLocation()
@@ -122,18 +110,6 @@ export const CardsList: FC = props => {
     getCoreRowModel: getCoreRowModel()
   })
 
-  const onDeleteCardHandler = async (cardId: string) => {
-    await deleteCard(cardId)
-  }
-  const onUpdateCardHandler = async (cardId: string) => {
-    const updateCardPayload = {
-      card: {
-        _id: cardId,
-        question: 'How you doing?'
-      }
-    }
-    await updateCard(updateCardPayload)
-  }
   return (
     <>
       <StyledPacksList>

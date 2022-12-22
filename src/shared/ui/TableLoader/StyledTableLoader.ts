@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const StyledTableLoader = styled.div`
+export const StyledTableLoader = styled.td`
   display: flex;
   align-items: center;
   justify-content: center;
