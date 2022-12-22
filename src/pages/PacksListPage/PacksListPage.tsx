@@ -15,7 +15,7 @@ import { Span } from '../../shared/ui/Span/Span'
 import { PacksSwitcher } from '../../widgets/PacksSwitcher/PacksSwitcher'
 import { DoubleRange } from '../../widgets/DoubleRange/DoubleRange'
 import { Pagination } from '../../widgets/Pagination/Pagination'
-import { DeboucedTableInput } from '../../widgets/DeboucedTableInput/DeboucedTableInput'
+import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/DebouncedTableInput'
 import { RemoveFilterBtn } from '../../widgets/RemoveFilterBtn/RemoveFilterBtn'
 import { AddNewPack } from '../../features/PacksList/ui/AddNewPack/AddNewPack'
 
@@ -30,7 +30,7 @@ export const PacksListPage: FC = props => {
         <FilterTextFieldWrapper>
           <InputWrapper>
             <Span spanTitle>Search</Span>
-            <DeboucedTableInput />
+            <DebouncedTableInput title={'Enter cards pack name'} />
           </InputWrapper>
           <PackSwitcherWrapper>
             <PacksSwitcher />

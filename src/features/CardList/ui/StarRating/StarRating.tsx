@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { ReactComponent as StarIcon } from '../../shared/assets/icons/Star.svg'
-import { ReactComponent as StarCheckedIcon } from '../../shared/assets/icons/StarChecked.svg'
-import { StyledStarRating } from './StyledStarRating'
+import { ReactComponent as StarIcon } from '../../../../shared/assets/icons/Star.svg'
+import { ReactComponent as StarCheckedIcon } from '../../../../shared/assets/icons/StarChecked.svg'
+import {StyledStarRating, StyledStarWrapper} from './StyledStarRating'
 
 export const StarRating = () => {
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
   return (
-    <div>
+    <StyledStarWrapper>
       {[...Array(5)].map((star, index) => {
         index += 1
         return (
@@ -29,6 +29,6 @@ export const StarRating = () => {
           </span>
         )
       })}
-    </div>
+    </StyledStarWrapper>
   )
 }

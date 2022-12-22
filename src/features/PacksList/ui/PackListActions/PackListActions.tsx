@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppSelector } from '../../../../app/providers/StoreProvider/hooks/useAppSelector'
 import {
   StyledIconPackWrapper,
   StyledIconsWrapper
-} from '../../features/PacksList/StyledPacksList'
-import { RemovePackAction } from '../../features/PacksList/ui/RemovePackAction/RemovePackAction'
-import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIcon.svg'
-import { EditActionIcon } from '../../features/PacksList/ui/EditAction/EditActionIcon'
+} from '../../StyledPacksList'
+import { RemovePackAction } from '../RemovePackAction/RemovePackAction'
+import { ReactComponent as LearnIcon } from '../../../../shared/assets/icons/TeacherIcon.svg'
+import { EditActionIcon } from '../EditAction/EditActionIcon'
 
 interface Props {
   packCreatorId: string

@@ -1,11 +1,16 @@
 import { TextField } from '../../shared/ui/TextField/TextField'
 import { useSearchParams } from 'react-router-dom'
-import { ChangeEvent, useCallback, useLayoutEffect, useState } from 'react'
+import { ChangeEvent, FC, useCallback, useLayoutEffect, useState } from 'react'
 import { debounce, identity, pickBy } from 'lodash-es'
 import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 
-export const DeboucedTableInput = () => {
+interface Props {
+  title: string
+}
+
+export const DebouncedTableInput: FC<Props> = props => {
+  const { title } = props
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [inputValue, setInputValue] = useState('')
@@ -56,7 +61,7 @@ export const DeboucedTableInput = () => {
     <TextField
       value={inputValue}
       onChange={handler}
-      title={'Provide your text'}
+      title={title}
       textFieldMode='outlined'
     />
   )

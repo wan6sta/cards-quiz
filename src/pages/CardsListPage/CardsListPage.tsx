@@ -3,7 +3,7 @@ import { Title } from '../../shared/ui/Title/Title'
 import { Button } from '../../shared/ui/Button/Button'
 import { Span } from '../../shared/ui/Span/Span'
 import { Pagination } from '../../widgets/Pagination/Pagination'
-import { DeboucedTableInput } from '../../widgets/DeboucedTableInput/DeboucedTableInput'
+import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/DebouncedTableInput'
 import { ButtonWrapper } from '../../features/PacksList/ui/AddNewPack/StyledAddNewPack'
 import {
   FilterTextFieldWrapper,
@@ -27,7 +27,7 @@ export const CardsListPage: FC = props => {
         Back to Packs List
       </BackToLink>
       <TitleWrapper>
-        <Title>{packName}</Title>
+        <Title>{packName.slice(0, 25)}</Title>
         <ButtonWrapper>
           <Button>Learn this pack</Button>
         </ButtonWrapper>
@@ -36,7 +36,7 @@ export const CardsListPage: FC = props => {
         <FilterTextFieldWrapper>
           <InputWrapper>
             <Span spanTitle>Search</Span>
-            <DeboucedTableInput />
+            <DebouncedTableInput  title={'Enter your question'} />
           </InputWrapper>
         </FilterTextFieldWrapper>
       </FilterWrapper>

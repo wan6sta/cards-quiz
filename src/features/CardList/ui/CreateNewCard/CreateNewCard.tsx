@@ -1,11 +1,11 @@
 import { FC } from 'react'
-import { Button } from '../../../shared/ui/Button/Button'
-import { useCreateCardMutation } from '../api/cardApiSlice'
+import { Button } from '../../../../shared/ui/Button/Button'
+import { useCreateCardMutation } from '../../api/cardApiSlice'
 import {
   StyledCreateNewCard,
   StyledCreateNewCardWrapper
 } from './StyledCreateNewCard'
-import { Span } from '../../../shared/ui/Span/Span'
+import { Span } from '../../../../shared/ui/Span/Span'
 import { useParams } from 'react-router-dom'
 
 export const CreateNewCard: FC = props => {

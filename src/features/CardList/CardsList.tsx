@@ -14,7 +14,6 @@ import {
   StyledErrorTd,
   StyledErrorTr,
   StyledHeadTr,
-  StyledIconsWrapper,
   StyledPacksList,
   StyledSpan,
   StyledTable,
@@ -33,14 +32,15 @@ import {
 } from './api/cardApiSlice'
 import { Card, GetCardsArgs } from './Models/CardsModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
-import {useLocation, useParams, useSearchParams} from 'react-router-dom'
-import { CardListGrade } from '../../widgets/CardListGrade/CardListGrade'
+import { useLocation, useParams, useSearchParams } from 'react-router-dom'
+import { CardListGrade } from './ui/CardListGrade/CardListGrade'
 import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
 import { getAuthIdSelector } from '../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
 import { getCardUserIdSelector } from './selectors/getCardUserIdSelector'
 import { getCardsSelector } from './selectors/getCardsSelector'
-import { CreateNewCard } from './ui/CreateNewCard'
-import {AppFilters} from "../PacksList/models/FiltersModel";
+import { CreateNewCard } from './ui/CreateNewCard/CreateNewCard'
+import { AppFilters } from '../PacksList/models/FiltersModel'
+import {StyledCardSpan, StyledCardTextWrapper, StyledGradeWrapper} from './StyledCardsList'
 
 interface Table extends Card {
   actions?: string
@@ -50,13 +50,28 @@ const columnHelper = createColumnHelper<Table>()
 
 const columns = [
   columnHelper.accessor('question', {
-    header: 'Question'
+    header: 'Question',
+    cell: cell => (
+      <StyledCardTextWrapper>
+        <StyledCardSpan>{cell.getValue()}</StyledCardSpan>
+      </StyledCardTextWrapper>
+    )
   }),
   columnHelper.accessor('answer', {
-    header: 'Answer'
+    header: 'Answer',
+    cell: cell => (
+      <StyledCardTextWrapper>
+        <StyledCardSpan>{cell.getValue()}</StyledCardSpan>
+      </StyledCardTextWrapper>
+    )
   }),
   columnHelper.accessor('updated', {
-    header: 'Last Updated'
+    header: 'Last Updated',
+    cell: cell => (
+      <StyledCardTextWrapper>
+        <StyledCardSpan>{cell.getValue()}</StyledCardSpan>
+      </StyledCardTextWrapper>
+    )
   }),
   columnHelper.accessor('grade', {
     header: 'Grade',
@@ -84,6 +99,7 @@ export const CardsList: FC = props => {
     cardsPack_id: String(packId),
     pageCount: Number(searchParams.get(AppFilters.perPage)) || 10,
     page: Number(searchParams.get(AppFilters.page)) || 1,
+    cardAnswer: searchParams.get(AppFilters.search) as string
   }
 
   const { refetch, isFetching } = useGetCardQuery(cardsQueryParams)
@@ -166,14 +182,10 @@ export const CardsList: FC = props => {
                   {row.getVisibleCells().map(cell => {
                     return (
                       <StyledTd key={cell.id}>
-                        <StyledTextWrapper>
-                          <StyledSpan>
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext()
-                            )}
-                          </StyledSpan>
-                        </StyledTextWrapper>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
                       </StyledTd>
                     )
                   })}
