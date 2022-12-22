@@ -12,19 +12,20 @@ import {
 } from './StyledCardListGrade'
 
 interface Props {
+  grade: number
   packsId: string
   packCreatorId: string
 }
 
 export const CardListGrade: FC<Props> = props => {
-  const { packsId, packCreatorId } = props
+  const { packsId, packCreatorId, grade } = props
   const userId = useAppSelector(getAuthIdSelector)
 
   return (
     <>
       {packCreatorId === userId ? (
         <StyledWrapper>
-          <StarRating />
+          <StarRating grade={grade} />
           <StyledIconsWrapperWrapper>
             <StyledCardIconsWrapper>
               <EditActionIcon cards Id={packsId} />
@@ -36,7 +37,7 @@ export const CardListGrade: FC<Props> = props => {
         </StyledWrapper>
       ) : (
         <StyledWrapper>
-          <StarRating />
+          <StarRating grade={grade} />
         </StyledWrapper>
       )}
     </>

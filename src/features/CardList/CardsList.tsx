@@ -71,6 +71,7 @@ const columns = [
     header: 'Grade',
     cell: cell => (
       <CardListGrade
+        grade={cell.row.original.grade as number}
         packsId={cell.row.original._id}
         packCreatorId={cell.row.original.user_id}
       />

@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { ReactComponent as StarIcon } from '../../../../shared/assets/icons/Star.svg'
 import { ReactComponent as StarCheckedIcon } from '../../../../shared/assets/icons/StarChecked.svg'
-import {StyledStarRating, StyledStarWrapper} from './StyledStarRating'
+import { StyledStarRating, StyledStarWrapper } from './StyledStarRating'
 
-export const StarRating = () => {
-  const [rating, setRating] = useState(0)
+interface Props {
+  grade: number
+}
+
+export const StarRating: FC<Props> = props => {
+  const { grade } = props
+  const [rating, setRating] = useState(grade)
   const [hover, setHover] = useState(0)
+
+  console.log(grade)
   return (
     <StyledStarWrapper>
       {[...Array(5)].map((star, index) => {
