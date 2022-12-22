@@ -36,8 +36,8 @@ import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoa
 import { EditPack } from './ui/EditPack/EditPack'
 import { RemovePack } from './ui/RemovePack/RemovePack'
 import { useUlrParams } from './hooks/useUrlParams'
-import {useAppDispatch} from "../../app/providers/StoreProvider/hooks/useAppDispatch";
-import {setCardPackId} from "../../pages/CardsListPage/CardsList/cardsSlice";
+import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
+import { setCardPackId } from '../../pages/CardsListPage/CardsList/cardsSlice'
 
 interface Table extends CardPack {
   actions?: string
@@ -159,7 +159,11 @@ export const PacksList: FC = props => {
                         <StyledTd key={cell.id}>
                           {row.original.user_id === userId ? (
                             <StyledIconsWrapper>
-                              <LearnIcon />
+                              <LearnIcon
+                                onClick={() =>
+                                  onLearnButtonClickHandler(row.original._id)
+                                }
+                              />
                               <EditPack packsId={row.original._id} />
                               <RemovePack packId={row.original._id} />
                             </StyledIconsWrapper>

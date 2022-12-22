@@ -15,10 +15,16 @@ import {
   TitleWrapper
 } from '../PacksListPage/StyledPacksList'
 import { CardsList } from './CardsList/CardsList'
+import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
 
 export const CardsListPage: FC = props => {
+  /* const cardsData = useAppSelector(state => state.cards.cards)
+      if (!cardsData.length) return <AddNewCard /> */
   return (
     <StyledPacksListPage>
+      <BackToLink alignSelf='flex-start' marginBottom='27px'>
+        Back to Packs List
+      </BackToLink>
       <TitleWrapper>
         <Title>Friends Pack</Title>
         <ButtonWrapper>

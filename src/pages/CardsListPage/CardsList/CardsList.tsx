@@ -12,8 +12,6 @@ import { ReactComponent as TrUp } from '../../../shared/assets/icons/TrUp.svg'
 import { ReactComponent as EditIcon } from '../../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../../shared/assets/icons/Trash.svg'
 import {
-  StyledErrorTd,
-  StyledErrorTr,
   StyledHeadTr,
   StyledIconsWrapper,
   StyledPacksList,
@@ -33,6 +31,7 @@ import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAp
 import { useSearchParams } from 'react-router-dom'
 import { AppFilters } from '../../../features/PacksList/models/FiltersModel'
 import { useUlrParams } from '../../../features/PacksList/hooks/useUrlParams'
+import {BackToLink} from "../../../shared/ui/BackToLink/BackToLink";
 
 interface Table extends Card {
   actions?: string
@@ -118,45 +117,39 @@ export const CardsList: FC = props => {
           </StyledThead>
 
           <StyledTbody>
-            {!data.length ? (
-              <StyledErrorTr>
-                <StyledErrorTd>Cards not found</StyledErrorTd>
-              </StyledErrorTr>
-            ) : (
-              table.getRowModel().rows.map(row => (
-                <StyledTr body key={row.id}>
-                  {row.getVisibleCells().map(cell => {
-                    if (cell.column.id === 'grade') {
-                      return (
-                        <StyledTd key={cell.id}>
-                          {row.original.user_id === userId ? (
-                            <StyledIconsWrapper>
-                              ⭐⭐⭐⭐⭐
-                              <EditIcon />
-                              <DeleteIcon />
-                            </StyledIconsWrapper>
-                          ) : (
-                            <StyledIconsWrapper>⭐⭐⭐⭐⭐</StyledIconsWrapper>
-                          )}
-                        </StyledTd>
-                      )
-                    }
+            {table.getRowModel().rows.map(row => (
+              <StyledTr body key={row.id}>
+                {row.getVisibleCells().map(cell => {
+                  if (cell.column.id === 'grade') {
                     return (
                       <StyledTd key={cell.id}>
-                        <StyledTextWrapper>
-                          <StyledSpan>
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext()
-                            )}
-                          </StyledSpan>
-                        </StyledTextWrapper>
+                        {row.original.user_id === userId ? (
+                          <StyledIconsWrapper>
+                            ⭐⭐⭐⭐⭐
+                            <EditIcon />
+                            <DeleteIcon />
+                          </StyledIconsWrapper>
+                        ) : (
+                          <StyledIconsWrapper>⭐⭐⭐⭐⭐</StyledIconsWrapper>
+                        )}
                       </StyledTd>
                     )
-                  })}
-                </StyledTr>
-              ))
-            )}
+                  }
+                  return (
+                    <StyledTd key={cell.id}>
+                      <StyledTextWrapper>
+                        <StyledSpan>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </StyledSpan>
+                      </StyledTextWrapper>
+                    </StyledTd>
+                  )
+                })}
+              </StyledTr>
+            ))}
           </StyledTbody>
         </StyledTable>
       </StyledPacksList>
