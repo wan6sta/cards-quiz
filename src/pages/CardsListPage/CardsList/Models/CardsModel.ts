@@ -46,3 +46,40 @@ export interface GetCardsArgs {
   cardQuestion?: string
   cardAnswer?: string
 }
+
+export interface NewCard {
+  _id: string
+  cardsPack_id: string
+  user_id: string
+  answer: string
+  question: string
+  grade: number
+  shots: number
+  comments: string
+  type: string
+  rating: number
+  more_id: string
+  created: Date
+  updated: Date
+  __v: number
+}
+
+export interface CreateCardResponse {
+  newCard: NewCard
+  token: string
+  tokenDeathTime: number
+}
+export interface CreateCardPayload {
+  card: CreateCard
+}
+
+interface CreateCard {
+  cardsPack_id: string
+  question?: string
+  answer?: string
+  grade?: number
+  shots?: number
+  answerImg?: string | number
+  questionVideo?: string | number
+  answerVideo?: string | number
+}

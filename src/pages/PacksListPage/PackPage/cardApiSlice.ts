@@ -19,6 +19,8 @@ import {
   setCardsPage
 } from '../../CardsListPage/CardsList/cardsSlice'
 import {
+  CreateCardPayload,
+  CreateCardResponse,
   GetCardsArgs,
   GetCardsResponse
 } from '../../CardsListPage/CardsList/Models/CardsModel'
@@ -45,8 +47,8 @@ export const cardApiSlice = createApi({
       },
       providesTags: result => ['Card']
     }),
-    createCard: builder.mutation<any, any>({
-      query: (payload: any) => ({
+    createCard: builder.mutation<CreateCardResponse, CreateCardPayload>({
+      query: (payload: CreateCardPayload) => ({
         url: 'cards/card',
         method: 'POST',
         body: payload
