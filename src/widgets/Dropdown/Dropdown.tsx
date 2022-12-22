@@ -15,7 +15,6 @@ import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../shared/models/ErrorModel'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
-import { Portal } from '../../shared/ui/Portal/Portal'
 import {
   useDeleteCardPackMutation,
   useUpdateCardsPackMutation
@@ -63,9 +62,8 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
   }, [isDeleteSuccess])
 
   useEffect(() => {
-    if (isUpdateSuccess) {
-      // @ts-expect-error
-      dispatch(setPackName(updatedPackData?.updatedCardsPack?.name))
+    if (updatedPackData) {
+      dispatch(setPackName(updatedPackData.name))
     }
   }, [isUpdateSuccess])
 
@@ -85,7 +83,8 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
 
   const editPackHandler = async () => {
     if (isUpdatePackLoading) return
-    await updatePack({ cardsPack: { name: 'edit packName', _id: packId } })
+    if (packId)
+      await updatePack({ cardsPack: { name: 'edit packName', _id: packId } })
   }
 
   const isBundleLoading = deleteIsLoading

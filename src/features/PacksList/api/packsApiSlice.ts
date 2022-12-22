@@ -6,7 +6,17 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../../shared/models/ErrorModel'
-import { ArgsForGetCards, CardPack, PacksResponse } from '../models/packModel'
+import {
+  ArgsForGetCards,
+  ArgsForPackBodyRequest,
+  CardPack,
+  CreatePack,
+  CreatePackResponse,
+  DeletePackResponse,
+  PacksResponse,
+  UpdatePack,
+  UpdatePackResponse
+} from '../models/packModel'
 import { identity, pickBy } from 'lodash-es'
 import {
   setCardsMaxCount,
@@ -15,7 +25,6 @@ import {
   setUserPack
 } from '../slice/packsSlice'
 import { convertPacksData } from '../lib/convertPacksData'
-import { resetCardState } from '../../CardList/slice/cardsSlice'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -36,24 +45,29 @@ export const packsApiSlice = createApi({
         )
       }),
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
-        const { data } = await queryFulfilled
-        dispatch(setUserPack(convertPacksData<CardPack>(data.cardPacks)))
-        dispatch(setTotalPacksCount(data.cardPacksTotalCount))
-        dispatch(setCardsMinCount(data.minCardsCount))
-        dispatch(setCardsMaxCount(data.maxCardsCount))
-        // dispatch(resetCardState())
+        try {
+          const { data } = await queryFulfilled
+          dispatch(setUserPack(convertPacksData<CardPack>(data.cardPacks)))
+          dispatch(setTotalPacksCount(data.cardPacksTotalCount))
+          dispatch(setCardsMinCount(data.minCardsCount))
+          dispatch(setCardsMaxCount(data.maxCardsCount))
+          // dispatch(resetCardState())
+        } catch {}
       },
       providesTags: result => ['Cards']
     }),
-    createCardPack: builder.mutation<any, any>({
-      query: (payload: any) => ({
+    createCardPack: builder.mutation<
+      CreatePackResponse,
+      ArgsForPackBodyRequest<CreatePack>
+    >({
+      query: payload => ({
         url: 'cards/pack',
         method: 'POST',
         body: payload
       }),
       invalidatesTags: ['Cards']
     }),
-    deleteCardPack: builder.mutation<any, string>({
+    deleteCardPack: builder.mutation<DeletePackResponse, string>({
       query: payload => {
         return {
           url: `cards/pack`,
@@ -65,7 +79,10 @@ export const packsApiSlice = createApi({
       },
       invalidatesTags: ['Cards']
     }),
-    updateCardsPack: builder.mutation<CardPack, any>({
+    updateCardsPack: builder.mutation<
+      CardPack,
+      ArgsForPackBodyRequest<UpdatePack>
+    >({
       query: payload => {
         return {
           url: `cards/pack`,
@@ -73,6 +90,8 @@ export const packsApiSlice = createApi({
           body: payload
         }
       },
+      transformResponse: (response: UpdatePackResponse) =>
+        response.updatedCardsPack,
       invalidatesTags: ['Cards']
     })
   })

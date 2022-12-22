@@ -17,6 +17,24 @@ export interface CardPack {
   __v: number
 }
 
+export interface UpdatePackResponse {
+  updatedCardsPack: CardPack
+  token: string
+  tokenDeathTime: number
+}
+
+export interface DeletePackResponse {
+  deletedCardsPack: CardPack
+  token: string
+  tokenDeathTime: number
+}
+
+export interface CreatePackResponse {
+  newCardsPack: CardPack
+  token: string
+  tokenDeathTime: number
+}
+
 export interface PacksResponse {
   cardPacks: CardPack[]
   page: number
@@ -26,6 +44,10 @@ export interface PacksResponse {
   maxCardsCount: number
   token: string
   tokenDeathTime: number
+}
+
+export interface ArgsForPackBodyRequest<T = {}> {
+  cardsPack: T
 }
 
 export interface ArgsForGetCards {
@@ -43,4 +65,9 @@ export interface CreatePack {
   name: string
   deckCover?: string
   private?: boolean
+}
+
+export interface UpdatePack {
+  name: string
+  _id: string
 }
