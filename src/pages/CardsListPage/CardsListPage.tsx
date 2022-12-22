@@ -16,10 +16,12 @@ import {
 } from '../PacksListPage/StyledPacksList'
 import { CardsList } from './CardsList/CardsList'
 import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
+import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { AddNewCard } from './addNewCardPage/AddNewCard'
 
 export const CardsListPage: FC = props => {
-  /* const cardsData = useAppSelector(state => state.cards.cards)
-      if (!cardsData.length) return <AddNewCard /> */
+  const cardsData = useAppSelector(state => state.cards.cards)
+  if (!cardsData.length) return <AddNewCard />
   return (
     <StyledPacksListPage>
       <BackToLink alignSelf='flex-start' marginBottom='27px'>

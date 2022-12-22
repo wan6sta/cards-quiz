@@ -11,14 +11,17 @@ interface StyledSpanProps {
   textCenter?: boolean
   hover?: boolean
   spanTitle?: boolean
+  alignSelf?: string
+  fontSize?: string
 }
 
 export const StyledSpan = styled.span<StyledSpanProps>`
-  font-size: 14px;
   line-height: 24px;
   opacity: 0.6;
   color: #000;
   margin-bottom: ${props => (props.marginBottom ? props.marginBottom : '0px')};
+  font-size: ${props => (props.fontSize ? props.fontSize : '14px')};
+  align-self: ${props => (props.alignSelf ? props.alignSelf : 'flex-start')};
   user-select: ${props => (props.nonSelect ? 'none' : 'text')};
   text-align: ${props => (props.textCenter ? 'center' : 'inherit')};
 

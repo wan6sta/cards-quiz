@@ -12,6 +12,8 @@ interface SpanProps {
   textCenter?: boolean
   hover?: boolean
   spanTitle?: boolean
+  alignSelf?: string
+  fontSize?: string
 }
 
 export const Span: FC<PropsWithChildren<SpanProps>> = memo(props => {
