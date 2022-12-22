@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import {
   createColumnHelper,
   flexRender,
@@ -9,9 +9,10 @@ import {
 
 import { ReactComponent as TrDown } from '../../shared/assets/icons/TrDown.svg'
 import { ReactComponent as TrUp } from '../../shared/assets/icons/TrUp.svg'
-import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
-import { ReactComponent as DeleteIcon } from '../../shared/assets/icons/Trash.svg'
+
 import {
+  StyledErrorTd,
+  StyledErrorTr,
   StyledHeadTr,
   StyledIconsWrapper,
   StyledPacksList,
@@ -33,8 +34,12 @@ import {
 import { Card, GetCardsArgs } from './Models/CardsModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useParams } from 'react-router-dom'
-import { StarRating } from '../../widgets/StarRating/StarRating'
 import { CardListGrade } from '../../widgets/CardListGrade/CardListGrade'
+import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
+import { getAuthIdSelector } from '../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
+import { getCardUserIdSelector } from './selectors/getCardUserIdSelector'
+import { getCardsSelector } from './selectors/getCardsSelector'
+import { CreateNewCard } from './ui/CreateNewCard'
 
 interface Table extends Card {
   actions?: string
@@ -67,9 +72,10 @@ export const CardsList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [deleteCard] = useDeleteCardMutation()
   const [updateCard] = useUpdateCardMutation()
-  const data = useAppSelector(state => state.cards.cards)
   const { packId } = useParams()
-  const userId = useAppSelector(state => state.auth.userData?._id)
+  const data = useAppSelector(getCardsSelector)
+  const userAuthId = useAppSelector(getAuthIdSelector)
+  const userPackId = useAppSelector(getCardUserIdSelector)
 
   const cardsQueryParams: GetCardsArgs = {
     cardsPack_id: String(packId)
@@ -137,24 +143,38 @@ export const CardsList: FC = props => {
           </StyledThead>
 
           <StyledTbody>
-            {table.getRowModel().rows.map(row => (
-              <StyledTr body key={row.id}>
-                {row.getVisibleCells().map(cell => {
-                  return (
-                    <StyledTd key={cell.id}>
-                      <StyledTextWrapper>
-                        <StyledSpan>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </StyledSpan>
-                      </StyledTextWrapper>
-                    </StyledTd>
-                  )
-                })}
-              </StyledTr>
-            ))}
+            {isFetching ? (
+              <StyledErrorTr>
+                <TableLoader />
+              </StyledErrorTr>
+            ) : !data.length ? (
+              <StyledErrorTr>
+                {userAuthId === userPackId ? (
+                  <CreateNewCard />
+                ) : (
+                  <StyledErrorTd>Packs not found</StyledErrorTd>
+                )}
+              </StyledErrorTr>
+            ) : (
+              table.getRowModel().rows.map(row => (
+                <StyledTr body key={row.id}>
+                  {row.getVisibleCells().map(cell => {
+                    return (
+                      <StyledTd key={cell.id}>
+                        <StyledTextWrapper>
+                          <StyledSpan>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </StyledSpan>
+                        </StyledTextWrapper>
+                      </StyledTd>
+                    )
+                  })}
+                </StyledTr>
+              ))
+            )}
           </StyledTbody>
         </StyledTable>
       </StyledPacksList>

@@ -6,13 +6,15 @@ interface Initial {
   packUserId: string
   packName: string
   cardsTotalCount: number
+  cardPackId: string
 }
 
 const initialState: Initial = {
   cards: [],
   packUserId: '',
   packName: '',
-  cardsTotalCount: 0
+  cardsTotalCount: 0,
+  cardPackId: ''
 }
 
 export const cardsSlice = createSlice({
@@ -31,6 +33,9 @@ export const cardsSlice = createSlice({
     setCardsTotalCount: (state, action: PayloadAction<number>) => {
       state.cardsTotalCount = action.payload
     },
+    setCardPackId: (state, action: PayloadAction<string>) => {
+      state.cardPackId = action.payload
+    },
     resetCardState: (state) => {
       state.cards = []
       state.packName = ''
@@ -39,5 +44,5 @@ export const cardsSlice = createSlice({
     },
   }
 })
-export const { setCardsTotalCount, setPackName, setPackUserId, setCards, resetCardState } =
+export const { setCardsTotalCount, setPackName, setPackUserId, setCards, resetCardState, setCardPackId } =
   cardsSlice.actions

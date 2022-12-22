@@ -19,6 +19,7 @@ import {
   UpdateCardResponse
 } from '../Models/CardsModel'
 import {
+  setCardPackId,
   setCards,
   setCardsTotalCount,
   setPackName,
@@ -45,6 +46,7 @@ export const cardApiSlice = createApi({
 
         dispatch(setCardsTotalCount(data.cardsTotalCount))
         dispatch(setCards(data.cards))
+        dispatch(setCardPackId(String(data.cardPackId)))
         dispatch(setPackName(data.packName))
         dispatch(setPackUserId(data.packUserId))
       },
