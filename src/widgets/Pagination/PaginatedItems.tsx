@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import ReactPaginate from 'react-paginate'
@@ -7,6 +7,7 @@ import cls from './Pagination.module.css'
 import { ReactComponent as RightIcon } from '../../shared/assets/icons/RightArrowI.svg'
 import { ReactComponent as LeftIcon } from '../../shared/assets/icons/LeftArrow.svg'
 import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
+import {debounce, identity, pickBy} from "lodash-es";
 
 export function PaginatedItems() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -19,20 +20,17 @@ export function PaginatedItems() {
   const urlPageParams = Number(searchParams.get(AppFilters.page))
   const packsCount = useAppSelector(state => state.packs.totalPacksCount || 1)
 
-  // const packsOnPage = useAppSelector(state => state.packs.userPack)
-
   useEffect(() => {
     setItemsPerPage(Number(searchParams.get(AppFilters.perPage)) || 10)
   }, [searchParams.get(AppFilters.perPage)])
   const pageCount = Math.ceil(packsCount / itemsPerPage)
 
-  const handlePageClick = (event: any) => {
-    setSearchParams({ ...urlParams, [AppFilters.page]: event.selected + 1 })
-  }
-
- // useEffect(() => {
- //   console.log('нет карточек!')
- // }, [packsOnPage.length])
+  const handlePageClick = useCallback(
+      debounce((event: any) => {
+        setSearchParams({ ...urlParams, [AppFilters.page]: event.selected + 1 })
+      }, 400),
+      [setSearchParams]
+  )
 
   return (
     <>
