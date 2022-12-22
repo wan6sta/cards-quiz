@@ -51,11 +51,14 @@ export const packsApiSlice = createApi({
       }),
       invalidatesTags: ['Cards']
     }),
-    deleteCardPack: builder.mutation<any, any>({
+    deleteCardPack: builder.mutation<any, string>({
       query: payload => {
         return ({
-          url: `cards/pack/?id=${payload}`,
-          method: 'DELETE'
+          url: `cards/pack`,
+          method: 'DELETE',
+          params: {
+            id: payload
+          }
         })
       },
       invalidatesTags: ['Cards']

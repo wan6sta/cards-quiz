@@ -97,7 +97,7 @@ export const PacksList: FC = props => {
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel()
   })
-  console.log(table.getRowModel().rows)
+
   const loading = isFetching
 
   const onLearnButtonClickHandler = (cardPackId: string) => {

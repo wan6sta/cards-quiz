@@ -25,8 +25,8 @@ export interface GetCardsResponse {
   packUserId: string
   packName: string
   packPrivate: boolean
-  packCreated: Date
-  packUpdated: Date
+  packCreated: ''
+  packUpdated: ''
   page: number
   pageCount: number
   cardsTotalCount: number

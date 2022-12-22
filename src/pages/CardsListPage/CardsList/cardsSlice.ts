@@ -9,10 +9,10 @@ const initialState: GetCardsResponse = {
   packUserId: '',
   page: 1,
   pageCount: 4,
-  packCreated: new Date(''),
+  packCreated: '',
   packName: '',
   packPrivate: false,
-  packUpdated: new Date(''),
+  packUpdated: '',
   token: '',
   tokenDeathTime: 0,
   cardPackId: ''
