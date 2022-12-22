@@ -17,9 +17,7 @@ import { CardsList } from '../../features/CardList/CardsList'
 import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { getPackName } from '../../features/CardList/selectors/getPackName'
-import { Flex } from '../../shared/ui/Flex/Flex'
 import { Dropdown } from '../../widgets/Dropdown/Dropdown'
-import { Portal } from '../../shared/ui/Portal/Portal'
 import { StyledTitleWrapper } from './StyledCardsListPage'
 
 export const CardsListPage: FC = props => {

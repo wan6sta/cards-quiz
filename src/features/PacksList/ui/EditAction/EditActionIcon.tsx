@@ -6,15 +6,17 @@ import { useUpdateCardMutation } from '../../../CardList/api/cardApiSlice'
 import {errorMessageHandler} from "../../../../shared/lib/errorMessageHandler/errorMessageHandler";
 import {FetchError} from "../../../../shared/models/ErrorModel";
 import {ErrorAlert} from "../../../../shared/ui/ErrorAlert/ErrorAlert";
+import {useAppDispatch} from "../../../../app/providers/StoreProvider/hooks/useAppDispatch";
 
 interface EditPackProps {
   Id: string
   cards?: boolean
+  dropdown?: boolean
 }
 
 // Add error
 export const EditActionIcon: FC<EditPackProps> = props => {
-  const { Id, cards } = props
+  const { Id, cards, dropdown } = props
   const [updatePack, { isLoading, error: updatePackError }] = useUpdateCardsPackMutation()
   const [updateCard, { isLoading: isCardsLoading, error: updateCardError }] = useUpdateCardMutation()
 
@@ -22,6 +24,7 @@ export const EditActionIcon: FC<EditPackProps> = props => {
     if (isLoading) return
     await updatePack({ cardsPack: { name: 'edit packName', _id: Id } })
   }
+
   const onUpdateCardHandler = async () => {
     if (isCardsLoading) return
     await updateCard({

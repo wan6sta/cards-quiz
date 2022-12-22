@@ -1,7 +1,7 @@
 import { Menu } from '@headlessui/react'
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren, useEffect } from 'react'
 import cls from './Dropdown.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { ReactComponent as UserIcon } from '../../shared/assets/icons/MiniUser.svg'
 import { ReactComponent as LogoutIcon } from '../../shared/assets/icons/Logout.svg'
@@ -16,6 +16,12 @@ import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorM
 import { FetchError } from '../../shared/models/ErrorModel'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { Portal } from '../../shared/ui/Portal/Portal'
+import {
+  useDeleteCardPackMutation,
+  useUpdateCardsPackMutation
+} from '../../features/PacksList/api/packsApiSlice'
+import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
+import { setPackName } from '../../features/CardList/slice/cardsSlice'
 
 interface Props {
   nav?: boolean
@@ -25,17 +31,62 @@ interface Props {
 
 export const Dropdown: FC<PropsWithChildren<Props>> = props => {
   const { children, nav } = props
-
+  const { packId } = useParams()
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const [deleteAcc, { isLoading: deleteIsLoading, error: deleteMeError }] =
     useDeleteMeMutation()
 
+  const [
+    removePack,
+    {
+      isLoading: isDeletePackLoading,
+      error: removePackError,
+      isSuccess: isDeleteSuccess
+    }
+  ] = useDeleteCardPackMutation()
+
+  const [
+    updatePack,
+    {
+      isLoading: isUpdatePackLoading,
+      error: updatePackError,
+      isSuccess: isUpdateSuccess,
+      data: updatedPackData
+    }
+  ] = useUpdateCardsPackMutation()
+
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      navigate(AppPaths.packsListPage)
+    }
+  }, [isDeleteSuccess])
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      // @ts-expect-error
+      dispatch(setPackName(updatedPackData?.updatedCardsPack?.name))
+    }
+  }, [isUpdateSuccess])
+
   const logOutHandler = async () => {
+    if (deleteIsLoading) return
     await deleteAcc({})
   }
 
   const properDeleteErrorMessage = errorMessageHandler(
     (deleteMeError as FetchError)?.data?.error
   )
+
+  const deletePackHandler = async () => {
+    if (isDeletePackLoading) return
+    await removePack(String(packId))
+  }
+
+  const editPackHandler = async () => {
+    if (isUpdatePackLoading) return
+    await updatePack({ cardsPack: { name: 'edit packName', _id: packId } })
+  }
 
   const isBundleLoading = deleteIsLoading
 
@@ -75,6 +126,9 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
       )}
       {!nav && (
         <>
+          {isDeletePackLoading || isUpdatePackLoading ? (
+            <LinearPageLoader />
+          ) : null}
           <Menu.Button
             className={cn(cls.dropdownBtn, { [cls.dropdownCardBtn]: !nav })}
           >
@@ -86,7 +140,10 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
             <div className={cls.tr}></div>
             <Menu.Item>
               {({ active }) => (
-                <li className={cn(cls.li, { [cls.active]: active })}>
+                <li
+                  onClick={editPackHandler}
+                  className={cn(cls.li, { [cls.active]: active })}
+                >
                   <EditIcon className={cls.icon} />
                   Edit
                 </li>
@@ -94,7 +151,10 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <li className={cn(cls.li, { [cls.active]: active })}>
+                <li
+                  onClick={deletePackHandler}
+                  className={cn(cls.li, { [cls.active]: active })}
+                >
                   <TrashIcon className={cls.icon} /> Delete
                 </li>
               )}
