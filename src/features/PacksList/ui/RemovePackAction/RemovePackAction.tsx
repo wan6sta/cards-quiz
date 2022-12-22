@@ -3,6 +3,9 @@ import { LinearPageLoader } from '../../../../shared/ui/LinearPageLoader/LinearP
 import { ReactComponent as DeleteIcon } from '../../../../shared/assets/icons/Trash.svg'
 import { FC } from 'react'
 import { useDeleteCardMutation } from '../../../../pages/PacksListPage/PackPage/cardApiSlice'
+import {ErrorAlert} from "../../../../shared/ui/ErrorAlert/ErrorAlert";
+import {errorMessageHandler} from "../../../../shared/lib/errorMessageHandler/errorMessageHandler";
+import {FetchError} from "../../../../shared/models/ErrorModel";
 
 interface RemovePackProps {
   id: string
@@ -12,8 +15,8 @@ interface RemovePackProps {
 // Add error
 export const RemovePackAction: FC<RemovePackProps> = props => {
   const { id, cards } = props
-  const [removePack, { isLoading }] = useDeleteCardPackMutation()
-  const [deleteCard, { isLoading: isCardsLoading }] = useDeleteCardMutation()
+  const [removePack, { isLoading, error: removePackError }] = useDeleteCardPackMutation()
+  const [deleteCard, { isLoading: isCardsLoading, error: removeCardError }] = useDeleteCardMutation()
   const deletePackHandler = async () => {
     if (isLoading) return
     await removePack(id)
@@ -22,6 +25,14 @@ export const RemovePackAction: FC<RemovePackProps> = props => {
     if (isCardsLoading) return
     await deleteCard(id)
   }
+
+  const errorPackHandler = errorMessageHandler(
+      (removePackError as FetchError)?.data?.error
+  )
+
+  const errorCardHandler = errorMessageHandler(
+      (removeCardError as FetchError)?.data?.error
+  )
 
   return (
     <>
@@ -37,6 +48,8 @@ export const RemovePackAction: FC<RemovePackProps> = props => {
           <DeleteIcon onClick={onDeleteCardHandler} />
         </>
       )}
+      <ErrorAlert errorMessage={errorPackHandler} />
+      <ErrorAlert errorMessage={errorCardHandler} />
     </>
   )
 }

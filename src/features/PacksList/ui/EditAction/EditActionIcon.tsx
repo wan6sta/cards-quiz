@@ -3,6 +3,9 @@ import { LinearPageLoader } from '../../../../shared/ui/LinearPageLoader/LinearP
 import { ReactComponent as EditIcon } from '../../../../shared/assets/icons/EditIcon.svg'
 import { FC } from 'react'
 import { useUpdateCardMutation } from '../../../../pages/PacksListPage/PackPage/cardApiSlice'
+import {errorMessageHandler} from "../../../../shared/lib/errorMessageHandler/errorMessageHandler";
+import {FetchError} from "../../../../shared/models/ErrorModel";
+import {ErrorAlert} from "../../../../shared/ui/ErrorAlert/ErrorAlert";
 
 interface EditPackProps {
   Id: string
@@ -12,8 +15,8 @@ interface EditPackProps {
 // Add error
 export const EditActionIcon: FC<EditPackProps> = props => {
   const { Id, cards } = props
-  const [updatePack, { isLoading }] = useUpdateCardsPackMutation()
-  const [updateCard, { isLoading: isCardsLoading }] = useUpdateCardMutation()
+  const [updatePack, { isLoading, error: updatePackError }] = useUpdateCardsPackMutation()
+  const [updateCard, { isLoading: isCardsLoading, error: updateCardError }] = useUpdateCardMutation()
 
   const editPackHandler = async () => {
     if (isLoading) return
@@ -29,6 +32,14 @@ export const EditActionIcon: FC<EditPackProps> = props => {
     })
   }
 
+  const errorPackHandler = errorMessageHandler(
+      (updatePackError as FetchError)?.data?.error
+  )
+
+  const errorCardHandler = errorMessageHandler(
+      (updateCardError as FetchError)?.data?.error
+  )
+
   return (
     <>
       {!cards && (
@@ -43,6 +54,8 @@ export const EditActionIcon: FC<EditPackProps> = props => {
           <EditIcon onClick={onUpdateCardHandler} />
         </>
       )}
+      <ErrorAlert errorMessage={errorPackHandler} />
+      <ErrorAlert errorMessage={errorCardHandler} />
     </>
   )
 }

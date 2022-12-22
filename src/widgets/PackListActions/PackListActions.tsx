@@ -1,6 +1,9 @@
 import { FC } from 'react'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
-import { StyledIconsWrapper } from '../../features/PacksList/StyledPacksList'
+import {
+  StyledIconPackWrapper,
+  StyledIconsWrapper
+} from '../../features/PacksList/StyledPacksList'
 import { RemovePackAction } from '../../features/PacksList/ui/RemovePackAction/RemovePackAction'
 import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIcon.svg'
 import { EditActionIcon } from '../../features/PacksList/ui/EditAction/EditActionIcon'
@@ -18,12 +21,20 @@ export const PackListActions: FC<PropsType> = props => {
     <StyledIconsWrapper>
       {packCreatorId === userId ? (
         <>
-          <LearnIcon />
-          <EditActionIcon Id={packsId} />
-          <RemovePackAction id={packsId} />
+          <StyledIconPackWrapper>
+            <LearnIcon />
+          </StyledIconPackWrapper>
+          <StyledIconPackWrapper>
+            <EditActionIcon Id={packsId} />
+          </StyledIconPackWrapper>
+          <StyledIconPackWrapper>
+            <RemovePackAction id={packsId} />
+          </StyledIconPackWrapper>
         </>
       ) : (
-        <LearnIcon />
+        <StyledIconPackWrapper>
+          <LearnIcon />
+        </StyledIconPackWrapper>
       )}
     </StyledIconsWrapper>
   )

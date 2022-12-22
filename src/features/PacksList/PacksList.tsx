@@ -33,6 +33,10 @@ import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoa
 import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
 import { setCardPackId } from '../../pages/CardsListPage/CardsList/cardsSlice'
 import { PackListActions } from '../../widgets/PackListActions/PackListActions'
+import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '../../shared/models/ErrorModel'
+import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
+import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 
 interface Table extends CardPack {
   actions?: string
@@ -64,10 +68,12 @@ export const PacksList: FC = props => {
   useEffect(() => {
     refetch()
   }, [sorting, search])
+
   const onLearnButtonClickHandler = (cardPackId: string) => {
     dispatch(setCardPackId(cardPackId))
     navigate('/cards-list')
   }
+
   const columnHelper = createColumnHelper<Table>()
 
   const columns = [
@@ -153,9 +159,9 @@ export const PacksList: FC = props => {
 
           <StyledTbody>
             {loading ? (
-              <StyledSkeletonTr>
+              <StyledErrorTr>
                 <TableLoader />
-              </StyledSkeletonTr>
+              </StyledErrorTr>
             ) : !data.length ? (
               <StyledErrorTr>
                 <StyledErrorTd>Packs not found</StyledErrorTd>
