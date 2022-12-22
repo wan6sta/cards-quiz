@@ -33,7 +33,11 @@ export const PacksSwitcher: FC = props => {
           {
             ...urlParams,
             [AppFilters.filter]: packType,
-            [AppFilters.page]: ''
+            [AppFilters.page]: '',
+            [AppFilters.max]: '',
+            [AppFilters.min]: '',
+            [AppFilters.search]: '',
+            [AppFilters.perPage]: ''
           },
           identity
         )
