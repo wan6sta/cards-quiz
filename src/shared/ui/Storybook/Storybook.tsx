@@ -20,6 +20,7 @@ import { Pagination } from '../../../widgets/Pagination/Pagination'
 import { Dropdown } from '../../../widgets/Dropdown/Dropdown'
 import { DoubleRange } from '../../../widgets/DoubleRange/DoubleRange'
 import { PacksSwitcher } from '../../../widgets/PacksSwitcher/PacksSwitcher'
+import { TableSkeleton } from '../TableSkeleton/TableSkeleton'
 
 export const Storybook = () => {
   return (
@@ -103,6 +104,10 @@ export const Storybook = () => {
 
       <StyledWrapper>
         <PacksSwitcher />
+      </StyledWrapper>
+
+      <StyledWrapper>
+        <TableSkeleton />
       </StyledWrapper>
     </StyledStorybook>
   )

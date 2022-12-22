@@ -128,6 +128,39 @@ export const StyledErrorTr = styled.tr`
   flex-grow: 1;
 `
 
+export const StyledSkeletonTr = styled.tr`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+  flex-grow: 1;
+`
+
+export const StyledIconPackWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+  
+  & > svg {
+    height: 18px;
+    width: 18px;
+  }
+  
+  &:hover {
+    opacity: 0.85;
+  }
+`
+
+export const StyledIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  justify-content: flex-start;
+`
+
 export const StyledErrorTd = styled.td`
   display: flex;
   align-items: center;

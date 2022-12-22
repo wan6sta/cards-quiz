@@ -10,8 +10,11 @@ import {
   StyledErrorTd,
   StyledErrorTr,
   StyledHeadTr,
+  StyledIconPackWrapper,
   StyledIconsWrapper,
+  StyledIconWrapper,
   StyledPacksList,
+  StyledSkeletonTr,
   StyledSpan,
   StyledTable,
   StyledTbody,
@@ -36,6 +39,12 @@ import { EditPack } from './ui/EditPack/EditPack'
 import { RemovePack } from './ui/RemovePack/RemovePack'
 import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
 import { setCardPackId } from '../../pages/CardsListPage/CardsList/cardsSlice'
+import { TableSkeleton } from '../../shared/ui/TableSkeleton/TableSkeleton'
+import { CircleLoader } from 'react-spinners'
+import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
+import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '../../shared/models/ErrorModel'
+import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 
 interface Table extends CardPack {
   actions?: string
@@ -82,7 +91,7 @@ export const PacksList: FC = props => {
     user_id: searchParams.get(AppFilters.filter) === 'my' ? userId : null
   }
 
-  const { refetch, isFetching } = useGetPacksQuery(queryParams)
+  const { refetch, isFetching, error } = useGetPacksQuery(queryParams)
 
   useEffect(() => {
     refetch()
@@ -104,6 +113,9 @@ export const PacksList: FC = props => {
     dispatch(setCardPackId(cardPackId))
     navigate('/cards-list')
   }
+
+  const errorHandler = errorMessageHandler((error as FetchError)?.data?.error)
+
   return (
     <>
       {loading ? <LinearPageLoader /> : null}
@@ -143,7 +155,9 @@ export const PacksList: FC = props => {
 
           <StyledTbody>
             {loading ? (
-              <StyledErrorTr></StyledErrorTr>
+              <StyledSkeletonTr>
+                <TableLoader />
+              </StyledSkeletonTr>
             ) : !data.length ? (
               <StyledErrorTr>
                 <StyledErrorTd>Packs not found</StyledErrorTd>
@@ -156,15 +170,21 @@ export const PacksList: FC = props => {
                       return (
                         <StyledTd key={cell.id}>
                           {row.original.user_id === userId ? (
-                            <StyledIconsWrapper>
-                              <LearnIcon
-                                onClick={() =>
-                                  onLearnButtonClickHandler(row.original._id)
-                                }
-                              />
-                              <EditPack packsId={row.original._id} />
-                              <RemovePack packId={row.original._id} />
-                            </StyledIconsWrapper>
+                            <StyledIconWrapper>
+                              <StyledIconPackWrapper>
+                                <LearnIcon
+                                  onClick={() =>
+                                    onLearnButtonClickHandler(row.original._id)
+                                  }
+                                />
+                              </StyledIconPackWrapper>
+                              <StyledIconPackWrapper>
+                                <EditPack packsId={row.original._id} />
+                              </StyledIconPackWrapper>
+                              <StyledIconPackWrapper>
+                                <RemovePack packId={row.original._id} />
+                              </StyledIconPackWrapper>
+                            </StyledIconWrapper>
                           ) : (
                             <StyledIconsWrapper>
                               <LearnIcon
@@ -196,6 +216,7 @@ export const PacksList: FC = props => {
           </StyledTbody>
         </StyledTable>
       </StyledPacksList>
+      <ErrorAlert errorMessage={errorHandler} />
     </>
   )
 }

@@ -19,6 +19,8 @@ export function PaginatedItems() {
   const urlPageParams = Number(searchParams.get(AppFilters.page))
   const packsCount = useAppSelector(state => state.packs.totalPacksCount || 1)
 
+  // const packsOnPage = useAppSelector(state => state.packs.userPack)
+
   useEffect(() => {
     setItemsPerPage(Number(searchParams.get(AppFilters.perPage)) || 10)
   }, [searchParams.get(AppFilters.perPage)])
@@ -27,6 +29,10 @@ export function PaginatedItems() {
   const handlePageClick = (event: any) => {
     setSearchParams({ ...urlParams, [AppFilters.page]: event.selected + 1 })
   }
+
+ // useEffect(() => {
+ //   console.log('нет карточек!')
+ // }, [packsOnPage.length])
 
   return (
     <>
