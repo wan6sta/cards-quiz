@@ -9,6 +9,7 @@ import { profileSlice } from '../../../features/Profile/api/profileSlice'
 import { packsApiSlice } from '../../../features/PacksList/api/packsApiSlice'
 import { packsSlice } from '../../../features/PacksList/slice/packsSlice'
 import { cardApiSlice } from '../../../pages/PacksListPage/PackPage/cardApiSlice'
+import { cardsSlice } from '../../../pages/CardsListPage/CardsList/cardsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -20,7 +21,8 @@ export const store = configureStore({
     [packsApiSlice.reducerPath]: packsApiSlice.reducer,
     auth: authSlice.reducer,
     [cardApiSlice.reducerPath]: cardApiSlice.reducer,
-    packs: packsSlice.reducer
+    packs: packsSlice.reducer,
+    cards: cardsSlice.reducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(

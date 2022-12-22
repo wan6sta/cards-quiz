@@ -31,10 +31,13 @@ import { useGetPacksQuery } from './api/packsApiSlice'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { getPacksSelector } from './selectors/getPacksSelector'
 import { AppFilters } from './models/FiltersModel'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { EditPack } from './ui/EditPack/EditPack'
-import {RemovePack} from "./ui/RemovePack/RemovePack";
+import { RemovePack } from './ui/RemovePack/RemovePack'
+import { useUlrParams } from './hooks/useUrlParams'
+import {useAppDispatch} from "../../app/providers/StoreProvider/hooks/useAppDispatch";
+import {setCardPackId} from "../../pages/CardsListPage/CardsList/cardsSlice";
 
 interface Table extends CardPack {
   actions?: string
@@ -66,7 +69,8 @@ export const PacksList: FC = props => {
   const data = useAppSelector(getPacksSelector)
   const userId = useAppSelector(state => state.auth.userData?._id)
   const [searchParams, setSearchParams] = useSearchParams()
-
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const sortedValue =
     sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
 
@@ -95,9 +99,13 @@ export const PacksList: FC = props => {
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel()
   })
-
+  console.log(table.getRowModel().rows)
   const loading = isFetching
 
+  const onLearnButtonClickHandler = (cardPackId: string) => {
+    dispatch(setCardPackId(cardPackId))
+    navigate('/cards-list')
+  }
   return (
     <>
       {loading ? <LinearPageLoader /> : null}
@@ -153,11 +161,15 @@ export const PacksList: FC = props => {
                             <StyledIconsWrapper>
                               <LearnIcon />
                               <EditPack packsId={row.original._id} />
-                              <RemovePack packId={row.original._id}/>
+                              <RemovePack packId={row.original._id} />
                             </StyledIconsWrapper>
                           ) : (
                             <StyledIconsWrapper>
-                              <LearnIcon />
+                              <LearnIcon
+                                onClick={() =>
+                                  onLearnButtonClickHandler(row.original._id)
+                                }
+                              />
                             </StyledIconsWrapper>
                           )}
                         </StyledTd>

@@ -5,5 +5,6 @@ export const enum AppFilters {
   'page' = 'page',
   'min' = 'min',
   'max' = 'max',
-  filter = 'filter'
+  filter = 'filter',
+  cardPack_id = 'cardPack_id'
 }

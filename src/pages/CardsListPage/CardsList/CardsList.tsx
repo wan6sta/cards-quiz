@@ -12,6 +12,8 @@ import { ReactComponent as TrUp } from '../../../shared/assets/icons/TrUp.svg'
 import { ReactComponent as EditIcon } from '../../../shared/assets/icons/EditIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../../shared/assets/icons/Trash.svg'
 import {
+  StyledErrorTd,
+  StyledErrorTr,
   StyledHeadTr,
   StyledIconsWrapper,
   StyledPacksList,
@@ -26,7 +28,11 @@ import {
   StyledTr
 } from '../../../features/PacksList/StyledPacksList'
 import { useGetCardQuery } from '../../PacksListPage/PackPage/cardApiSlice'
-import { Card } from './Models/CardsModel'
+import { Card, GetCardsArgs } from './Models/CardsModel'
+import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useSearchParams } from 'react-router-dom'
+import { AppFilters } from '../../../features/PacksList/models/FiltersModel'
+import { useUlrParams } from '../../../features/PacksList/hooks/useUrlParams'
 
 interface Table extends Card {
   actions?: string
@@ -51,17 +57,17 @@ const columns = [
 
 export const CardsList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
-  const { data: rrr, isSuccess } = useGetCardQuery({
-    cardsPack_id: '63319bd2ef99210257c3d013'
-  })
-  const [data, setData] = useState([])
-  // const userId = useAppSelector(state => state.auth.userData?._id)
-  useEffect(() => {
-    if (rrr) {
-      setData(rrr.cards)
-    }
-  }, [isSuccess])
-  console.log(rrr?.cards)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const urlParams = useUlrParams()
+
+  const data = useAppSelector(state => state.cards.cards)
+  const cardsPackId = useAppSelector(state => state.cards.cardPackId)
+  const userId = useAppSelector(state => state.auth.userData?._id)
+
+  const cardsQueryParams: GetCardsArgs = {
+    cardsPack_id: cardsPackId as string
+  }
+  const { refetch, isFetching } = useGetCardQuery(cardsQueryParams)
   const table = useReactTable({
     data,
     columns,
@@ -71,10 +77,13 @@ export const CardsList: FC = props => {
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel()
   })
-  useEffect(() => {
-    console.log(table.getRowModel().rows)
-  }, [])
 
+  useEffect(() => {
+    setSearchParams({
+      ...urlParams,
+      [AppFilters.cardPack_id]: cardsPackId as string
+    })
+  }, [])
   return (
     <>
       <StyledPacksList>
@@ -109,35 +118,45 @@ export const CardsList: FC = props => {
           </StyledThead>
 
           <StyledTbody>
-            {table.getRowModel().rows.map(row => (
-              <StyledTr body key={row.id}>
-                {row.getVisibleCells().map(cell => {
-                  if (cell.column.id === 'grade') {
+            {!data.length ? (
+              <StyledErrorTr>
+                <StyledErrorTd>Cards not found</StyledErrorTd>
+              </StyledErrorTr>
+            ) : (
+              table.getRowModel().rows.map(row => (
+                <StyledTr body key={row.id}>
+                  {row.getVisibleCells().map(cell => {
+                    if (cell.column.id === 'grade') {
+                      return (
+                        <StyledTd key={cell.id}>
+                          {row.original.user_id === userId ? (
+                            <StyledIconsWrapper>
+                              ⭐⭐⭐⭐⭐
+                              <EditIcon />
+                              <DeleteIcon />
+                            </StyledIconsWrapper>
+                          ) : (
+                            <StyledIconsWrapper>⭐⭐⭐⭐⭐</StyledIconsWrapper>
+                          )}
+                        </StyledTd>
+                      )
+                    }
                     return (
                       <StyledTd key={cell.id}>
-                        <StyledIconsWrapper>
-                          ⭐⭐⭐⭐⭐
-                          <EditIcon />
-                          <DeleteIcon />
-                        </StyledIconsWrapper>
+                        <StyledTextWrapper>
+                          <StyledSpan>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </StyledSpan>
+                        </StyledTextWrapper>
                       </StyledTd>
                     )
-                  }
-                  return (
-                    <StyledTd key={cell.id}>
-                      <StyledTextWrapper>
-                        <StyledSpan>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </StyledSpan>
-                      </StyledTextWrapper>
-                    </StyledTd>
-                  )
-                })}
-              </StyledTr>
-            ))}
+                  })}
+                </StyledTr>
+              ))
+            )}
           </StyledTbody>
         </StyledTable>
       </StyledPacksList>

@@ -42,7 +42,6 @@ export const Registration = () => {
 
   const {
     handleSubmit,
-    reset,
     control,
     formState: { errors }
   } = useForm<FormValues>({
@@ -57,7 +56,6 @@ export const Registration = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     await registerUser(data)
-    reset()
   }
 
   const disableButton =

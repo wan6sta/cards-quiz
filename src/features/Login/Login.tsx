@@ -38,7 +38,6 @@ export const Login = () => {
 
   const {
     handleSubmit,
-    reset,
     control,
     register,
     formState: { errors }
@@ -54,7 +53,6 @@ export const Login = () => {
 
   const onSubmit: SubmitHandler<LoginForm> = async data => {
     await login(data)
-    reset()
   }
 
   const errorHandler = errorMessageHandler(

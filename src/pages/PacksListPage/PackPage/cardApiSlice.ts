@@ -7,6 +7,15 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../../shared/models/ErrorModel'
+import {
+  setCardsMaxCount,
+  setCardsMinCount,
+  setTotalPacksCount,
+  setUserPack
+} from '../../../features/PacksList/slice/packsSlice'
+import { convertData } from '../../../features/PacksList/lib/convertData'
+import {setCards, setCardsPage} from "../../CardsListPage/CardsList/cardsSlice";
+import {GetCardsArgs, GetCardsResponse} from "../../CardsListPage/CardsList/Models/CardsModel";
 
 export const cardApiSlice = createApi({
   reducerPath: 'card/api',
@@ -16,13 +25,18 @@ export const cardApiSlice = createApi({
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   tagTypes: ['Card'],
   endpoints: builder => ({
-    getCard: builder.query<any, any>({
+    getCard: builder.query<GetCardsResponse, GetCardsArgs>({
       query: args => ({
         url: `cards/card`,
         params: pickBy({
           ...args
         })
       }),
+      async onQueryStarted(payload, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled
+        dispatch(setCards(data.cards))
+        dispatch(setCardsPage(data.page))
+      },
       providesTags: result => ['Card']
     }),
     createCard: builder.mutation<any, any>({
@@ -53,7 +67,4 @@ export const cardApiSlice = createApi({
 
 export const {
   useGetCardQuery,
-  useCreateCardMutation,
-  useUpdateCardMutation,
-  useDeleteCardMutation
 } = cardApiSlice

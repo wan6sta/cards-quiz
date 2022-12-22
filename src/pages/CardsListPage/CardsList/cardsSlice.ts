@@ -14,7 +14,8 @@ const initialState: GetCardsResponse = {
   packPrivate: false,
   packUpdated: new Date(''),
   token: '',
-  tokenDeathTime: 0
+  tokenDeathTime: 0,
+  cardPackId: ''
 }
 
 export const cardsSlice = createSlice({
@@ -24,14 +25,12 @@ export const cardsSlice = createSlice({
     setCards: (state, action: PayloadAction<Card[]>) => {
       state.cards = action.payload
     },
-    setTotalPacksCount: (state, action: PayloadAction<number>) => {},
-    setCardsMinCount: (state, action: PayloadAction<number>) => {},
-    setCardsMaxCount: (state, action: PayloadAction<number>) => {}
+    setCardsPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload
+    },
+    setCardPackId: (state, action: PayloadAction<string>) => {
+      state.cardPackId = action.payload
+    }
   }
 })
-export const {
-  setCards,
-  setTotalPacksCount,
-  setCardsMinCount,
-  setCardsMaxCount
-} = cardsSlice.actions
+export const { setCards, setCardsPage, setCardPackId } = cardsSlice.actions
