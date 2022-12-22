@@ -37,6 +37,7 @@ import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorM
 import { FetchError } from '../../shared/models/ErrorModel'
 import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
+import {AppPaths} from "../../app/providers/AppRouter/routerConfig";
 
 interface Table extends CardPack {
   actions?: string
@@ -69,9 +70,9 @@ export const PacksList: FC = props => {
     refetch()
   }, [sorting, search])
 
-  const onLearnButtonClickHandler = (cardPackId: string) => {
+  const onClickNameHandler = (cardPackId: string) => {
     dispatch(setCardPackId(cardPackId))
-    navigate('/cards-list')
+    navigate(`/cards-list/${cardPackId}`)
   }
 
   const columnHelper = createColumnHelper<Table>()
@@ -81,7 +82,7 @@ export const PacksList: FC = props => {
       header: 'Name',
       cell: cell => (
         <StyledTitleWrapper
-          onClick={() => onLearnButtonClickHandler(cell.row.original._id)}
+          onClick={() => onClickNameHandler(cell.row.original._id)}
         >
           {cell.getValue()}
         </StyledTitleWrapper>

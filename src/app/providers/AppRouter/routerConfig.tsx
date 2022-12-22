@@ -20,7 +20,7 @@ export const enum AppPaths {
   'registrationSuccessPage' = '/registration-success',
   'storybook' = '/storybook',
   'packsListPage' = '/packs-list',
-  'cardsListPage' = '/cards-list',
+  'cardsListPage' = '/cards-list/:packId',
   'forgotPasswordPage' = '/forgot-password-page',
   'setNewPassword' = '/set-new-password/:token',
   'checkEmailPage' = '/check-email-page',

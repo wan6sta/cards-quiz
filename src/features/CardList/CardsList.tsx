@@ -32,10 +32,9 @@ import {
 } from './api/cardApiSlice'
 import { Card, GetCardsArgs } from './Models/CardsModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
-import { useSearchParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { AppFilters } from '../PacksList/models/FiltersModel'
 import { useUlrParams } from '../PacksList/hooks/useUrlParams'
-import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
 import { StarRating } from '../../widgets/StarRating/StarRating'
 
 interface Table extends Card {
@@ -61,18 +60,18 @@ const columns = [
 
 export const CardsList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
-  const [searchParams, setSearchParams] = useSearchParams()
-  const urlParams = useUlrParams()
   const [deleteCard] = useDeleteCardMutation()
   const [updateCard] = useUpdateCardMutation()
   const data = useAppSelector(state => state.cards.cards)
-  const cardsPackId = useAppSelector(state => state.cards.cardPackId)
+  const { packId } = useParams()
   const userId = useAppSelector(state => state.auth.userData?._id)
 
   const cardsQueryParams: GetCardsArgs = {
-    cardsPack_id: cardsPackId as string
+    cardsPack_id: String(packId)
   }
+
   const { refetch, isFetching } = useGetCardQuery(cardsQueryParams)
+
   const table = useReactTable({
     data,
     columns,
@@ -82,13 +81,6 @@ export const CardsList: FC = props => {
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel()
   })
-
-  useEffect(() => {
-    setSearchParams({
-      ...urlParams,
-      [AppFilters.cardPack_id]: cardsPackId as string
-    })
-  }, [])
 
   const onDeleteCardHandler = async (cardId: string) => {
     await deleteCard(cardId)
