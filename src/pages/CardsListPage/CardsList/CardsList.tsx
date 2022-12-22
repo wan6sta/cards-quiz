@@ -36,6 +36,7 @@ import { useSearchParams } from 'react-router-dom'
 import { AppFilters } from '../../../features/PacksList/models/FiltersModel'
 import { useUlrParams } from '../../../features/PacksList/hooks/useUrlParams'
 import { BackToLink } from '../../../shared/ui/BackToLink/BackToLink'
+import { StarRating } from '../../../widgets/StarRating/StarRating'
 
 interface Table extends Card {
   actions?: string
@@ -143,7 +144,7 @@ export const CardsList: FC = props => {
                       <StyledTd key={cell.id}>
                         {row.original.user_id === userId ? (
                           <StyledIconsWrapper>
-                            ⭐⭐⭐⭐⭐
+                            <StarRating />
                             <EditIcon
                               onClick={async () =>
                                 await onUpdateCardHandler(row.original._id)
@@ -156,7 +157,9 @@ export const CardsList: FC = props => {
                             />
                           </StyledIconsWrapper>
                         ) : (
-                          <StyledIconsWrapper>⭐⭐⭐⭐⭐</StyledIconsWrapper>
+                          <StyledIconsWrapper>
+                            <StarRating />
+                          </StyledIconsWrapper>
                         )}
                       </StyledTd>
                     )
