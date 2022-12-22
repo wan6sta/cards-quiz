@@ -15,6 +15,7 @@ import {
   setUserPack
 } from '../slice/packsSlice'
 import { convertData } from '../lib/convertData'
+import { resetCardState } from '../../CardList/slice/cardsSlice'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -40,6 +41,7 @@ export const packsApiSlice = createApi({
         dispatch(setTotalPacksCount(data.cardPacksTotalCount))
         dispatch(setCardsMinCount(data.minCardsCount))
         dispatch(setCardsMaxCount(data.maxCardsCount))
+        // dispatch(resetCardState())
       },
       providesTags: result => ['Cards']
     }),
@@ -53,13 +55,13 @@ export const packsApiSlice = createApi({
     }),
     deleteCardPack: builder.mutation<any, string>({
       query: payload => {
-        return ({
+        return {
           url: `cards/pack`,
           method: 'DELETE',
           params: {
             id: payload
           }
-        })
+        }
       },
       invalidatesTags: ['Cards']
     }),

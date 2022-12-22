@@ -7,10 +7,7 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
 import { FetchError } from '../../../shared/models/ErrorModel'
-import {
-  setCards,
-  setCardsPage
-} from '../slice/cardsSlice'
+
 import {
   CardApiPayload,
   CreateCard,
@@ -21,6 +18,12 @@ import {
   UpdateCard,
   UpdateCardResponse
 } from '../Models/CardsModel'
+import {
+  setCards,
+  setCardsTotalCount,
+  setPackName,
+  setPackUserId
+} from '../slice/cardsSlice'
 
 export const cardApiSlice = createApi({
   reducerPath: 'card/api',
@@ -39,8 +42,11 @@ export const cardApiSlice = createApi({
       }),
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled
+
+        dispatch(setCardsTotalCount(data.cardsTotalCount))
         dispatch(setCards(data.cards))
-        dispatch(setCardsPage(data.page))
+        dispatch(setPackName(data.packName))
+        dispatch(setPackUserId(data.packUserId))
       },
       providesTags: result => ['Card']
     }),

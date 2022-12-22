@@ -17,6 +17,10 @@ import { CardsList } from '../../features/CardList/CardsList'
 import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
 
 export const CardsListPage: FC = props => {
+  // const totalCardsCount = useAppSelector(getTotalPacksCountSelector('card'))
+  // const authId = useAppSelector(getAuthIdSelector)
+  // const userId = useAppSelector(getCardUserIdSelector)
+
   return (
     <StyledPacksListPage>
       <BackToLink alignSelf='flex-start' marginBottom='27px'>

@@ -31,14 +31,12 @@ import { AppFilters } from './models/FiltersModel'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
-import { setCardPackId } from '../CardList/slice/cardsSlice'
 import { PackListActions } from '../../widgets/PackListActions/PackListActions'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../shared/models/ErrorModel'
 import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
-import {AppPaths} from "../../app/providers/AppRouter/routerConfig";
-import {identity, pickBy} from "lodash-es";
+import {setPackUserId} from "../CardList/slice/cardsSlice";
 
 interface Table extends CardPack {
   actions?: string
@@ -71,12 +69,8 @@ export const PacksList: FC = props => {
     refetch()
   }, [sorting, search])
 
-  const onClickNameHandler = (cardPackId: string) => {
-    dispatch(setCardPackId(cardPackId))
-    setSearchParams(pickBy({
-      [AppFilters.page]: ''
-    }, identity))
-
+  const onClickNameHandler = (cardPackId: string, userCardId: string) => {
+    dispatch(setPackUserId(userCardId))
     navigate(`/cards-list/${cardPackId}`)
   }
 
@@ -87,7 +81,9 @@ export const PacksList: FC = props => {
       header: 'Name',
       cell: cell => (
         <StyledTitleWrapper
-          onClick={() => onClickNameHandler(cell.row.original._id)}
+          onClick={() =>
+            onClickNameHandler(cell.row.original._id, cell.row.original.user_id)
+          }
         >
           {cell.getValue()}
         </StyledTitleWrapper>

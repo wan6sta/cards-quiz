@@ -1,5 +1,5 @@
-import {useParams, useSearchParams} from 'react-router-dom'
-import {useCallback, useEffect, useState} from 'react'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { useCallback, useEffect, useState } from 'react'
 import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import ReactPaginate from 'react-paginate'
@@ -7,8 +7,8 @@ import cls from './Pagination.module.css'
 import { ReactComponent as RightIcon } from '../../shared/assets/icons/RightArrowI.svg'
 import { ReactComponent as LeftIcon } from '../../shared/assets/icons/LeftArrow.svg'
 import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
-import {debounce} from "lodash-es";
-import {getPacksSelector} from "../../features/PacksList/selectors/getTotalPacksCountSelector";
+import { debounce } from 'lodash-es'
+import { getTotalPacksCountSelector } from '../../features/PacksList/selectors/getTotalPacksCountSelector'
 
 export function PaginatedItems() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -21,7 +21,8 @@ export function PaginatedItems() {
   const initialValue = 0
   const urlParams = useUlrParams()
   const urlPageParams = Number(searchParams.get(AppFilters.page))
-  const packsCount = useAppSelector(getPacksSelector(packId || '')) || 1
+  const packsCount =
+    useAppSelector(getTotalPacksCountSelector(packId || '')) || 1
 
   useEffect(() => {
     setItemsPerPage(Number(searchParams.get(AppFilters.perPage)) || 10)
@@ -29,10 +30,10 @@ export function PaginatedItems() {
   const pageCount = Math.ceil(packsCount / itemsPerPage)
 
   const handlePageClick = useCallback(
-      debounce((event: any) => {
-        setSearchParams({ ...urlParams, [AppFilters.page]: event.selected + 1 })
-      }, 400),
-      [setSearchParams]
+    debounce((event: any) => {
+      setSearchParams({ ...urlParams, [AppFilters.page]: event.selected + 1 })
+    }, 400),
+    [setSearchParams]
   )
 
   return (

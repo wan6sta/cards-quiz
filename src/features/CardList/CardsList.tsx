@@ -72,6 +72,10 @@ export const CardsList: FC = props => {
 
   const { refetch, isFetching } = useGetCardQuery(cardsQueryParams)
 
+  useEffect(() => {
+    refetch()
+  }, [])
+
   const table = useReactTable({
     data,
     columns,
