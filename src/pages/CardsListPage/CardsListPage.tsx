@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { Title } from '../../shared/ui/Title/Title'
 import { Button } from '../../shared/ui/Button/Button'
 import { Span } from '../../shared/ui/Span/Span'
@@ -17,6 +17,10 @@ import { CardsList } from '../../features/CardList/CardsList'
 import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { getPackName } from '../../features/CardList/selectors/getPackName'
+import { Flex } from '../../shared/ui/Flex/Flex'
+import { Dropdown } from '../../widgets/Dropdown/Dropdown'
+import { Portal } from '../../shared/ui/Portal/Portal'
+import { StyledTitleWrapper } from './StyledCardsListPage'
 
 export const CardsListPage: FC = props => {
   const packName = useAppSelector(getPackName)
@@ -27,7 +31,10 @@ export const CardsListPage: FC = props => {
         Back to Packs List
       </BackToLink>
       <TitleWrapper>
-        <Title>{packName.slice(0, 25)}</Title>
+        <StyledTitleWrapper>
+            <Title>{packName.slice(0, 25)}</Title>
+            <Dropdown />
+        </StyledTitleWrapper>
         <ButtonWrapper>
           <Button>Learn this pack</Button>
         </ButtonWrapper>
@@ -36,7 +43,7 @@ export const CardsListPage: FC = props => {
         <FilterTextFieldWrapper>
           <InputWrapper>
             <Span spanTitle>Search</Span>
-            <DebouncedTableInput  title={'Enter your question'} />
+            <DebouncedTableInput title={'Enter your question'} />
           </InputWrapper>
         </FilterTextFieldWrapper>
       </FilterWrapper>

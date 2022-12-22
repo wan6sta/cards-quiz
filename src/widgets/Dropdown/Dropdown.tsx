@@ -15,6 +15,7 @@ import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../shared/models/ErrorModel'
 import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { Portal } from '../../shared/ui/Portal/Portal'
 
 interface Props {
   nav?: boolean
@@ -39,7 +40,10 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
   const isBundleLoading = deleteIsLoading
 
   return (
-    <Menu as={'div'} className={cls.dropdownWrapper}>
+    <Menu
+      as={'div'}
+      className={cn(cls.dropdownWrapper, { [cls.dropdownCardWrapper]: !nav })}
+    >
       {isBundleLoading ? <LinearPageLoader /> : null}
       {nav && (
         <>
@@ -71,7 +75,9 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
       )}
       {!nav && (
         <>
-          <Menu.Button className={cls.dropdownBtn}>
+          <Menu.Button
+            className={cn(cls.dropdownBtn, { [cls.dropdownCardBtn]: !nav })}
+          >
             <DotsIcon />
           </Menu.Button>
           <Menu.Items
