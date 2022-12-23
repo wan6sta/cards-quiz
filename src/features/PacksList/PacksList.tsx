@@ -41,10 +41,6 @@ import { useUlrParams } from './hooks/useUrlParams'
 import { getPacksPageSelector } from './selectors/getPacksPageSelector'
 import { getAuthIdSelector } from '../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
 
-interface Table extends CardPack {
-  actions?: string
-}
-
 export const PacksList: FC = props => {
   const [sorting, setSorting] = useState<SortingState>([])
   const { search } = useLocation()
@@ -93,7 +89,7 @@ export const PacksList: FC = props => {
     navigate(`/cards-list/${cardPackId}`)
   }
 
-  const columnHelper = createColumnHelper<Table>()
+  const columnHelper = createColumnHelper<CardPack>()
   const columns = [
     columnHelper.accessor('name', {
       header: 'Name',
@@ -116,7 +112,8 @@ export const PacksList: FC = props => {
     columnHelper.accessor('user_name', {
       header: 'Created by'
     }),
-    columnHelper.accessor('actions', {
+    columnHelper.display({
+      id: 'actions',
       header: 'Actions',
       cell: cell => (
         <PackListActions

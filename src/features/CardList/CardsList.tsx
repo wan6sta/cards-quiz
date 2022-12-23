@@ -38,11 +38,7 @@ import { StyledCardSpan, StyledCardTextWrapper } from './StyledCardsList'
 import { useUlrParams } from '../PacksList/hooks/useUrlParams'
 import { getCardsPageSelector } from './selectors/getCardsPageSelector'
 
-interface Table extends Card {
-  actions?: string
-}
-
-const columnHelper = createColumnHelper<Table>()
+const columnHelper = createColumnHelper<Card>()
 
 const columns = [
   columnHelper.accessor('question', {
@@ -69,7 +65,8 @@ const columns = [
       </StyledCardTextWrapper>
     )
   }),
-  columnHelper.accessor('grade', {
+  columnHelper.display({
+    id: 'grade',
     header: 'Grade',
     cell: cell => (
       <CardListGrade
@@ -160,7 +157,6 @@ export const CardsList: FC = () => {
               </StyledHeadTr>
             ))}
           </StyledThead>
-
           <StyledTbody>
             {isFetching ? (
               <StyledErrorTr>
