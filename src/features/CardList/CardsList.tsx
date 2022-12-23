@@ -6,13 +6,9 @@ import {
   SortingState,
   useReactTable
 } from '@tanstack/react-table'
-
-import { ReactComponent as TrDown } from '../../shared/assets/icons/TrDown.svg'
-import { ReactComponent as TrUp } from '../../shared/assets/icons/TrUp.svg'
-
 import {
-  StyledErrorTd,
-  StyledErrorTr,
+  StyledFlexTd,
+  StyledFlexTr,
   StyledHeadTr,
   StyledPacksList,
   StyledTable,
@@ -36,7 +32,11 @@ import { CreateNewCard } from './ui/CreateNewCard/CreateNewCard'
 import { AppFilters } from '../PacksList/models/FiltersModel'
 import { StyledCardSpan, StyledCardTextWrapper } from './StyledCardsList'
 import { useUlrParams } from '../PacksList/hooks/useUrlParams'
-import { getCardsPageSelector } from './selectors/getCardsPageSelector'
+import { useIsMyPack } from '../../app/providers/StoreProvider/hooks/useIsMyPack'
+import { useCardQueryParams } from './hooks/useCardQueryParams'
+import { TheadTable } from './ui/TheadTable/TheadTable'
+import { BodyTable } from './ui/BodyTable/BodyTable'
+import { transformSortedValue } from '../../shared/lib/transformSortedValue/transformSortedValue'
 
 const columnHelper = createColumnHelper<Card>()
 
@@ -79,21 +79,16 @@ const columns = [
 ]
 
 export const CardsList: FC = () => {
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [searchParams, setSearchParams] = useSearchParams()
   const urlParams = useUlrParams()
-  const { packId } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const { search } = useLocation()
-  const data = useAppSelector(getCardsSelector)
-  const userAuthId = useAppSelector(getAuthIdSelector)
-  const userPackId = useAppSelector(getCardUserIdSelector)
 
-  const cardsQueryParams: GetCardsArgs = {
-    cardsPack_id: String(packId),
-    pageCount: Number(searchParams.get(AppFilters.perPage)) || 10,
-    page: Number(searchParams.get(AppFilters.page)) || 1,
-    cardAnswer: searchParams.get(AppFilters.search) as string
-  }
+  const data = useAppSelector(getCardsSelector)
+
+  const [sorting, setSorting] = useState<SortingState>([])
+  const sortedValue = transformSortedValue(sorting)
+
+  const cardsQueryParams = useCardQueryParams(sortedValue)
 
   const {
     refetch,
@@ -128,64 +123,12 @@ export const CardsList: FC = () => {
     <>
       <StyledPacksList>
         <StyledTable>
-          <StyledThead>
-            {table.getHeaderGroups().map(headerGroup => (
-              <StyledHeadTr key={headerGroup.id}>
-                {headerGroup.headers.map(header => {
-                  return (
-                    <StyledTh key={header.id}>
-                      {header.isPlaceholder ? null : (
-                        <StyledTitleWrapper
-                          {...{
-                            onClick: header.column.getToggleSortingHandler()
-                          }}
-                        >
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                          {{
-                            asc: <TrUp />,
-                            desc: <TrDown />
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </StyledTitleWrapper>
-                      )}
-                    </StyledTh>
-                  )
-                })}
-              </StyledHeadTr>
-            ))}
-          </StyledThead>
-          <StyledTbody>
-            {isFetching ? (
-              <StyledErrorTr>
-                <TableLoader />
-              </StyledErrorTr>
-            ) : !data.length ? (
-              <StyledErrorTr>
-                {userAuthId === userPackId ? (
-                  <CreateNewCard text />
-                ) : (
-                  <StyledErrorTd>Packs not found</StyledErrorTd>
-                )}
-              </StyledErrorTr>
-            ) : (
-              table.getRowModel().rows.map(row => (
-                <StyledTr body key={row.id}>
-                  {row.getVisibleCells().map(cell => {
-                    return (
-                      <StyledTd key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </StyledTd>
-                    )
-                  })}
-                </StyledTr>
-              ))
-            )}
-          </StyledTbody>
+          <TheadTable table={table} />
+          <BodyTable
+            dataLength={data.length}
+            loading={isFetching}
+            table={table}
+          />
         </StyledTable>
       </StyledPacksList>
     </>

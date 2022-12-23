@@ -10,7 +10,7 @@ import {
   StyledTable,
   StyledTitleWrapper
 } from './StyledPacksList'
-import { CardPack } from './models/packModel'
+import { CardPack, PacksResponse } from './models/packModel'
 import { useGetPacksQuery } from './api/packsApiSlice'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { getPacksSelector } from './selectors/getPacksSelector'
@@ -24,12 +24,14 @@ import { FetchError } from '../../shared/models/ErrorModel'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { setPackUserId } from '../CardList/slice/cardsSlice'
 import { useUlrParams } from './hooks/useUrlParams'
-import { getPacksPageSelector } from './selectors/getPacksPageSelector'
-import { useQueryParams } from './hooks/useQueryParams'
+import { usePackQueryParams } from './hooks/usePackQueryParams'
 import { BodyTable } from './ui/BodyTable/BodyTable'
 import { TheadTable } from './ui/TheadTable/TheadTable'
+import { transformSortedValue } from '../../shared/lib/transformSortedValue/transformSortedValue'
 
-export const PacksList: FC = props => {
+const columnHelper = createColumnHelper<CardPack>()
+
+export const PacksList: FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -37,13 +39,11 @@ export const PacksList: FC = props => {
   const urlParams = useUlrParams()
 
   const data = useAppSelector(getPacksSelector)
-  const packPage = useAppSelector(getPacksPageSelector)
 
   const [sorting, setSorting] = useState<SortingState>([])
-  const sortedValue =
-    sorting.length > 0 && `${sorting[0]?.desc ? '0' : '1'}${sorting[0]?.id}`
+  const sortedValue = transformSortedValue(sorting)
 
-  const queryParams = useQueryParams(sortedValue)
+  const queryParams = usePackQueryParams(sortedValue)
 
   const {
     refetch,
@@ -70,7 +70,6 @@ export const PacksList: FC = props => {
     navigate(`/cards-list/${cardPackId}`)
   }
 
-  const columnHelper = createColumnHelper<CardPack>()
   const columns = [
     columnHelper.accessor('name', {
       header: 'Name',
@@ -121,12 +120,10 @@ export const PacksList: FC = props => {
   return (
     <>
       {loading ? <LinearPageLoader /> : null}
-      <StyledPacksList>
-        <StyledTable>
-          <TheadTable table={table} />
-          <BodyTable loading={loading} dataLength={data.length} table={table} />
-        </StyledTable>
-      </StyledPacksList>
+      <StyledTable>
+        <TheadTable table={table} />
+        <BodyTable loading={loading} dataLength={data.length} table={table} />
+      </StyledTable>
       <ErrorAlert errorMessage={errorHandler} />
     </>
   )

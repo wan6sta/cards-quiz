@@ -121,7 +121,7 @@ export const StyledSpan = styled.span`
   text-overflow: ellipsis;
 `
 
-export const StyledErrorTr = styled.tr`
+export const StyledFlexTr = styled.tr`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,7 +161,7 @@ export const StyledIconWrapper = styled.div`
   justify-content: flex-start;
 `
 
-export const StyledErrorTd = styled.td`
+export const StyledFlexTd = styled.td`
   display: flex;
   align-items: center;
   justify-content: center;

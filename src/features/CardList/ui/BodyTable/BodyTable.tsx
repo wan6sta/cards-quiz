@@ -1,24 +1,25 @@
 import {
   StyledFlexTd,
   StyledFlexTr,
-  StyledSpan,
   StyledTbody,
   StyledTd,
-  StyledTextWrapper,
   StyledTr
-} from '../../StyledPacksList'
+} from '../../../PacksList/StyledPacksList'
 import { TableLoader } from '../../../../shared/ui/TableLoader/TableLoader'
+import { CreateNewCard } from '../CreateNewCard/CreateNewCard'
 import { flexRender, Table } from '@tanstack/react-table'
-import { CardPack } from '../../models/packModel'
+import { Card } from '../../Models/CardsModel'
+import {useIsMyPack} from "../../../../app/providers/StoreProvider/hooks/useIsMyPack";
 
 interface Props {
   loading: boolean
   dataLength: number
-  table: Table<CardPack>
+  table: Table<Card>
 }
 
 export const BodyTable = (props: Props) => {
-  const { loading, table, dataLength } = props
+  const {table, loading, dataLength} = props
+  const isMyPack = useIsMyPack()
 
   return (
     <StyledTbody>
@@ -28,7 +29,11 @@ export const BodyTable = (props: Props) => {
         </StyledFlexTr>
       ) : !dataLength ? (
         <StyledFlexTr>
-          <StyledFlexTd>Packs not found</StyledFlexTd>
+          {isMyPack ? (
+            <CreateNewCard text />
+          ) : (
+            <StyledFlexTd>Packs not found</StyledFlexTd>
+          )}
         </StyledFlexTr>
       ) : (
         table.getRowModel().rows.map(row => (
@@ -36,14 +41,7 @@ export const BodyTable = (props: Props) => {
             {row.getVisibleCells().map(cell => {
               return (
                 <StyledTd key={cell.id}>
-                  <StyledTextWrapper>
-                    <StyledSpan>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </StyledSpan>
-                  </StyledTextWrapper>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </StyledTd>
               )
             })}
