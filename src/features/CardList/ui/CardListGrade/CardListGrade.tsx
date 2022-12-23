@@ -1,5 +1,4 @@
 import { useAppSelector } from '../../../../app/providers/StoreProvider/hooks/useAppSelector'
-import { StyledIconsWrapper } from '../../../PacksList/StyledPacksList'
 import { EditActionIcon } from '../../../PacksList/ui/EditAction/EditActionIcon'
 import { RemovePackAction } from '../../../PacksList/ui/RemovePackAction/RemovePackAction'
 import { FC } from 'react'

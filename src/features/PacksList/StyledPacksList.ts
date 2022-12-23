@@ -143,12 +143,12 @@ export const StyledIconPackWrapper = styled.div`
   height: 18px;
   width: 18px;
   cursor: pointer;
-  
+
   & > svg {
     height: 18px;
     width: 18px;
   }
-  
+
   &:hover {
     opacity: 0.85;
   }

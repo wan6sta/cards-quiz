@@ -5,12 +5,8 @@ import {
   SortingState,
   useReactTable
 } from '@tanstack/react-table'
-import {
-  StyledPacksList,
-  StyledTable,
-  StyledTitleWrapper
-} from './StyledPacksList'
-import { CardPack, PacksResponse } from './models/packModel'
+import { StyledTable, StyledTitleWrapper } from './StyledPacksList'
+import { CardPack } from './models/packModel'
 import { useGetPacksQuery } from './api/packsApiSlice'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { getPacksSelector } from './selectors/getPacksSelector'

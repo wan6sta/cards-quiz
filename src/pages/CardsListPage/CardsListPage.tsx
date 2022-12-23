@@ -28,9 +28,7 @@ export const CardsListPage: FC = () => {
 
   return (
     <StyledPacksListPage>
-      <BackToLink marginBottom='27px'>
-        Back to Packs List
-      </BackToLink>
+      <BackToLink marginBottom='27px'>Back to Packs List</BackToLink>
       <TitleWrapper>
         <StyledTitleWrapper>
           <Title>{packName}</Title>

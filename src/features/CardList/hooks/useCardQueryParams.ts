@@ -2,7 +2,9 @@ import { AppFilters } from '../../PacksList/models/FiltersModel'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { GetCardsArgs } from '../Models/CardsModel'
 
-export const useCardQueryParams = (sortedValue: string | boolean): GetCardsArgs => {
+export const useCardQueryParams = (
+  sortedValue: string | boolean
+): GetCardsArgs => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { packId } = useParams()
 

@@ -11,7 +11,7 @@ export const AddNewCard = () => {
   const cardPackId = useAppSelector(state => state.cards.cardPackId)
   const onAddCardHandler = async () => {
     const card = {
-      cardsPack_id: cardPackId as string
+      cardsPack_id: cardPackId 
     }
     await createCard({ card })
   }

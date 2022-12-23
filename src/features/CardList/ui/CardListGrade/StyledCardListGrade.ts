@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ export const StyledIconsWrapperWrapper = styled.div`
 
 export const StyledCardIconsWrapper = styled.div`
   display: flex;
-  
+
   & > svg {
     cursor: pointer;
     height: 18px;

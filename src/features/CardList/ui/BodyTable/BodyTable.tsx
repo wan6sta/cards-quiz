@@ -9,7 +9,7 @@ import { TableLoader } from '../../../../shared/ui/TableLoader/TableLoader'
 import { CreateNewCard } from '../CreateNewCard/CreateNewCard'
 import { flexRender, Table } from '@tanstack/react-table'
 import { Card } from '../../Models/CardsModel'
-import {useIsMyPack} from "../../../../app/providers/StoreProvider/hooks/useIsMyPack";
+import { useIsMyPack } from '../../../../app/providers/StoreProvider/hooks/useIsMyPack'
 
 interface Props {
   loading: boolean
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const BodyTable = (props: Props) => {
-  const {table, loading, dataLength} = props
+  const { table, loading, dataLength } = props
   const isMyPack = useIsMyPack()
 
   return (

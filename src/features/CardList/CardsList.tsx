@@ -1,38 +1,20 @@
 import { FC, useEffect, useState } from 'react'
 import {
   createColumnHelper,
-  flexRender,
   getCoreRowModel,
   SortingState,
   useReactTable
 } from '@tanstack/react-table'
-import {
-  StyledFlexTd,
-  StyledFlexTr,
-  StyledHeadTr,
-  StyledPacksList,
-  StyledTable,
-  StyledTbody,
-  StyledTd,
-  StyledTh,
-  StyledThead,
-  StyledTitleWrapper,
-  StyledTr
-} from '../PacksList/StyledPacksList'
+import { StyledPacksList, StyledTable } from '../PacksList/StyledPacksList'
 import { useGetCardQuery } from './api/cardApiSlice'
-import { Card, GetCardsArgs } from './Models/CardsModel'
+import { Card } from './Models/CardsModel'
 import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
-import { useLocation, useParams, useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { CardListGrade } from './ui/CardListGrade/CardListGrade'
-import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
-import { getAuthIdSelector } from '../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
-import { getCardUserIdSelector } from './selectors/getCardUserIdSelector'
 import { getCardsSelector } from './selectors/getCardsSelector'
-import { CreateNewCard } from './ui/CreateNewCard/CreateNewCard'
 import { AppFilters } from '../PacksList/models/FiltersModel'
 import { StyledCardSpan, StyledCardTextWrapper } from './StyledCardsList'
 import { useUlrParams } from '../PacksList/hooks/useUrlParams'
-import { useIsMyPack } from '../../app/providers/StoreProvider/hooks/useIsMyPack'
 import { useCardQueryParams } from './hooks/useCardQueryParams'
 import { TheadTable } from './ui/TheadTable/TheadTable'
 import { BodyTable } from './ui/BodyTable/BodyTable'

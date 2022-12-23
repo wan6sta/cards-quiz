@@ -1,88 +1,88 @@
 .dropdownWrapper {
-    display: inline-block;
-    position: relative;
-    text-align: left;
-    z-index: 2;
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  z-index: 2;
 }
 
 .dropdownCardWrapper {
-    height: 24px;
+  height: 24px;
 }
 
 .dropdownWrapper:hover {
 }
 
 .dropdownItems {
-    position: absolute;
-    z-index: 2;
-    right: 0;
-    margin-top: 6px;
-    transform-origin: top right;
-    padding: 20px 0 0 20px;
-    width: 122px;
-    height: 104px;
-    border: 1px solid #cfcfcf;
-    border-radius: 5px;
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-    background-color: white;
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  margin-top: 6px;
+  transform-origin: top right;
+  padding: 20px 0 0 20px;
+  width: 122px;
+  height: 104px;
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
 .tr {
-    position: absolute;
-    top: -4.5px;
-    right: 10px;
-    transform: rotate(45deg);
-    width: 7px;
-    height: 7px;
-    border: 1px solid #cfcfcf;
-    border-bottom: none;
-    border-right: none;
-    background-color: white;
+  position: absolute;
+  top: -4.5px;
+  right: 10px;
+  transform: rotate(45deg);
+  width: 7px;
+  height: 7px;
+  border: 1px solid #cfcfcf;
+  border-bottom: none;
+  border-right: none;
+  background-color: white;
 }
 
 .dropdownBtn {
-    user-select: none;
-    cursor: pointer;
-    transition: 0.2s ease-in;
-    background: none;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  background: none;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
 }
 
 .dropdownCardBtn {
-    height: 24px;
+  height: 24px;
 }
 
 li {
-    display: flex;
-    align-items: center;
-    list-style-type: none;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 24px;
-    margin-bottom: 16px;
-    user-select: none;
-    cursor: pointer;
-    transition: 0.1s ease-in;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 16px;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.1s ease-in;
 }
 
 .icon {
-    margin-right: 14px;
-    width: 16px;
-    height: 16px;
+  margin-right: 14px;
+  width: 16px;
+  height: 16px;
 }
 
 .active {
-    color: #366eff;
+  color: #366eff;
 }
 
 a {
-    color: #000;
-    text-decoration: none;
+  color: #000;
+  text-decoration: none;
 }
 
 .dropdownPacks {
-    width: 122px;
-    height: 136px;
+  width: 122px;
+  height: 136px;
 }
