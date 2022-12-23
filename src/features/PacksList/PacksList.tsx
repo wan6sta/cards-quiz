@@ -38,7 +38,6 @@ import { TableLoader } from '../../shared/ui/TableLoader/TableLoader'
 import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
 import { setPackUserId } from '../CardList/slice/cardsSlice'
 import { useUlrParams } from './hooks/useUrlParams'
-import { getPacksPageSelector } from './selectors/getPacksPageSelector'
 import { getAuthIdSelector } from '../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
 
 export const PacksList: FC = props => {
@@ -46,7 +45,6 @@ export const PacksList: FC = props => {
   const { search } = useLocation()
   const data = useAppSelector(getPacksSelector)
   const urlParams = useUlrParams()
-  const packPage = useAppSelector(getPacksPageSelector)
   const userId = useAppSelector(getAuthIdSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
@@ -76,10 +74,10 @@ export const PacksList: FC = props => {
   }, [sorting, search])
 
   useEffect(() => {
-    if (packData?.cardPacks.length === 0) {
+    if (packData?.cardPacks.length === 0 && packData.page > 1) {
       setSearchParams({
         ...urlParams,
-        [AppFilters.page]: String(packPage - 1)
+        [AppFilters.page]: String(packData.page - 1)
       })
     }
   }, [packData])
