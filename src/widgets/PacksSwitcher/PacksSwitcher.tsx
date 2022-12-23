@@ -42,7 +42,7 @@ export const PacksSwitcher: FC = props => {
           identity
         )
       )
-    }, 250),
+    }, 350),
     [setSearchParams]
   )
 
