@@ -19,7 +19,7 @@ import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/DebouncedT
 import { RemoveFilterBtn } from '../../widgets/RemoveFilterBtn/RemoveFilterBtn'
 import { AddNewPack } from '../../features/PacksList/ui/AddNewPack/AddNewPack'
 
-export const PacksListPage: FC = props => {
+export const PacksListPage: FC = () => {
   return (
     <StyledPacksListPage>
       <TitleWrapper>

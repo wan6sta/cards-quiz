@@ -12,7 +12,6 @@ export const StarRating: FC<Props> = props => {
   const [rating, setRating] = useState(grade)
   const [hover, setHover] = useState(0)
 
-  console.log(grade)
   return (
     <StyledStarWrapper>
       {[...Array(5)].map((star, index) => {

@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react'
+import { FC } from 'react'
 import { Title } from '../../shared/ui/Title/Title'
 import { Button } from '../../shared/ui/Button/Button'
 import { Span } from '../../shared/ui/Span/Span'
@@ -19,25 +19,21 @@ import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSe
 import { getPackName } from '../../features/CardList/selectors/getPackName'
 import { Dropdown } from '../../widgets/Dropdown/Dropdown'
 import { StyledTitleWrapper } from './StyledCardsListPage'
-import { getAuthIdSelector } from '../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
-import { getCardUserIdSelector } from '../../features/CardList/selectors/getCardUserIdSelector'
 import { CreateNewCard } from '../../features/CardList/ui/CreateNewCard/CreateNewCard'
+import { useIsMyPack } from '../../app/providers/StoreProvider/hooks/useIsMyPack'
 
-export const CardsListPage: FC = props => {
-  const packName = useAppSelector(getPackName)
-  const authId = useAppSelector(getAuthIdSelector)
-  const userPackId = useAppSelector(getCardUserIdSelector)
-
-  const isMyPack = authId === userPackId
+export const CardsListPage: FC = () => {
+  const packName = useAppSelector(getPackName).slice(0, 25)
+  const isMyPack = useIsMyPack()
 
   return (
     <StyledPacksListPage>
-      <BackToLink alignSelf='flex-start' marginBottom='27px'>
+      <BackToLink marginBottom='27px'>
         Back to Packs List
       </BackToLink>
       <TitleWrapper>
         <StyledTitleWrapper>
-          <Title>{packName.slice(0, 25)}</Title>
+          <Title>{packName}</Title>
           {isMyPack ? <Dropdown /> : null}
         </StyledTitleWrapper>
         <ButtonWrapper>
