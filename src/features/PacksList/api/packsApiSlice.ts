@@ -21,7 +21,6 @@ import { identity, pickBy } from 'lodash-es'
 import {
   setCardsMaxCount,
   setCardsMinCount,
-  setPage,
   setTotalPacksCount,
   setUserPack
 } from '../slice/packsSlice'
@@ -52,8 +51,6 @@ export const packsApiSlice = createApi({
           dispatch(setTotalPacksCount(data.cardPacksTotalCount))
           dispatch(setCardsMinCount(data.minCardsCount))
           dispatch(setCardsMaxCount(data.maxCardsCount))
-          dispatch(setPage(data.page))
-          // dispatch(resetCardState())
         } catch {}
       },
       providesTags: result => ['Cards']

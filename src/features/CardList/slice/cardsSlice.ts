@@ -7,7 +7,6 @@ interface Initial {
   packName: string
   cardsTotalCount: number
   cardPackId: string
-  page: number
 }
 
 const initialState: Initial = {
@@ -15,8 +14,7 @@ const initialState: Initial = {
   packUserId: '',
   packName: '',
   cardsTotalCount: 0,
-  cardPackId: '',
-  page: 1
+  cardPackId: ''
 }
 
 export const cardsSlice = createSlice({
@@ -43,9 +41,6 @@ export const cardsSlice = createSlice({
       state.packName = ''
       state.packUserId = ''
       state.cardsTotalCount = 0
-    },
-    setCardsPage: (state, action: PayloadAction<number>) => {
-      state.page = action.payload
     }
   }
 })
@@ -55,6 +50,5 @@ export const {
   setPackUserId,
   setCards,
   resetCardState,
-  setCardPackId,
-  setCardsPage
+  setCardPackId
 } = cardsSlice.actions

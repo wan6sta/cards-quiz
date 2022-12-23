@@ -82,7 +82,6 @@ export const CardsList: FC = () => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [searchParams, setSearchParams] = useSearchParams()
   const urlParams = useUlrParams()
-  const cardsPage = useAppSelector(getCardsPageSelector)
   const { packId } = useParams()
   const { search } = useLocation()
   const data = useAppSelector(getCardsSelector)
@@ -107,10 +106,10 @@ export const CardsList: FC = () => {
   }, [search])
 
   useEffect(() => {
-    if (cardsData?.cards.length === 0) {
+    if (cardsData?.cards.length === 0 && cardsData.page > 1) {
       setSearchParams({
         ...urlParams,
-        [AppFilters.page]: String(cardsPage - 1)
+        [AppFilters.page]: String(cardsData.page - 1)
       })
     }
   }, [cardsData])

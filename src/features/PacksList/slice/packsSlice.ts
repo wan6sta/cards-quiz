@@ -6,15 +6,13 @@ interface Initial {
   totalPacksCount: number
   cardsMinCount: number
   cardsMaxCount: number
-  page: number
 }
 
 const initialState: Initial = {
   userPack: [],
   totalPacksCount: 0,
   cardsMinCount: 0,
-  cardsMaxCount: 0,
-  page: 1
+  cardsMaxCount: 0
 }
 
 export const packsSlice = createSlice({
@@ -32,9 +30,6 @@ export const packsSlice = createSlice({
     },
     setCardsMaxCount: (state, action: PayloadAction<number>) => {
       state.cardsMaxCount = action.payload
-    },
-    setPage: (state, action: PayloadAction<number>) => {
-      state.page = action.payload
     }
   }
 })
@@ -42,6 +37,5 @@ export const {
   setUserPack,
   setTotalPacksCount,
   setCardsMinCount,
-  setCardsMaxCount,
-  setPage
+  setCardsMaxCount
 } = packsSlice.actions

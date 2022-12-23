@@ -22,7 +22,6 @@ import {
 import {
   setCardPackId,
   setCards,
-  setCardsPage,
   setCardsTotalCount,
   setPackName,
   setPackUserId
@@ -52,7 +51,6 @@ export const cardApiSlice = createApi({
           dispatch(setCardPackId(String(data.cardPackId)))
           dispatch(setPackName(data.packName))
           dispatch(setPackUserId(data.packUserId))
-          dispatch(setCardsPage(data.page))
         } catch {}
       },
       providesTags: result => ['Card']
