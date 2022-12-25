@@ -12,6 +12,7 @@ interface FlexProps {
   cursorPointer?: boolean
   onClick?: MouseEventHandler<HTMLDivElement>
   margin?: string
+  padding?: string
   width?: string
   height?: string
 }

@@ -13,6 +13,7 @@ interface StyledFlexProps {
   width?: string
   height?: string
   margin?: string
+  padding?: string
 }
 
 export const StyledFlex = styled.div<StyledFlexProps>`
@@ -30,5 +31,6 @@ export const StyledFlex = styled.div<StyledFlexProps>`
   column-gap: ${props => (props.rowGap ? props.rowGap : '0')};
   cursor: ${props => (props.cursorPointer ? 'pointer' : 'default')};
   margin: ${props => (props.margin ? props.margin : '0px')};
+  padding: ${props => (props.padding ? props.padding : '0px')};
   ${props => props && css``}
 `
