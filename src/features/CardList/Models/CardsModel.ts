@@ -15,7 +15,7 @@ export interface Card {
   rating?: number
   more_id?: string
   created?: string
-  updated?: string
+  updated: string
   __v?: number
 }
 
@@ -64,12 +64,6 @@ export interface NewCard {
   __v: number
 }
 
-export interface CreateCardResponse {
-  newCard: NewCard
-  token: string
-  tokenDeathTime: number
-}
-
 export interface CardApiPayload<T> {
   card: T
 }
@@ -108,6 +102,19 @@ export interface DeleteCardResponse {
   tokenDeathTime: number
 }
 
+export interface UpdateCardResponse {
+  updatedCard: UpdatedCard
+  token: string
+  tokenDeathTime: number
+}
+
+export interface CreateCardResponse {
+  newCard: NewCard
+  token: string
+  tokenDeathTime: number
+}
+
+
 export interface UpdatedCard {
   _id: string
   cardsPack_id: string
@@ -127,12 +134,6 @@ export interface UpdatedCard {
   answerVideo: string
   questionImg: string
   questionVideo: string
-}
-
-export interface UpdateCardResponse {
-  updatedCard: UpdatedCard
-  token: string
-  tokenDeathTime: number
 }
 
 export interface UpdateCard {
