@@ -12,7 +12,7 @@ export const StyledModalWrapper = styled.div<StyledModalWrapperProps>`
   bottom: 0;
   left: 0;
   right: 0;
-  background: #3D3D3D
+  background: rgba(0, 0, 0, 0.8);
 
   ${props => props && css``}
 `
