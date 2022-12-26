@@ -6,7 +6,7 @@ import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../../../shared/models/ErrorModel'
 import { useState } from 'react'
-import { AddPackModal } from '../../AddPackModal/AddPackModal'
+import { AddPackModal } from './AddPackModal/AddPackModal'
 import { Modal } from '../../../../widgets/Modal/Modal'
 
 export const AddNewPack = () => {

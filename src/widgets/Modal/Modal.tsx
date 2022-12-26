@@ -10,13 +10,15 @@ import { Flex } from '../../shared/ui/Flex/Flex'
 interface MyModalProps {
   isOpen: boolean
   title: string
+  buttonMode?: string
   toggleClose: () => void
   actionCallback: () => void
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export const Modal: FC<MyModalProps> = props => {
-  const { children, isOpen, toggleClose, title, actionCallback } = props
+  const { children, isOpen, toggleClose, title, actionCallback, buttonMode } =
+    props
 
   return (
     <>
@@ -39,7 +41,15 @@ export const Modal: FC<MyModalProps> = props => {
                 <Button width={'120px'} secondary onClick={toggleClose}>
                   Cancel
                 </Button>
-                <Button width={'120px'} onClick={actionCallback}>Save</Button>
+                {buttonMode === 'danger' ? (
+                  <Button danger width={'120px'} onClick={actionCallback}>
+                    Delete
+                  </Button>
+                ) : (
+                  <Button width={'120px'} onClick={actionCallback}>
+                    Save
+                  </Button>
+                )}
               </Flex>
             </Dialog.Panel>
           </ModalWrapper>

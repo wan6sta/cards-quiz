@@ -1,11 +1,13 @@
 import { useUpdateCardsPackMutation } from '../../api/packsApiSlice'
 import { LinearPageLoader } from '../../../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { ReactComponent as EditIcon } from '../../../../shared/assets/icons/EditIcon.svg'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useUpdateCardMutation } from '../../../CardList/api/cardApiSlice'
 import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../../../shared/models/ErrorModel'
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert'
+import { Modal } from '../../../../widgets/Modal/Modal'
+import { AddPackModal } from '../AddNewPack/AddPackModal/AddPackModal'
 
 interface EditPackProps {
   Id: string
@@ -15,6 +17,8 @@ interface EditPackProps {
 
 // Add error
 export const EditActionIcon: FC<EditPackProps> = props => {
+  const [isOpen, setIsOpen] = useState(false)
+
   const { Id, cards, dropdown } = props
   const [updatePack, { isLoading, error: updatePackError }] =
     useUpdateCardsPackMutation()
@@ -44,20 +48,34 @@ export const EditActionIcon: FC<EditPackProps> = props => {
     (updateCardError as FetchError)?.data?.error
   )
 
+  const toggleOpen = () => {
+    setIsOpen(true)
+  }
+  const toggleClose = () => {
+    setIsOpen(false)
+  }
   return (
     <>
       {!cards && (
         <>
           {isLoading ? <LinearPageLoader /> : null}
-          <EditIcon onClick={editPackHandler} />
+          <EditIcon onClick={toggleOpen} />
         </>
       )}
       {cards && (
         <>
           {isCardsLoading ? <LinearPageLoader /> : null}
-          <EditIcon onClick={onUpdateCardHandler} />
+          <EditIcon onClick={toggleOpen} />
         </>
       )}
+      <Modal
+        isOpen={isOpen}
+        title={'Edit pack'}
+        toggleClose={toggleClose}
+        actionCallback={editPackHandler}
+      >
+        <AddPackModal />
+      </Modal>
       <ErrorAlert errorMessage={errorPackHandler} />
       <ErrorAlert errorMessage={errorCardHandler} />
     </>

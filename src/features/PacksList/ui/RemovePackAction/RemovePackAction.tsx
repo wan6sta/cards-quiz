@@ -1,11 +1,13 @@
 import { useDeleteCardPackMutation } from '../../api/packsApiSlice'
 import { LinearPageLoader } from '../../../../shared/ui/LinearPageLoader/LinearPageLoader'
 import { ReactComponent as DeleteIcon } from '../../../../shared/assets/icons/Trash.svg'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useDeleteCardMutation } from '../../../CardList/api/cardApiSlice'
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../../../shared/models/ErrorModel'
+import { Modal } from '../../../../widgets/Modal/Modal'
+import { RemovePackModal } from './RemovePackModal/RemovePackModal'
 
 interface RemovePackProps {
   id: string
@@ -14,6 +16,7 @@ interface RemovePackProps {
 
 // Add error
 export const RemovePackAction: FC<RemovePackProps> = props => {
+  const [isOpen, setIsOpen] = useState(false)
   const { id, cards } = props
   const [removePack, { isLoading, error: removePackError }] =
     useDeleteCardPackMutation()
@@ -36,12 +39,19 @@ export const RemovePackAction: FC<RemovePackProps> = props => {
     (removeCardError as FetchError)?.data?.error
   )
 
+  const toggleClose = () => {
+    setIsOpen(false)
+  }
+  const toggleOpen = () => {
+    setIsOpen(true)
+  }
+
   return (
     <>
       {!cards && (
         <>
           {isLoading ? <LinearPageLoader /> : null}
-          <DeleteIcon onClick={deletePackHandler} />{' '}
+          <DeleteIcon onClick={toggleOpen} />{' '}
         </>
       )}
       {cards && (
@@ -50,6 +60,15 @@ export const RemovePackAction: FC<RemovePackProps> = props => {
           <DeleteIcon onClick={onDeleteCardHandler} />
         </>
       )}
+      <Modal
+        buttonMode={'danger'}
+        title={'Delete pack'}
+        toggleClose={toggleClose}
+        isOpen={isOpen}
+        actionCallback={onDeleteCardHandler}
+      >
+        <RemovePackModal />
+      </Modal>
       <ErrorAlert errorMessage={errorPackHandler} />
       <ErrorAlert errorMessage={errorCardHandler} />
     </>
