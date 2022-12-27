@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Listbox } from '@headlessui/react'
-import cls from './PerPageSelect.module.css'
-import { ReactComponent as ArrowDown } from '../../../shared/assets/icons/ArrowDown.svg'
-import { useSearchParams } from 'react-router-dom'
 import { identity, pickBy } from 'lodash-es'
-import { AppFilters } from 'features/PacksList/models/FiltersModel'
-import { useUlrParams } from 'features/PacksList/hooks/useUrlParams'
-import { cn } from 'shared/lib/cn/cn'
+import { useSearchParams } from 'react-router-dom'
+import { Listbox } from '@headlessui/react'
+import { ReactComponent as ArrowDown } from '@/shared/assets/icons/ArrowDown.svg'
+import { cn } from '@/shared/lib/cn/cn'
+import { AppFilters } from '@/features/PacksList/models/FiltersModel'
+import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
+import cls from './PerPageSelect.module.css'
 
 const cardsCount = [
   { id: 1, name: '10', unavailable: false },

@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Title } from '../../shared/ui/Title/Title'
 import { Button } from '../../shared/ui/Button/Button'
 import { Span } from '../../shared/ui/Span/Span'
-import { Pagination } from '../../widgets/Pagination/ui/Pagination'
+import { Pagination } from '../../widgets/Pagination/ui/Pagination/Pagination'
 import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/DebouncedTableInput'
 import { ButtonWrapper } from '../../features/PacksList/ui/AddNewPack/StyledAddNewPack'
 import {

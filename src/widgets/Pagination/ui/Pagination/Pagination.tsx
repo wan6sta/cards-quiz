@@ -1,7 +1,7 @@
 import { FC } from 'react'
-import { PerPageSelect } from 'widgets/PerPageSelect/ui/PerPageSelect'
-import { PaginatedItems } from './PaginatedItems'
-import cls from './Pagination.module.css'
+import { PerPageSelect } from '@/widgets/PerPageSelect'
+import { PaginatedItems } from '../PaginatedItems/PaginatedItems'
+import { SelectWrapper, StyledPagination } from './StyledPagination'
 
 interface PaginationProps {
   titleForSelectSpan?: string
@@ -11,13 +11,13 @@ export const Pagination: FC<PaginationProps> = props => {
   const { titleForSelectSpan } = props
 
   return (
-    <div className={cls.paginateWrapper}>
+    <StyledPagination>
       <PaginatedItems />
-      <div className={cls.selectWrapper}>
+      <SelectWrapper>
         <span>Show</span>
         <PerPageSelect />
         <span>{titleForSelectSpan}</span>
-      </div>
-    </div>
+      </SelectWrapper>
+    </StyledPagination>
   )
 }

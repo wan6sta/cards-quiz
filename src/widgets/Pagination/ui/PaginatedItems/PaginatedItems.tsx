@@ -1,32 +1,33 @@
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useCallback, useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
-import cls from './Pagination.module.css'
-import { ReactComponent as RightIcon } from '../../../shared/assets/icons/RightArrowI.svg'
-import { ReactComponent as LeftIcon } from '../../../shared/assets/icons/LeftArrow.svg'
 import { debounce } from 'lodash-es'
-import {AppFilters} from "features/PacksList/models/FiltersModel";
-import {getTotalPacksCountSelector} from "features/PacksList/selectors/getTotalPacksCountSelector";
-import {useAppSelector} from "app/providers/StoreProvider/hooks/useAppSelector";
-import {useUlrParams} from "features/PacksList/hooks/useUrlParams";
+import { ReactComponent as RightIcon } from '@/shared/assets/icons/RightArrowI.svg'
+import { ReactComponent as LeftIcon } from '@/shared/assets/icons/LeftArrow.svg'
+import { AppFilters } from '@/features/PacksList/models/FiltersModel'
+import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
+import { getTotalPacksCountSelector } from '@/features/PacksList/selectors/getTotalPacksCountSelector'
+import { useAppSelector } from '@/app/providers/StoreProvider/hooks/useAppSelector'
+import cls from './PaginatedItems.module.css'
 
 export function PaginatedItems() {
   const [searchParams, setSearchParams] = useSearchParams()
-
   const { packId } = useParams()
-
-  const [itemsPerPage, setItemsPerPage] = useState(
-    Number(searchParams.get(AppFilters.perPage)) || 10
-  )
-  const initialValue = 0
   const urlParams = useUlrParams()
+  const urlItemsPerPage = Number(searchParams.get(AppFilters.perPage))
+
+  const [itemsPerPage, setItemsPerPage] = useState(urlItemsPerPage || 10)
+
+  const initialValue = 0
   const urlPageParams = Number(searchParams.get(AppFilters.page))
+
   const packsCount =
     useAppSelector(getTotalPacksCountSelector(packId || '')) || 1
 
   useEffect(() => {
-    setItemsPerPage(Number(searchParams.get(AppFilters.perPage)) || 10)
-  }, [searchParams.get(AppFilters.perPage)])
+    setItemsPerPage(urlItemsPerPage || 10)
+  }, [urlItemsPerPage])
+
   const pageCount = Math.ceil(packsCount / itemsPerPage)
 
   const handlePageClick = useCallback(
@@ -37,7 +38,6 @@ export function PaginatedItems() {
   )
 
   return (
-    <>
       <ReactPaginate
         breakLabel='...'
         nextLabel={
@@ -58,6 +58,5 @@ export function PaginatedItems() {
         className={cls.ul}
         activeClassName={cls.active}
       />
-    </>
   )
 }

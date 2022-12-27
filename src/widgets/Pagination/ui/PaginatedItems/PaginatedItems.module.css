@@ -1,20 +1,3 @@
-.paginateWrapper {
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  column-gap: 30px;
-  height: 24px;
-}
-
-.selectWrapper {
-  user-select: none;
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  column-gap: 5px;
-  font-weight: 500;
-}
-
 .prev {
   width: 37px;
   height: 24px;
