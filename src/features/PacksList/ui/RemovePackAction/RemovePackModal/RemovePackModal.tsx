@@ -1,6 +1,6 @@
-import { Flex } from '../../../../../shared/ui/Flex/Flex'
-import { Span } from '../../../../../shared/ui/Span/Span'
 import { FC } from 'react'
+import { Flex } from '@/shared/ui/Flex/Flex'
+import { Span } from '@/shared/ui/Span/Span'
 
 interface RemovePackModalProps {
   packName?: string

@@ -15,7 +15,7 @@ import { DebouncedTableInput } from '@/widgets/DeboucedTableInput'
 import { PacksSwitcher } from '@/widgets/PacksSwitcher'
 import { RemoveFilterBtn } from '@/widgets/RemoveFilterBtn'
 import { DoubleRange } from '@/widgets/DoubleRange'
-import { PacksList } from '@/features/PacksList/PacksList'
+import { PacksList } from '@/features/PacksList/ui/PacksList/PacksList'
 import { Pagination } from '@/widgets/Pagination'
 
 export const PacksListPage = () => {

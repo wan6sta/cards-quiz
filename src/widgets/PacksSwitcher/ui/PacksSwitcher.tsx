@@ -1,7 +1,7 @@
 import { FC, useCallback, useLayoutEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { debounce, identity, pickBy } from 'lodash-es'
-import { AppFilters } from '@/features/PacksList/models/FiltersModel'
+import { AppFilters } from '@/features/PacksList/model/types/FiltersModel'
 import { Flex } from '@/shared/ui/Flex/Flex'
 import { Span } from '@/shared/ui/Span/Span'
 import { StyledPack, StyledPacksSwitcher } from './StyledPacksSwitcher'

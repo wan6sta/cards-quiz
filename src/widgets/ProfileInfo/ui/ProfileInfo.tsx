@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import GithubIcon from '@/shared/assets/icons/GithubIcon.png'
 import { useAppSelector } from '@/shared/hooks/useAppSelector'
-import { authUserDataSelector } from '@/app/api/authSlice/selectors/authUserDataSelector'
+import { authUserData } from '@/app/api/authSlice/selectors/authUserData'
 import { Dropdown } from '@/widgets/Dropdown/ui/Dropdown'
 import { StyledProfileInfo } from '@/widgets/ProfileInfo/ui/StyledProfileInfo'
 import { ImgWrapper } from '@/shared/ui/ImgWrapper/ImgWrapper'
 
 export const ProfileInfo: FC = () => {
-  const userData = useAppSelector(authUserDataSelector)
+  const userData = useAppSelector(authUserData)
 
   return (
     <Dropdown nav>

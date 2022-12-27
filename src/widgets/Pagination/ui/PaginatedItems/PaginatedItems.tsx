@@ -4,9 +4,9 @@ import ReactPaginate from 'react-paginate'
 import { debounce } from 'lodash-es'
 import { ReactComponent as RightIcon } from '@/shared/assets/icons/RightArrowI.svg'
 import { ReactComponent as LeftIcon } from '@/shared/assets/icons/LeftArrow.svg'
-import { AppFilters } from '@/features/PacksList/models/FiltersModel'
-import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
-import { getTotalPacksCountSelector } from '@/features/PacksList/selectors/getTotalPacksCountSelector'
+import { AppFilters } from '@/features/PacksList/model/types/FiltersModel'
+import { useUlrParams } from '@/features/PacksList/model/hooks/useUrlParams'
+import { getTotalPacksCount } from '@/features/PacksList/model/selectors/getTotalPacksCount'
 import { useAppSelector } from '@/shared/hooks/useAppSelector'
 import cls from './PaginatedItems.module.css'
 
@@ -22,7 +22,7 @@ export function PaginatedItems() {
   const urlPageParams = Number(searchParams.get(AppFilters.page))
 
   const packsCount =
-    useAppSelector(getTotalPacksCountSelector(packId || '')) || 1
+    useAppSelector(getTotalPacksCount(packId || '')) || 1
 
   useEffect(() => {
     setItemsPerPage(urlItemsPerPage || 10)

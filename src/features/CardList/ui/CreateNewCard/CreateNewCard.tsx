@@ -1,18 +1,20 @@
 import { FC } from 'react'
-import { Button } from '../../../../shared/ui/Button/Button'
+import { useParams } from 'react-router-dom'
 import { useCreateCardMutation } from '../../api/cardApiSlice'
 import {
   StyledCreateNewCard,
   StyledCreateNewCardWrapper
 } from './StyledCreateNewCard'
-import { Span } from '../../../../shared/ui/Span/Span'
-import { useParams } from 'react-router-dom'
+import { Span } from '@/shared/ui/Span/Span'
+import { Button } from '@/shared/ui/Button/Button'
 
 interface CreateNewCardProps {
   text?: boolean
 }
 
-export const CreateNewCard: FC<CreateNewCardProps> = ({ text }) => {
+export const CreateNewCard: FC<CreateNewCardProps> = props => {
+  const { text } = props
+
   const [createCard] = useCreateCardMutation()
   const { packId } = useParams()
 

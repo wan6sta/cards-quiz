@@ -1,13 +1,13 @@
-import { useUpdateCardsPackMutation } from '../../api/packsApiSlice'
-import { LinearPageLoader } from '../../../../widgets/LinearPageLoader/ui/LinearPageLoader'
-import { ReactComponent as EditIcon } from '../../../../shared/assets/icons/EditIcon.svg'
 import { FC, useState } from 'react'
-import { useUpdateCardMutation } from '../../../CardList/api/cardApiSlice'
-import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/errorMessageHandler'
-import { FetchError } from '../../../../shared/models/ErrorModel'
-import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert'
-import { Modal } from '../../../../widgets/Modal/ui/Modal/Modal'
+import { ReactComponent as EditIcon } from '@/shared/assets/icons/EditIcon.svg'
 import { AddPackModal } from '../AddNewPack/AddPackModal/AddPackModal'
+import { useUpdateCardsPackMutation } from '@/features/PacksList'
+import { useUpdateCardMutation } from '@/features/CardList'
+import { errorMessageHandler } from '@/shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '@/shared/types/ErrorModel'
+import { LinearPageLoader } from '@/widgets/LinearPageLoader'
+import { Modal } from '@/widgets/Modal/ui'
+import { ErrorAlert } from '@/shared/ui/ErrorAlert/ErrorAlert'
 
 interface EditPackProps {
   Id: string
@@ -15,7 +15,6 @@ interface EditPackProps {
   dropdown?: boolean
 }
 
-// Add error
 export const EditActionIcon: FC<EditPackProps> = props => {
   const [isOpen, setIsOpen] = useState(false)
 

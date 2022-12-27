@@ -1,13 +1,13 @@
-import { Button } from '../../../../shared/ui/Button/Button'
 import { ButtonWrapper } from './StyledAddNewPack'
-import { useCreateCardPackMutation } from '../../api/packsApiSlice'
-import { LinearPageLoader } from '../../../../widgets/LinearPageLoader/ui/LinearPageLoader'
-import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert'
-import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/errorMessageHandler'
-import { FetchError } from '../../../../shared/models/ErrorModel'
 import { useState } from 'react'
 import { AddPackModal } from './AddPackModal/AddPackModal'
-import { Modal } from '../../../../widgets/Modal/ui/Modal/Modal'
+import { useCreateCardPackMutation } from '@/features/PacksList'
+import { errorMessageHandler } from '@/shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '@/shared/types/ErrorModel'
+import { LinearPageLoader } from '@/widgets/LinearPageLoader'
+import { Button } from '@/shared/ui/Button/Button'
+import { Modal } from '@/widgets/Modal/ui'
+import { ErrorAlert } from '@/shared/ui/ErrorAlert/ErrorAlert'
 
 export const AddNewPack = () => {
   const [isOpen, setIsOpen] = useState(false)

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { UserLoggedInResponse } from '@/features/Login/models/loginModels'
+import { UserLoggedInResponse } from '@/features/Login/model/types/loginModels'
 
 interface Initial {
   userData: undefined | UserLoggedInResponse

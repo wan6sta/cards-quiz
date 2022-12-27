@@ -2,20 +2,20 @@ import Range from 'rc-slider'
 import { useSearchParams } from 'react-router-dom'
 import { useCallback, useEffect, useState } from 'react'
 import { debounce, identity, isArray, pickBy } from 'lodash-es'
-import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
+import { useUlrParams } from '@/features/PacksList/model/hooks/useUrlParams'
 import { useAppSelector } from '@/shared/hooks/useAppSelector'
-import { AppFilters } from '@/features/PacksList/models/FiltersModel'
+import { AppFilters } from '@/features/PacksList/model/types/FiltersModel'
 import { Span } from '@/shared/ui/Span/Span'
 import cls from './DoubleRange.module.css'
 import './index.css'
-import { getMinMaxCountSelector } from '@/features/PacksList/selectors/getMinMaxCountSelector'
+import { getUrlMinMaxCount } from '@/features/PacksList/model/selectors/getUrlMinMaxCount'
 
 type Value = number | number[]
 
 export const DoubleRange = () => {
   const urlParams = useUlrParams()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [minCount, maxCount] = useAppSelector(getMinMaxCountSelector)
+  const [minCount, maxCount] = useAppSelector(getUrlMinMaxCount)
 
   const [min, setMin] = useState(minCount)
   const [max, setMax] = useState(maxCount)

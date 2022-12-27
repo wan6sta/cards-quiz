@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { ReactComponent as RemoveFilter } from '@/shared/assets/icons/FilterRemove.svg'
-import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
+import { useUlrParams } from '@/features/PacksList/model/hooks/useUrlParams'
 import { RemoveFilterWrapper } from './StyledRemoveFilterBtn'
 
 export const RemoveFilterBtn = () => {

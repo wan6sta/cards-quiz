@@ -7,9 +7,9 @@ import {
 import {
   RegisterUserPayload,
   RegistrationResponseType
-} from '../models/registrationModels'
-import { FetchError } from '../../../shared/models/ErrorModel'
-import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
+} from '../model/types/registrationModels'
+import { BASE_URL } from '@/shared/assets/constants/BASE_URL'
+import { FetchError } from '@/shared/types/ErrorModel'
 
 export const registerApiSlice = createApi({
   reducerPath: 'register/api',

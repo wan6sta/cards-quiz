@@ -4,10 +4,10 @@ import {
   FetchArgs,
   fetchBaseQuery
 } from '@reduxjs/toolkit/dist/query/react'
-import { LoginPayload, UserLoggedInResponse } from '../models/loginModels'
-import { FetchError } from '../../../shared/models/ErrorModel'
-import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
-import { setUserData } from '../../../app/api/authSlice/slice/authSlice'
+import { LoginPayload, UserLoggedInResponse } from '../model/types/loginModels'
+import { BASE_URL } from '@/shared/assets/constants/BASE_URL'
+import { setUserData } from '@/app/api/authSlice'
+import { FetchError } from '@/shared/types/ErrorModel'
 
 export const loginApiSlice = createApi({
   reducerPath: 'login/api',

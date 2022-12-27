@@ -4,10 +4,10 @@ import {
   FetchArgs,
   fetchBaseQuery
 } from '@reduxjs/toolkit/dist/query/react'
-import { FetchError } from '@/shared/models/ErrorModel'
+import { FetchError } from '@/shared/types/ErrorModel'
 import { BASE_URL } from '@/shared/assets/constants/BASE_URL'
-import { UserLoggedInResponse } from '@/features/Login/models/loginModels'
 import { removeUserData, setUserData } from '../slice/authSlice'
+import { UserLoggedInResponse } from '@/features/Login/model/types/loginModels'
 
 export const authMeApiSlice = createApi({
   reducerPath: 'authMe/api',

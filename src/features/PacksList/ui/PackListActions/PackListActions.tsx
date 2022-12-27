@@ -1,12 +1,13 @@
 import { FC } from 'react'
-import { useAppSelector } from '../../../../shared/hooks/useAppSelector'
 import {
   StyledIconPackWrapper,
   StyledIconsWrapper
-} from '../../StyledPacksList'
+} from '../PacksList/StyledPacksList'
 import { RemovePackAction } from '../RemovePackAction/RemovePackAction'
-import { ReactComponent as LearnIcon } from '../../../../shared/assets/icons/TeacherIcon.svg'
+import { ReactComponent as LearnIcon } from '@/shared/assets/icons/TeacherIcon.svg'
 import { EditActionIcon } from '../EditAction/EditActionIcon'
+import { useAppSelector } from '@/shared/hooks/useAppSelector'
+import { getAuthId } from '@/app/api/authSlice'
 
 interface Props {
   packCreatorId: string
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export const PackListActions: FC<Props> = props => {
-  const userId = useAppSelector(state => state.auth.userData?._id)
+  const userId = useAppSelector(getAuthId)
 
   const { packsId, packCreatorId } = props
   return (

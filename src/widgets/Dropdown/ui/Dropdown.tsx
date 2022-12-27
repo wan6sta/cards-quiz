@@ -14,9 +14,9 @@ import {
   useUpdateCardsPackMutation
 } from '@/features/PacksList/api/packsApiSlice'
 import { AppPaths } from '@/app/providers/AppRouter/config/routerConfig'
-import { setPackName } from '@/features/CardList/slice/cardsSlice'
+import { setPackName } from '@/features/CardList/model/slice/cardsSlice'
 import { errorMessageHandler } from '@/shared/lib/errorMessageHandler/errorMessageHandler'
-import { FetchError } from '@/shared/models/ErrorModel'
+import { FetchError } from '@/shared/types/ErrorModel'
 import { LinearPageLoader } from '@/widgets/LinearPageLoader/ui/LinearPageLoader'
 import { cn } from '@/shared/lib/cn/cn'
 import { ErrorAlert } from '@/shared/ui/ErrorAlert/ErrorAlert'

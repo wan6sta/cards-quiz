@@ -1,13 +1,13 @@
+import { flexRender, Table } from '@tanstack/react-table'
+import { Card } from '../../model/types/CardsModel'
+import { ReactComponent as TrDown } from '@/shared/assets/icons/TrDown.svg'
+import { ReactComponent as TrUp } from '@/shared/assets/icons/TrUp.svg'
 import {
   StyledHeadTr,
   StyledTh,
   StyledThead,
   StyledTitleWrapper
-} from '../../../PacksList/StyledPacksList'
-import { flexRender, Table } from '@tanstack/react-table'
-import { Card } from '../../Models/CardsModel'
-import { ReactComponent as TrDown } from '../../../../shared/assets/icons/TrDown.svg'
-import { ReactComponent as TrUp } from '../../../../shared/assets/icons/TrUp.svg'
+} from '@/features/PacksList/ui/PacksList/StyledPacksList'
 
 interface Props {
   table: Table<Card>

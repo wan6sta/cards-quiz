@@ -4,8 +4,6 @@ import {
   FetchArgs,
   fetchBaseQuery
 } from '@reduxjs/toolkit/dist/query/react'
-import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
-import { FetchError } from '../../../shared/models/ErrorModel'
 import {
   ArgsForGetCards,
   ArgsForPackBodyRequest,
@@ -16,16 +14,18 @@ import {
   PacksResponse,
   UpdatePack,
   UpdatePackResponse
-} from '../models/packModel'
+} from '../model/types/packModel'
 import { identity, pickBy } from 'lodash-es'
 import {
   setCardsMaxCount,
   setCardsMinCount,
   setTotalPacksCount,
   setUserPack
-} from '../slice/packsSlice'
-import { convertPacksData } from '../lib/convertPacksData'
-import {setAppIsLoading} from "app/providers/StoreProvider/appSlice/appSlice";
+} from '../model/slice/packsSlice'
+import { convertPacksData } from '../model/lib/convertPacksData'
+import { BASE_URL } from '@/shared/assets/constants/BASE_URL'
+import { FetchError } from '@/shared/types/ErrorModel'
+import { setAppIsLoading } from '@/app/api/appSlice'
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -105,6 +105,5 @@ export const {
   useGetPacksQuery,
   useCreateCardPackMutation,
   useDeleteCardPackMutation,
-  useUpdateCardsPackMutation,
-  useLazyGetPacksQuery
+  useUpdateCardsPackMutation
 } = packsApiSlice

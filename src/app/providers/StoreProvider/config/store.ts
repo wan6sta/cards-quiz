@@ -1,15 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { registerApiSlice } from '@/features/Registration/api/registerApiSlice'
-import { loginApiSlice } from '@/features/Login/api/loginApiSlice'
-import { forgotApiSlice } from '@/features/PasswordUpdate/api/forgotPassApiSlice'
-import { profileSlice } from '@/features/Profile/api/profileSlice'
-import { packsApiSlice } from '@/features/PacksList/api/packsApiSlice'
-import { cardApiSlice } from '@/features/CardList/api/cardApiSlice'
-import { packsSlice } from '@/features/PacksList/slice/packsSlice'
-import { cardsSlice } from '@/features/CardList/slice/cardsSlice'
 import { authMeApiSlice, authSlice } from '@/app/api/authSlice'
 import { appSlice } from '@/app/api/appSlice'
+import { registerApiSlice } from '@/features/Registration'
+import { loginApiSlice } from '@/features/Login'
+import { forgotApiSlice } from '@/features/PasswordUpdate'
+import { profileSlice } from '@/features/Profile'
+import { packsApiSlice, packsSlice } from '@/features/PacksList'
+import { cardApiSlice, cardsSlice } from '@/features/CardList'
 
 export const store = configureStore({
   reducer: {

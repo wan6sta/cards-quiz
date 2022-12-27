@@ -1,14 +1,15 @@
-import { useAppSelector } from '../../../../shared/hooks/useAppSelector'
-import { EditActionIcon } from '../../../PacksList/ui/EditAction/EditActionIcon'
-import { RemovePackAction } from '../../../PacksList/ui/RemovePackAction/RemovePackAction'
 import { FC } from 'react'
 import { StarRating } from '../StarRating/StarRating'
-import { getAuthIdSelector } from '../../../../app/api/authSlice/selectors/getAuthIdSelector'
 import {
   StyledCardIconsWrapper,
   StyledIconsWrapperWrapper,
   StyledWrapper
 } from './StyledCardListGrade'
+import { useAppSelector } from '@/shared/hooks/useAppSelector'
+import { getAuthId } from '@/app/api/authSlice'
+
+import { EditActionIcon } from '@/features/PacksList/ui/EditAction/EditActionIcon'
+import { RemovePackAction } from '@/features/PacksList/ui/RemovePackAction/RemovePackAction'
 
 interface Props {
   grade: number
@@ -18,7 +19,7 @@ interface Props {
 
 export const CardListGrade: FC<Props> = props => {
   const { packsId, packCreatorId, grade } = props
-  const userId = useAppSelector(getAuthIdSelector)
+  const userId = useAppSelector(getAuthId)
 
   return (
     <>

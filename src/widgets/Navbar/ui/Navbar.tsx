@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useAppSelector } from '@/shared/hooks/useAppSelector'
-import { isAuthSelector } from '@/app/api/authSlice/selectors/isAuthSelector'
+import { getIsAuth } from '@/app/api/authSlice/selectors/getIsAuth'
 import { ProfileInfo } from '@/widgets/ProfileInfo'
 import { Flex } from '@/shared/ui/Flex/Flex'
 import { Button } from '@/shared/ui/Button/Button'
@@ -8,7 +8,7 @@ import { AppPaths } from '@/app/providers/AppRouter/config/routerConfig'
 import { StyledButtonWrapper, StyledNavbar } from './StyledNavbar'
 
 export const Navbar = () => {
-  const isAuth = useAppSelector(isAuthSelector)
+  const isAuth = useAppSelector(getIsAuth)
 
   return (
     <StyledNavbar>

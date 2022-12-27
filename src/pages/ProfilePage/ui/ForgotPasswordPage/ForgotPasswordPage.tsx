@@ -1,7 +1,7 @@
 import { StyledForgotPasswordPage } from './StyledForgotPasswordPage'
 import { BoxCard } from '@/shared/ui/BoxCard/BoxCard'
 import { Title } from '@/shared/ui/Title/Title'
-import { ForgotPassword } from '@/features/PasswordUpdate/ForgotPassword'
+import { ForgotPassword } from '@/features/PasswordUpdate/ui/ForgotPassword/ForgotPassword'
 
 export const ForgotPasswordPage = () => {
   return (

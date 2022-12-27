@@ -3,11 +3,11 @@ import {
   StyledTh,
   StyledThead,
   StyledTitleWrapper
-} from '../../StyledPacksList'
+} from '../PacksList/StyledPacksList'
 import { flexRender, Table } from '@tanstack/react-table'
-import { CardPack } from '../../models/packModel'
-import { ReactComponent as TrDown } from '../../../../shared/assets/icons/TrDown.svg'
-import { ReactComponent as TrUp } from '../../../../shared/assets/icons/TrUp.svg'
+import { CardPack } from '../../model/types/packModel'
+import { ReactComponent as TrDown } from '@/shared/assets/icons/TrDown.svg'
+import { ReactComponent as TrUp } from '@/shared/assets/icons/TrUp.svg'
 
 interface Props {
   table: Table<CardPack>

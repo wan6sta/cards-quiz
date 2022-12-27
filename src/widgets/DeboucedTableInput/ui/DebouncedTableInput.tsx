@@ -2,8 +2,8 @@ import { useSearchParams } from 'react-router-dom'
 import { ChangeEvent, FC, useCallback, useLayoutEffect, useState } from 'react'
 import { debounce, identity, pickBy } from 'lodash-es'
 import { TextField } from '@/shared/ui/TextField/TextField'
-import { AppFilters } from '@/features/PacksList/models/FiltersModel'
-import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
+import { AppFilters } from '@/features/PacksList/model/types/FiltersModel'
+import { useUlrParams } from '@/features/PacksList/model/hooks/useUrlParams'
 
 interface Props {
   title: string

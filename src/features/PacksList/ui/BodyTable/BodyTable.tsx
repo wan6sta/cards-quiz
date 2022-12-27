@@ -6,10 +6,10 @@ import {
   StyledTd,
   StyledTextWrapper,
   StyledTr
-} from '../../StyledPacksList'
-import { TableLoader } from '../../../../shared/ui/TableLoader/TableLoader'
+} from '../PacksList/StyledPacksList'
 import { flexRender, Table } from '@tanstack/react-table'
-import { CardPack } from '../../models/packModel'
+import { CardPack } from '../../model/types/packModel'
+import { TableLoader } from '@/shared/ui/TableLoader/TableLoader'
 
 interface Props {
   loading: boolean

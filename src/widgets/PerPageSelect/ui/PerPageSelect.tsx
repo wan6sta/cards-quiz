@@ -4,8 +4,8 @@ import { useSearchParams } from 'react-router-dom'
 import { Listbox } from '@headlessui/react'
 import { ReactComponent as ArrowDown } from '@/shared/assets/icons/ArrowDown.svg'
 import { cn } from '@/shared/lib/cn/cn'
-import { AppFilters } from '@/features/PacksList/models/FiltersModel'
-import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
+import { AppFilters } from '@/features/PacksList/model/types/FiltersModel'
+import { useUlrParams } from '@/features/PacksList/model/hooks/useUrlParams'
 import cls from './PerPageSelect.module.css'
 
 const cardsCount = [

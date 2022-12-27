@@ -1,6 +1,6 @@
 import { StyledProfilePage } from './StyledProfilePage'
 import { BackToLink } from '@/shared/ui/BackToLink/BackToLink'
-import { Profile } from '@/features/Profile/Profile'
+import { Profile } from '@/features/Profile/ui/Profile'
 
 export const ProfilePage = () => {
   return (

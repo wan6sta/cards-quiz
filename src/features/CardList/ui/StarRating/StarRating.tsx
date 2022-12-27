@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
-import { ReactComponent as StarIcon } from '../../../../shared/assets/icons/Star.svg'
-import { ReactComponent as StarCheckedIcon } from '../../../../shared/assets/icons/StarChecked.svg'
+import { ReactComponent as StarIcon } from '@/shared/assets/icons/Star.svg'
+import { ReactComponent as StarCheckedIcon } from '@/shared/assets/icons/StarChecked.svg'
 import { StyledStarRating, StyledStarWrapper } from './StyledStarRating'
 
 interface Props {

@@ -14,13 +14,12 @@ import { BackToLink } from '../BackToLink/BackToLink'
 import { ImgWrapper } from '../ImgWrapper/ImgWrapper'
 import Git from '../../assets/icons/Cat.jpg'
 import Cat from '../../assets/icons/GithubIcon.png'
-import { LinearPageLoader } from '../../../widgets/LinearPageLoader/ui/LinearPageLoader'
-import { TableSkeleton } from '../TableSkeleton/TableSkeleton'
 import { EditableSpan } from '@/widgets/EditableSpan'
 import { Dropdown } from '@/widgets/Dropdown'
 import { Pagination } from '@/widgets/Pagination'
 import { DoubleRange } from '@/widgets/DoubleRange'
 import { PacksSwitcher } from '@/widgets/PacksSwitcher'
+import { LinearPageLoader } from '@/widgets/LinearPageLoader'
 
 export const Storybook = () => {
   return (
@@ -104,10 +103,6 @@ export const Storybook = () => {
 
       <StyledWrapper>
         <PacksSwitcher />
-      </StyledWrapper>
-
-      <StyledWrapper>
-        <TableSkeleton />
       </StyledWrapper>
     </StyledStorybook>
   )

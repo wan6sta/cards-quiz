@@ -1,20 +1,19 @@
-import { useDeleteCardPackMutation } from '../../api/packsApiSlice'
-import { LinearPageLoader } from '../../../../widgets/LinearPageLoader/ui/LinearPageLoader'
-import { ReactComponent as DeleteIcon } from '../../../../shared/assets/icons/Trash.svg'
 import { FC, useState } from 'react'
-import { useDeleteCardMutation } from '../../../CardList/api/cardApiSlice'
-import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert'
-import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/errorMessageHandler'
-import { FetchError } from '../../../../shared/models/ErrorModel'
-import { Modal } from '../../../../widgets/Modal/ui/Modal/Modal'
+import { ReactComponent as DeleteIcon } from '@/shared/assets/icons/Trash.svg'
 import { RemovePackModal } from './RemovePackModal/RemovePackModal'
+import { useDeleteCardPackMutation } from '@/features/PacksList'
+import { useDeleteCardMutation } from '@/features/CardList'
+import { errorMessageHandler } from '@/shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '@/shared/types/ErrorModel'
+import { LinearPageLoader } from '@/widgets/LinearPageLoader'
+import { Modal } from '@/widgets/Modal/ui'
+import { ErrorAlert } from '@/shared/ui/ErrorAlert/ErrorAlert'
 
 interface RemovePackProps {
   id: string
   cards?: boolean
 }
 
-// Add error
 export const RemovePackAction: FC<RemovePackProps> = props => {
   const [isOpen, setIsOpen] = useState(false)
   const { id, cards } = props

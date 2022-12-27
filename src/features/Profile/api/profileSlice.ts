@@ -4,9 +4,9 @@ import {
   FetchArgs,
   fetchBaseQuery
 } from '@reduxjs/toolkit/dist/query/react'
-import { FetchError } from '../../../shared/models/ErrorModel'
-import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
-import { setUserData } from '../../../app/api/authSlice/slice/authSlice'
+import { BASE_URL } from '@/shared/assets/constants/BASE_URL'
+import { FetchError } from '@/shared/types/ErrorModel'
+import { setUserData } from '@/app/api/authSlice'
 
 export const profileSlice = createApi({
   reducerPath: 'profile/api',

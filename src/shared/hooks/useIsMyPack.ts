@@ -1,10 +1,10 @@
 import { useAppSelector } from './useAppSelector'
-import { getAuthIdSelector } from '@/app/api/authSlice/selectors/getAuthIdSelector'
-import { getCardUserIdSelector } from '@/features/CardList/selectors/getCardUserIdSelector'
+import { getAuthId } from '@/app/api/authSlice/selectors/getAuthId'
+import { getCardUserId } from '@/features/CardList/model/selectors/getCardUserId'
 
 export const useIsMyPack = () => {
-  const authId = useAppSelector(getAuthIdSelector)
-  const userPackId = useAppSelector(getCardUserIdSelector)
+  const authId = useAppSelector(getAuthId)
+  const userPackId = useAppSelector(getCardUserId)
 
   return authId === userPackId
 }

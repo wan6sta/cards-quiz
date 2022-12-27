@@ -5,8 +5,6 @@ import {
   FetchArgs,
   fetchBaseQuery
 } from '@reduxjs/toolkit/dist/query/react'
-import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
-import { FetchError } from '../../../shared/models/ErrorModel'
 
 import {
   Card,
@@ -18,16 +16,18 @@ import {
   GetCardsResponse,
   UpdateCard,
   UpdateCardResponse
-} from '../Models/CardsModel'
+} from '../model/types/CardsModel'
 import {
   setCardPackId,
   setCards,
   setCardsTotalCount,
   setPackName,
   setPackUserId
-} from '../slice/cardsSlice'
-import { convertPacksData } from '../../PacksList/lib/convertPacksData'
-import { setAppIsLoading } from 'app/providers/StoreProvider/appSlice/appSlice'
+} from '../model/slice/cardsSlice'
+import { BASE_URL } from '@/shared/assets/constants/BASE_URL'
+import { FetchError } from '@/shared/types/ErrorModel'
+import { setAppIsLoading } from '@/app/api/appSlice'
+import { convertPacksData } from '@/features/PacksList/model/lib/convertPacksData'
 
 export const cardApiSlice = createApi({
   reducerPath: 'card/api',
