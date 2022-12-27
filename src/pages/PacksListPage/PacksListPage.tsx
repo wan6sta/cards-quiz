@@ -12,7 +12,7 @@ import {
 } from './StyledPacksList'
 import { Title } from '../../shared/ui/Title/Title'
 import { Span } from '../../shared/ui/Span/Span'
-import { PacksSwitcher } from '../../widgets/PacksSwitcher/PacksSwitcher'
+import { PacksSwitcher } from '../../widgets/PacksSwitcher/ui/PacksSwitcher'
 import { DoubleRange } from '../../widgets/DoubleRange/DoubleRange'
 import { Pagination } from '../../widgets/Pagination/ui/Pagination/Pagination'
 import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/DebouncedTableInput'

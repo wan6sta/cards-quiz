@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ErrorPage } from '../../../pages/ErrorPage/ErrorPage'
-import { PageLayout } from '../../../widgets/PageLayout/PageLayout'
+import { PageLayout } from '../../../widgets/PageLayout/ui/PageLayout'
 import { appRouterConfig } from './routerConfig'
 import { RequiredAuth } from './RequiredAuth'
 import { RequiredNonAuth } from './RequiredNonAuth'

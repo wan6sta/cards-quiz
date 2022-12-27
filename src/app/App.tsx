@@ -1,5 +1,5 @@
 import { LoginPage } from '../pages/LoginPage/LoginPage'
-import { PageLayout } from '../widgets/PageLayout/PageLayout'
+import { PageLayout } from '../widgets/PageLayout/ui/PageLayout'
 
 export const App = () => {
   return (

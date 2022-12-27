@@ -19,7 +19,7 @@ import { LinearPageLoader } from '../LinearPageLoader/LinearPageLoader'
 import { Pagination } from '../../../widgets/Pagination/ui/Pagination/Pagination'
 import { Dropdown } from '../../../widgets/Dropdown/Dropdown'
 import { DoubleRange } from '../../../widgets/DoubleRange/DoubleRange'
-import { PacksSwitcher } from '../../../widgets/PacksSwitcher/PacksSwitcher'
+import { PacksSwitcher } from '../../../widgets/PacksSwitcher/ui/PacksSwitcher'
 import { TableSkeleton } from '../TableSkeleton/TableSkeleton'
 
 export const Storybook = () => {

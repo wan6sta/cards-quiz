@@ -1,28 +1,27 @@
 import { FC, useCallback, useLayoutEffect, useState } from 'react'
-import { StyledPack, StyledPacksSwitcher } from './StyledPacksSwitcher'
-import { Flex } from '../../shared/ui/Flex/Flex'
-import { Span } from '../../shared/ui/Span/Span'
 import { useSearchParams } from 'react-router-dom'
-import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
-import { AppFilters } from '../../features/PacksList/models/FiltersModel'
 import { debounce, identity, pickBy } from 'lodash-es'
+import { AppFilters } from '@/features/PacksList/models/FiltersModel'
+import { Flex } from '@/shared/ui/Flex/Flex'
+import { Span } from '@/shared/ui/Span/Span'
+import { StyledPack, StyledPacksSwitcher } from './StyledPacksSwitcher'
 
 export type PackSwitch = 'all' | 'my'
 
-export const PacksSwitcher: FC = props => {
+export const PacksSwitcher: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const urlParams = useUlrParams()
   const [type, setType] = useState<PackSwitch>('all')
 
   const filter = searchParams.get(AppFilters.filter)
 
   useLayoutEffect(() => {
-    if (filter === null) {
+    if (filter) {
+      setType(prev => filter as PackSwitch)
+    } else {
       setType('all')
-      return
     }
-    setType(prev => filter as PackSwitch)
   }, [filter])
+
   const isAll = type === 'all'
   const isMy = type === 'my'
 
@@ -31,13 +30,7 @@ export const PacksSwitcher: FC = props => {
       setSearchParams(
         pickBy(
           {
-            ...urlParams,
-            [AppFilters.filter]: packType,
-            [AppFilters.page]: '',
-            [AppFilters.max]: '',
-            [AppFilters.min]: '',
-            [AppFilters.search]: '',
-            [AppFilters.perPage]: ''
+            [AppFilters.filter]: packType
           },
           identity
         )
