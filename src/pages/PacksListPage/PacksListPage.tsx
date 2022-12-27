@@ -14,9 +14,9 @@ import { Title } from '../../shared/ui/Title/Title'
 import { Span } from '../../shared/ui/Span/Span'
 import { PacksSwitcher } from '../../widgets/PacksSwitcher/PacksSwitcher'
 import { DoubleRange } from '../../widgets/DoubleRange/DoubleRange'
-import { Pagination } from '../../widgets/Pagination/Pagination'
+import { Pagination } from '../../widgets/Pagination/ui/Pagination'
 import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/DebouncedTableInput'
-import { RemoveFilterBtn } from '../../widgets/RemoveFilterBtn/RemoveFilterBtn'
+import { RemoveFilterBtn } from '../../widgets/RemoveFilterBtn/ui/RemoveFilterBtn'
 import { AddNewPack } from '../../features/PacksList/ui/AddNewPack/AddNewPack'
 
 export const PacksListPage: FC = () => {

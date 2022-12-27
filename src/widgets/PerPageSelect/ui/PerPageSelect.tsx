@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Listbox } from '@headlessui/react'
-import cls from './Select.module.css'
-import { ReactComponent as ArrowDown } from '../../shared/assets/icons/ArrowDown.svg'
+import cls from './PerPageSelect.module.css'
+import { ReactComponent as ArrowDown } from '../../../shared/assets/icons/ArrowDown.svg'
 import { useSearchParams } from 'react-router-dom'
 import { identity, pickBy } from 'lodash-es'
 import { AppFilters } from 'features/PacksList/models/FiltersModel'
@@ -15,7 +15,7 @@ const cardsCount = [
   { id: 4, name: '25', unavailable: false }
 ]
 
-export const Select = () => {
+export const PerPageSelect = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const urlSelectedValue = searchParams.get(AppFilters.perPage)
   const [selectedPerson, setSelectedPerson] = useState(cardsCount[0])

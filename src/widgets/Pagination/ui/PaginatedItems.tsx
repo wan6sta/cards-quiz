@@ -1,14 +1,14 @@
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useCallback, useEffect, useState } from 'react'
-import { AppFilters } from '../../features/PacksList/models/FiltersModel'
-import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import ReactPaginate from 'react-paginate'
 import cls from './Pagination.module.css'
-import { ReactComponent as RightIcon } from '../../shared/assets/icons/RightArrowI.svg'
-import { ReactComponent as LeftIcon } from '../../shared/assets/icons/LeftArrow.svg'
-import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
+import { ReactComponent as RightIcon } from '../../../shared/assets/icons/RightArrowI.svg'
+import { ReactComponent as LeftIcon } from '../../../shared/assets/icons/LeftArrow.svg'
 import { debounce } from 'lodash-es'
-import { getTotalPacksCountSelector } from '../../features/PacksList/selectors/getTotalPacksCountSelector'
+import {AppFilters} from "features/PacksList/models/FiltersModel";
+import {getTotalPacksCountSelector} from "features/PacksList/selectors/getTotalPacksCountSelector";
+import {useAppSelector} from "app/providers/StoreProvider/hooks/useAppSelector";
+import {useUlrParams} from "features/PacksList/hooks/useUrlParams";
 
 export function PaginatedItems() {
   const [searchParams, setSearchParams] = useSearchParams()

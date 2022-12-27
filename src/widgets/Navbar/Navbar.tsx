@@ -5,7 +5,7 @@ import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSe
 import { Link } from 'react-router-dom'
 import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
 import { Flex } from '../../shared/ui/Flex/Flex'
-import { ProfileInfo } from '../ProfileInfo/ProfileInfo'
+import { ProfileInfo } from '../ProfileInfo/ui/ProfileInfo'
 import { isAuthSelector } from '../../app/providers/StoreProvider/authSlice/selectors/isAuthSelector'
 
 interface NavbarProps {
