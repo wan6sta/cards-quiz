@@ -95,6 +95,7 @@ export const PacksList: FC = () => {
         <PackListActions
           packCreatorId={cell.row.original.user_id}
           packsId={cell.row.original._id}
+          packsName={cell.row.original.name}
         />
       )
     })
