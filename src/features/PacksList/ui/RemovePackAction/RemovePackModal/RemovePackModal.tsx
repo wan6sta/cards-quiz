@@ -3,15 +3,15 @@ import { Flex } from '@/shared/ui/Flex/Flex'
 import { Span } from '@/shared/ui/Span/Span'
 
 interface RemovePackModalProps {
-  packName?: string
+  packsName?: string
 }
 
 export const RemovePackModal: FC<RemovePackModalProps> = props => {
-  const { packName } = props
+  const { packsName } = props
   return (
     <Flex flexDirection={'column'} margin={'0 0 30px 0'}>
       <Span>
-        Do you really want to remove {packName}? All cards will be deleted.
+        Do you really want to remove {packsName}? All cards will be deleted.
       </Span>
     </Flex>
   )

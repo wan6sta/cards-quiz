@@ -12,12 +12,13 @@ import { getAuthId } from '@/app/api/authSlice'
 interface Props {
   packCreatorId: string
   packsId: string
+  packsName: string
 }
 
 export const PackListActions: FC<Props> = props => {
   const userId = useAppSelector(getAuthId)
 
-  const { packsId, packCreatorId } = props
+  const { packsId, packCreatorId, packsName } = props
   return (
     <StyledIconsWrapper>
       {packCreatorId === userId ? (
@@ -29,7 +30,7 @@ export const PackListActions: FC<Props> = props => {
             <EditActionIcon Id={packsId} />
           </StyledIconPackWrapper>
           <StyledIconPackWrapper>
-            <RemovePackAction id={packsId} />
+            <RemovePackAction id={packsId} packsName={packsName} />
           </StyledIconPackWrapper>
         </>
       ) : (

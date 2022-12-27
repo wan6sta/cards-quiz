@@ -17,6 +17,8 @@ interface EditPackProps {
 
 export const EditActionIcon: FC<EditPackProps> = props => {
   const [isOpen, setIsOpen] = useState(false)
+  const [newName, setNewName] = useState('')
+  const [isPrivate, setIsPrivate] = useState(false)
 
   const { Id, cards, dropdown } = props
   const [updatePack, { isLoading, error: updatePackError }] =
@@ -26,7 +28,7 @@ export const EditActionIcon: FC<EditPackProps> = props => {
 
   const editPackHandler = async () => {
     if (isLoading) return
-    await updatePack({ cardsPack: { name: 'edit packName', _id: Id } })
+    await updatePack({ cardsPack: { name: newName, _id: Id, private: isPrivate } })
   }
 
   const onUpdateCardHandler = async () => {
@@ -73,7 +75,12 @@ export const EditActionIcon: FC<EditPackProps> = props => {
         toggleClose={toggleClose}
         actionCallback={editPackHandler}
       >
-        <AddPackModal />
+        <AddPackModal
+          setIsPrivate={setIsPrivate}
+          isPrivate={isPrivate}
+          newName={newName}
+          setNewName={setNewName}
+        />
       </Modal>
       <ErrorAlert errorMessage={errorPackHandler} />
       <ErrorAlert errorMessage={errorCardHandler} />

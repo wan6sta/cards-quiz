@@ -12,11 +12,12 @@ import { ErrorAlert } from '@/shared/ui/ErrorAlert/ErrorAlert'
 interface RemovePackProps {
   id: string
   cards?: boolean
+  packsName?: string
 }
 
 export const RemovePackAction: FC<RemovePackProps> = props => {
   const [isOpen, setIsOpen] = useState(false)
-  const { id, cards } = props
+  const { id, cards, packsName } = props
   const [removePack, { isLoading, error: removePackError }] =
     useDeleteCardPackMutation()
   const [deleteCard, { isLoading: isCardsLoading, error: removeCardError }] =
@@ -64,9 +65,9 @@ export const RemovePackAction: FC<RemovePackProps> = props => {
         title={'Delete pack'}
         toggleClose={toggleClose}
         isOpen={isOpen}
-        actionCallback={onDeleteCardHandler}
+        actionCallback={deletePackHandler}
       >
-        <RemovePackModal />
+        <RemovePackModal packsName={packsName}/>
       </Modal>
       <ErrorAlert errorMessage={errorPackHandler} />
       <ErrorAlert errorMessage={errorCardHandler} />

@@ -70,4 +70,5 @@ export interface CreatePack {
 export interface UpdatePack {
   name: string
   _id: string
+  private?: boolean
 }
