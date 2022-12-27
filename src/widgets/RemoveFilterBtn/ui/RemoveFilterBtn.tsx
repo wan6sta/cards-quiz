@@ -5,7 +5,7 @@ import { RemoveFilterWrapper } from './StyledRemoveFilterBtn'
 
 export const RemoveFilterBtn = () => {
   const urlParams = useUlrParams()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [_, setSearchParams] = useSearchParams()
 
   const removeQueryParams = () => {
     if (urlParams) {

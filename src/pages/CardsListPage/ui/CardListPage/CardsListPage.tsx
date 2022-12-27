@@ -16,11 +16,10 @@ import { CreateNewCard } from '@/features/CardList/ui/CreateNewCard/CreateNewCar
 import { Button } from '@/shared/ui/Button/Button'
 import { Span } from '@/shared/ui/Span/Span'
 import { DebouncedTableInput } from '@/widgets/DeboucedTableInput'
-import { CardsList } from '@/features/CardList/ui/CardList/CardsList'
 import { Pagination } from '@/widgets/Pagination'
 import { ButtonWrapper } from '@/features/PacksList/ui/AddNewPack/StyledAddNewPack'
 import { StyledTitleWrapper } from './StyledCardsListPage'
-import { getPackName } from '@/features/CardList'
+import { CardsList, getPackName } from '@/features/CardList'
 
 export const CardsListPage: FC = () => {
   const packName = useAppSelector(getPackName).slice(0, 25)

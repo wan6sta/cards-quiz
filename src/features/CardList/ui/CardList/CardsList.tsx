@@ -22,6 +22,7 @@ import {
   StyledPacksList,
   StyledTable
 } from '@/features/PacksList/ui/PacksList/StyledPacksList'
+import { getAppIsLoading } from '@/app/api/appSlice'
 
 const columnHelper = createColumnHelper<Card>()
 
@@ -69,6 +70,7 @@ export const CardsList = () => {
   const { search } = useLocation()
 
   const data = useAppSelector(getCards)
+  const appIsLoading = useAppSelector(getAppIsLoading)
 
   const [sorting, setSorting] = useState<SortingState>([])
   const sortedValue = transformSortedValue(sorting)
@@ -82,6 +84,8 @@ export const CardsList = () => {
   } = useGetCardQuery(cardsQueryParams)
 
   useEffect(() => {
+    if (appIsLoading) return
+
     refetch()
   }, [search])
 
