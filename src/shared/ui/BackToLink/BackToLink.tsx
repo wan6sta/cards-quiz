@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from 'react'
+import { ReactComponent as BackIcon } from '@/shared/assets/icons/BackToIcon.svg'
+import { AppPaths } from '@/app/providers/AppRouter/routerConfig'
+import { AppLink } from '@/shared/ui/AppLink/AppLink'
 import { StyledBackToLink, StyledWrapper } from './StyledBackToLink'
-import { AppLink } from '../AppLink/AppLink'
-import { ReactComponent as BackIcon } from '../../assets/icons/BackToIcon.svg'
-import { AppPaths } from '../../../app/providers/AppRouter/routerConfig'
 
 interface BackToLinkProps {
   marginBottom?: string

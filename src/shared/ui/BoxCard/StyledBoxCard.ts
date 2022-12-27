@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 interface StyledBoxCardProps {
   width?: string
@@ -16,6 +16,4 @@ export const StyledBoxCard = styled.div<StyledBoxCardProps>`
   box-shadow: 2px 1px 8px 0px rgba(34, 60, 80, 0.2);
   border-radius: 2px;
   padding: 35px 33px 42px 33px;
-
-  ${props => props && css``}
 `

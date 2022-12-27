@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
+import { ReactComponent as Logout } from '@/shared/assets/icons/Logout.svg'
 import { StyledButton } from './StyledButton'
-import { ReactComponent as Logout } from '../../assets/icons/Logout.svg'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   primary?: boolean

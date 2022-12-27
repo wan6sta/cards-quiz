@@ -14,13 +14,13 @@ import { BackToLink } from '../BackToLink/BackToLink'
 import { ImgWrapper } from '../ImgWrapper/ImgWrapper'
 import Git from '../../assets/icons/Cat.jpg'
 import Cat from '../../assets/icons/GithubIcon.png'
-import { EditableSpan } from '../../../widgets/EditableSpan/ui/EditableSpan'
 import { LinearPageLoader } from '../LinearPageLoader/LinearPageLoader'
-import { Pagination } from '../../../widgets/Pagination/ui/Pagination/Pagination'
-import { Dropdown } from '../../../widgets/Dropdown/ui/Dropdown'
-import { DoubleRange } from '../../../widgets/DoubleRange/ui/DoubleRange'
-import { PacksSwitcher } from '../../../widgets/PacksSwitcher/ui/PacksSwitcher'
 import { TableSkeleton } from '../TableSkeleton/TableSkeleton'
+import { EditableSpan } from '@/widgets/EditableSpan'
+import { Dropdown } from '@/widgets/Dropdown'
+import { Pagination } from '@/widgets/Pagination'
+import { DoubleRange } from '@/widgets/DoubleRange'
+import { PacksSwitcher } from '@/widgets/PacksSwitcher'
 
 export const Storybook = () => {
   return (

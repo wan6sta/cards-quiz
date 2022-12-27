@@ -6,9 +6,9 @@ import {
   memo,
   useState
 } from 'react'
-import { Span } from '../Span/Span'
-import cls from './TextField.module.css'
-import { cn } from '../../lib/cn/cn'
+import { Span } from '@/shared/ui/Span/Span'
+import { Button } from '@/shared/ui/Button/Button'
+import { cn } from '@/shared/lib/cn/cn'
 import {
   StyledSearchIcon,
   StyledSearchIconWrapper,
@@ -17,7 +17,7 @@ import {
   StyledShowPasswordWrapper,
   StyledTextFiled
 } from './StyledTextField'
-import { Button } from '../Button/Button'
+import cls from './TextField.module.css'
 
 interface TextFiledProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string
@@ -64,6 +64,7 @@ export const TextField = memo(
         onEnter && onEnter()
       }
     }
+
     return (
       <div className={cls.wrapperWrapper}>
         <div className={cls.wrapper}>

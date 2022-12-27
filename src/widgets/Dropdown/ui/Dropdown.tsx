@@ -8,7 +8,7 @@ import { ReactComponent as TrashIcon } from '@/shared/assets/icons/Trash.svg'
 import { ReactComponent as LearnIcon } from '@/shared/assets/icons/TeacherIcon.svg'
 import { ReactComponent as DotsIcon } from '@/shared/assets/icons/Dots.svg'
 import { useAppDispatch } from '@/app/providers/StoreProvider/hooks/useAppDispatch'
-import { useDeleteMeMutation } from '@/shared/api/authMeApiSlice'
+import { useDeleteMeMutation } from '@/app/providers/StoreProvider/authSlice/api/authMeApiSlice'
 import {
   useDeleteCardPackMutation,
   useUpdateCardsPackMutation

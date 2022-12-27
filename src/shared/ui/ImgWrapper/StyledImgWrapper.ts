@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 interface StyledImgWrapperProps {
   width?: string
@@ -19,6 +19,4 @@ export const StyledImgWrapper = styled.div<StyledImgWrapperProps>`
     user-select: none;
     border-radius: ${props => (props.borderRadius ? props.borderRadius : '0%')};
   }
-
-  ${props => props && css``}
 `

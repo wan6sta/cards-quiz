@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 import { LinearPageLoader } from '../../../shared/ui/LinearPageLoader/LinearPageLoader'
-import { useMeMutation } from '../../../shared/api/authMeApiSlice'
+import { useMeMutation } from '../StoreProvider/authSlice/api/authMeApiSlice'
 
 export const AppLoader: FC<PropsWithChildren> = ({ children }) => {
   const [isAppLoading, setIsAppLoading] = useState(true)

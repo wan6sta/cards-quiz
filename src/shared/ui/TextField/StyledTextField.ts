@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import { ReactComponent as SearchIcon } from '../../assets/icons/SearchIcon.svg'
-import { ReactComponent as EyeIcon } from '../../assets/icons/Eye.svg'
-import { ReactComponent as EyeSlashIcon } from '../../assets/icons/Eye-slash.svg'
+import { ReactComponent as SearchIcon } from '@/shared/assets/icons/SearchIcon.svg'
+import { ReactComponent as EyeIcon } from '@/shared/assets/icons/Eye.svg'
+import { ReactComponent as EyeSlashIcon } from '@/shared/assets/icons/Eye-slash.svg'
 
 interface StyledTextFiledProps {
   changeInputView?: boolean
