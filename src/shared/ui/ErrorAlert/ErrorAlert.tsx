@@ -12,7 +12,7 @@ export const ErrorAlert: FC<ErrorProps> = props => {
     errorMessage &&
       toast.error(`${errorMessage}`, {
         position: 'top-center',
-        autoClose: 2500,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,
@@ -25,7 +25,7 @@ export const ErrorAlert: FC<ErrorProps> = props => {
   return (
     <ToastContainer
       position='top-center'
-      autoClose={2500}
+      autoClose={1500}
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
