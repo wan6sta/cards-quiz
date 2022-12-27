@@ -27,6 +27,7 @@ import {
   setPackUserId
 } from '../slice/cardsSlice'
 import { convertPacksData } from '../../PacksList/lib/convertPacksData'
+import { setAppIsLoading } from 'app/providers/StoreProvider/appSlice/appSlice'
 
 export const cardApiSlice = createApi({
   reducerPath: 'card/api',
@@ -45,13 +46,17 @@ export const cardApiSlice = createApi({
       }),
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
         try {
+          dispatch(setAppIsLoading(true))
           const { data } = await queryFulfilled
           dispatch(setCardsTotalCount(data.cardsTotalCount))
           dispatch(setCards(convertPacksData<Card>(data.cards)))
           dispatch(setCardPackId(String(data.cardPackId)))
           dispatch(setPackName(data.packName))
           dispatch(setPackUserId(data.packUserId))
-        } catch {}
+          dispatch(setAppIsLoading(false))
+        } catch {
+          dispatch(setAppIsLoading(false))
+        }
       },
       providesTags: result => ['Card']
     }),

@@ -24,6 +24,7 @@ import { usePackQueryParams } from './hooks/usePackQueryParams'
 import { BodyTable } from './ui/BodyTable/BodyTable'
 import { TheadTable } from './ui/TheadTable/TheadTable'
 import { transformSortedValue } from '../../shared/lib/transformSortedValue/transformSortedValue'
+import { appIsLoadingSelector } from 'app/providers/StoreProvider/appSlice/selectors/appIsLoadingSelector'
 
 const columnHelper = createColumnHelper<CardPack>()
 
@@ -34,6 +35,7 @@ export const PacksList: FC = () => {
   const { search } = useLocation()
   const urlParams = useUlrParams()
 
+  const appIsLoading = useAppSelector(appIsLoadingSelector)
   const data = useAppSelector(getPacksSelector)
 
   const [sorting, setSorting] = useState<SortingState>([])
@@ -49,6 +51,8 @@ export const PacksList: FC = () => {
   } = useGetPacksQuery(queryParams)
 
   useEffect(() => {
+    if (appIsLoading) return
+
     refetch()
   }, [sorting, search])
 

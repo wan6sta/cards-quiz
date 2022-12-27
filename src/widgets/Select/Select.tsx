@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import { Listbox } from '@headlessui/react'
 import cls from './Select.module.css'
 import { ReactComponent as ArrowDown } from '../../shared/assets/icons/ArrowDown.svg'
-import { cn } from '../../shared/lib/cn/cn'
 import { useSearchParams } from 'react-router-dom'
-import { AppFilters } from '../../features/PacksList/models/FiltersModel'
-import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
 import { identity, pickBy } from 'lodash-es'
+import { AppFilters } from 'features/PacksList/models/FiltersModel'
+import { useUlrParams } from 'features/PacksList/hooks/useUrlParams'
+import { cn } from 'shared/lib/cn/cn'
 
 const cardsCount = [
   { id: 1, name: '10', unavailable: false },
@@ -25,6 +25,8 @@ export const Select = () => {
     if (urlSelectedValue) {
       const el = cardsCount.find(el => el.name === urlSelectedValue)
       setSelectedPerson(el ? el : cardsCount[0])
+    } else {
+      setSelectedPerson(cardsCount[0])
     }
   }, [urlSelectedValue])
 

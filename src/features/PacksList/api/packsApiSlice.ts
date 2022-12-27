@@ -25,6 +25,7 @@ import {
   setUserPack
 } from '../slice/packsSlice'
 import { convertPacksData } from '../lib/convertPacksData'
+import {setAppIsLoading} from "app/providers/StoreProvider/appSlice/appSlice";
 
 export const packsApiSlice = createApi({
   reducerPath: 'packs/api',
@@ -46,12 +47,16 @@ export const packsApiSlice = createApi({
       }),
       async onQueryStarted(payload, { dispatch, queryFulfilled }) {
         try {
+          dispatch(setAppIsLoading(true))
           const { data } = await queryFulfilled
           dispatch(setUserPack(convertPacksData<CardPack>(data.cardPacks)))
           dispatch(setTotalPacksCount(data.cardPacksTotalCount))
           dispatch(setCardsMinCount(data.minCardsCount))
           dispatch(setCardsMaxCount(data.maxCardsCount))
-        } catch {}
+          dispatch(setAppIsLoading(false))
+        } catch {
+          dispatch(setAppIsLoading(false))
+        }
       },
       providesTags: result => ['Cards']
     }),

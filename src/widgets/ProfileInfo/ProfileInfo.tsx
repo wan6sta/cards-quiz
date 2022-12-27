@@ -1,21 +1,22 @@
 import { FC } from 'react'
-import { ImgWrapper } from '../../shared/ui/ImgWrapper/ImgWrapper'
 import GithubIcon from '../../shared/assets/icons/GithubIcon.png'
-import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
-import cls from './PageInfo.module.css'
 import { Dropdown } from '../Dropdown/Dropdown'
+import { useAppSelector } from 'app/providers/StoreProvider/hooks/useAppSelector'
+import { ImgWrapper } from 'shared/ui/ImgWrapper/ImgWrapper'
+import { authUserDataSelector } from 'app/providers/StoreProvider/authSlice/selectors/authUserDataSelector'
+import { StyledProfileInfo } from 'widgets/ProfileInfo/StyledProfileInfo'
 
-export const ProfileInfo: FC = props => {
-  const { userData } = useAppSelector(state => state.auth)
+export const ProfileInfo: FC = () => {
+  const userData = useAppSelector(authUserDataSelector)
 
   return (
     <Dropdown nav>
-      <div className={cls.wrapper}>
+      <StyledProfileInfo>
         {userData?.name}
         <ImgWrapper cursorPointer width={'36px'} height={'36px'}>
           <img src={GithubIcon} alt='Icon' />
         </ImgWrapper>
-      </div>
+      </StyledProfileInfo>
     </Dropdown>
   )
 }
