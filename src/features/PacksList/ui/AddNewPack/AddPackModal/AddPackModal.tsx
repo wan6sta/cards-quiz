@@ -2,10 +2,7 @@ import { FC } from 'react'
 import { Flex } from '@/shared/ui/Flex/Flex'
 import { TextField } from '@/shared/ui/TextField/TextField'
 import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
-import {
-  CheckboxModalLabel,
-  TexFieldModalWrapper
-} from '@/features/PacksList/ui/AddNewPack/AddPackModal/StyledAddPackModal'
+import { CheckboxModalLabel, TexFieldModalWrapper } from './StyledAddPackModal'
 
 interface AddModalProps {
   newName: string
@@ -19,10 +16,19 @@ export const AddPackModal: FC<AddModalProps> = props => {
   return (
     <Flex flexDirection={'column'}>
       <TexFieldModalWrapper>
-        <TextField textFieldMode={'nonOutlined'} title={'Name pack'} />
+        <TextField
+          value={newName}
+          onChange={e => setNewName(e.currentTarget.value)}
+          textFieldMode={'nonOutlined'}
+          title={'Name pack'}
+        />
       </TexFieldModalWrapper>
       <CheckboxModalLabel style={{ marginBottom: '35px' }}>
-        <Checkbox label={'Private pack'} />
+        <Checkbox
+          checked={isPrivate}
+          onChange={e => setIsPrivate(e.currentTarget.checked)}
+          label={'Private pack'}
+        />
       </CheckboxModalLabel>
     </Flex>
   )
