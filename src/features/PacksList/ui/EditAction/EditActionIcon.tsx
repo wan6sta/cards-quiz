@@ -6,7 +6,7 @@ import { useUpdateCardMutation } from '../../../CardList/api/cardApiSlice'
 import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../../../shared/models/ErrorModel'
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert'
-import { Modal } from '../../../../widgets/Modal/Modal'
+import { Modal } from '../../../../widgets/Modal/ui/Modal/Modal'
 import { AddPackModal } from '../AddNewPack/AddPackModal/AddPackModal'
 
 interface EditPackProps {

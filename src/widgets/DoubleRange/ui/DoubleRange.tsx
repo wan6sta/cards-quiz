@@ -1,20 +1,22 @@
 import Range from 'rc-slider'
-import './index.css'
-import { useCallback, useEffect, useState } from 'react'
-import cls from './DoubleRange.module.css'
-import { Span } from '../../shared/ui/Span/Span'
-import { debounce, identity, isArray, pickBy } from 'lodash-es'
-import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
 import { useSearchParams } from 'react-router-dom'
-import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
-import { AppFilters } from '../../features/PacksList/models/FiltersModel'
+import { useCallback, useEffect, useState } from 'react'
+import { debounce, identity, isArray, pickBy } from 'lodash-es'
+import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
+import { useAppSelector } from '@/app/providers/StoreProvider/hooks/useAppSelector'
+import { AppFilters } from '@/features/PacksList/models/FiltersModel'
+import { Span } from '@/shared/ui/Span/Span'
+import cls from './DoubleRange.module.css'
+import './index.css'
+import { getMinMaxCountSelector } from '@/features/PacksList/selectors/getMinMaxCountSelector'
 
 type Value = number | number[]
+
 export const DoubleRange = () => {
   const urlParams = useUlrParams()
   const [searchParams, setSearchParams] = useSearchParams()
-  const minCount = useAppSelector(state => state.packs.cardsMinCount)
-  const maxCount = useAppSelector(state => state.packs.cardsMaxCount)
+  const [minCount, maxCount] = useAppSelector(getMinMaxCountSelector)
+
   const [min, setMin] = useState(minCount)
   const [max, setMax] = useState(maxCount)
 

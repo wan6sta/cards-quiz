@@ -6,7 +6,7 @@ import { useDeleteCardMutation } from '../../../CardList/api/cardApiSlice'
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../../../shared/models/ErrorModel'
-import { Modal } from '../../../../widgets/Modal/Modal'
+import { Modal } from '../../../../widgets/Modal/ui/Modal/Modal'
 import { RemovePackModal } from './RemovePackModal/RemovePackModal'
 
 interface RemovePackProps {

@@ -7,7 +7,7 @@ import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/
 import { FetchError } from '../../../../shared/models/ErrorModel'
 import { useState } from 'react'
 import { AddPackModal } from './AddPackModal/AddPackModal'
-import { Modal } from '../../../../widgets/Modal/Modal'
+import { Modal } from '../../../../widgets/Modal/ui/Modal/Modal'
 
 export const AddNewPack = () => {
   const [isOpen, setIsOpen] = useState(false)

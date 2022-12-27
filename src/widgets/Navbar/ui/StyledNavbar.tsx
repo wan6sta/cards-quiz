@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 
-interface StyledNavbarProps {
-  someProps?: string
-}
-
-export const StyledNavbar = styled.div<StyledNavbarProps>`
+export const StyledNavbar = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -16,7 +12,7 @@ export const StyledNavbar = styled.div<StyledNavbarProps>`
     inset 0px 1px 0px rgba(255, 255, 255, 0.3);
 `
 
-export const StyledButtonWrapper = styled.div<StyledNavbarProps>`
+export const StyledButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;

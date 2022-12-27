@@ -1,32 +1,30 @@
 import { Menu } from '@headlessui/react'
 import { FC, PropsWithChildren, useEffect } from 'react'
-import cls from './Dropdown.module.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { AppPaths } from '../../app/providers/AppRouter/routerConfig'
-import { ReactComponent as UserIcon } from '../../shared/assets/icons/MiniUser.svg'
-import { ReactComponent as LogoutIcon } from '../../shared/assets/icons/Logout.svg'
-import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
-import { ReactComponent as TrashIcon } from '../../shared/assets/icons/Trash.svg'
-import { ReactComponent as LearnIcon } from '../../shared/assets/icons/TeacherIcon.svg'
-import { ReactComponent as DotsIcon } from '../../shared/assets/icons/Dots.svg'
-import { cn } from '../../shared/lib/cn/cn'
-import { useDeleteMeMutation } from '../../shared/api/authMeApiSlice'
-import { ErrorAlert } from '../../shared/ui/ErrorAlert/ErrorAlert'
-import { errorMessageHandler } from '../../shared/lib/errorMessageHandler/errorMessageHandler'
-import { FetchError } from '../../shared/models/ErrorModel'
-import { LinearPageLoader } from '../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { ReactComponent as UserIcon } from '@/shared/assets/icons/MiniUser.svg'
+import { ReactComponent as LogoutIcon } from '@/shared/assets/icons/Logout.svg'
+import { ReactComponent as EditIcon } from '@/shared/assets/icons/EditIcon.svg'
+import { ReactComponent as TrashIcon } from '@/shared/assets/icons/Trash.svg'
+import { ReactComponent as LearnIcon } from '@/shared/assets/icons/TeacherIcon.svg'
+import { ReactComponent as DotsIcon } from '@/shared/assets/icons/Dots.svg'
+import { useAppDispatch } from '@/app/providers/StoreProvider/hooks/useAppDispatch'
+import { useDeleteMeMutation } from '@/shared/api/authMeApiSlice'
 import {
   useDeleteCardPackMutation,
   useUpdateCardsPackMutation
-} from '../../features/PacksList/api/packsApiSlice'
-import { useAppDispatch } from '../../app/providers/StoreProvider/hooks/useAppDispatch'
-import { setPackName } from '../../features/CardList/slice/cardsSlice'
+} from '@/features/PacksList/api/packsApiSlice'
+import { AppPaths } from '@/app/providers/AppRouter/routerConfig'
+import { setPackName } from '@/features/CardList/slice/cardsSlice'
+import { errorMessageHandler } from '@/shared/lib/errorMessageHandler/errorMessageHandler'
+import { FetchError } from '@/shared/models/ErrorModel'
+import { LinearPageLoader } from '@/shared/ui/LinearPageLoader/LinearPageLoader'
+import { cn } from '@/shared/lib/cn/cn'
+import { ErrorAlert } from '@/shared/ui/ErrorAlert/ErrorAlert'
+import cls from './Dropdown.module.css'
 
 interface Props {
   nav?: boolean
 }
-
-// При использовании в навбаре использовать вместе с чилдрен!
 
 export const Dropdown: FC<PropsWithChildren<Props>> = props => {
   const { children, nav } = props

@@ -1,19 +1,20 @@
 import { ChangeEvent, FC, KeyboardEvent, useState } from 'react'
+import { ReactComponent as EditIcon } from '@/shared/assets/icons/EditIcon.svg'
+import { Flex } from '@/shared/ui/Flex/Flex'
+import { TextField } from '@/shared/ui/TextField/TextField'
+import { Title } from '@/shared/ui/Title/Title'
 import { StyledEditableSpan, StyledTextWrapper } from './StyledEditableSpan'
-import { Title } from '../../shared/ui/Title/Title'
-import { ReactComponent as EditIcon } from '../../shared/assets/icons/EditIcon.svg'
-import { TextField } from '../../shared/ui/TextField/TextField'
-import { Flex } from '../../shared/ui/Flex/Flex'
 
-interface EditableSpanProps {
+interface Props {
   initialValue?: string
   title: string
   marginBottom?: string
   editNameCallback?: (str: string) => void
 }
 
-export const EditableSpan: FC<EditableSpanProps> = props => {
+export const EditableSpan: FC<Props> = props => {
   const { editNameCallback, title, initialValue, ...restProps } = props
+
   const [value, setValue] = useState(initialValue)
   const [inputShow, setInputShow] = useState(false)
   const [error, setError] = useState('')

@@ -3,11 +3,11 @@ import { PerPageSelect } from '@/widgets/PerPageSelect'
 import { PaginatedItems } from '../PaginatedItems/PaginatedItems'
 import { SelectWrapper, StyledPagination } from './StyledPagination'
 
-interface PaginationProps {
+interface Props {
   titleForSelectSpan?: string
 }
 
-export const Pagination: FC<PaginationProps> = props => {
+export const Pagination: FC<Props> = props => {
   const { titleForSelectSpan } = props
 
   return (

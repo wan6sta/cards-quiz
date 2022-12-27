@@ -2,7 +2,7 @@ import { FC } from 'react'
 import GithubIcon from '@/shared/assets/icons/GithubIcon.png'
 import { useAppSelector } from '@/app/providers/StoreProvider/hooks/useAppSelector'
 import { authUserDataSelector } from '@/app/providers/StoreProvider/authSlice/selectors/authUserDataSelector'
-import { Dropdown } from '@/widgets/Dropdown/Dropdown'
+import { Dropdown } from '@/widgets/Dropdown/ui/Dropdown'
 import { StyledProfileInfo } from '@/widgets/ProfileInfo/ui/StyledProfileInfo'
 import { ImgWrapper } from '@/shared/ui/ImgWrapper/ImgWrapper'
 

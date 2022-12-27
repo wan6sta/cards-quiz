@@ -1,9 +1,9 @@
-import { TextField } from '../../shared/ui/TextField/TextField'
 import { useSearchParams } from 'react-router-dom'
 import { ChangeEvent, FC, useCallback, useLayoutEffect, useState } from 'react'
 import { debounce, identity, pickBy } from 'lodash-es'
-import { useUlrParams } from '../../features/PacksList/hooks/useUrlParams'
-import { AppFilters } from '../../features/PacksList/models/FiltersModel'
+import { TextField } from '@/shared/ui/TextField/TextField'
+import { AppFilters } from '@/features/PacksList/models/FiltersModel'
+import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
 
 interface Props {
   title: string
@@ -11,24 +11,22 @@ interface Props {
 
 export const DebouncedTableInput: FC<Props> = props => {
   const { title } = props
+  const urlParams = useUlrParams()
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [inputValue, setInputValue] = useState('')
   const inputUrlValue = searchParams.get(AppFilters.search)
-  useLayoutEffect(() => {
-    if (inputUrlValue === null) {
-      setInputValue('')
-      return
-    }
-    setInputValue(searchParams.get(AppFilters.search) as string)
-  }, [searchParams.get(AppFilters.search)])
 
-  const urlParams = useUlrParams()
+  useLayoutEffect(() => {
+    if (inputUrlValue) {
+      setInputValue(inputUrlValue)
+    } else {
+      setInputValue('')
+    }
+  }, [inputUrlValue])
 
   const removeQueryParams = () => {
-    const param = searchParams.get(AppFilters.search)
-
-    if (param) {
+    if (inputUrlValue) {
       searchParams.delete(AppFilters.search)
       setSearchParams(searchParams)
     }

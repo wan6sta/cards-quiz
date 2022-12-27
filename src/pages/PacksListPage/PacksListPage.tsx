@@ -13,9 +13,9 @@ import {
 import { Title } from '../../shared/ui/Title/Title'
 import { Span } from '../../shared/ui/Span/Span'
 import { PacksSwitcher } from '../../widgets/PacksSwitcher/ui/PacksSwitcher'
-import { DoubleRange } from '../../widgets/DoubleRange/DoubleRange'
+import { DoubleRange } from '../../widgets/DoubleRange/ui/DoubleRange'
 import { Pagination } from '../../widgets/Pagination/ui/Pagination/Pagination'
-import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/DebouncedTableInput'
+import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/ui/DebouncedTableInput'
 import { RemoveFilterBtn } from '../../widgets/RemoveFilterBtn/ui/RemoveFilterBtn'
 import { AddNewPack } from '../../features/PacksList/ui/AddNewPack/AddNewPack'
 
