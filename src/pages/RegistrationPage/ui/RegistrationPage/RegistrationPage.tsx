@@ -1,5 +1,5 @@
-import { Registration } from '../../features/Registration/Registration'
-import { Flex } from '../../shared/ui/Flex/Flex'
+import { Flex } from '@/shared/ui/Flex/Flex'
+import { Registration } from '@/features/Registration/Registration'
 
 export const RegistrationPage = () => {
   return (

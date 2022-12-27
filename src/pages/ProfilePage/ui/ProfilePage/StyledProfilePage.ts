@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const StyledProfilePage = styled.div`
   display: flex;
@@ -6,5 +6,4 @@ export const StyledProfilePage = styled.div`
   flex: 1;
   align-items: center;
   width: 100%;
-  ${props => props && css``}
 `

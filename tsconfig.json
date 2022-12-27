@@ -28,7 +28,7 @@
     "./vite.config.ts",
     "./src/**/*.tsx",
     "./src/**/*.ts",
-    "./src/pages/ProfilePage/ResetPassword/CheckEmailPage/CheckEmailPage.tsx"
+    "./src/pages/ProfilePage/ui/CheckEmailPage/CheckEmailPage.tsx"
   ],
   "references": [
     {

@@ -1,5 +1,5 @@
-import { Login } from '../../features/Login/Login'
-import { Flex } from '../../shared/ui/Flex/Flex'
+import { Flex } from '@/shared/ui/Flex/Flex'
+import { Login } from '@/features/Login/Login'
 
 export const LoginPage = () => {
   return (

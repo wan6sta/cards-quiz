@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Button } from '../../shared/ui/Button/Button'
 import styled from 'styled-components'
+import { Button } from '@/shared/ui/Button/Button'
 
 const StyledWrapper = styled.div`
   width: 100px;
   margin-right: 40px;
 `
 
-// Компонента для теста ErrorBoundary
+// Test ErrorBoundary
 export const BugButton = () => {
   const [error, setError] = useState(false)
 

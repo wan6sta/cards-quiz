@@ -1,15 +1,19 @@
 import { ReactNode } from 'react'
-import { LoginPage } from '@/pages/LoginPage/LoginPage'
-import { ProfilePage } from '@/pages/ProfilePage/ProfilePage'
-import { RegistrationPage } from '@/pages/RegistrationPage/RegistrationPage'
-import { RegistrationSuccessPage } from '@/pages/RegistrationPage/RegistrationSuccessPage/RegistrationSuccessPage'
-import { PacksListPage } from '@/pages/PacksListPage/PacksListPage'
-import { CardsListPage } from '@/pages/CardsListPage/CardsListPage'
-import { ForgotPasswordPage } from '@/pages/ProfilePage/ResetPassword/ForgotPasswordPage/ForgotPasswordPage'
-import { CheckEmailPage } from '@/pages/ProfilePage/ResetPassword/CheckEmailPage/CheckEmailPage'
-import { SetNewPasswordPage } from '@/pages/ProfilePage/ResetPassword/SetNewPasswordPage/SetNewPasswordPage'
-import { NotFoundPage } from '@/pages/NotFoundPage/NotFoundPage'
 import { Navigate } from 'react-router-dom'
+import { LoginPage } from '@/pages/LoginPage'
+import {
+  CheckEmailPage,
+  ForgotPasswordPage,
+  ProfilePage,
+  SetNewPasswordPage
+} from '@/pages/ProfilePage'
+import {
+  RegistrationPage,
+  RegistrationSuccessPage
+} from '@/pages/RegistrationPage'
+import { PacksListPage } from '@/pages/PacksListPage'
+import { CardsListPage } from '@/pages/CardsListPage'
+import { NotFoundPage } from '@/pages/NotFoundPage'
 import { Storybook } from '@/shared/ui/Storybook/Storybook'
 
 export const enum AppPaths {

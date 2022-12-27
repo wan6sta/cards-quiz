@@ -3,7 +3,7 @@ import { appRouterConfig } from '../config/routerConfig'
 import { RequiredAuth } from '../config/RequiredAuth'
 import { RequiredNonAuth } from '../config/RequiredNonAuth'
 import { PageLayout } from '@/widgets/PageLayout'
-import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
+import { ErrorPage } from '@/pages/ErrorPage'
 
 const newRouter = createBrowserRouter(
   appRouterConfig.map(route => {

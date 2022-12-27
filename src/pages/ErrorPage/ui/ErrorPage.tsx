@@ -1,6 +1,6 @@
-import { Button } from '../../shared/ui/Button/Button'
-import { Title } from '../../shared/ui/Title/Title'
 import { StyledErrorPage, StyledWrapper } from './StyledErrorPage'
+import { Title } from '@/shared/ui/Title/Title'
+import { Button } from '@/shared/ui/Button/Button'
 
 export const ErrorPage = () => {
   const reloadPage = () => {

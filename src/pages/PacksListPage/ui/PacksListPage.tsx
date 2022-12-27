@@ -1,5 +1,3 @@
-import { FC } from 'react'
-import { PacksList } from '../../features/PacksList/PacksList'
 import {
   FilterSliderWrapper,
   FilterTextFieldWrapper,
@@ -10,16 +8,17 @@ import {
   StyledPacksListPage,
   TitleWrapper
 } from './StyledPacksList'
-import { Title } from '../../shared/ui/Title/Title'
-import { Span } from '../../shared/ui/Span/Span'
-import { PacksSwitcher } from '../../widgets/PacksSwitcher/ui/PacksSwitcher'
-import { DoubleRange } from '../../widgets/DoubleRange/ui/DoubleRange'
-import { Pagination } from '../../widgets/Pagination/ui/Pagination/Pagination'
-import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/ui/DebouncedTableInput'
-import { RemoveFilterBtn } from '../../widgets/RemoveFilterBtn/ui/RemoveFilterBtn'
-import { AddNewPack } from '../../features/PacksList/ui/AddNewPack/AddNewPack'
+import { Title } from '@/shared/ui/Title/Title'
+import { AddNewPack } from '@/features/PacksList/ui/AddNewPack/AddNewPack'
+import { Span } from '@/shared/ui/Span/Span'
+import { DebouncedTableInput } from '@/widgets/DeboucedTableInput'
+import { PacksSwitcher } from '@/widgets/PacksSwitcher'
+import { RemoveFilterBtn } from '@/widgets/RemoveFilterBtn'
+import { DoubleRange } from '@/widgets/DoubleRange'
+import { PacksList } from '@/features/PacksList/PacksList'
+import { Pagination } from '@/widgets/Pagination'
 
-export const PacksListPage: FC = () => {
+export const PacksListPage = () => {
   return (
     <StyledPacksListPage>
       <TitleWrapper>

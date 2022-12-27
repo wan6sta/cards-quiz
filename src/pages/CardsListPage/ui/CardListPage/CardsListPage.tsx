@@ -1,10 +1,6 @@
 import { FC } from 'react'
-import { Title } from '../../shared/ui/Title/Title'
-import { Button } from '../../shared/ui/Button/Button'
-import { Span } from '../../shared/ui/Span/Span'
-import { Pagination } from '../../widgets/Pagination/ui/Pagination/Pagination'
-import { DebouncedTableInput } from '../../widgets/DeboucedTableInput/ui/DebouncedTableInput'
-import { ButtonWrapper } from '../../features/PacksList/ui/AddNewPack/StyledAddNewPack'
+import { useAppSelector } from '@/shared/hooks/useAppSelector'
+import { useIsMyPack } from '@/shared/hooks/useIsMyPack'
 import {
   FilterTextFieldWrapper,
   FilterWrapper,
@@ -12,15 +8,18 @@ import {
   PaginationWrapper,
   StyledPacksListPage,
   TitleWrapper
-} from '../PacksListPage/StyledPacksList'
-import { CardsList } from '../../features/CardList/CardsList'
-import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
-import { useAppSelector } from '../../shared/hooks/useAppSelector'
-import { getPackName } from '../../features/CardList/selectors/getPackName'
-import { Dropdown } from '../../widgets/Dropdown/ui/Dropdown'
+} from '@/pages/PacksListPage/ui/StyledPacksList'
+import { BackToLink } from '@/shared/ui/BackToLink/BackToLink'
+import { Title } from '@/shared/ui/Title/Title'
+import { Dropdown } from '@/widgets/Dropdown'
+import { CreateNewCard } from '@/features/CardList/ui/CreateNewCard/CreateNewCard'
+import { Button } from '@/shared/ui/Button/Button'
+import { Span } from '@/shared/ui/Span/Span'
+import { DebouncedTableInput } from '@/widgets/DeboucedTableInput'
+import { CardsList } from '@/features/CardList/CardsList'
+import { Pagination } from '@/widgets/Pagination'
+import { ButtonWrapper } from '@/features/PacksList/ui/AddNewPack/StyledAddNewPack'
 import { StyledTitleWrapper } from './StyledCardsListPage'
-import { CreateNewCard } from '../../features/CardList/ui/CreateNewCard/CreateNewCard'
-import { useIsMyPack } from '../../shared/hooks/useIsMyPack'
 
 export const CardsListPage: FC = () => {
   const packName = useAppSelector(getPackName).slice(0, 25)
