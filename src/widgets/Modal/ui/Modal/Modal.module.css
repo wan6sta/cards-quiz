@@ -1,43 +1,44 @@
 .popup {
-    background: #fff;
-    border: 1px solid black;
-    width: 395px;
+  background: #fff;
+  border: 1px solid black;
+  width: 395px;
 }
 
 .popup__title {
-    padding: 19px 24px;
-    border-bottom: 1px solid #D9D9D9;
-    margin-bottom: 35px;
-    width: 100%;
-    position: relative;
+  padding: 19px 24px;
+  border-bottom: 1px solid #d9d9d9;
+  margin-bottom: 35px;
+  width: 100%;
+  position: relative;
 }
 
 .cross {
-    position: absolute;
-    right: 34px;
-    top: 23px;
-    width: 14px;
-    height: 14px;
-    opacity: 1;
+  position: absolute;
+  right: 34px;
+  top: 23px;
+  width: 14px;
+  height: 14px;
+  opacity: 1;
 }
 
 .cross:hover {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
-.cross:before, .cross:after {
-    position: absolute;
-    left: 15px;
-    content: ' ';
-    height: 14px;
-    width: 1px;
-    background-color: #000;
+.cross:before,
+.cross:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 14px;
+  width: 1px;
+  background-color: #000;
 }
 
 .cross:before {
-    transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .cross:after {
-    transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }

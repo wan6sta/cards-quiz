@@ -23,4 +23,4 @@ export { getPacks } from './model/selectors/getPacks'
 export { getTotalPacksCount } from './model/selectors/getTotalPacksCount'
 export { getUrlMinMaxCount } from './model/selectors/getUrlMinMaxCount'
 
-export {  } from './ui/PacksList/PacksList'
+export {} from './ui/PacksList/PacksList'

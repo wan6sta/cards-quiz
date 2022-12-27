@@ -114,7 +114,6 @@ export interface CreateCardResponse {
   tokenDeathTime: number
 }
 
-
 export interface UpdatedCard {
   _id: string
   cardsPack_id: string

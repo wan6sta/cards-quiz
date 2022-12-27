@@ -21,8 +21,7 @@ export function PaginatedItems() {
   const initialValue = 0
   const urlPageParams = Number(searchParams.get(AppFilters.page))
 
-  const packsCount =
-    useAppSelector(getTotalPacksCount(packId || '')) || 1
+  const packsCount = useAppSelector(getTotalPacksCount(packId || '')) || 1
 
   useEffect(() => {
     setItemsPerPage(urlItemsPerPage || 10)
@@ -38,25 +37,25 @@ export function PaginatedItems() {
   )
 
   return (
-      <ReactPaginate
-        breakLabel='...'
-        nextLabel={
-          <div tabIndex={1} className={cls.prev}>
-            <RightIcon />
-          </div>
-        }
-        onPageChange={handlePageClick}
-        forcePage={urlPageParams === 0 ? initialValue : urlPageParams - 1}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel={
-          <div tabIndex={1} className={cls.prev}>
-            <LeftIcon />
-          </div>
-        }
-        renderOnZeroPageCount={undefined}
-        className={cls.ul}
-        activeClassName={cls.active}
-      />
+    <ReactPaginate
+      breakLabel='...'
+      nextLabel={
+        <div tabIndex={1} className={cls.prev}>
+          <RightIcon />
+        </div>
+      }
+      onPageChange={handlePageClick}
+      forcePage={urlPageParams === 0 ? initialValue : urlPageParams - 1}
+      pageRangeDisplayed={5}
+      pageCount={pageCount}
+      previousLabel={
+        <div tabIndex={1} className={cls.prev}>
+          <LeftIcon />
+        </div>
+      }
+      renderOnZeroPageCount={undefined}
+      className={cls.ul}
+      activeClassName={cls.active}
+    />
   )
 }
