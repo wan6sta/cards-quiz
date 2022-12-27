@@ -25,6 +25,8 @@ export const AddPackModal: FC<AddModalProps> = props => {
       </TexFieldModalWrapper>
       <CheckboxModalLabel style={{ marginBottom: '35px' }}>
         <Checkbox
+          width={'16px'}
+          height={'16px'}
           checked={isPrivate}
           onChange={e => setIsPrivate(e.currentTarget.checked)}
           label={'Private pack'}
