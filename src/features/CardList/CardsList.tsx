@@ -8,7 +8,7 @@ import {
 import { StyledPacksList, StyledTable } from '../PacksList/StyledPacksList'
 import { useGetCardQuery } from './api/cardApiSlice'
 import { Card } from './Models/CardsModel'
-import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppSelector } from '../../shared/hooks/useAppSelector'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { CardListGrade } from './ui/CardListGrade/CardListGrade'
 import { getCardsSelector } from './selectors/getCardsSelector'

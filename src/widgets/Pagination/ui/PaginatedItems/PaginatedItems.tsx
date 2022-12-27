@@ -7,7 +7,7 @@ import { ReactComponent as LeftIcon } from '@/shared/assets/icons/LeftArrow.svg'
 import { AppFilters } from '@/features/PacksList/models/FiltersModel'
 import { useUlrParams } from '@/features/PacksList/hooks/useUrlParams'
 import { getTotalPacksCountSelector } from '@/features/PacksList/selectors/getTotalPacksCountSelector'
-import { useAppSelector } from '@/app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppSelector } from '@/shared/hooks/useAppSelector'
 import cls from './PaginatedItems.module.css'
 
 export function PaginatedItems() {

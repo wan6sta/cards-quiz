@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { RootState } from '@/app/providers/StoreProvider/store'
+import { RootState } from '@/app/providers/StoreProvider/config/store'
 
 export const getMinMaxCountSelector = createSelector(
   (state: RootState) => (state.packs),

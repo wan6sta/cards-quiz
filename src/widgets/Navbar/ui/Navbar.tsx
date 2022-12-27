@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '@/app/providers/StoreProvider/hooks/useAppSelector'
-import { isAuthSelector } from '@/app/providers/StoreProvider/authSlice/selectors/isAuthSelector'
+import { useAppSelector } from '@/shared/hooks/useAppSelector'
+import { isAuthSelector } from '@/app/api/authSlice/selectors/isAuthSelector'
 import { ProfileInfo } from '@/widgets/ProfileInfo'
 import { Flex } from '@/shared/ui/Flex/Flex'
 import { Button } from '@/shared/ui/Button/Button'
-import { AppPaths } from '@/app/providers/AppRouter/routerConfig'
+import { AppPaths } from '@/app/providers/AppRouter/config/routerConfig'
 import { StyledButtonWrapper, StyledNavbar } from './StyledNavbar'
 
 export const Navbar = () => {

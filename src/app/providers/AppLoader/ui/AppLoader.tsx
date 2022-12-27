@@ -1,8 +1,9 @@
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
-import { LinearPageLoader } from '../../../shared/ui/LinearPageLoader/LinearPageLoader'
-import { useMeMutation } from '../StoreProvider/authSlice/api/authMeApiSlice'
+import { useMeMutation } from '@/app/api/authSlice'
+import { LinearPageLoader } from '@/widgets/LinearPageLoader'
 
-export const AppLoader: FC<PropsWithChildren> = ({ children }) => {
+export const AppLoader: FC<PropsWithChildren> = props => {
+  const { children } = props
   const [isAppLoading, setIsAppLoading] = useState(true)
 
   const [me, { error, isSuccess: isAuth }] = useMeMutation()
@@ -10,6 +11,7 @@ export const AppLoader: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     me({})
   }, [])
+
   useEffect(() => {
     if (isAuth) {
       setIsAppLoading(false)

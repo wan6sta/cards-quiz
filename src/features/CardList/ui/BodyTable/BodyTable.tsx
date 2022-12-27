@@ -9,7 +9,7 @@ import { TableLoader } from '../../../../shared/ui/TableLoader/TableLoader'
 import { CreateNewCard } from '../CreateNewCard/CreateNewCard'
 import { flexRender, Table } from '@tanstack/react-table'
 import { Card } from '../../Models/CardsModel'
-import { useIsMyPack } from '../../../../app/providers/StoreProvider/hooks/useIsMyPack'
+import { useIsMyPack } from '../../../../shared/hooks/useIsMyPack'
 
 interface Props {
   loading: boolean

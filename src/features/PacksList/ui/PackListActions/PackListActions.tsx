@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useAppSelector } from '../../../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppSelector } from '../../../../shared/hooks/useAppSelector'
 import {
   StyledIconPackWrapper,
   StyledIconsWrapper

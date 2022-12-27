@@ -7,7 +7,7 @@ import { StyledCheckEmailPage } from './StyledCheckEmailPage'
 import { Span } from '../../../../shared/ui/Span/Span'
 import { Link } from 'react-router-dom'
 import { Button } from '../../../../shared/ui/Button/Button'
-import { AppPaths } from '../../../../app/providers/AppRouter/routerConfig'
+import { AppPaths } from '../../../../app/providers/AppRouter/config/routerConfig'
 import { RESTORE_USER_EMAIL_KEY } from '../../../../shared/assets/constants/RESTORE_USER_EMAIL_KEY'
 
 export const CheckEmailPage: FC = props => {

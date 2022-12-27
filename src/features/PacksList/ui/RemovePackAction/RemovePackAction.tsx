@@ -1,5 +1,5 @@
 import { useDeleteCardPackMutation } from '../../api/packsApiSlice'
-import { LinearPageLoader } from '../../../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { LinearPageLoader } from '../../../../widgets/LinearPageLoader/ui/LinearPageLoader'
 import { ReactComponent as DeleteIcon } from '../../../../shared/assets/icons/Trash.svg'
 import { FC, useState } from 'react'
 import { useDeleteCardMutation } from '../../../CardList/api/cardApiSlice'

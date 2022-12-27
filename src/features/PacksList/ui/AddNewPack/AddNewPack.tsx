@@ -1,7 +1,7 @@
 import { Button } from '../../../../shared/ui/Button/Button'
 import { ButtonWrapper } from './StyledAddNewPack'
 import { useCreateCardPackMutation } from '../../api/packsApiSlice'
-import { LinearPageLoader } from '../../../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { LinearPageLoader } from '../../../../widgets/LinearPageLoader/ui/LinearPageLoader'
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert'
 import { errorMessageHandler } from '../../../../shared/lib/errorMessageHandler/errorMessageHandler'
 import { FetchError } from '../../../../shared/models/ErrorModel'

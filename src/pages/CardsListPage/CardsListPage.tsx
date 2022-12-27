@@ -15,12 +15,12 @@ import {
 } from '../PacksListPage/StyledPacksList'
 import { CardsList } from '../../features/CardList/CardsList'
 import { BackToLink } from '../../shared/ui/BackToLink/BackToLink'
-import { useAppSelector } from '../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppSelector } from '../../shared/hooks/useAppSelector'
 import { getPackName } from '../../features/CardList/selectors/getPackName'
 import { Dropdown } from '../../widgets/Dropdown/ui/Dropdown'
 import { StyledTitleWrapper } from './StyledCardsListPage'
 import { CreateNewCard } from '../../features/CardList/ui/CreateNewCard/CreateNewCard'
-import { useIsMyPack } from '../../app/providers/StoreProvider/hooks/useIsMyPack'
+import { useIsMyPack } from '../../shared/hooks/useIsMyPack'
 
 export const CardsListPage: FC = () => {
   const packName = useAppSelector(getPackName).slice(0, 25)

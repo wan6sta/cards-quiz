@@ -1,9 +1,9 @@
-import { useAppSelector } from '../../../../app/providers/StoreProvider/hooks/useAppSelector'
+import { useAppSelector } from '../../../../shared/hooks/useAppSelector'
 import { EditActionIcon } from '../../../PacksList/ui/EditAction/EditActionIcon'
 import { RemovePackAction } from '../../../PacksList/ui/RemovePackAction/RemovePackAction'
 import { FC } from 'react'
 import { StarRating } from '../StarRating/StarRating'
-import { getAuthIdSelector } from '../../../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
+import { getAuthIdSelector } from '../../../../app/api/authSlice/selectors/getAuthIdSelector'
 import {
   StyledCardIconsWrapper,
   StyledIconsWrapperWrapper,

@@ -1,7 +1,7 @@
 import { AppFilters } from '../models/FiltersModel'
 import { useSearchParams } from 'react-router-dom'
-import { useAppSelector } from '../../../app/providers/StoreProvider/hooks/useAppSelector'
-import { getAuthIdSelector } from '../../../app/providers/StoreProvider/authSlice/selectors/getAuthIdSelector'
+import { useAppSelector } from '../../../shared/hooks/useAppSelector'
+import { getAuthIdSelector } from '../../../app/api/authSlice/selectors/getAuthIdSelector'
 
 export const usePackQueryParams = (sortedValue: string | boolean) => {
   const [searchParams, setSearchParams] = useSearchParams()

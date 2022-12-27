@@ -1,4 +1,4 @@
-import { RootState } from '../../../app/providers/StoreProvider/store'
+import { RootState } from '../../../app/providers/StoreProvider/config/store'
 
 export const getTotalPacksCountSelector =
   (packId: string) =>

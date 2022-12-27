@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { ImgWrapper } from '../../../shared/ui/ImgWrapper/ImgWrapper'
 import { ReactComponent as SuccessIcon } from '../../../shared/assets/icons/successIcon.svg'
 import { Flex } from '../../../shared/ui/Flex/Flex'
-import { AppPaths } from '../../../app/providers/AppRouter/routerConfig'
+import { AppPaths } from '../../../app/providers/AppRouter/config/routerConfig'
 
 export const RegistrationSuccessPage = () => {
   const navigate = useNavigate()

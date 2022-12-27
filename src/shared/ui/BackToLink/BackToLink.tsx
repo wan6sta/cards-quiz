@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
 import { ReactComponent as BackIcon } from '@/shared/assets/icons/BackToIcon.svg'
-import { AppPaths } from '@/app/providers/AppRouter/routerConfig'
+import { AppPaths } from '@/app/providers/AppRouter/config/routerConfig'
 import { AppLink } from '@/shared/ui/AppLink/AppLink'
 import { StyledBackToLink, StyledWrapper } from './StyledBackToLink'
 

@@ -1,5 +1,5 @@
 import { useUpdateCardsPackMutation } from '../../api/packsApiSlice'
-import { LinearPageLoader } from '../../../../shared/ui/LinearPageLoader/LinearPageLoader'
+import { LinearPageLoader } from '../../../../widgets/LinearPageLoader/ui/LinearPageLoader'
 import { ReactComponent as EditIcon } from '../../../../shared/assets/icons/EditIcon.svg'
 import { FC, useState } from 'react'
 import { useUpdateCardMutation } from '../../../CardList/api/cardApiSlice'

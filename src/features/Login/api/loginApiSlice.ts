@@ -7,7 +7,7 @@ import {
 import { LoginPayload, UserLoggedInResponse } from '../models/loginModels'
 import { FetchError } from '../../../shared/models/ErrorModel'
 import { BASE_URL } from '../../../shared/assets/constants/BASE_URL'
-import { setUserData } from '../../../app/providers/StoreProvider/authSlice/slice/authSlice'
+import { setUserData } from '../../../app/api/authSlice/slice/authSlice'
 
 export const loginApiSlice = createApi({
   reducerPath: 'login/api',

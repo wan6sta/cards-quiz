@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ErrorPage } from '../../../pages/ErrorPage/ErrorPage'
-import { PageLayout } from '../../../widgets/PageLayout/ui/PageLayout'
-import { appRouterConfig } from './routerConfig'
-import { RequiredAuth } from './RequiredAuth'
-import { RequiredNonAuth } from './RequiredNonAuth'
+import { appRouterConfig } from '../config/routerConfig'
+import { RequiredAuth } from '../config/RequiredAuth'
+import { RequiredNonAuth } from '../config/RequiredNonAuth'
+import { PageLayout } from '@/widgets/PageLayout'
+import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
 
 const newRouter = createBrowserRouter(
   appRouterConfig.map(route => {
