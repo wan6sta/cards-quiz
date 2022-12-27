@@ -59,6 +59,8 @@ const columns = [
         grade={cell.row.original.grade as number}
         packsId={cell.row.original._id}
         packCreatorId={cell.row.original.user_id}
+        cardName={cell.row.original.question}
+        initAnswer={cell.row.original.answer}
       />
     )
   })
