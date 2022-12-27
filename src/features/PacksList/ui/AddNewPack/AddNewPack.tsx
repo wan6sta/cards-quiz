@@ -10,11 +10,13 @@ import { AddPackModal } from './AddPackModal/AddPackModal'
 import { Modal } from '../../../../widgets/Modal/Modal'
 
 export const AddNewPack = () => {
+  const [newName, setNewName] = useState('')
+  const [isPrivate, setIsPrivate] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [addCard, { isLoading, error }] = useCreateCardPackMutation()
 
   const addCardHandler = () => {
-    addCard({ cardsPack: { name: 'mock card' } })
+    addCard({ cardsPack: { name: newName, private: isPrivate } })
     setIsOpen(false)
   }
 
@@ -41,7 +43,12 @@ export const AddNewPack = () => {
           title={'Add new pack'}
           toggleClose={toggleClose}
         >
-          <AddPackModal />
+          <AddPackModal
+            newName={newName}
+            setNewName={setNewName}
+            isPrivate={isPrivate}
+            setIsPrivate={setIsPrivate}
+          />
         </Modal>
         <ErrorAlert errorMessage={errorHandler} />
       </ButtonWrapper>
