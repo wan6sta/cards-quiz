@@ -15,6 +15,7 @@ import { PacksListPage } from '@/pages/PacksListPage'
 import { CardsListPage } from '@/pages/CardsListPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { Storybook } from '@/shared/ui/Storybook/Storybook'
+import { LearnPage } from '@/pages/LearnPage/ui/LearnPage'
 
 export const enum AppPaths {
   'app' = '/',
@@ -29,7 +30,8 @@ export const enum AppPaths {
   'setNewPassword' = '/set-new-password/:token',
   'checkEmailPage' = '/check-email-page',
   'notFoundPage' = '/404',
-  'notFoundPageRedirect' = '*'
+  'notFoundPageRedirect' = '*',
+  'learnPage' = '/learn/:packId'
 }
 
 interface AppRouteProps {
@@ -85,6 +87,12 @@ export const appRouterConfig: AppRouteProps[] = [
     path: AppPaths.setNewPassword,
     element: <SetNewPasswordPage />,
     pageLayout: true
+  },
+  {
+    path: AppPaths.learnPage,
+    element: <LearnPage />,
+    pageLayout: true,
+    page404: true
   },
   {
     path: AppPaths.notFoundPage,

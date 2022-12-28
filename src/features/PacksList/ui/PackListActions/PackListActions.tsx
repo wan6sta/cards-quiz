@@ -8,23 +8,28 @@ import { ReactComponent as LearnIcon } from '@/shared/assets/icons/TeacherIcon.s
 import { EditActionIcon } from '../EditAction/EditActionIcon'
 import { useAppSelector } from '@/shared/hooks/useAppSelector'
 import { getAuthId } from '@/app/api/authSlice'
+import { LearnActionIcon } from '@/features/PacksList/ui/LearnAction/LearnActionIcon'
 
 interface Props {
   packCreatorId: string
   packsId: string
   packsName: string
+  cardsCount?: number
 }
 
 export const PackListActions: FC<Props> = props => {
   const userId = useAppSelector(getAuthId)
 
-  const { packsId, packCreatorId, packsName } = props
+  const { packsId, packCreatorId, packsName, cardsCount } = props
   return (
     <StyledIconsWrapper>
       {packCreatorId === userId ? (
         <>
           <StyledIconPackWrapper>
-            <LearnIcon />
+            <LearnActionIcon
+              cardsCount={cardsCount as number}
+              packsId={packsId}
+            />
           </StyledIconPackWrapper>
           <StyledIconPackWrapper>
             <EditActionIcon Id={packsId} />
@@ -35,7 +40,10 @@ export const PackListActions: FC<Props> = props => {
         </>
       ) : (
         <StyledIconPackWrapper>
-          <LearnIcon />
+          <LearnActionIcon
+            cardsCount={cardsCount as number}
+            packsId={packsId}
+          />
         </StyledIconPackWrapper>
       )}
     </StyledIconsWrapper>

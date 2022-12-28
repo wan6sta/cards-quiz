@@ -99,6 +99,7 @@ export const PacksList: FC = () => {
       header: 'Actions',
       cell: cell => (
         <PackListActions
+          cardsCount={cell.row.original.cardsCount}
           packCreatorId={cell.row.original.user_id}
           packsId={cell.row.original._id}
           packsName={cell.row.original.name}
