@@ -6,6 +6,10 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from '@/shared/assets/constants/BASE_URL'
 import { FetchError } from '@/shared/types/ErrorModel'
+import {
+  GradeResponse,
+  SetGradePayload
+} from '@/features/Learn/model/types/LearnModel'
 
 export const learnApiSlice = createApi({
   reducerPath: 'login/api',
@@ -14,7 +18,7 @@ export const learnApiSlice = createApi({
     credentials: 'include'
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
   endpoints: builder => ({
-    grade: builder.mutation<any, any>({
+    grade: builder.mutation<GradeResponse, SetGradePayload>({
       query: payload => ({
         url: 'cards/grade',
         method: 'PUT',

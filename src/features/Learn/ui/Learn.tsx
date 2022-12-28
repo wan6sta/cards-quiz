@@ -37,7 +37,7 @@ export const Learn = () => {
 
   const gradeRequestBody = {
     grade: radioValue.id,
-    card_id: cardsData?.cards[selectedCard]._id
+    card_id: cardsData?.cards[selectedCard]._id as string
   }
 
   const onNextBtnClick = async () => {
