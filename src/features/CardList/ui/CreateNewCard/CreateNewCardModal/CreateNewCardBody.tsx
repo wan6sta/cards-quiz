@@ -1,9 +1,8 @@
 import { FC } from 'react'
 import { Flex } from '@/shared/ui/Flex/Flex'
 import { TextField } from '@/shared/ui/TextField/TextField'
-import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
 import { TexFieldModalWrapper } from '@/features/PacksList/ui/AddNewPack/AddPackModal/StyledAddPackModal'
-import { PerPageSelect } from '@/widgets/PerPageSelect'
+import { MyListBox } from '@/widgets/ListBox/MyListBox'
 
 interface CreateNewCardModalProps {
   question: string
@@ -16,13 +15,7 @@ export const CreateNewCardModal: FC<CreateNewCardModalProps> = props => {
   const { question, setQuestion, answer, setAnswer } = props
   return (
     <Flex flexDirection={'column'}>
-      <label>
-        <select>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
-      </label>
+      <MyListBox />
       <TexFieldModalWrapper>
         <TextField
           value={question}
