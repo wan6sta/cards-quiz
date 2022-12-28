@@ -21,6 +21,8 @@ import { LinearPageLoader } from '@/widgets/LinearPageLoader/ui/LinearPageLoader
 import { cn } from '@/shared/lib/cn/cn'
 import { ErrorAlert } from '@/shared/ui/ErrorAlert/ErrorAlert'
 import cls from './Dropdown.module.css'
+import { useAppSelector } from '@/shared/hooks/useAppSelector'
+import { getTotalPacksCount } from '@/features/PacksList'
 
 interface Props {
   nav?: boolean
@@ -31,6 +33,7 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
   const { packId } = useParams()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const cardsCount = useAppSelector(getTotalPacksCount(packId as string))
   const [deleteAcc, { isLoading: deleteIsLoading, error: deleteMeError }] =
     useDeleteMeMutation()
 
@@ -83,6 +86,10 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
     if (isUpdatePackLoading) return
     if (packId)
       await updatePack({ cardsPack: { name: 'edit packName', _id: packId } })
+  }
+
+  const onClickNameHandler = () => {
+    if (cardsCount !== 0) navigate(`/learn/${packId as string}`)
   }
 
   const isBundleLoading = deleteIsLoading
@@ -158,8 +165,15 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <li className={cn(cls.li, { [cls.active]: active })}>
-                  <LearnIcon className={cls.icon} /> Learn
+                <li
+                  onClick={onClickNameHandler}
+                  className={cn(cls.li, { [cls.active]: active })}
+                >
+                  <LearnIcon
+                    opacity={cardsCount ? 1 : 0.4}
+                    className={cls.icon}
+                  />
+                  Learn
                 </li>
               )}
             </Menu.Item>
