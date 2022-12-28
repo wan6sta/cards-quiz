@@ -49,9 +49,7 @@ export const Learn = () => {
 
   useEffect(() => {
     if (cardsData) {
-      if (selectedCard === cardsData.cards.length - 1) {
-        setSelectedCard(0)
-      }
+      selectedCard === cardsData.cards.length - 1 && setSelectedCard(0)
     }
   }, [selectedCard])
 
@@ -74,7 +72,6 @@ export const Learn = () => {
         {!showAnswer && (
           <Button onClick={() => setShowAnswer(true)}>Show answer</Button>
         )}
-
         {showAnswer && (
           <>
             <Span fontSize={'16px'} bold>
