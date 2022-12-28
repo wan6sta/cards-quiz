@@ -17,8 +17,6 @@ export const LearnRadioGroup: FC<Props> = props => {
     <RadioGroup value={radioValue} by={'id'} onChange={setRadioValue}>
       <RadioGroup.Label>Rate yourself:</RadioGroup.Label>
       {optionsValue.map(el => (
-        /* Use the `active` state to conditionally style the active option. */
-        /* Use the `checked` state to conditionally style the checked option. */
         <RadioGroup.Option key={el.id} value={el} as={Fragment}>
           {({ checked }) => (
             <OptionsWrapper>
