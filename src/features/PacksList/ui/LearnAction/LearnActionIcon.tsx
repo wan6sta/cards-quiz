@@ -10,14 +10,11 @@ interface propsType {
 export const LearnActionIcon: FC<propsType> = props => {
   const { packsId, cardsCount } = props
   const navigate = useNavigate()
-  const onClickNameHandler = (packsId: string) => {
+  const onClickNameHandler = () => {
     if (cardsCount !== 0) navigate(`/learn/${packsId}`)
   }
 
   return (
-    <LearnIcon
-      opacity={cardsCount ? 1 : 0.4}
-      onClick={() => onClickNameHandler(packsId)}
-    />
+    <LearnIcon opacity={cardsCount ? 1 : 0.4} onClick={onClickNameHandler} />
   )
 }
