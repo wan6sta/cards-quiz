@@ -14,9 +14,9 @@ export const ErrorAlert: FC<ErrorProps> = props => {
         position: 'top-center',
         autoClose: 1500,
         hideProgressBar: false,
-        closeOnClick: true,
+        closeOnClick: false,
         pauseOnHover: false,
-        draggable: true,
+        draggable: false,
         progress: undefined,
         theme: 'light'
       })
@@ -28,11 +28,11 @@ export const ErrorAlert: FC<ErrorProps> = props => {
       autoClose={1500}
       hideProgressBar={false}
       newestOnTop={false}
-      closeOnClick
+      closeOnClick={false}
       rtl={false}
       limit={1}
       pauseOnFocusLoss={false}
-      draggable
+      draggable={false}
       pauseOnHover={false}
       theme='light'
     />
