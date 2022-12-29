@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/shared/ui/Button/Button'
 import { LearnRadioGroup } from '@/widgets/LearnRadioGroup/ui/LearnRadioGroup'
 import { Flex } from '@/shared/ui/Flex/Flex'
-import { useGradeMutation } from '@/features/Learn/api/learnApiSlice'
 import { LinearPageLoader } from '@/widgets/LinearPageLoader'
+import { useGradeMutation } from '../api/learnApiSlice'
 
 export const Learn = () => {
   const { packId } = useParams()
