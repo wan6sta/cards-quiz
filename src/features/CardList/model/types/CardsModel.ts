@@ -4,7 +4,7 @@ export interface Card {
   user_id: string
   answer: string
   question: string
-  grade?: number
+  grade: number
   shots?: number
   questionImg?: string
   answerImg?: string

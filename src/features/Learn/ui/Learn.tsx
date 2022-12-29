@@ -9,6 +9,9 @@ import { LearnRadioGroup } from '@/widgets/LearnRadioGroup/ui/LearnRadioGroup'
 import { Flex } from '@/shared/ui/Flex/Flex'
 import { LinearPageLoader } from '@/widgets/LinearPageLoader'
 import { useGradeMutation } from '../api/learnApiSlice'
+import { Card } from '@/features/CardList/model/types/CardsModel'
+import { randomFunc } from '@/features/Learn/model/lib/randomFunc'
+import { PuffLoader } from 'react-spinners'
 
 export const Learn = () => {
   const { packId } = useParams()
@@ -18,10 +21,13 @@ export const Learn = () => {
     pageCount: 99999
   }
 
-  const { data: cardsData, isFetching: questionIsLoading } =
-    useGetCardQuery(getCardsQueryParams)
+  const {
+    data: cardsData,
+    isFetching: questionIsLoading,
+    isSuccess
+  } = useGetCardQuery(getCardsQueryParams)
 
-  const [setGrade] = useGradeMutation()
+  const [setGrade, { isLoading: gradeIsLoading }] = useGradeMutation()
 
   const rate = [
     { id: 1, name: 'Did not know' },
@@ -31,32 +37,44 @@ export const Learn = () => {
     { id: 5, name: 'Knew the answer' }
   ]
 
+  const initValue = {
+    _id: '',
+    cardsPack_id: '',
+    user_id: '',
+    answer: '',
+    question: '',
+    grade: 0,
+    updated: ''
+  }
+
   const [radioValue, setRadioValue] = useState(rate[0])
-  const [selectedCard, setSelectedCard] = useState(0)
+  const [selectedCard, setSelectedCard] = useState<Card>(initValue)
   const [showAnswer, setShowAnswer] = useState(false)
+
+  useEffect(() => {
+    if (cardsData?.cards) setSelectedCard(randomFunc(cardsData.cards))
+  }, [isSuccess])
 
   const gradeRequestBody = {
     grade: radioValue.id,
-    card_id: cardsData?.cards[selectedCard]._id as string
+    card_id: selectedCard._id
   }
 
   const onNextBtnClick = async () => {
     await setGrade(gradeRequestBody)
-    setSelectedCard(prev => prev + 1)
+    if (cardsData) setSelectedCard(randomFunc(cardsData.cards))
     setShowAnswer(false)
     setRadioValue(rate[0])
   }
 
-  useEffect(() => {
-    if (cardsData) {
-      selectedCard === cardsData.cards.length - 1 && setSelectedCard(0)
-    }
-  }, [selectedCard])
-
   if (questionIsLoading) {
     return <LinearPageLoader />
   }
-
+  const gradeLoading = gradeIsLoading ? (
+    <PuffLoader color='#ffffff' size={31} />
+  ) : (
+    'Next'
+  )
   return (
     <>
       <Title marginBottom='30px' fontSize='22px'>
@@ -66,7 +84,7 @@ export const Learn = () => {
         <Span fontSize={'16px'} bold>
           <b>Question: </b>
           <Span fontSize={'16px'} bold>
-            {cardsData?.cards[selectedCard].question}
+            {selectedCard.question}
           </Span>
         </Span>
         {!showAnswer && (
@@ -77,7 +95,7 @@ export const Learn = () => {
             <Span fontSize={'16px'} bold>
               <b>Answer: </b>
               <Span fontSize={'16px'} bold>
-                {cardsData?.cards[selectedCard].answer}
+                {selectedCard.answer}
               </Span>
             </Span>
             <Flex>
@@ -87,7 +105,9 @@ export const Learn = () => {
                 setRadioValue={setRadioValue}
               />
             </Flex>
-            <Button onClick={onNextBtnClick}>Next</Button>
+            <Button disabled={gradeIsLoading} onClick={onNextBtnClick}>
+              {gradeLoading}
+            </Button>
           </>
         )}
       </BoxCard>

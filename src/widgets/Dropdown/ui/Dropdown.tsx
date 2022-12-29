@@ -88,7 +88,7 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
       await updatePack({ cardsPack: { name: 'edit packName', _id: packId } })
   }
 
-  const onClickNameHandler = () => {
+  const onClickLearnHandler = () => {
     if (cardsCount !== 0) navigate(`/learn/${packId as string}`)
   }
 
@@ -168,10 +168,12 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
                 <li
                   style={{
                     cursor: cardsCount ? '' : 'auto',
-                    opacity: cardsCount ? 1 : 0.4
+                    opacity: cardsCount ? 1 : 0.5
                   }}
-                  onClick={onClickNameHandler}
-                  className={cn(cls.li, { [cls.active]: active })}
+                  onClick={onClickLearnHandler}
+                  className={
+                    cardsCount ? cn(cls.li, { [cls.active]: active }) : ''
+                  }
                 >
                   <LearnIcon
                     opacity={cardsCount ? 1 : 0.4}

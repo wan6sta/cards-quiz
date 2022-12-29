@@ -20,10 +20,18 @@ import { Pagination } from '@/widgets/Pagination'
 import { ButtonWrapper } from '@/features/PacksList/ui/AddNewPack/StyledAddNewPack'
 import { StyledTitleWrapper } from './StyledCardsListPage'
 import { CardsList, getPackName } from '@/features/CardList'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getTotalPacksCount } from '@/features/PacksList'
 
 export const CardsListPage: FC = () => {
+  const { packId } = useParams()
+  const navigate = useNavigate()
+  const cardsCount = useAppSelector(getTotalPacksCount(packId as string))
   const packName = useAppSelector(getPackName).slice(0, 25)
   const isMyPack = useIsMyPack()
+  const onClickHandler = () => {
+    if (cardsCount !== 0) navigate(`/learn/${packId as string}`)
+  }
 
   return (
     <StyledPacksListPage>
@@ -34,7 +42,11 @@ export const CardsListPage: FC = () => {
           {isMyPack ? <Dropdown /> : null}
         </StyledTitleWrapper>
         <ButtonWrapper>
-          {isMyPack ? <CreateNewCard /> : <Button>Learn this pack</Button>}
+          {isMyPack ? (
+            <CreateNewCard />
+          ) : (
+            <Button onClick={onClickHandler}>Learn this pack</Button>
+          )}
         </ButtonWrapper>
       </TitleWrapper>
       <FilterWrapper>
