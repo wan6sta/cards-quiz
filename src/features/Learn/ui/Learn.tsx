@@ -80,12 +80,15 @@ export const Learn = () => {
       <Title marginBottom='30px' fontSize='22px'>
         {cardsData?.packName}
       </Title>
-      <BoxCard width={'439px'} rowGap='24px'>
+      <BoxCard width={'439px'} rowGap='15px'>
         <Span fontSize={'16px'} bold>
           <b>Question: </b>
           <Span fontSize={'16px'} bold>
             {selectedCard.question}
           </Span>
+        </Span>
+        <Span marginBottom={'20px'}>
+          Количество попыток ответов на вопрос: {selectedCard.shots}
         </Span>
         {!showAnswer && (
           <Button onClick={() => setShowAnswer(true)}>Show answer</Button>
