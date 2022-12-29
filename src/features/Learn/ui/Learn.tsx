@@ -88,7 +88,7 @@ export const Learn = () => {
           </Span>
         </Span>
         <Span marginBottom={'20px'}>
-          Количество попыток ответов на вопрос: {selectedCard.shots}
+          Number of attempts to answer the question: {selectedCard.shots}
         </Span>
         {!showAnswer && (
           <Button onClick={() => setShowAnswer(true)}>Show answer</Button>
