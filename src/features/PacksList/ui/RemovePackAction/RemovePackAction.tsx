@@ -13,11 +13,13 @@ interface RemovePackProps {
   id: string
   cards?: boolean
   packsName?: string
+  cardName?: string
 }
 
 export const RemovePackAction: FC<RemovePackProps> = props => {
   const [isOpen, setIsOpen] = useState(false)
-  const { id, cards, packsName } = props
+  const [isOpen1, setIsOpen1] = useState(false)
+  const { id, cards, packsName, cardName } = props
   const [removePack, { isLoading, error: removePackError }] =
     useDeleteCardPackMutation()
   const [deleteCard, { isLoading: isCardsLoading, error: removeCardError }] =
@@ -45,6 +47,12 @@ export const RemovePackAction: FC<RemovePackProps> = props => {
   const toggleOpen = () => {
     setIsOpen(true)
   }
+  const toggleClose1 = () => {
+    setIsOpen1(false)
+  }
+  const toggleOpen1 = () => {
+    setIsOpen1(true)
+  }
 
   return (
     <>
@@ -57,7 +65,7 @@ export const RemovePackAction: FC<RemovePackProps> = props => {
       {cards && (
         <>
           {isCardsLoading ? <LinearPageLoader /> : null}
-          <DeleteIcon onClick={onDeleteCardHandler} />
+          <DeleteIcon onClick={toggleOpen1} />
         </>
       )}
       <Modal
@@ -67,7 +75,16 @@ export const RemovePackAction: FC<RemovePackProps> = props => {
         isOpen={isOpen}
         actionCallback={deletePackHandler}
       >
-        <RemovePackModal packsName={packsName}/>
+        <RemovePackModal packsName={packsName} />
+      </Modal>
+      <Modal
+        buttonMode={'danger'}
+        title={'Delete pack'}
+        toggleClose={toggleClose1}
+        isOpen={isOpen1}
+        actionCallback={onDeleteCardHandler}
+      >
+        <RemovePackModal cardName={cardName} />
       </Modal>
       <ErrorAlert errorMessage={errorPackHandler} />
       <ErrorAlert errorMessage={errorCardHandler} />

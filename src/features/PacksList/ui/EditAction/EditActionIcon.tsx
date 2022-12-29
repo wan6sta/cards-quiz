@@ -8,19 +8,25 @@ import { FetchError } from '@/shared/types/ErrorModel'
 import { LinearPageLoader } from '@/widgets/LinearPageLoader'
 import { Modal } from '@/widgets/Modal/ui'
 import { ErrorAlert } from '@/shared/ui/ErrorAlert/ErrorAlert'
+import { CreateNewCardModal } from '@/features/CardList/ui/CreateNewCard/CreateNewCardModal/CreateNewCardBody'
 
 interface EditPackProps {
   Id: string
   cards?: boolean
   dropdown?: boolean
+  initQuestion?: string
+  initAnswer?: string
 }
 
 export const EditActionIcon: FC<EditPackProps> = props => {
+  const { Id, cards, dropdown, initAnswer, initQuestion } = props
   const [isOpen, setIsOpen] = useState(false)
+  const [isOpen1, setIsOpen1] = useState(false)
   const [newName, setNewName] = useState('')
   const [isPrivate, setIsPrivate] = useState(false)
+  const [question, setQuestion] = useState(initQuestion || '')
+  const [answer, setAnswer] = useState(initAnswer || '')
 
-  const { Id, cards, dropdown } = props
   const [updatePack, { isLoading, error: updatePackError }] =
     useUpdateCardsPackMutation()
   const [updateCard, { isLoading: isCardsLoading, error: updateCardError }] =
@@ -28,7 +34,9 @@ export const EditActionIcon: FC<EditPackProps> = props => {
 
   const editPackHandler = async () => {
     if (isLoading) return
-    await updatePack({ cardsPack: { name: newName, _id: Id, private: isPrivate } })
+    await updatePack({
+      cardsPack: { name: newName, _id: Id, private: isPrivate }
+    })
   }
 
   const onUpdateCardHandler = async () => {
@@ -36,7 +44,8 @@ export const EditActionIcon: FC<EditPackProps> = props => {
     await updateCard({
       card: {
         _id: Id,
-        question: 'How you doing?'
+        question,
+        answer
       }
     })
   }
@@ -55,6 +64,12 @@ export const EditActionIcon: FC<EditPackProps> = props => {
   const toggleClose = () => {
     setIsOpen(false)
   }
+  const toggleOpen1 = () => {
+    setIsOpen1(true)
+  }
+  const toggleClose1 = () => {
+    setIsOpen1(false)
+  }
   return (
     <>
       {!cards && (
@@ -66,7 +81,7 @@ export const EditActionIcon: FC<EditPackProps> = props => {
       {cards && (
         <>
           {isCardsLoading ? <LinearPageLoader /> : null}
-          <EditIcon onClick={toggleOpen} />
+          <EditIcon onClick={toggleOpen1} />
         </>
       )}
       <Modal
@@ -80,6 +95,19 @@ export const EditActionIcon: FC<EditPackProps> = props => {
           isPrivate={isPrivate}
           newName={newName}
           setNewName={setNewName}
+        />
+      </Modal>
+      <Modal
+        isOpen={isOpen1}
+        title={'Edit card'}
+        toggleClose={toggleClose1}
+        actionCallback={onUpdateCardHandler}
+      >
+        <CreateNewCardModal
+          question={question}
+          setQuestion={setQuestion}
+          answer={answer}
+          setAnswer={setAnswer}
         />
       </Modal>
       <ErrorAlert errorMessage={errorPackHandler} />

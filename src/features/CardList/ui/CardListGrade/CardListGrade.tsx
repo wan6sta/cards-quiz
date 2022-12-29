@@ -15,10 +15,12 @@ interface Props {
   grade: number
   packsId: string
   packCreatorId: string
+  cardName?: string
+  initAnswer?: string
 }
 
 export const CardListGrade: FC<Props> = props => {
-  const { packsId, packCreatorId, grade } = props
+  const { packsId, packCreatorId, grade, cardName, initAnswer } = props
   const userId = useAppSelector(getAuthId)
 
   return (
@@ -28,10 +30,15 @@ export const CardListGrade: FC<Props> = props => {
           <StarRating grade={grade} />
           <StyledIconsWrapperWrapper>
             <StyledCardIconsWrapper>
-              <EditActionIcon cards Id={packsId} />
+              <EditActionIcon
+                cards
+                Id={packsId}
+                initQuestion={cardName}
+                initAnswer={initAnswer}
+              />
             </StyledCardIconsWrapper>
             <StyledCardIconsWrapper>
-              <RemovePackAction cards id={packsId} />
+              <RemovePackAction cards id={packsId} cardName={cardName} />
             </StyledCardIconsWrapper>
           </StyledIconsWrapperWrapper>
         </StyledWrapper>

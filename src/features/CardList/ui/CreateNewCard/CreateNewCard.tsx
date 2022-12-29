@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useCreateCardMutation } from '../../api/cardApiSlice'
 import {
@@ -7,6 +7,8 @@ import {
 } from './StyledCreateNewCard'
 import { Span } from '@/shared/ui/Span/Span'
 import { Button } from '@/shared/ui/Button/Button'
+import { Modal } from '@/widgets/Modal/ui'
+import { CreateNewCardModal } from '@/features/CardList/ui/CreateNewCard/CreateNewCardModal/CreateNewCardBody'
 
 interface CreateNewCardProps {
   text?: boolean
@@ -15,16 +17,28 @@ interface CreateNewCardProps {
 export const CreateNewCard: FC<CreateNewCardProps> = props => {
   const { text } = props
 
+  const [isOpen, setIsOpen] = useState(false)
+  const [question, setQuestion] = useState('')
+  const [answer, setAnswer] = useState('')
   const [createCard] = useCreateCardMutation()
   const { packId } = useParams()
 
   const onAddCardHandler = async () => {
     const card = {
-      cardsPack_id: String(packId)
+      cardsPack_id: String(packId),
+      question,
+      answer
     }
     await createCard({ card })
+    toggleClose()
   }
 
+  const toggleClose = () => {
+    setIsOpen(false)
+  }
+  const toggleOpen = () => {
+    setIsOpen(true)
+  }
   return (
     <StyledCreateNewCardWrapper>
       {text ? (
@@ -33,8 +47,21 @@ export const CreateNewCard: FC<CreateNewCardProps> = props => {
         </Span>
       ) : null}
       <StyledCreateNewCard>
-        <Button onClick={onAddCardHandler}>Add new Card</Button>
+        <Button onClick={toggleOpen}>Add new Card</Button>
       </StyledCreateNewCard>
+      <Modal
+        isOpen={isOpen}
+        title={'Add new card'}
+        toggleClose={toggleClose}
+        actionCallback={onAddCardHandler}
+      >
+        <CreateNewCardModal
+          question={question}
+          setQuestion={setQuestion}
+          answer={answer}
+          setAnswer={setAnswer}
+        />
+      </Modal>
     </StyledCreateNewCardWrapper>
   )
 }

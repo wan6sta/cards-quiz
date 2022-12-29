@@ -1,0 +1,42 @@
+.listBox {
+    width: 347px;
+    margin-bottom: 23px;
+    position: relative;
+}
+
+.button {
+    position: relative;
+    width: 100%;
+    background: transparent;
+    border: 1px solid #DFE4E5;
+    border-radius: 2px;
+    height: 36px;
+    text-align: start;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.options {
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    top: 67px;
+    left: 0;
+    z-index: 10;
+    background: #fff;
+    border: 1px solid #DFE4E5;
+    margin-bottom: 0;
+}
+
+.default {
+    width: 100%;
+    padding: 3px 6px;
+    margin-bottom: 0;
+    border-radius: 4px;
+}
+
+.active {
+    background: #c4c4c4;
+}
