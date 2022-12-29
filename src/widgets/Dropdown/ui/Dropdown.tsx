@@ -166,6 +166,10 @@ export const Dropdown: FC<PropsWithChildren<Props>> = props => {
             <Menu.Item>
               {({ active }) => (
                 <li
+                  style={{
+                    cursor: cardsCount ? '' : 'auto',
+                    opacity: cardsCount ? 1 : 0.4
+                  }}
                   onClick={onClickNameHandler}
                   className={cn(cls.li, { [cls.active]: active })}
                 >

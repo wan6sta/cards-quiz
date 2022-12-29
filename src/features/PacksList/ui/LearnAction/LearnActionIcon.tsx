@@ -15,6 +15,10 @@ export const LearnActionIcon: FC<propsType> = props => {
   }
 
   return (
-    <LearnIcon opacity={cardsCount ? 1 : 0.4} onClick={onClickNameHandler} />
+    <LearnIcon
+      cursor={cardsCount ? '' : 'auto'}
+      opacity={cardsCount ? 1 : 0.4}
+      onClick={onClickNameHandler}
+    />
   )
 }
