@@ -50,7 +50,7 @@ export const Registration = () => {
       password: '',
       confirmPassword: ''
     },
-    mode: 'all',
+    mode: 'onBlur',
     resolver: yupResolver(Schema)
   })
 

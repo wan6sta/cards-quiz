@@ -47,7 +47,7 @@ export const Login = () => {
       password: '',
       rememberMe: false
     },
-    mode: 'all',
+    mode: 'onBlur',
     resolver: yupResolver(Schema)
   })
 
